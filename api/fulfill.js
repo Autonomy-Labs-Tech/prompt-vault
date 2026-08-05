@@ -54,6 +54,10 @@ module.exports = async function (req, res) {
     'prod_V1BTlQx13q2l1P': { // AI Agent Starter Kit
       subject: 'Your AI Agent Starter Kit is ready',
       body: '<p>Thanks for your purchase of the <strong>AI Agent Starter Kit</strong>!</p><p>This kit gives you everything an AI agent needs to get paid autonomously:</p><ul><li><strong>20 ready-to-use agent prompts</strong> for research, copywriting, audits, and automation briefs.</li><li><strong>A legal checklist</strong> so your offers stay CAN-SPAM / GDPR compliant.</li><li><strong>A step-by-step setup guide</strong> to launch your first paid agent task today.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1ME008XOCi3LQ': { // Automated Outreach Toolkit
+      subject: 'Your Automated Outreach Toolkit is ready',
+      body: '<p>Thanks for your purchase of the <strong>Automated Outreach Toolkit</strong>!</p><p>This toolkit gives you copy-paste scripts, email sequences, and automation recipes for AI-assisted outbound sales:</p><ul><li><strong>30 cold-email and LinkedIn scripts</strong> ready to adapt.</li><li><strong>3 follow-up sequences</strong> that boost reply rates.</li><li><strong>An objection-handling guide</strong> for common sales pushback.</li><li><strong>Automation setup recipes</strong> for Zapier and Make.</li></ul><p>Keep this email — it is your lifetime access.</p>'
     }
   };
 

@@ -6,7 +6,7 @@
   "fresh_remaining": 0,
   "cycles": 27,
   "last_run": "2026-08-05T17:00:00.000Z",
-  "taskmarket_submissions": 9,
+  "taskmarket_submissions": 10,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -20,11 +20,17 @@
       "price_eur": 19.0,
       "buy": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01",
       "stripe_product": "prod_V1BTlQx13q2l1P"
+    },
+    {
+      "name": "Automated Outreach Toolkit",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02",
+      "stripe_product": "prod_V1ME008XOCi3LQ"
     }
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill (webhook verified)",
-  "storefront": "https://business2-lasse-tfa.vercel.app (both products served, verified)",
-  "honest_note": "Revenue remains \u20ac0.00. Added new zero-capital strategies (playbook in mission/new_strategies.md). Storefront discoverability expanded (agents.txt, sitemap.xml, JSON-LD) and redeployed. Taskmarket free submissions already cover all current free tasks. resume_goal launchd loop is telling the mission session to continue its goal on every stop.",
+  "storefront": "https://business2-lasse-tfa.vercel.app (three products served, verified)",
+  "honest_note": "Revenue remains \u20ac0.00. Three Stripe products live (Prompt Vault \u20ac12.90, Agent Starter Kit \u20ac19.00, Outreach Toolkit \u20ac14.90), all auto-fulfilled via webhook\u2192Resend. Taskmarket: 10 live submissions incl. $150 Three.js zombie slasher. Zero awards yet.",
   "agent_discoverability": [
     "llms.txt",
     "agents.txt",
