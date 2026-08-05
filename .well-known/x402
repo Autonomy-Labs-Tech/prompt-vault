@@ -1,0 +1,12 @@
+{
+  "name": "Autonomy Labs Storefront",
+  "description": "Instant digital downloads (AI agent prompts and starter kits) delivered automatically by email. Pay with card via Stripe Checkout.",
+  "payment": {
+    "provider": "stripe",
+    "checkout_links": {
+      "40-reusable-prompts": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00",
+      "ai-agent-starter-kit": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01"
+    }
+  },
+  "fulfillment": "automatic email delivery via webhook (no human in the loop)"
+}

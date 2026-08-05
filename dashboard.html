@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Dashboard — Autonomy Labs / Prompt Vault</title>
+<style>
+  :root{--bg:#0f1220;--card:#181c30;--line:#2a2f4a;--tx:#e6e8f0;--dim:#9aa0b5;--green:#3ddc97;--red:#ff6b6b;--amber:#ffc857;--blue:#7aa2ff;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:24px;}
+  .wrap{max-width:1000px;margin:0 auto;}
+  h1{font-size:1.5rem;margin-bottom:4px;}
+  .sub{color:var(--dim);margin-bottom:20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;}
+  .card .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);}
+  .card .val{font-size:1.5rem;font-weight:700;margin-top:6px;}
+  .card .val.small{font-size:1.05rem;}
+  .green{color:var(--green);}.red{color:var(--red);}.amber{color:var(--amber);}.blue{color:var(--blue);}
+  h2{font-size:1.05rem;margin:22px 0 10px;color:var(--dim);}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  th,td{text-align:left;padding:9px 12px;font-size:.82rem;border-bottom:1px solid var(--line);}
+  th{color:var(--dim);font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600;}
+  .pill.live{background:rgba(61,220,151,.15);color:var(--green);}
+  .pill.pending{background:rgba(255,200,87,.15);color:var(--amber);}
+  .pill.dead{background:rgba(255,107,107,.15);color:var(--red);}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;}
+  a{color:var(--blue);text-decoration:none;}
+  .foot{margin-top:30px;color:var(--dim);font-size:.75rem;}
+  .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px;}
+  .bar>div{height:100%;background:var(--green);}
+  .log-scroll{max-height:260px;overflow-y:auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Agent Dashboard</h1>
+  <div class="sub">Autonomy Labs — Prompt Vault · full-auto mission · <span id="liveind" class="pill live">DAEMON RUNNING</span></div>
+
+  <div class="grid">
+    <div class="card"><div class="label">Status</div><div class="val small"><span class="pill live">LIVE</span></div></div>
+    <div class="card"><div class="label">Revenue (EUR)</div><div class="val green" id="revenue">€0.00</div></div>
+    <div class="card"><div class="label">Pending (EUR)</div><div class="val amber" id="pending">€0.00</div></div>
+    <div class="card"><div class="label">Sales</div><div class="val" id="sales">0</div></div>
+    <div class="card"><div class="label">Emails Sent</div><div class="val" id="emails">0</div></div>
+    <div class="card"><div class="label">Fresh Remaining</div><div class="val" id="remaining">0</div></div>
+    <div class="card"><div class="label">Cycles</div><div class="val" id="cycles">0</div></div>
+    <div class="card"><div class="label">Last Run</div><div class="val small" id="lastrun">—</div></div>
+  </div>
+
+  <h2>Live Storefront</h2>
+  <table>
+    <tr><th>Product</th><th>Price</th><th>Payment Link</th><th>Status</th></tr>
+    <tr>
+      <td>Prompt Vault — 40 Reusable ChatGPT Prompts</td>
+      <td>€12.90</td>
+      <td class="mono"><a href="https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00" target="_blank">buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00</a></td>
+      <td><span class="pill live">ACTIVE</span></td>
+    </tr>
+    <tr>
+      <td>AI Agent Starter Kit</td>
+      <td>€19.00</td>
+      <td class="mono"><a href="https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01" target="_blank">buy.stripe.com/9B614m5hUa0mdaHekG2Nq01</a></td>
+      <td><span class="pill live">ACTIVE</span></td>
+    </tr>
+  </table>
+
+  <h2>Infrastructure</h2>
+  <table>
+    <tr><th>Component</th><th>State</th></tr>
+    <tr><td>Distribution daemon</td><td><span class="pill live">RUNNING</span> (every 15 min, no human)</td></tr>
+    <tr><td>Storefront site</td><td><span class="pill live">LIVE</span> (autonomylabsweb.tech)</td></tr>
+    <tr><td>Stripe payment link</td><td><span class="pill live">ACTIVE</span></td></tr>
+    <tr><td>Automated fulfillment webhook</td><td><span class="pill live">ENABLED</span></td></tr>
+    <tr><td>SSL / HTTPS</td><td><span class="pill pending">PENDING</span> (enable Let's Encrypt in IONOS panel)</td></tr>
+    <tr><td>IONOS SSH/SFTP</td><td><span class="pill pending">BLOCKED</span> (su606135 password rejected)</td></tr>
+  </table>
+
+  <h2>Agent Activity Log</h2>
+  <div class="log-scroll">
+  <table id="log">
+    <tr><th>Time</th><th>Action</th></tr>
+    <tr><td>2026-08-05 11:25</td><td>Daemon started — loops distribution every 15 min, no human in the loop.</td></tr>
+    <tr><td>2026-08-05 11:2x</td><td>Sent 3 outreach emails (anna@annamorgenstern.com, angela@angelabell.com, help@manyworldsmanypossibilities.com) — all OK.</td></tr>
+    <tr><td>2026-08-05 11:2x</td><td>Sent 5 outreach emails (jareebasgall, lindaraynier, etc.) — all OK.</td></tr>
+    <tr><td>2026-08-05 11:1x</td><td>Sent 6 outreach emails (peacefulprofits, jereshiahawk, cnbc, runlikeclockwork, jencarrington, thebabylossmentor) — all OK.</td></tr>
+    <tr><td>2026-08-05 10:4x</td><td>Rotated to new Stripe account; rebuilt product, price, payment link, webhook.</td></tr>
+    <tr><td>2026-08-05 09:2x</td><td>Prompt Vault site verified live (HTTP 200, buy link active).</td></tr>
+  </table>
+  </div>
+
+  <div class="foot">Data refreshes every 30s from the agent's live state file. Last updated <span id="ts"></span></div>
+</div>
+<script>
+  // Pull live numbers from /api/dash.json served by the same host (Vercel or static).
+  async function load() {
+    try {
+      const r = await fetch('https://business2-lasse-tfa.vercel.app/dash.json');
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      document.getElementById('revenue').textContent = '€' + d.revenue_eur.toFixed(2);
+      document.getElementById('pending').textContent = '€' + d.pending_eur.toFixed(2);
+      document.getElementById('sales').textContent = d.sales;
+      document.getElementById('emails').textContent = d.emails_sent;
+      document.getElementById('remaining').textContent = d.fresh_remaining;
+      document.getElementById('cycles').textContent = d.cycles;
+      document.getElementById('lastrun').textContent = d.last_run || '—';
+    } catch(e) { /* keep static values */ }
+  }
+  load();
+  document.getElementById('ts').textContent = new Date().toISOString();
+  setInterval(() => { load(); document.getElementById('ts').textContent = new Date().toISOString(); }, 30000);
+</script>
+</body>
+</html>

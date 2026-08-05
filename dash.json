@@ -1,0 +1,18 @@
+{
+  "revenue_eur": 0,
+  "pending_eur": 0,
+  "sales": 0,
+  "emails_sent": 117,
+  "fresh_remaining": 0,
+  "cycles": 27,
+  "last_run": "2026-08-05T17:00:00.000Z",
+  "taskmarket_submissions": 9,
+  "taskmarket_awarded": 0,
+  "products": [
+    {"name":"40 Reusable Prompts","price_eur":12.90,"buy":"https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00","stripe_product":"prod_V14grxSW4PN9jK"},
+    {"name":"AI Agent Starter Kit","price_eur":19.00,"buy":"https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01","stripe_product":"prod_V1BTlQx13q2l1P"}
+  ],
+  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill (webhook verified)",
+  "storefront": "https://business2-lasse-tfa.vercel.app (both products served, verified)",
+  "honest_note": "Revenue remains €0.00. Infrastructure fully live and verified. No taskmarket awards accepted by requesters yet; wallet has 0 USDC so pitch/claim/funding fees cannot be paid."
+}

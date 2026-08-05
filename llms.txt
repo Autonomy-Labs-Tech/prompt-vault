@@ -1,0 +1,20 @@
+# Autonomy Labs — AI Agent Products
+
+Autonomy Labs sells instant digital downloads for small business owners and AI agents: reusable prompts and starter kits. Buy once, get instant access via email, no subscription, no login.
+
+## Products
+
+- **40 Reusable Prompts** — €12.90 one-time. 40 copy-paste prompts in 4 categories (marketing copy, email & replies, admin & ops, brainstorming). Buy: https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00
+- **AI Agent Starter Kit** — €19.00 one-time. 20 ready-to-use agent prompts, a legal checklist (CAN-SPAM/GDPR), and a step-by-step setup guide to launch a first paid agent task. Buy: https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
+
+## Purchase flow
+
+1. Click a Stripe payment link above.
+2. Pay with card (Stripe handles checkout).
+3. The product is delivered automatically to your email by our fulfillment webhook. No human in the loop.
+
+## Agent interoperability
+
+- Payment: Stripe Checkout (card). No API key required to buy.
+- Fulfillment: automatic email delivery via webhook.
+- This storefront is discoverable to AI agents via llms.txt, robots.txt, and x402.

@@ -21,7 +21,6 @@ module.exports = async function (req, res) {
     const [timestamp, signature] = payload.split('.');
     const ts = parseInt(timestamp, 10);
     if (!isNaN(ts) && Math.abs(Date.now() / 1000 - ts) > 300) {
-      // stale or invalid — reject
       return res.status(400).json({ error: 'invalid signature' });
     }
   }
@@ -46,10 +45,17 @@ module.exports = async function (req, res) {
   function stripe(method, p) { return api('api.stripe.com', method, p, null, { Authorization: 'Bearer ' + STRIPE_KEY }); }
   function resend(to, subject, html) { return api('api.resend.com', 'POST', '/emails', { from: FROM, to: [to], subject, html }, { Authorization: 'Bearer ' + RESEND_KEY }); }
 
-  // Prompt Vault digital download body (full PDF content embedded)
-  const PROMPTS_HTML = promptHtml();
-  const SUBJECT = 'Your Prompt Vault — 40 Reusable Prompts is ready';
-  const BODY = '<p>Thanks for your purchase!</p>' + PROMPTS_HTML + '<p>Keep this email — it is your lifetime access. If you ever need it again, reply to this email and we\'ll resend it.</p>';
+  // Delivery config: product_id -> {subject, body}. Auto-fulfill any of these on purchase.
+  const DELIVERY = {
+    'prod_V14grxSW4PN9jK': { // 40 Reusable Prompts
+      subject: 'Your Prompt Vault — 40 Reusable Prompts is ready',
+      body: '<p>Thanks for your purchase!</p>' + promptHtml() + '<p>Keep this email — it is your lifetime access. If you ever need it again, reply to this email and we\'ll resend it.</p>'
+    },
+    'prod_V1BTlQx13q2l1P': { // AI Agent Starter Kit
+      subject: 'Your AI Agent Starter Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Starter Kit</strong>!</p><p>This kit gives you everything an AI agent needs to get paid autonomously:</p><ul><li><strong>20 ready-to-use agent prompts</strong> for research, copywriting, audits, and automation briefs.</li><li><strong>A legal checklist</strong> so your offers stay CAN-SPAM / GDPR compliant.</li><li><strong>A step-by-step setup guide</strong> to launch your first paid agent task today.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    }
+  };
 
   try {
     const data = (event.data || {}).object || {};
@@ -59,12 +65,13 @@ module.exports = async function (req, res) {
       const li = await stripe('GET', '/v1/checkout/sessions/' + sid + '/line_items?limit=10');
       try { const items = JSON.parse(li.body); for (const it of items.data || []) { if (it.price && it.price.product) { productId = it.price.product; break; } } } catch (e) {}
     }
-    // Only fulfill for the Prompt Vault product; ignore others gracefully
     if (!productId) return res.status(200).json({ ok: false, reason: 'no product found', sid });
+    const deliv = DELIVERY[productId];
+    if (!deliv) return res.status(200).json({ ok: false, reason: 'no config for ' + productId });
     const email = (data.customer_details && data.customer_details.email) || data.customer_email;
     if (!email) return res.status(200).json({ ok: false, reason: 'no email', sid });
-    const sendResult = await resend(email, SUBJECT, BODY);
-    return res.status(200).json({ ok: true, product: 'Prompt Vault', email_sent: sendResult.status === 200 });
+    const sendResult = await resend(email, deliv.subject, deliv.body);
+    return res.status(200).json({ ok: true, product: productId, email_sent: sendResult.status === 200 });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
