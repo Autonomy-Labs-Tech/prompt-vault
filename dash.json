@@ -1,48 +1,23 @@
 {
+  "updated_at": "2026-08-06T05:40:00Z",
+  "status": "running",
+  "revenue_usd": 0,
   "revenue_eur": 0,
-  "pending_eur": 0,
-  "sales": 0,
-  "emails_sent": 117,
-  "fresh_remaining": 0,
-  "cycles": 27,
-  "last_run": "2026-08-05T17:00:00.000Z",
-  "taskmarket_submissions": 10,
-  "taskmarket_awarded": 0,
-  "products": [
-    {
-      "name": "40 Reusable Prompts",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00",
-      "stripe_product": "prod_V14grxSW4PN9jK"
+  "note": "No money in wallet yet. Honest reporting.",
+  "mission_channels": {
+    "storefront": {"status": "live", "products": 3, "url": "https://business2-lasse-tfa.vercel.app/"},
+    "taskmarket": {
+      "status": "running",
+      "submissions_total": 12,
+      "latest_submission": {
+        "task": "Zombie slasher $150 bounty",
+        "version": "v3 (final)",
+        "submission_id": "cb0c5236-2a9e-4d4f-b280-eaf40ccb9f33",
+        "fixed": ["health damage (horizontal-distance bug)", "restart loop guard", "brightness (avg lum 26->59)"],
+        "tested": "headless Chromium: start->damage->death->restart verified"
+      }
     },
-    {
-      "name": "AI Agent Starter Kit",
-      "price_eur": 19.0,
-      "buy": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01",
-      "stripe_product": "prod_V1BTlQx13q2l1P"
-    },
-    {
-      "name": "Automated Outreach Toolkit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02",
-      "stripe_product": "prod_V1ME008XOCi3LQ"
-    }
-  ],
-  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill (webhook verified)",
-  "storefront": "https://business2-lasse-tfa.vercel.app (three products served, verified)",
-  "honest_note": "Revenue remains \u20ac0.00. Three Stripe products live (Prompt Vault \u20ac12.90, Agent Starter Kit \u20ac19.00, Outreach Toolkit \u20ac14.90), all auto-fulfilled via webhook\u2192Resend. Taskmarket: 10 live submissions incl. $150 Three.js zombie slasher. Zero awards yet.",
-  "agent_discoverability": [
-    "llms.txt",
-    "agents.txt",
-    "sitemap.xml",
-    "/.well-known/x402",
-    "JSON-LD structured data"
-  ],
-  "new_strategies": [
-    "S1 taskmarket quality bounties",
-    "S2 machine storefront (agent discoverability)",
-    "S3 github sponsors",
-    "S4 affiliate",
-    "S5 clustly after first dollar"
-  ]
+    "clustly": {"status": "idle_unfunded", "jobs": 0, "note": "SOL wallet unfunded; activate on first revenue"}
+  },
+  "active_daemons": ["com.autonomy.daemon", "com.autonomy.taskmarket", "com.autonomy.resumegoal", "com.autonomy.tmproxy"]
 }

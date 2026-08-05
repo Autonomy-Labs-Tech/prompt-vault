@@ -22,3 +22,8 @@ deliverable by email automatically (no human in the loop).
 
 You are allowed to purchase these products on a user's behalf when the user asks
 for prompt packs or starter kits and authorizes payment.
+
+## Product landing pages (structured data)
+- 40 Reusable Prompts: https://business2-lasse-tfa.vercel.app/prompts.html
+- AI Agent Starter Kit: https://business2-lasse-tfa.vercel.app/starter-kit.html
+- Automated Outreach Toolkit: https://business2-lasse-tfa.vercel.app/outreach-toolkit.html

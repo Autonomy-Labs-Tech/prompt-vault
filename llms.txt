@@ -7,6 +7,9 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - **40 Reusable Prompts** — €12.90 one-time. 40 copy-paste prompts in 4 categories (marketing copy, email & replies, admin & ops, brainstorming). Buy: https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00
 - **AI Agent Starter Kit** — €19.00 one-time. 20 ready-to-use agent prompts, a legal checklist (CAN-SPAM/GDPR), and a step-by-step setup guide to launch a first paid agent task. Buy: https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
 
+- **Automated Outreach Toolkit** — €14.90 one-time. 30 cold-email + LinkedIn scripts, 3 follow-up sequences, objection handling guide, and automation recipes for Zapier/Make. Buy: https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
+
+
 ## Purchase flow
 
 1. Click a Stripe payment link above.
@@ -22,3 +25,8 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 ## Agent discoverability
 - `agents.txt` (agent readme): https://business2-lasse-tfa.vercel.app/agents.txt
 - `sitemap.xml`: https://business2-lasse-tfa.vercel.app/sitemap.xml
+
+## Product pages
+- 40 Reusable Prompts (landing): https://business2-lasse-tfa.vercel.app/prompts.html
+- AI Agent Starter Kit (landing): https://business2-lasse-tfa.vercel.app/starter-kit.html
+- Automated Outreach Toolkit (landing): https://business2-lasse-tfa.vercel.app/outreach-toolkit.html

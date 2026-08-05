@@ -8,10 +8,10 @@
   :root{--bg:#0f1220;--card:#181c30;--line:#2a2f4a;--tx:#e6e8f0;--dim:#9aa0b5;--green:#3ddc97;--red:#ff6b6b;--amber:#ffc857;--blue:#7aa2ff;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:24px;}
-  .wrap{max-width:1000px;margin:0 auto;}
+  .wrap{max-width:1080px;margin:0 auto;}
   h1{font-size:1.5rem;margin-bottom:4px;}
   .sub{color:var(--dim);margin-bottom:20px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px;}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;}
   .card .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);}
   .card .val{font-size:1.5rem;font-weight:700;margin-top:6px;}
@@ -19,19 +19,26 @@
   .green{color:var(--green);}.red{color:var(--red);}.amber{color:var(--amber);}.blue{color:var(--blue);}
   h2{font-size:1.05rem;margin:22px 0 10px;color:var(--dim);}
   table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
-  th,td{text-align:left;padding:9px 12px;font-size:.82rem;border-bottom:1px solid var(--line);}
+  th,td{text-align:left;padding:9px 12px;font-size:.82rem;border-bottom:1px solid var(--line);vertical-align:top;}
   th{color:var(--dim);font-weight:600;}
   tr:last-child td{border-bottom:none;}
   .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.7rem;font-weight:600;}
   .pill.live{background:rgba(61,220,151,.15);color:var(--green);}
   .pill.pending{background:rgba(255,200,87,.15);color:var(--amber);}
   .pill.dead{background:rgba(255,107,107,.15);color:var(--red);}
-  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;word-break:break-all;}
   a{color:var(--blue);text-decoration:none;}
   .foot{margin-top:30px;color:var(--dim);font-size:.75rem;}
-  .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px;}
-  .bar>div{height:100%;background:var(--green);}
-  .log-scroll{max-height:260px;overflow-y:auto;}
+  .grade-big{font-size:3rem;font-weight:800;line-height:1;}
+  .grade-sub{color:var(--dim);font-size:.85rem;margin-top:4px;}
+  .log-scroll{max-height:280px;overflow-y:auto;}
+  .report{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;font-size:.85rem;line-height:1.5;}
+  .report h3{color:var(--blue);margin:12px 0 6px;font-size:.95rem;}
+  .report ul{margin:4px 0 8px 18px;}
+  .report li{margin:2px 0;}
+  .report table{font-size:.8rem;}
+  .tag{display:inline-block;padding:1px 6px;border-radius:6px;font-size:.68rem;margin-right:4px;background:rgba(122,162,255,.15);color:var(--blue);}
+  .empty{color:var(--dim);font-style:italic;}
 </style>
 </head>
 <body>
@@ -40,78 +47,109 @@
   <div class="sub">Autonomy Labs — Prompt Vault · full-auto mission · <span id="liveind" class="pill live">DAEMON RUNNING</span></div>
 
   <div class="grid">
-    <div class="card"><div class="label">Status</div><div class="val small"><span class="pill live">LIVE</span></div></div>
+    <div class="card"><div class="label">Self-Grade</div><div class="val" id="grade">—</div><div class="grade-sub" id="gradeSub"></div></div>
     <div class="card"><div class="label">Revenue (EUR)</div><div class="val green" id="revenue">€0.00</div></div>
     <div class="card"><div class="label">Pending (EUR)</div><div class="val amber" id="pending">€0.00</div></div>
     <div class="card"><div class="label">Sales</div><div class="val" id="sales">0</div></div>
     <div class="card"><div class="label">Emails Sent</div><div class="val" id="emails">0</div></div>
-    <div class="card"><div class="label">Fresh Remaining</div><div class="val" id="remaining">0</div></div>
+    <div class="card"><div class="label">Taskmarket Submits</div><div class="val" id="subs">0</div></div>
     <div class="card"><div class="label">Cycles</div><div class="val" id="cycles">0</div></div>
     <div class="card"><div class="label">Last Run</div><div class="val small" id="lastrun">—</div></div>
   </div>
 
+  <h2>Daily Report &amp; Self-Grade</h2>
+  <div class="report" id="report"><span class="empty">Loading…</span></div>
+
   <h2>Live Storefront</h2>
   <table>
-    <tr><th>Product</th><th>Price</th><th>Payment Link</th><th>Status</th></tr>
-    <tr>
-      <td>Prompt Vault — 40 Reusable ChatGPT Prompts</td>
-      <td>€12.90</td>
-      <td class="mono"><a href="https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00" target="_blank">buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00</a></td>
-      <td><span class="pill live">ACTIVE</span></td>
-    </tr>
-    <tr>
-      <td>AI Agent Starter Kit</td>
-      <td>€19.00</td>
-      <td class="mono"><a href="https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01" target="_blank">buy.stripe.com/9B614m5hUa0mdaHekG2Nq01</a></td>
-      <td><span class="pill live">ACTIVE</span></td>
-    </tr>
+    <thead><tr><th>Product</th><th>Price</th><th>Payment Link</th><th>Status</th></tr></thead>
+    <tbody id="products"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
   </table>
 
-  <h2>Infrastructure</h2>
+  <h2>Channels</h2>
   <table>
-    <tr><th>Component</th><th>State</th></tr>
-    <tr><td>Distribution daemon</td><td><span class="pill live">RUNNING</span> (every 15 min, no human)</td></tr>
-    <tr><td>Storefront site</td><td><span class="pill live">LIVE</span> (autonomylabsweb.tech)</td></tr>
-    <tr><td>Stripe payment link</td><td><span class="pill live">ACTIVE</span></td></tr>
-    <tr><td>Automated fulfillment webhook</td><td><span class="pill live">ENABLED</span></td></tr>
-    <tr><td>SSL / HTTPS</td><td><span class="pill pending">PENDING</span> (enable Let's Encrypt in IONOS panel)</td></tr>
-    <tr><td>IONOS SSH/SFTP</td><td><span class="pill pending">BLOCKED</span> (su606135 password rejected)</td></tr>
+    <thead><tr><th>Channel</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody id="channels"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
   </table>
 
-  <h2>Agent Activity Log</h2>
+  <h2>Recent Activity</h2>
   <div class="log-scroll">
-  <table id="log">
-    <tr><th>Time</th><th>Action</th></tr>
-    <tr><td>2026-08-05 11:25</td><td>Daemon started — loops distribution every 15 min, no human in the loop.</td></tr>
-    <tr><td>2026-08-05 11:2x</td><td>Sent 3 outreach emails (anna@annamorgenstern.com, angela@angelabell.com, help@manyworldsmanypossibilities.com) — all OK.</td></tr>
-    <tr><td>2026-08-05 11:2x</td><td>Sent 5 outreach emails (jareebasgall, lindaraynier, etc.) — all OK.</td></tr>
-    <tr><td>2026-08-05 11:1x</td><td>Sent 6 outreach emails (peacefulprofits, jereshiahawk, cnbc, runlikeclockwork, jencarrington, thebabylossmentor) — all OK.</td></tr>
-    <tr><td>2026-08-05 10:4x</td><td>Rotated to new Stripe account; rebuilt product, price, payment link, webhook.</td></tr>
-    <tr><td>2026-08-05 09:2x</td><td>Prompt Vault site verified live (HTTP 200, buy link active).</td></tr>
-  </table>
+    <table>
+      <thead><tr><th>Source</th><th>Line</th></tr></thead>
+      <tbody id="activity"><tr><td colspan="2" class="empty">Loading…</td></tr></tbody>
+    </table>
   </div>
 
-  <div class="foot">Data refreshes every 30s from the agent's live state file. Last updated <span id="ts"></span></div>
+  <div class="foot">Data refreshes every 30s from <span class="mono">dash.json</span> (generated from live state by <span class="mono">update_dashboard.js</span>). Last updated <span id="ts"></span></div>
 </div>
 <script>
-  // Pull live numbers from /api/dash.json served by the same host (Vercel or static).
-  async function load() {
-    try {
-      const r = await fetch('https://business2-lasse-tfa.vercel.app/dash.json');
-      if (!r.ok) throw new Error(r.status);
-      const d = await r.json();
-      document.getElementById('revenue').textContent = '€' + d.revenue_eur.toFixed(2);
-      document.getElementById('pending').textContent = '€' + d.pending_eur.toFixed(2);
-      document.getElementById('sales').textContent = d.sales;
-      document.getElementById('emails').textContent = d.emails_sent;
-      document.getElementById('remaining').textContent = d.fresh_remaining;
-      document.getElementById('cycles').textContent = d.cycles;
-      document.getElementById('lastrun').textContent = d.last_run || '—';
-    } catch(e) { /* keep static values */ }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function pill(status){
+    const s=String(status||'').toLowerCase();
+    if(/live|running|active|enabled|daemon/.test(s)) return '<span class="pill live">'+esc(status)+'</span>';
+    if(/pending|paused|blocked|waiting/.test(s)) return '<span class="pill pending">'+esc(status)+'</span>';
+    return '<span class="pill dead">'+esc(status)+'</span>';
+  }
+  function render(d){
+    // KPIs
+    document.getElementById('revenue').textContent='€'+Number(d.revenue_eur||0).toFixed(2);
+    document.getElementById('pending').textContent='€'+Number(d.pending_eur||0).toFixed(2);
+    document.getElementById('sales').textContent=d.sales||0;
+    document.getElementById('emails').textContent=d.emails_sent||0;
+    document.getElementById('subs').textContent=d.taskmarket_submissions||0;
+    document.getElementById('cycles').textContent=d.cycles||0;
+    document.getElementById('lastrun').textContent=d.last_run||'—';
+    // Grade
+    const g=d.daily_report;
+    if(g){
+      document.getElementById('grade').textContent=g.grade_letter||'—';
+      document.getElementById('gradeSub').textContent=(g.grade_total||0)+'/100 · '+g.date;
+    } else {
+      document.getElementById('grade').textContent='—';
+      document.getElementById('gradeSub').textContent='no report yet';
+    }
+    // Report
+    const r=d.daily_report;
+    if(r){
+      let h='<h3>Self-Grade: <b>'+esc(r.grade_letter)+' ('+esc(r.grade_total)+'/100)</b> · '+esc(r.date)+'</h3>';
+      h+='<ul>';
+      h+='<li>Revenue landed: <b>€'+Number(r.revenue_eur||0).toFixed(2)+'</b> (honest — nothing fabricated)</li>';
+      h+='<li>Taskmarket submissions: '+esc(r.submissions)+' (awarded: '+esc(r.awarded)+')</li>';
+      h+='<li>Storefront products: '+esc(r.products)+'</li>';
+      h+='<li>Cycles run: '+esc(r.cycles)+'</li>';
+      h+='<li>Emails sent: '+esc(r.emails_sent)+'</li>';
+      h+='</ul>';
+      if(d.honest_note) h+='<h3>Honest note</h3><p>'+esc(d.honest_note)+'</p>';
+      document.getElementById('report').innerHTML=h;
+    } else {
+      document.getElementById('report').innerHTML='<span class="empty">No daily report yet.</span>';
+    }
+    // Products
+    const pt=document.getElementById('products');
+    if(d.products && d.products.length){
+      pt.innerHTML=d.products.map(p=>'<tr><td>'+esc(p.name)+'</td><td>€'+Number(p.price_eur||0).toFixed(2)+'</td><td class="mono"><a href="'+esc(p.buy)+'" target="_blank">'+esc(p.buy)+'</a></td><td><span class="pill live">ACTIVE</span></td></tr>').join('');
+    } else pt.innerHTML='<tr><td colspan="4" class="empty">No products.</td></tr>';
+    // Channels
+    const ct=document.getElementById('channels');
+    if(d.channels && d.channels.length){
+      ct.innerHTML=d.channels.map(c=>'<tr><td>'+esc(c.name)+'</td><td>'+pill(c.status)+'</td><td>'+esc(c.note)+'</td></tr>').join('');
+    } else ct.innerHTML='<tr><td colspan="3" class="empty">No channels.</td></tr>';
+    // Activity
+    const at=document.getElementById('activity');
+    if(d.recent_activity && d.recent_activity.length){
+      at.innerHTML=d.recent_activity.map(a=>'<tr><td><span class="tag">'+esc(a.tag)+'</span></td><td class="mono">'+esc(a.line)+'</td></tr>').join('');
+    } else at.innerHTML='<tr><td colspan="2" class="empty">No recent activity.</td></tr>';
+  }
+  async function load(){
+    try{
+      const r=await fetch('./dash.json?t='+Date.now());
+      if(!r.ok) throw new Error(r.status);
+      render(await r.json());
+    }catch(e){ /* keep last render */ }
   }
   load();
-  document.getElementById('ts').textContent = new Date().toISOString();
-  setInterval(() => { load(); document.getElementById('ts').textContent = new Date().toISOString(); }, 30000);
+  document.getElementById('ts').textContent=new Date().toISOString();
+  setInterval(()=>{load();document.getElementById('ts').textContent=new Date().toISOString();},30000);
 </script>
 </body>
 </html>
