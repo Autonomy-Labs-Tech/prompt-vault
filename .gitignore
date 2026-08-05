@@ -1,0 +1,5 @@
+.env
+*.env
+.vercel/
+node_modules/
+fulfill.php.keyed
