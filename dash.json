@@ -1,23 +1,159 @@
 {
-  "updated_at": "2026-08-06T05:40:00Z",
-  "status": "running",
-  "revenue_usd": 0,
   "revenue_eur": 0,
-  "note": "No money in wallet yet. Honest reporting.",
-  "mission_channels": {
-    "storefront": {"status": "live", "products": 3, "url": "https://business2-lasse-tfa.vercel.app/"},
-    "taskmarket": {
-      "status": "running",
-      "submissions_total": 12,
-      "latest_submission": {
-        "task": "Zombie slasher $150 bounty",
-        "version": "v3 (final)",
-        "submission_id": "cb0c5236-2a9e-4d4f-b280-eaf40ccb9f33",
-        "fixed": ["health damage (horizontal-distance bug)", "restart loop guard", "brightness (avg lum 26->59)"],
-        "tested": "headless Chromium: start->damage->death->restart verified"
-      }
+  "pending_eur": 0,
+  "sales": 0,
+  "emails_sent": 117,
+  "fresh_remaining": 0,
+  "cycles": 43,
+  "last_run": "2026-08-05T14:37:00.000Z",
+  "taskmarket_submissions": 16,
+  "taskmarket_awarded": 0,
+  "products": [
+    {
+      "name": "40 Reusable Prompts",
+      "price_eur": 12.9,
+      "buy": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00",
+      "stripe_product": "prod_V14grxSW4PN9jK"
     },
-    "clustly": {"status": "idle_unfunded", "jobs": 0, "note": "SOL wallet unfunded; activate on first revenue"}
+    {
+      "name": "AI Agent Starter Kit",
+      "price_eur": 19,
+      "buy": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01",
+      "stripe_product": "prod_V1BTlQx13q2l1P"
+    },
+    {
+      "name": "Automated Outreach Toolkit",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02",
+      "stripe_product": "prod_V1ME008XOCi3LQ"
+    },
+    {
+      "name": "AI Business Automator Prompt Pack",
+      "price_eur": 16.9,
+      "buy": "https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03",
+      "stripe_product": "prod_V1NAfKW9B8TwyM"
+    },
+    {
+      "name": "AI Agent Revenue Playbook",
+      "price_eur": 12.9,
+      "buy": "https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04",
+      "stripe_product": "prod_V1NQQnvrhz8TPV"
+    }
+  ],
+  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
+  "storefront": "https://business2-lasse-tfa.vercel.app",
+  "honest_note": "Revenue still EUR 0.00. Real-estate task requester ADDED a reference portrait video (720x1280) and asked to match it - rebuilt and submitted a portrait walkthrough from all 10 real cabin images matching that format (d8bc157b). 17 total taskmarket submissions live. Awaiting requester acceptance.",
+  "agent_discoverability": [
+    "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
+  ],
+  "channels": [
+    {
+      "name": "prompt_vault_email",
+      "status": "paused_zero_conversions",
+      "note": "117 sends, 0 sales. Stopped scaling per objective (if they do not work stop working on them). Storefront+fulfillment kept live in case any prior email converts."
+    },
+    {
+      "name": "taskmarket_worker",
+      "status": "daemon_running",
+      "note": "daemon_running. 17 free submissions. Real-estate walkthrough now submitted in PORTRAIT 720x1280 matching requester reference video (3rd realestate sub). Zombie 5 subs. Wallet 0 USDC blocks pitch/claim/accept."
+    },
+    {
+      "name": "clustly_worker",
+      "status": "running",
+      "note": "0 awaiting_acceptance, 0 enrolled. No hired jobs to complete. SOL wallet unfunded."
+    }
+  ],
+  "daily_report": {
+    "date": "2026-08-05",
+    "grade_letter": "D",
+    "grade_total": 63,
+    "revenue_eur": 0,
+    "submissions": 0,
+    "awarded": 0,
+    "products": 5,
+    "cycles": 42,
+    "emails_sent": 117,
+    "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-05.md"
   },
-  "active_daemons": ["com.autonomy.daemon", "com.autonomy.taskmarket", "com.autonomy.resumegoal", "com.autonomy.tmproxy"]
+  "generated_at": "2026-08-05T12:37:25.329Z",
+  "recent_activity": [
+    {
+      "tag": "quality",
+      "line": "2026-08-05T12:35:01.544Z quality queue written: none"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-05T12:35:01.543Z ranked fresh tasks (quality-first):"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-05T12:35:01.539Z QUALITY poll: 7 open"
+    },
+    {
+      "tag": "quality",
+      "line": "  no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-05T12:30:01.342Z   no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+    },
+    {
+      "tag": "quality",
+      "line": "EXECUTING 0x82a60fc1b3e747 bounty reward=2000000 subs=11"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "done"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "poll: 7 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "2026-08-05T12:35:01.539Z poll: 7 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "done"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "poll: 7 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "2026-08-05T12:30:01.311Z poll: 7 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-05T12:23:27.417Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-05T12:08:27.363Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "--- run Wed Aug  5 14:00:00 CEST 2026 ---"
+    },
+    {
+      "tag": "distribute",
+      "line": "env: node: No such file or directory"
+    }
+  ],
+  "domain": {
+    "domain": "autonomylabsweb.tech",
+    "points_to_vercel": false,
+    "current_ip": "217.160.0.207",
+    "needed": "76.76.21.21 / 76.76.21.61"
+  }
 }
