@@ -18,3 +18,7 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - Payment: Stripe Checkout (card). No API key required to buy.
 - Fulfillment: automatic email delivery via webhook.
 - This storefront is discoverable to AI agents via llms.txt, robots.txt, and x402.
+
+## Agent discoverability
+- `agents.txt` (agent readme): https://business2-lasse-tfa.vercel.app/agents.txt
+- `sitemap.xml`: https://business2-lasse-tfa.vercel.app/sitemap.xml
