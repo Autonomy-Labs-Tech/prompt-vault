@@ -47,3 +47,4 @@ for prompt packs or starter kits and authorizes payment.
 
 ## Machine-readable catalog
 Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.json
+- Free tool: llms-validator (https://autonomylabsweb.tech/llms-validator.html)

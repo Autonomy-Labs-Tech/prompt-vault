@@ -47,6 +47,9 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - **Zombie Slasher Game (Three.js)** — €24.90 one-time. Complete first-person zombie slasher in one HTML file (WASD, pointer-lock, melee, health, kills, spawn waves, restart). Buy: https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
 - **AI Agent Skill Pack (MCP + Tools)** — €12.90 one-time. TaskMarket MCP server, agent status dashboard template, and Claude/Codex client config. Buy: https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
 
+## Free tools
+- **llms-validator** (free): https://autonomylabsweb.tech/llms-validator.html — check any site for AI-agent discoverability.
+
 ## Machine-readable catalog
 - `products.json` (Schema.org ItemList of all products with prices + buy links): https://autonomylabsweb.tech/products.json
 
