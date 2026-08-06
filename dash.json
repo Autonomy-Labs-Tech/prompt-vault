@@ -145,31 +145,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T13:30:00.591Z",
+  "generated_at": "2026-08-06T13:35:05.643Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-06T13:25:01.778Z quality queue written: none"
+      "line": "2026-08-06T13:35:01.630Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T13:25:01.777Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T13:35:01.629Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T13:25:01.773Z QUALITY poll: 14 open"
+      "line": "2026-08-06T13:35:01.626Z QUALITY poll: 14 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T13:20:01.135Z quality queue written: none"
+      "line": "2026-08-06T13:30:01.658Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T13:20:01.134Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T13:30:01.658Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T13:20:01.129Z QUALITY poll: 14 open"
+      "line": "2026-08-06T13:30:01.654Z QUALITY poll: 14 open"
     },
     {
       "tag": "taskmarket",
@@ -181,7 +181,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T13:25:01.776Z candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=2 Create a **15-second, photorealistic scene from the televisi"
+      "line": "2026-08-06T13:35:01.617Z candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=2 Create a **15-second, photorealistic scene from the televisi"
     },
     {
       "tag": "taskmarket",
@@ -189,7 +189,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T13:25:01.773Z poll: 14 open tasks"
+      "line": "2026-08-06T13:35:01.614Z poll: 14 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -223,7 +223,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

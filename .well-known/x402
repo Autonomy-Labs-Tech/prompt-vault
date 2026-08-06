@@ -29,7 +29,9 @@
       "ai-agent-monetization-starter-kit": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y",
       "ai-agent-qa-test-playbook": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x",
       "ai-agent-prompt-injection-defense": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w",
-      "ai-website-audit-report": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
+      "ai-website-audit-report": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v",
+      "custom-threejs-scene-rebuild": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U",
+      "threejs-build-toolkit": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
     }
   },
   "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
