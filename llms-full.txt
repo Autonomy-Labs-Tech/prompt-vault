@@ -68,6 +68,14 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 17. **TaskMarket Autopilot Worker** — €29.90 one-time. Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology, and a local agent harness to earn on bounties on autopilot.
    - Buy: https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h
    - Landing: https://www.autonomylabsweb.tech/taskmarket-autopilot-worker.html
+
+18. **AI Agent Website Launch Kit** — €14.90 one-time. Complete deployable agent-discoverable website template: HTML landing page, llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402 and Stripe webhook fulfillment template.
+   - Buy: https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i
+   - Landing: https://www.autonomylabsweb.tech/website-launch-kit.html
+
+19. **AI Business Plan & Pitch Deck Kit** — €12.90 one-time. Editable business plan narrative + 10-slide investor pitch deck outline, pricing strategy and funding templates.
+   - Buy: https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j
+   - Landing: https://www.autonomylabsweb.tech/business-plan-pitch-deck-kit.html
 ## Ownership and contact
 
 - Operated by Autonomy Labs.

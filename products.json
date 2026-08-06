@@ -238,6 +238,32 @@
         "url": "https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h"
       },
       "url": "https://autonomylabsweb.tech/taskmarket-autopilot-worker.html"
+    },
+    {
+      "@type": "Product",
+      "position": 18,
+      "name": "AI Agent Website Launch Kit",
+      "description": "A complete, deployable AI-agent-discoverable website: HTML landing page, llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402 and Stripe webhook fulfillment template.",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i"
+      },
+      "url": "https://autonomylabsweb.tech/website-launch-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 19,
+      "name": "AI Business Plan & Pitch Deck Kit",
+      "description": "Editable business plan and investor pitch deck templates (narrative + slide outlines) for AI-service businesses, with pricing and funding sections.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j"
+      },
+      "url": "https://autonomylabsweb.tech/business-plan-pitch-deck-kit.html"
     }
   ]
 }

@@ -100,6 +100,14 @@ module.exports = async function (req, res) {
       subject: 'Your AI Agent Outbound Sales Kit is ready',
       body: '<p>Thanks for your purchase of the <strong>AI Agent Outbound Sales Kit</strong>!</p><p>This kit is a complete copy-paste outbound sales system for AI agents:</p><ul><li><strong>20 cold-email scripts</strong> ready to adapt and send.</li><li><strong>10 LinkedIn outreach scripts</strong> plus follow-up logic.</li><li><strong>Objection-handling</strong> and CTA templates.</li><li><strong>CAN-SPAM / GDPR compliance checklist</strong> so your outreach stays lawful.</li></ul><p>Keep this email — it is your lifetime access.</p>'
     },
+    'prod_V1QiyDbNHDU2H2': { // AI Agent Website Launch Kit
+      subject: 'Your AI Agent Website Launch Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Website Launch Kit</strong>!</p><p>This kit is a complete, deployable AI-agent-discoverable website:</p><ul><li><strong>Ready-to-deploy HTML landing page</strong> for Vercel.</li><li><strong>llms.txt + llms-full.txt</strong> so AI agents can read your catalog.</li><li><strong>agents.txt, sitemap.xml, robots.txt</strong> for discoverability.</li><li><strong>.well-known/x402</strong> configuration for agent payments.</li><li><strong>Stripe Checkout + auto-fulfillment webhook template</strong> (Node.js serverless).</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1QiUEfoVHeU9P': { // AI Business Plan & Pitch Deck Kit
+      subject: 'Your AI Business Plan & Pitch Deck Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Business Plan &amp; Pitch Deck Kit</strong>!</p><p>This kit gives you everything to plan and pitch an AI-service business:</p><ul><li><strong>Full business plan narrative</strong> (executive summary, market, model, financials).</li><li><strong>10-slide investor pitch deck outline</strong> with talking points.</li><li><strong>Pricing strategy</strong> and funding/runway templates.</li><li><strong>One-page summary</strong> and milestones tracker.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
     'prod_V1QZAxF6W7iY8W': { // TaskMarket Autopilot Worker
       subject: 'Your TaskMarket Autopilot Worker config is ready',
       body: '<p>Thanks for your purchase of the <strong>TaskMarket Autopilot Worker</strong>!</p><p>This pack gives you a deployable worker config for earning on TaskMarket bounties on autopilot:</p><ul><li><strong>Task-scanning loop</strong> templates that poll for fresh low-competition tasks.</li><li><strong>Submission quality gates</strong> so you only ship your best work.</li><li><strong>Requester psychology</strong> notes and a local agent harness.</li><li><strong>Free-submit rules</strong> (first 5 per task free) so you start with zero capital.</li></ul><p>Keep this email — it is your lifetime access.</p>'
