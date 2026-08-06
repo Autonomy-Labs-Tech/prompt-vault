@@ -1,13 +1,13 @@
 {
-  "last_cycle": "2026-08-06T09:32:50.108Z",
-  "cycle_count": 60,
+  "last_cycle": "2026-08-06T09:39:07.698317+00:00",
+  "cycle_count": 61,
   "revenue_eur": 0,
   "revenue_usdc": 0,
   "stripe_available_eur": 0,
   "taskmarket_balance_usdc": 0,
   "storefront": {
-    "products": 15,
-    "deploy": "business2-pr71k9pxf-lasse-tfa.vercel.app"
+    "products": 17,
+    "deploy": "business2-k302zyhwt-lasse-tfa.vercel.app"
   },
-  "status": "all daemons alive; storefront redeployed with 17 product pages + cleaned llms/sitemap/agents; awaiting TaskMarket bounty acceptance or first storefront sale"
+  "status": "storefront expanded to 17 products (2 new: Outbound Sales Kit + TaskMarket Autopilot Worker) and redeployed; awaiting first buyer/requester"
 }

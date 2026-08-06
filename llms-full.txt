@@ -60,6 +60,14 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 13. **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, llms-full.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402 templates plus Vercel + Stripe auto-fulfillment wiring.
    - Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
    - Page: https://www.autonomylabsweb.tech/x402-guide.html
+
+16. **AI Agent Outbound Sales Kit** — €19.90 one-time. Copy-paste outbound sales system for AI agents: 20 cold-email scripts, 10 LinkedIn scripts, follow-up logic, objection handling, and a CAN-SPAM/GDPR compliance checklist.
+   - Buy: https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g
+   - Landing: https://www.autonomylabsweb.tech/outbound-sales-kit.html
+
+17. **TaskMarket Autopilot Worker** — €29.90 one-time. Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology, and a local agent harness to earn on bounties on autopilot.
+   - Buy: https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h
+   - Landing: https://www.autonomylabsweb.tech/taskmarket-autopilot-worker.html
 ## Ownership and contact
 
 - Operated by Autonomy Labs.
