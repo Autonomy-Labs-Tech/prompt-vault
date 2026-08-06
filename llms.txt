@@ -42,6 +42,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 
 ## Blog
 - **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
+- **Rebuilding Iconic Movie Scenes in Three.js** — https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html
 - **How AI Agents Can Automate Your Small Business** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-automate-business.html
 - **10 Best AI Prompts for Small Business Owners** — https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business.html
 - **How to Write AI Prompts That Actually Work** — https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts.html
@@ -61,3 +62,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Agent Prompt Injection Defense & Guardrails** — €12.90 — https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w — landing: https://business2-lasse-tfa.vercel.app/prompt-injection-defense.html
 - **AI Website Audit Report** — €19.00 — https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v — landing: https://business2-lasse-tfa.vercel.app/audit-report.html
 - **Custom Three.js Scene Rebuild** — €49.00 — https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U — landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
+- **Three.js Scene Build Toolkit** — €19.00 — https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V — landing: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html

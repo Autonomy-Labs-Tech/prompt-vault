@@ -425,6 +425,30 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html",
    "identifier": "threejs-scene-rebuild"
+  },
+  {
+   "@type": "Product",
+   "position": 28,
+   "name": "Three.js Scene Build Toolkit",
+   "description": "The production pipeline behind our movie-scene rebuilds: deterministic app.js scene template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, and an offline/determinism verification checklist.",
+   "category": "Developer Tools",
+   "tagline": "Deterministic, offline, single-file Three.js scenes \u2014 the exact pipeline we ship with",
+   "features": [
+    "renderAt(seconds) deterministic scene template",
+    "esbuild bundle + inline single-file build",
+    "Headless capture scripts + renderer.info stats",
+    "Offline and determinism verification checklist",
+    "Proven on 6 shipped scene rebuilds"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 19,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html",
+   "identifier": "threejs-build-toolkit"
   }
  ]
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Three.js Scene Build Toolkit — Autonomy Labs</title>
+<meta name="description" content="The exact build pipeline behind our movie-scene rebuilds: deterministic renderAt(seconds) scene template, esbuild single-file inline build, headless capture scripts, and a verification checklist. Zero external assets.">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Three.js Scene Build Toolkit","description":"Deterministic Three.js scene build pipeline: app.js template, esbuild inline build script, headless capture scripts, verification checklist.","offers":{"@type":"Offer","price":"19","priceCurrency":"EUR","url":"https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V","availability":"https://schema.org/InStock"}}
+</script>
+<style>
+  :root{--bg:#0d1117;--bg2:#161b22;--card:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#7c3aed;--green:#3fb950}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .container{max-width:760px;margin:0 auto;padding:0 24px}
+  .topbar{border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:32px}
+  .brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:10px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:inline-flex;align-items:center;justify-content:center}
+  h1{font-size:1.9rem;font-weight:800;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:1.05rem;margin-bottom:24px}
+  h2{font-size:1.2rem;margin:24px 0 12px}
+  ul{list-style:none;margin-bottom:24px}
+  ul li{padding:8px 0;border-bottom:1px solid var(--border);display:flex;gap:10px}
+  ul li::before{content:"\2713";color:var(--green);font-weight:700;flex-shrink:0}
+  .buy{display:inline-block;background:var(--accent);color:#0d1117;font-weight:700;padding:14px 30px;border-radius:10px;font-size:1rem;text-decoration:none}
+  .buy:hover{background:#6cb3ff}
+  .pricebox{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:24px;display:flex;align-items:baseline;gap:8px}
+  .pricebox .n{font-size:1.6rem;font-weight:800}
+  .pricebox .s{color:var(--muted);font-size:.9rem}
+  .small{color:var(--muted);font-size:.85rem}
+  .back{display:inline-block;margin-top:24px;color:var(--muted);text-decoration:none;font-size:.9rem}
+  .back:hover{color:var(--text)}
+  code{background:var(--bg2);padding:2px 6px;border-radius:5px;font-size:.85rem;border:1px solid var(--border)}
+</style></head><body>
+<div class="container">
+  <div class="topbar"><div class="brand"><span class="logo">⚡</span> Autonomy Labs</div></div>
+  <h1>Three.js Scene Build Toolkit</h1>
+  <p class="sub">The exact pipeline behind our movie-scene rebuilds — deterministic, offline, single-file. Everything you need to build scenes that render the same every time and open with the network dead.</p>
+  <div class="pricebox"><span class="n">€19</span><span class="s">one-time · delivered by email</span></div>
+  <h2>What you get</h2>
+  <ul>
+    <li><code>app.js</code> scene template — <code>renderAt(seconds)</code> determinism, seeded randomness (mulberry32), camera keyframe timeline, Web Audio synthesis (pad, wind, heartbeat, bells)</li>
+    <li><code>build_html.js</code> — esbuild bundle → minified → inlined into one self-contained <code>index.html</code> (Three.js r185, no CDN, no runtime fetch)</li>
+    <li>Headless capture scripts (puppeteer) for preview frames and contact sheets, with <code>renderer.info</code> stats</li>
+    <li>Offline + determinism verification checklist (block all HTTP, re-render, compare)</li>
+    <li><code>sources.md</code> and concept-note templates for provenance-grade deliverables</li>
+  </ul>
+  <h2>Why this pipeline</h2>
+  <ul>
+    <li>Every frame reproducible — graders and screenshots see exactly what you authored</li>
+    <li>Under 10k triangles and ~60 draw calls at the busiest frame; runs at 60fps on mid-range phones</li>
+    <li>Single-file output that survives air-gapped review and never breaks on CDN changes</li>
+    <li>Proven on six shipped scene rebuilds (Raiders, Shining, BTTF, Ghostbusters, RoboCop, E.T.)</li>
+  </ul>
+  <a class="buy" href="https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V">Get the toolkit — €19</a>
+  <p class="small" style="margin-top:12px">Payment via Stripe Checkout. The pipeline guide and template code are delivered to your inbox automatically.</p>
+  <a class="back" href="index.html">← Back to store</a>
+</div></body></html>

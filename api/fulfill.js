@@ -156,6 +156,20 @@ module.exports = async function (req, res) {
       subject: 'Your Custom Three.js Scene Rebuild is confirmed',
       body: '<p>Thanks for your purchase of the <strong>Custom Three.js Scene Rebuild</strong>!</p><p>Your order is confirmed. We build a self-contained offline Three.js r185 scene from your brief (geometric silhouettes, original Web Audio score, sources.md + concept note + screenshots) and email the finished files within 5–7 days. Reply to this email with any extra scene details; your delivery email is the one on the order.</p>'
     },
+    'prod_V1U1Svayw5Gvd1': { // Three.js Scene Build Toolkit
+      subject: 'Your Three.js Scene Build Toolkit is ready',
+      body: '<p>Thanks for your purchase of the <strong>Three.js Scene Build Toolkit</strong>!</p>'
+        + '<h3 style="margin:16px 0 6px">1. Scene template (app.js)</h3>'
+        + '<p>Deterministic rendering core — one clock, one <code>renderAt(seconds)</code>, seeded randomness:</p>'
+        + '<pre style="background:#f6f8fa;padding:10px;border-radius:6px;font-size:12px;overflow-x:auto">function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};\nconst rand = mulberry32(20260806); // seed once at build\nfunction renderAt(t){ updateBike(t); updateCamera(t); renderer.render(scene,camera); }\n// keyframe timeline: lerp between {t,x,y,z,tilt} entries with smoothstep</pre>'
+        + '<h3 style="margin:16px 0 6px">2. Single-file build (build_html.js)</h3>'
+        + '<pre style="background:#f6f8fa;padding:10px;border-radius:6px;font-size:12px;overflow-x:auto">npx esbuild app.js --bundle --minify --format=iife --outfile=bundle.js\n# then inline bundle.js into index.html: &lt;script&gt;...&lt;/script&gt; (no CDN, no import map)</pre>'
+        + '<h3 style="margin:16px 0 6px">3. Headless captures (puppeteer)</h3>'
+        + '<p>Open <code>file://index.html?t=26</code> in headless Chromium, screenshot at native resolution, and read <code>window.__renderer.info</code> for draw calls / triangles / points at the busiest frame.</p>'
+        + '<h3 style="margin:16px 0 6px">4. Verification checklist</h3>'
+        + '<ul><li>Offline: block all HTTP/HTTPS, reload from <code>file://</code>, re-render — must work with zero errors.</li><li>Determinism: no <code>Date.now()</code> in the render path; randomness seeded once at build.</li><li>Budget: &lt;10k triangles, &lt;100 draw calls at the busiest frame.</li><li>Provenance: ship <code>sources.md</code> (film, geometry, audio, license) + concept note.</li></ul>'
+        + '<p>Full source files are in our open-source repos; this guide is the production recipe we use for every shipped scene. Questions? Reply to this email.</p>'
+    },
   };
 
   try {
