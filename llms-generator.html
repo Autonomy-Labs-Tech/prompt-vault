@@ -102,7 +102,7 @@ document.getElementById('copy').addEventListener('click',()=>{
 });
 document.getElementById('validate').addEventListener('click',()=>{
   const url=document.getElementById('url').value.trim().replace(/\/+$/,'');
-  window.location.href='llms-validator.html#url='+encodeURIComponent(url);
+  window.location.href='audit.html?url='+encodeURIComponent(url);
 });
 </script>
 </body></html>

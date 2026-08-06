@@ -95,6 +95,9 @@ async function run(){
 }
 go.addEventListener('click',run);
 url.addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+// prefill from ?url= (e.g. from the llms.txt generator)
+const q = new URLSearchParams(location.search).get('url');
+if (q && /^https?:\/\//i.test(q)) { url.value = q; run(); }
 </script>
 </body>
 </html>
