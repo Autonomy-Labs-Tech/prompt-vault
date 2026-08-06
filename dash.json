@@ -186,35 +186,35 @@
     "submissions": 18,
     "awarded": 0,
     "products": 28,
-    "cycles": 102,
+    "cycles": 103,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T16:00:00.749Z",
+  "generated_at": "2026-08-06T16:30:01.158Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-06T15:55:02.037Z quality queue written: none"
+      "line": "[Thu Aug  6 18:30:01 CEST 2026] executing top task 0xab4307e40b5dc33a6575e29e8d014305f0214ddf637d69b9e369eabb7f290a7b"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T15:55:02.036Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T16:25:02.325Z quality queue written: 0xab4307e40b5dc3"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T15:55:02.033Z QUALITY poll: 13 open"
+      "line": "2026-08-06T16:25:02.325Z   [9.09] bounty $100 subs=10 ARCADE BENCHMARK 02: Reactor Rush. Build a complete playable"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T15:50:01.533Z quality queue written: none"
+      "line": "2026-08-06T16:25:02.324Z   [12.50] bounty $100 subs=7 ARCADE BENCHMARK 04: Tunnel Tap. Build a complete playable b"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T15:50:01.532Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T16:25:02.324Z   [12.50] bounty $100 subs=7 ARCADE BENCHMARK 06: Bubble Brawl. Build a complete playable"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T15:50:01.529Z QUALITY poll: 13 open"
+      "line": "2026-08-06T16:25:02.324Z   [14.29] bounty $100 subs=6 ARCADE BENCHMARK 07: Magnet Mine. Build a complete playable "
     },
     {
       "tag": "taskmarket",
@@ -222,43 +222,43 @@
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 13 open tasks"
+      "line": "candidate: 0xff2d1349413ba1 bounty reward=10000000 subs=5 ARCADE BENCHMARK 05: Signal Panic. Build a complete playable"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T15:55:02.029Z poll: 13 open tasks"
+      "line": "2026-08-06T16:25:02.342Z candidate: 0xff2d1349413ba1 bounty reward=10000000 subs=5 ARCADE BENCHMARK 05: Signal Panic. Build a complete playable"
     },
     {
       "tag": "taskmarket",
-      "line": "done"
+      "line": "candidate: 0xab4307e40b5dc3 bounty reward=10000000 subs=5 ARCADE BENCHMARK 08: Rooftop Relay. Build a complete playabl"
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 13 open tasks"
+      "line": "2026-08-06T16:25:02.341Z candidate: 0xab4307e40b5dc3 bounty reward=10000000 subs=5 ARCADE BENCHMARK 08: Rooftop Relay. Build a complete playabl"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T15:50:01.523Z poll: 13 open tasks"
+      "line": "poll: 21 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T16:23:41.455Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T16:08:41.379Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "--- run Thu Aug  6 18:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T15:53:41.308Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -268,7 +268,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
