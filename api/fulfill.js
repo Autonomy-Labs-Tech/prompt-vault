@@ -150,7 +150,11 @@ module.exports = async function (req, res) {
     },
     'prod_V1NvDTS0cNV4kK': { // AI Website Audit Report
       subject: 'Your AI Website Audit Report is confirmed',
-      body: '<p>Thanks for your purchase of the <strong>AI Website Audit Report</strong>!</p><p>Your audit is confirmed. Reply to this email with the website URL you want audited (or include it at checkout). We will run the deep AI-agent discoverability audit and email your report with concrete fixes.</p>'
+      body: '<p>Thanks for your purchase of the <strong>AI Website Audit Report</strong>!</p><p>We could not find a website URL with this order. Reply to this email with the URL you want audited and we will run the deep AI-agent discoverability audit and email your report with concrete fixes. (Tip: next time, enter the URL in the "Website URL to audit" field at checkout and the report arrives automatically.)</p>'
+    },
+    'prod_V1TprsCU1bxALX': { // Custom Three.js Scene Rebuild
+      subject: 'Your Custom Three.js Scene Rebuild is confirmed',
+      body: '<p>Thanks for your purchase of the <strong>Custom Three.js Scene Rebuild</strong>!</p><p>Your order is confirmed. We build a self-contained offline Three.js r185 scene from your brief (geometric silhouettes, original Web Audio score, sources.md + concept note + screenshots) and email the finished files within 5–7 days. Reply to this email with any extra scene details; your delivery email is the one on the order.</p>'
     },
   };
 
@@ -167,12 +171,70 @@ module.exports = async function (req, res) {
     if (!deliv) return res.status(200).json({ ok: false, reason: 'no config for ' + productId });
     const email = (data.customer_details && data.customer_details.email) || data.customer_email;
     if (!email) return res.status(200).json({ ok: false, reason: 'no email', sid });
-    const sendResult = await resend(email, deliv.subject, deliv.body);
+    let subject = deliv.subject, body = deliv.body;
+    if (productId === 'prod_V1NvDTS0cNV4kK') {
+      // AI Website Audit Report: if the buyer supplied a website URL at checkout,
+      // run the agent-readiness audit now and email the report with it.
+      const cf = (data.custom_fields || []).find((f) => f.key === 'website_url');
+      const url = cf && (cf.text ? cf.text.value : cf.value);
+      if (url && /^https?:\/\/.+/i.test(url)) {
+        const rep = await runAudit(url);
+        subject = 'Your AI Website Audit Report for ' + url + ' is ready';
+        body = '<p>Thanks for your purchase!</p>'
+          + '<p>Here is your <strong>AI-agent discoverability audit</strong> for <code>' + esc(url) + '</code> (checked ' + rep.when + '):</p>'
+          + '<table style="border-collapse:collapse;width:100%;max-width:560px;font-size:14px">'
+          + '<tr style="background:#efece5"><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Surface</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Status</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Content-Type</th></tr>'
+          + rep.rows
+          + '</table>'
+          + '<p style="font-size:16px;font-weight:700">Grade: ' + rep.grade + ' (' + rep.present + '/5 agent surfaces present)</p>'
+          + '<p><strong>Top fixes:</strong></p><ul>' + rep.fixes + '</ul>'
+          + '<p>Full reproducible check: <code>curl -sS -o /dev/null -w "%{http_code} %{content_type}\\n" ' + esc(url) + '/llms.txt</code></p>'
+          + '<p>Questions? Reply to this email.</p>';
+      }
+    }
+    const sendResult = await resend(email, subject, body);
     return res.status(200).json({ ok: true, product: productId, email_sent: sendResult.status === 200 });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
 };
+
+const AUDIT_SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt'];
+
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+async function runAudit(base0) {
+  const base = String(base0).replace(/\/+$/, '');
+  const when = new Date().toISOString();
+  const results = [];
+  for (const p of AUDIT_SURFACES) {
+    const ac = new AbortController();
+    const to = setTimeout(() => ac.abort(), 8000);
+    try {
+      const r = await fetch(base + p, { signal: ac.signal, headers: { 'User-Agent': 'autonomy-labs-audit/1.0' } });
+      results.push({ path: p, status: r.status, ct: r.headers.get('content-type') || '' });
+    } catch (e) {
+      results.push({ path: p, status: 0, ct: '', err: e.name === 'AbortError' ? 'timeout' : e.message });
+    } finally { clearTimeout(to); }
+  }
+  const present = results.filter((r) => r.status === 200).length;
+  const grade = present >= 5 ? 'A' : present >= 4 ? 'B' : present >= 3 ? 'C' : present >= 2 ? 'D' : 'F';
+  let rows = '';
+  for (const r of results) {
+    const st = r.status === 200 ? '<span style="color:#3f7a4f">OK 200</span>' : esc(r.status ? 'HTTP ' + r.status : (r.err || 'ERR'));
+    rows += '<tr><td style="padding:6px 8px;border:1px solid #ddd"><code>' + esc(r.path) + '</code></td>'
+      + '<td style="padding:6px 8px;border:1px solid #ddd">' + st + '</td>'
+      + '<td style="padding:6px 8px;border:1px solid #ddd">' + esc(r.ct || '—') + '</td></tr>';
+  }
+  const fixes = [];
+  for (const r of results) {
+    if (r.status !== 200) fixes.push('<li>Add a live <code>' + esc(r.path) + '</code> (returned ' + esc(r.status || r.err) + ').</li>');
+  }
+  if (!results.find((r) => r.path === '/llms.txt' && r.status === 200)) fixes.push('<li>Add <code>/llms.txt</code> with your product names, prices, and buy links so AI agents can read and buy.</li>');
+  if (!results.find((r) => r.path === '/.well-known/x402' && r.status === 200)) fixes.push('<li>Add <code>/.well-known/x402</code> with machine-readable payment config for agent-initiated purchases.</li>');
+  if (!fixes.length) fixes.push('<li>All agent surfaces are live — keep them updated when the catalog changes.</li>');
+  return { when, rows, grade, present, fixes: fixes.join('') };
+}
 
 function promptHtml() {
   const cats = [

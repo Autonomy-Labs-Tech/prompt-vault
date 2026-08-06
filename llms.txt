@@ -60,3 +60,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Agent QA & Test Playbook** — €9.90 — https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x — landing: https://business2-lasse-tfa.vercel.app/qa-test-playbook.html
 - **AI Agent Prompt Injection Defense & Guardrails** — €12.90 — https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w — landing: https://business2-lasse-tfa.vercel.app/prompt-injection-defense.html
 - **AI Website Audit Report** — €19.00 — https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v — landing: https://business2-lasse-tfa.vercel.app/audit-report.html
+- **Custom Three.js Scene Rebuild** — €49.00 — https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U — landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html

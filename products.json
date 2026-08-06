@@ -401,6 +401,30 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html",
    "identifier": "fulfillment-webhook-kit"
+  },
+  {
+   "@type": "Product",
+   "position": 27,
+   "name": "Custom Three.js Scene Rebuild",
+   "description": "An iconic movie or TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note and screenshots. No likenesses, no ripped assets, deterministic render. Proven on 6 TaskMarket scene bounties.",
+   "category": "Services",
+   "tagline": "Your iconic scene, rebuilt in Three.js \u2014 offline, deterministic, submission-ready",
+   "features": [
+    "Self-contained offline single HTML (Three.js r185)",
+    "20-45s scene with camera beats and original Web Audio score",
+    "Geometric silhouettes only \u2014 no likenesses, no ripped assets",
+    "sources.md provenance + concept note + screenshots",
+    "Deterministic renderAt(seconds) for capture reproducibility"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 49,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html",
+   "identifier": "threejs-scene-rebuild"
   }
  ]
 }

@@ -71,3 +71,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - AI Agent Monetization Starter Kit — €14.90 — https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y
 - AI Agent QA & Test Playbook — €9.90 — https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x
 - AI Website Audit Report: https://business2-lasse-tfa.vercel.app/audit-report.html
+- Custom Three.js Scene Rebuild: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
