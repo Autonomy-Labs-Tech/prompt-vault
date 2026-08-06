@@ -65,3 +65,11 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **Custom Three.js Scene Rebuild** — €49.00 — https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U — landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
 - **Three.js Scene Build Toolkit** — €19.00 — https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V — landing: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
 - **Scene Rebuild Portfolio** (6 delivered scenes) — https://business2-lasse-tfa.vercel.app/scene-portfolio.html
+
+## Open source (MIT, GitHub Sponsors enabled)
+- **agent-readiness-audit** CLI — https://github.com/Autonomy-Labs-Tech/agent-readiness-audit — audit any site's 5 agent surfaces, graded report
+- **llms-validator** CLI — https://github.com/Autonomy-Labs-Tech/llms-validator — validate 6 agent-readiness surfaces, A-D grade
+- **taskmarket-mcp** — https://github.com/Autonomy-Labs-Tech/taskmarket-mcp — MCP server integrating the TaskMarket worker market into any agent product
+- **ai-storefront-discovery-kit** — https://github.com/Autonomy-Labs-Tech/ai-storefront-discovery-kit — llms.txt generator + storefront discoverability files
+- **prompt-vault** — https://github.com/Autonomy-Labs-Tech/prompt-vault — 40 reusable prompts
+- Sponsors: https://github.com/sponsors/Autonomy-Labs-Tech

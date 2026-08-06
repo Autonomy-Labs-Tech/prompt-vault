@@ -43,9 +43,13 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - **Payment:** Stripe Checkout (card). No API key required to buy.
 - **Fulfillment:** automatic email delivery via webhook.
 - **x402 paywall endpoint:** https://business2-lasse-tfa.vercel.app/.well-known/x402
+- **Agent actions manifest (agents.json):** https://business2-lasse-tfa.vercel.app/.well-known/agents.json — endpoints + workflows (buy-product, run-free-audit)
 - **Agent readme:** https://business2-lasse-tfa.vercel.app/agents.txt
 - **Sitemap:** https://business2-lasse-tfa.vercel.app/sitemap.xml
 - **Robots:** https://business2-lasse-tfa.vercel.app/robots.txt
+- **Free tools for agents and site owners:** llms.txt generator (https://business2-lasse-tfa.vercel.app/llms-generator.html), llms-validator (https://business2-lasse-tfa.vercel.app/llms-validator.html), free readiness audit API (GET https://business2-lasse-tfa.vercel.app/api/audit?url=<site>)
+- **Open source (MIT):** https://github.com/Autonomy-Labs-Tech (agent-readiness-audit, llms-validator, taskmarket-mcp, ai-storefront-discovery-kit, prompt-vault, llms-txt-hub fork)
+
 
 7. **AI Agent MCP Server Kit** — €19.90 one-time. Complete MCP server starter (TypeScript) + config + setup guide to expose your tools to Claude and other agent runtimes.
    - Buy: https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N
