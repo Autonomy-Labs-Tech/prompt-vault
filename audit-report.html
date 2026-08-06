@@ -48,6 +48,23 @@
     <li>Enter your website URL at checkout</li>
     <li>Your audit report is emailed to you automatically — no human in the loop</li>
   </ul>
+  <h2>Sample report (real run)</h2>
+  <p class="small">This is an actual audit of our own storefront, produced by the same engine your report uses:</p>
+  <pre style="background:#161b22;border:1px solid var(--border);border-radius:8px;padding:14px;overflow:auto;font-size:12px;color:var(--text)">{
+  "url": "https://business2-lasse-tfa.vercel.app",
+  "grade": "A",
+  "score": 100,
+  "checks": [
+    { "name": "robots.txt",                "ok": true, "detail": "HTTP 200" },
+    { "name": "sitemap.xml",               "ok": true, "detail": "HTTP 200" },
+    { "name": "llms.txt",                  "ok": true, "detail": "HTTP 200" },
+    { "name": "llms-full.txt",             "ok": true, "detail": "HTTP 200" },
+    { "name": "agents.txt",                "ok": true, "detail": "HTTP 200" },
+    { "name": "x402 (.well-known/x402)",   "ok": true, "detail": "HTTP 200" }
+  ],
+  "summary": "6/6 agent-readiness surfaces detected."
+}</pre>
+  <p class="small">Your report adds the same measured checks plus per-surface <em>fixes</em> (e.g. "add a live /llms.txt — returned 404"), ranked by impact.</p>
   <a class="buy" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Get your audit — €19</a>
   <p class="small" style="margin-top:12px">Payment via Stripe Checkout. Fulfillment is automatic via webhook.</p>
   <a class="back" href="index.html">← Back to store</a>
