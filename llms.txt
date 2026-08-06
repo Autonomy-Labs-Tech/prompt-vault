@@ -50,3 +50,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Agent Monetization Starter Kit** — €14.90 — https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l — landing: https://autonomylabsweb.tech/monetization-starter-kit.html
 - **AI Agent QA & Test Playbook** — €9.90 — https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m — landing: https://autonomylabsweb.tech/qa-test-playbook.html
 - **AI Agent Prompt Injection Defense & Guardrails** — €12.90 — https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n — landing: https://autonomylabsweb.tech/prompt-injection-defense.html
+- **AI Website Audit Report** — €19.00 — https://buy.stripe.com/cNifZg9yaegC5IfgsO2Nq0o — landing: https://autonomylabsweb.tech/audit-report.html

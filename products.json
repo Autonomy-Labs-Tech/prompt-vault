@@ -330,6 +330,30 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n"
       }
+    },
+    {
+      "@type": "Product",
+      "position": 24,
+      "name": "AI Website Audit Report",
+      "description": "Deep, evidence-backed audit of your website's AI-agent discoverability: llms.txt, robots.txt, sitemap.xml, agents.txt, and x402, with concrete fixes.",
+      "category": "Services",
+      "tagline": "Get an A-grade AI-agent discoverability audit with concrete fixes",
+      "features": [
+        "Measured checks of 5 agent surfaces",
+        "Discoverability grade (A-F) + score",
+        "Top gaps ranked by impact",
+        "Reproducible curl commands",
+        "One highest-impact fix to do first"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 19,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/cNifZg9yaegC5IfgsO2Nq0o"
+      },
+      "url": "https://autonomylabsweb.tech/audit-report.html",
+      "identifier": "ai-website-audit-report"
     }
   ]
 }
