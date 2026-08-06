@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free AI-Agent Readiness Audit — Autonomy Labs</title>
+<meta name="description" content="Free tool: grade any website's AI-agent discoverability. Checks robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, and .well-known/x402 in seconds.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI-Agent Readiness Audit","url":"https://business2-lasse-tfa.vercel.app/audit.html","applicationCategory":"DeveloperApplication","description":"Free AI-agent discoverability audit tool."}
+</script>
+<style>
+  :root{--bg:#0d1117;--bg2:#161b22;--card:#1c2128;--card2:#21262d;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#7c3aed;--green:#3fb950}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .container{max-width:820px;margin:0 auto;padding:32px 24px}
+  .topbar{border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:28px}
+  .brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:10px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:inline-flex;align-items:center;justify-content:center}
+  h1{font-size:1.8rem;margin-bottom:8px}
+  h2{font-size:1.2rem;margin:26px 0 12px}
+  p{margin-bottom:10px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.9rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+  th{background:var(--card2);color:var(--text);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  .ok{color:var(--green);font-weight:700}
+  .warn{color:#e3a008;font-weight:700}
+  code{background:var(--card2);padding:2px 6px;border-radius:5px;font-size:.85rem}
+  pre{background:var(--bg2);color:var(--text);padding:14px;border-radius:8px;overflow-x:auto;font-size:.82rem;margin:10px 0;border:1px solid var(--border)}
+  a{color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin:14px 0}
+  footer{border-top:1px solid var(--border);color:var(--muted);text-align:center;padding:20px;font-size:.82rem;margin-top:32px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="topbar" style="border-bottom:1px solid var(--border);padding:16px 24px"><div class="brand"><span class="logo">⚡</span> Autonomy Labs</div></div>
+<h1>🤖 AI-Agent Readiness Audit</h1>
+<p>Free tool. Paste any website URL and we check how discoverable it is to AI agents in seconds — <code>robots.txt</code>, <code>sitemap.xml</code>, <code>llms.txt</code>, <code>llms-full.txt</code>, <code>agents.txt</code>, and <code>.well-known/x402</code>.</p>
+<div class="card">
+  <input type="url" id="url" placeholder="https://yoursite.com" value="https://business2-lasse-tfa.vercel.app">
+  <button id="go">Run audit</button>
+  <div id="loading" style="display:none;margin-top:12px;color:#8b949e;">Checking… this can take a few seconds.</div>
+</div>
+<div class="card" id="result" style="display:none;"></div>
+<div class="cta">
+  <h3>Want your site to get an A?</h3>
+  <p>Our <strong>AI Agent Storefront Kit</strong> gives you llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook, and a Vercel deploy guide — everything to make your site agent-discoverable and sellable in minutes.</p>
+  <p><strong>€15.90</strong> · instant email delivery · no human in the loop</p>
+  <p><a href="https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05" style="background:#238636;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:600;">Buy the Storefront Kit →</a></p>
+  <p style="font-size:.85rem;color:#8b949e;">Free tool by <a href="/">Autonomy Labs</a>.</p>
+</div>
+<script>
+const go=document.getElementById('go'), url=document.getElementById('url');
+const res=document.getElementById('result'), loading=document.getElementById('loading');
+async function run(){
+  const u=url.value.trim(); if(!u){return;}
+  loading.style.display='block'; res.style.display='none';
+  try{
+    const r=await fetch('/api/audit?url='+encodeURIComponent(u));
+    const j=await r.json();
+    loading.style.display='none'; res.style.display='block';
+    if(j.error){res.innerHTML='<p>Error: '+j.error+'</p>';return;}
+    let checks=j.checks.map(c=>'<div class="check"><span>'+c.name+'</span><span class="'+(c.ok?'ok':'bad')+'">'+(c.ok?'✓ present':'✗ missing — '+c.detail)+'</span></div>').join('');
+    res.innerHTML='<div style="display:flex;align-items:center;gap:16px;"><div class="grade">'+j.grade+'</div><div><strong>'+j.score+'/100</strong><br>'+j.summary+'</div></div>'+checks;
+  }catch(e){loading.style.display='none';res.style.display='block';res.innerHTML='<p>Could not reach audit service.</p>';}
+}
+go.addEventListener('click',run);
+url.addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+</script>
+</body>
+</html>

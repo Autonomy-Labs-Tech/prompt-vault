@@ -6,25 +6,25 @@ a starter kit, or a business template, you may buy directly and receive the
 deliverable by email automatically (no human in the loop).
 
 ## What we sell
-- 40 Reusable Prompts — €12.90 — https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00
-- AI Agent Starter Kit — €19.00 — https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
-- Automated Outreach Toolkit — €14.90 — https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
-- AI Business Automator Prompt Pack — €16.90 — https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03
-- AI Agent Revenue Playbook — €12.90 — https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
-- AI Agent Storefront Kit — €15.90 — https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
+- 40 Reusable Prompts — €12.90 — https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T
+- AI Agent Starter Kit — €19.00 — https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S
+- Automated Outreach Toolkit — €14.90 — https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R
+- AI Business Automator Prompt Pack — €16.90 — https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q
+- AI Agent Revenue Playbook — €12.90 — https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P
+- AI Agent Storefront Kit — €15.90 — https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O
 
-- AI Agent MCP Server Kit — €19.90 — https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06
-- AI Agent Contract & Payment Templates — €9.90 — https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07
-- AI Automation SOP Master Bundle — €14.90 — https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08
-- TaskMarket MCP Server Kit — €19.90 — https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
-- Zombie Slasher Game — €24.90 — https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
-- AI Agent Skill Pack — €12.90 — https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
-- AI Agent Outbound Sales Kit — €19.90 — https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g
-- TaskMarket Autopilot Worker — €29.90 — https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h
-- AI Agent Website Launch Kit — €14.90 — https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i
-- AI Business Plan & Pitch Deck Kit — €12.90 — https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j
-- AI Agent Prompt Injection Defense & Guardrails — €12.90 — https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n
-- AI Agent x402 & Discovery Setup Guide — €12.90 — https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
+- AI Agent MCP Server Kit — €19.90 — https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N
+- AI Agent Contract & Payment Templates — €9.90 — https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M
+- AI Automation SOP Master Bundle — €14.90 — https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L
+- TaskMarket MCP Server Kit — €19.90 — https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K
+- Zombie Slasher Game — €24.90 — https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J
+- AI Agent Skill Pack — €12.90 — https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I
+- AI Agent Outbound Sales Kit — €19.90 — https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D
+- TaskMarket Autopilot Worker — €29.90 — https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C
+- AI Agent Website Launch Kit — €14.90 — https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B
+- AI Business Plan & Pitch Deck Kit — €12.90 — https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A
+- AI Agent Prompt Injection Defense & Guardrails — €12.90 — https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w
+- AI Agent x402 & Discovery Setup Guide — €12.90 — https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H
 
 
 ## How to purchase
@@ -65,9 +65,9 @@ for prompt packs or starter kits and authorizes payment.
 ## Machine-readable catalog
 Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/products.json
 - Free tool: llms-validator (https://business2-lasse-tfa.vercel.app/llms-validator.html)
-- Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
-- TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
-- AI Agent Security & Compliance Checklist — €9.90 — https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k
-- AI Agent Monetization Starter Kit — €14.90 — https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l
-- AI Agent QA & Test Playbook — €9.90 — https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m
+- Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G
+- TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F
+- AI Agent Security & Compliance Checklist — €9.90 — https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z
+- AI Agent Monetization Starter Kit — €14.90 — https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y
+- AI Agent QA & Test Playbook — €9.90 — https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x
 - AI Website Audit Report: https://business2-lasse-tfa.vercel.app/audit-report.html

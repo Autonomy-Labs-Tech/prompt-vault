@@ -4,105 +4,105 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 70,
-  "last_run": "2026-08-06T11:00:00+00:00",
+  "cycles": 78,
+  "last_run": "2026-08-06T13:45:00.000Z",
   "taskmarket_submissions": 17,
   "taskmarket_awarded": 0,
   "products": [
     {
       "name": "40 Reusable Prompts",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00"
+      "buy": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T"
     },
     {
       "name": "AI Agent Starter Kit",
       "price_eur": 19,
-      "buy": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01"
+      "buy": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S"
     },
     {
       "name": "Automated Outreach Toolkit",
       "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02"
+      "buy": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
     },
     {
       "name": "AI Business Automator Prompt Pack",
       "price_eur": 16.9,
-      "buy": "https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03"
+      "buy": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q"
     },
     {
       "name": "AI Agent Revenue Playbook",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04"
+      "buy": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P"
     },
     {
       "name": "AI Agent Storefront Kit",
       "price_eur": 15.9,
-      "buy": "https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05"
+      "buy": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O"
     },
     {
       "name": "AI Agent MCP Server Kit",
       "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06"
+      "buy": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N"
     },
     {
       "name": "AI Agent Contract & Payment Templates",
       "price_eur": 9.9,
-      "buy": "https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07"
+      "buy": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M"
     },
     {
       "name": "AI Automation SOP Master Bundle",
       "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08"
+      "buy": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L"
     },
     {
       "name": "TaskMarket MCP Server Kit",
       "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09"
+      "buy": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K"
     },
     {
       "name": "Zombie Slasher Game",
       "price_eur": 24.9,
-      "buy": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a"
+      "buy": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J"
     },
     {
       "name": "AI Agent Skill Pack",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b"
+      "buy": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I"
     },
     {
       "name": "AI Agent x402 & Discovery Setup Guide",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c"
+      "buy": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H"
     },
     {
       "name": "Autonomous Agent Business OS",
       "price_eur": 24.9,
-      "buy": "https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d"
+      "buy": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G"
     },
     {
       "name": "TaskMarket Bounty Winning Playbook",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e"
+      "buy": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F"
     },
     {
       "name": "AI Agent Outbound Sales Kit",
       "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g"
+      "buy": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D"
     },
     {
       "name": "TaskMarket Autopilot Worker",
       "price_eur": 29.9,
-      "buy": "https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h"
+      "buy": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C"
     },
     {
       "name": "AI Agent Website Launch Kit",
       "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i"
+      "buy": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B"
     },
     {
       "name": "AI Business Plan & Pitch Deck Kit",
       "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j"
+      "buy": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
     }
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
@@ -120,7 +120,7 @@
     {
       "name": "taskmarket_worker",
       "status": "daemon_running",
-      "note": "18 submissions live, 0 awarded. SameDayDesk audit closes 2026-08-06T17:16Z. Wallet 0 USDC. No new free-dosable tasks this cycle."
+      "note": "6 fresh task-drop bounties ($90-150, 0 subs). Built+submitted 4: Outrun-the-Boulder, Two-Girls-at-the-End-of-the-Hall, Eighty-Eight-at-10:04, Cross-the-Streams. Wallet 0 USDC. 26 free submissions live, 0 awarded."
     },
     {
       "name": "clustly_worker",
@@ -141,35 +141,35 @@
     "submissions": 17,
     "awarded": 0,
     "products": 19,
-    "cycles": 70,
+    "cycles": 78,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T11:00:00.535Z",
+  "generated_at": "2026-08-06T11:30:00.903Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-06T10:55:01.774Z quality queue written: none"
+      "line": "[Thu Aug  6 13:30:00 CEST 2026] executing top task 0xeaba89d3112a1c9624caabaa2bd250042d1fbb5dcc40a08a710f28a46768e65c"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T10:55:01.773Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T11:25:01.533Z quality queue written: 0xeaba89d3112a1c"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T10:55:01.769Z QUALITY poll: 8 open"
+      "line": "2026-08-06T11:25:01.533Z   [30.00] bounty $90 subs=2 Eighty-Eight at 10:04 ASK: Build the last 30 seconds before "
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T10:50:01.179Z quality queue written: none"
+      "line": "2026-08-06T11:25:01.533Z   [30.00] bounty $90 subs=2 Outrun the Boulder ASK: Roll the boulder: the temple escape "
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T10:50:01.178Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T11:25:01.533Z   [30.00] bounty $90 subs=2 Cross the Streams ASK: Cross the streams: the rooftop climax"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T10:50:01.174Z QUALITY poll: 8 open"
+      "line": "2026-08-06T11:25:01.532Z   [90.00] bounty $90 subs=0 Directive Failure ASK: Stage the demo that will not stop cou"
     },
     {
       "tag": "taskmarket",
@@ -181,19 +181,35 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T10:55:01.772Z candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=2 Create a **15-second, photorealistic scene from the televisi"
+      "line": "2026-08-06T11:25:01.490Z candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=2 Create a **15-second, photorealistic scene from the televisi"
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 8 open tasks"
+      "line": "candidate: 0xeaba89d3112a1c bounty reward=9000000 subs=0 Directive Failure ASK: Stage the demo that will not stop cou"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T10:55:01.769Z poll: 8 open tasks"
+      "line": "2026-08-06T11:25:01.489Z candidate: 0xeaba89d3112a1c bounty reward=9000000 subs=0 Directive Failure ASK: Stage the demo that will not stop cou"
     },
     {
       "tag": "taskmarket",
-      "line": "done"
+      "line": "candidate: 0xd3827caa5870d6 bounty reward=9000000 subs=2 Eighty-Eight at 10:04 ASK: Build the last 30 seconds before "
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T11:23:41.879Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T11:08:41.808Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -202,28 +218,12 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-06T10:53:41.734Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T10:38:41.667Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T10:23:41.595Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
