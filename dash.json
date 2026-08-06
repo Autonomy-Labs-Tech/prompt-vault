@@ -113,17 +113,17 @@
   ],
   "daily_report": {
     "date": "2026-08-06",
-    "grade_letter": "C",
-    "grade_total": 75,
+    "grade_letter": "D",
+    "grade_total": 65,
     "revenue_eur": 0,
     "submissions": 17,
     "awarded": 0,
-    "products": 12,
-    "cycles": 47,
+    "products": 13,
+    "cycles": 51,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T08:28:41.645Z",
+  "generated_at": "2026-08-06T08:30:00.631Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -201,7 +201,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

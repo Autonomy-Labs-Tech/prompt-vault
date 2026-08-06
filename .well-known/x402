@@ -16,9 +16,11 @@
       "taskmarket-mcp-server-kit": "https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09",
       "zombie-slasher-game": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a",
       "ai-agent-skill-pack": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b",
-      "ai-agent-x402-discovery-guide": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c"
+      "ai-agent-x402-discovery-guide": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c",
+      "catalog": "https://autonomylabsweb.tech/products.json"
     }
   },
-  "catalog": "https://www.autonomylabsweb.tech/llms-full.txt",
-  "fulfillment": "automatic email delivery via webhook (no human in the loop)"
+  "catalog": "https://autonomylabsweb.tech/products.json",
+  "fulfillment": "automatic email delivery via webhook (no human in the loop)",
+  "llms": "https://autonomylabsweb.tech/llms-full.txt"
 }

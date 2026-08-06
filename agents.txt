@@ -44,3 +44,6 @@ for prompt packs or starter kits and authorizes payment.
 - TaskMarket MCP Server Kit: https://www.autonomylabsweb.tech/taskmarket-mcp.html
 - Zombie Slasher Game: https://www.autonomylabsweb.tech/zombie-game.html
 - AI Agent Skill Pack: https://www.autonomylabsweb.tech/agent-skill-pack.html
+
+## Machine-readable catalog
+Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.json
