@@ -118,3 +118,11 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 22. **AI Agent QA & Test Playbook** — €9.90 one-time. How to test AI deliverables from multiple angles before shipping, with reusable checklists.
    - Buy: https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m
    - Landing: https://business2-lasse-tfa.vercel.app/qa-test-playbook.html
+
+## Blog
+- **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
+- **How AI Agents Can Automate Your Small Business** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-automate-business.html
+- **10 Best AI Prompts for Small Business Owners** — https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business.html
+- **How to Write AI Prompts That Actually Work** — https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts.html
+- **Best AI Tools for Small Business in 2026** — https://business2-lasse-tfa.vercel.app/blog/ai-tools-for-small-business.html
+

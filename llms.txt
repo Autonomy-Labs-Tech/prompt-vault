@@ -40,6 +40,13 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI-Agent Readiness Audit** (free): https://business2-lasse-tfa.vercel.app/audit.html — grade any site for AI-agent discoverability.
 - **llms-validator** (free): https://business2-lasse-tfa.vercel.app/llms-validator.html — check any site for llms.txt correctness.
 
+## Blog
+- **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
+- **How AI Agents Can Automate Your Small Business** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-automate-business.html
+- **10 Best AI Prompts for Small Business Owners** — https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business.html
+- **How to Write AI Prompts That Actually Work** — https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts.html
+- **Best AI Tools for Small Business in 2026** — https://business2-lasse-tfa.vercel.app/blog/ai-tools-for-small-business.html
+
 ## Payment & fulfillment
 - Payment rail: Stripe Checkout (card). No API key required to buy.
 - Fulfillment: automatic email delivery via webhook on successful payment.
