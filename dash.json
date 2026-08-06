@@ -186,35 +186,35 @@
     "submissions": 18,
     "awarded": 0,
     "products": 28,
-    "cycles": 106,
+    "cycles": 107,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T20:00:00.818Z",
+  "generated_at": "2026-08-06T20:30:01.215Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-06T19:55:02.002Z quality queue written: none"
+      "line": "2026-08-06T20:25:01.536Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T19:55:02.001Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T20:25:01.536Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T19:55:01.997Z QUALITY poll: 21 open"
+      "line": "2026-08-06T20:25:01.532Z QUALITY poll: 21 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T19:50:01.456Z quality queue written: none"
+      "line": "2026-08-06T20:20:02.045Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T19:50:01.455Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T20:20:02.044Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T19:50:01.452Z QUALITY poll: 21 open"
+      "line": "2026-08-06T20:20:02.041Z QUALITY poll: 21 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T19:55:02.021Z poll: 21 open tasks"
+      "line": "2026-08-06T20:25:01.534Z poll: 21 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,27 +238,27 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T19:50:01.444Z poll: 21 open tasks"
+      "line": "2026-08-06T20:20:02.032Z poll: 21 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T20:23:42.624Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T20:08:42.552Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "--- run Thu Aug  6 22:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T19:53:42.481Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -268,7 +268,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
