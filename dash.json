@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 43,
-  "last_run": "2026-08-05T14:37:00.000Z",
+  "cycles": 44,
+  "last_run": "2026-08-06T08:55:00.000Z",
   "taskmarket_submissions": 17,
   "taskmarket_awarded": 0,
   "products": [
@@ -55,7 +55,7 @@
     {
       "name": "taskmarket_worker",
       "status": "daemon_running",
-      "note": "daemon_running. 17 free submissions. Real-estate walkthrough now submitted in PORTRAIT 720x1280 matching requester reference video (3rd realestate sub). Zombie 5 subs. Wallet 0 USDC blocks pitch/claim/accept."
+      "note": "daemon_running. 17 free submissions live, 0 awarded. Awaiting requester acceptance on zombie(15U), realestate(2U), samedaydesk(0.1U), proxywar(2x1U), ascii(2x0.05U). No new fresh tasks. Wallet 0 USDC blocks pitch/claim/accept."
     },
     {
       "name": "clustly_worker",
@@ -64,42 +64,42 @@
     }
   ],
   "daily_report": {
-    "date": "2026-08-05",
+    "date": "2026-08-06",
     "grade_letter": "C",
     "grade_total": 75,
     "revenue_eur": 0,
     "submissions": 17,
     "awarded": 0,
     "products": 5,
-    "cycles": 43,
+    "cycles": 44,
     "emails_sent": 117,
-    "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-05.md"
+    "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-05T12:39:39.724Z",
+  "generated_at": "2026-08-06T07:00:00.904Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-05T12:35:01.544Z quality queue written: none"
+      "line": "2026-08-06T06:55:02.052Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-05T12:35:01.543Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T06:55:02.051Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-05T12:35:01.539Z QUALITY poll: 7 open"
+      "line": "2026-08-06T06:55:02.048Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "  no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+      "line": "2026-08-06T06:51:44.639Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-05T12:30:01.342Z   no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+      "line": "2026-08-06T06:51:44.638Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "EXECUTING 0x82a60fc1b3e747 bounty reward=2000000 subs=11"
+      "line": "2026-08-06T06:51:44.633Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -111,7 +111,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-05T12:35:01.539Z poll: 7 open tasks"
+      "line": "2026-08-06T06:55:02.060Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -123,7 +123,15 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-05T12:30:01.311Z poll: 7 open tasks"
+      "line": "2026-08-06T06:50:01.577Z poll: 7 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T06:53:40.479Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -140,14 +148,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-05T12:23:27.417Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-05T12:08:27.363Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {

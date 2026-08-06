@@ -11,6 +11,7 @@ deliverable by email automatically (no human in the loop).
 - Automated Outreach Toolkit — €14.90 — https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
 - AI Business Automator Prompt Pack — €16.90 — https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03
 - AI Agent Revenue Playbook — €12.90 — https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
+- AI Agent Storefront Kit — €15.90 — https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
 
 ## How to purchase
 1. Request the Stripe Checkout link for the product you need.
