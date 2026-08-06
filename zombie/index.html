@@ -107,6 +107,43 @@ const zcountEl=$('zcount'),scoreEl=$('score'),waveBanner=$('waveBanner'),toastEl
 const hitmarker=$('hitmarker'),damageFlash=$('damageFlash'),lowHealth=$('lowHealth');
 const chargePct=$('chargePct'),chargeSub=$('chargeSub'),killFeed=$('killFeed');
 
+// ============ Audio (WebAudio, fully synthesized — no external files) ============
+let AC=null, master=null;
+function initAudio(){
+  if(AC)return;
+  try{ AC=new (window.AudioContext||window.webkitAudioContext)(); master=AC.createGain(); master.gain.value=0.5; master.connect(AC.destination); }catch(e){}
+}
+function tone(type,freq0,freq1,dur,vol,delay){
+  if(!AC)return;
+  const t0=AC.currentTime+(delay||0);
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.type=type;o.frequency.setValueAtTime(freq0,t0);
+  o.frequency.exponentialRampToValueAtTime(Math.max(1,freq1),t0+dur);
+  g.gain.setValueAtTime(0.0001,t0);
+  g.gain.exponentialRampToValueAtTime(vol,t0+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(g);g.connect(master);o.start(t0);o.stop(t0+dur+0.05);
+}
+function noiseBurst(dur,vol,delay,freq){
+  if(!AC)return;
+  const t0=AC.currentTime+(delay||0);
+  const len=AC.sampleRate*dur, buf=AC.createBuffer(1,len,AC.sampleRate), data=buf.getChannelData(0);
+  for(let i=0;i<len;i++)data[i]=(Math.random()*2-1)*(1-i/len);
+  const src=AC.createBufferSource();src.buffer=buf;
+  const flt=AC.createBiquadFilter();flt.type='bandpass';flt.frequency.value=freq||800;flt.Q.value=0.8;
+  const g=AC.createGain();g.gain.value=vol;
+  src.connect(flt);flt.connect(g);g.connect(master);src.start(t0);
+}
+const SND={
+  swing(heavy){ noiseBurst(heavy?0.35:0.18,0.35,0,heavy?500:1100); },
+  hit(){ tone('triangle',220,90,0.12,0.5); noiseBurst(0.08,0.4,0,300); },
+  kill(){ tone('sawtooth',180,50,0.35,0.5); tone('sawtooth',140,40,0.45,0.4,0.05); },
+  hurt(){ tone('square',110,60,0.25,0.5); },
+  wave(){ tone('triangle',320,520,0.18,0.3); tone('triangle',480,760,0.22,0.3,0.12); },
+  start(){ tone('triangle',220,440,0.3,0.35); tone('triangle',330,660,0.35,0.35,0.18); },
+  over(){ tone('sawtooth',200,60,1.1,0.5); tone('sawtooth',160,40,1.2,0.4,0.2); }
+};
+
 // ============ Renderer / Scene / Camera ============
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
 renderer.setSize(window.innerWidth,window.innerHeight);
@@ -280,6 +317,7 @@ let swingT=0,swingDur=0;
 function doAttack(){
   if(player.dead||chargeCd>0)return;
   const heavy=charge>0.6;
+  SND.swing(heavy);
   swingDur=heavy?0.5:0.28;swingT=swingDur;
   chargeCd=heavy?0.8:0.35;
   weapon.rotation.set(0,0,0);
@@ -301,7 +339,7 @@ function doAttack(){
       hitAny=true;
     }
   }
-  if(hitAny)showHitmarker();
+  if(hitAny){showHitmarker();SND.hit();}
 }
 
 function showHitmarker(){
@@ -363,6 +401,7 @@ function spawnZombie(){
 }
 function killZombie(z,heavy){
   if(z.dead)return;
+  SND.kill();
   z.dead=true;player.kills++;player.score+=z.variant===2?30:z.variant===3?20:10;
   killsEl.textContent=player.kills;scoreEl.textContent=player.score;
   // blood burst
@@ -394,6 +433,7 @@ function addKillFeed(variant){
 }
 const bloodBursts=[];
 function nextWave(){
+  SND.wave();
   player.wave++;
   waveEl.textContent=player.wave;
   waveBanner.textContent='— WAVE '+player.wave+' —';
@@ -478,6 +518,7 @@ function update(dt){
       lastHit=performance.now();
       player.health-=z.damage;
       healthEl.textContent=Math.max(0,player.health);
+      SND.hurt();
       damageFlash.style.opacity=1;setTimeout(()=>damageFlash.style.opacity=0,200);
       if(player.health<30)lowHealth.style.opacity=1;else lowHealth.style.opacity=0;
       if(player.health<=0)endGame();
@@ -516,6 +557,7 @@ function update(dt){
   fireLight2.intensity=12+Math.sin(time*8+2)*2+Math.random()*1.5;
 }
 function startGame(){
+  initAudio(); SND.start();
   overlay.classList.add('hidden');running=true;player.dead=false;
   player.health=100;player.kills=0;player.score=0;player.wave=1;
   healthEl.textContent=100;killsEl.textContent=0;scoreEl.textContent=0;waveEl.textContent=1;
@@ -530,6 +572,7 @@ function startGame(){
   animate();
 }
 function endGame(){
+  SND.over();
   player.dead=true;running=false;
   document.exitPointerLock();
   overlay.classList.remove('hidden');
