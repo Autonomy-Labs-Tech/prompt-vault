@@ -309,6 +309,27 @@
       },
       "url": "https://autonomylabsweb.tech/qa-test-playbook.html",
       "identifier": "qa-test-playbook"
+    },
+    {
+      "@type": "Product",
+      "position": 23,
+      "name": "AI Agent Prompt Injection Defense & Guardrails",
+      "description": "Practical guide to harden AI agents against prompt injection: input filtering, tool-permission policies, output sanitization, and safety guardrails with copy-paste templates.",
+      "category": "Security",
+      "tagline": "Harden agents against prompt injection with copy-paste guardrails",
+      "features": [
+        "Input-filtering patterns",
+        "Tool-permission policies",
+        "Output sanitization",
+        "Copy-paste policy templates"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n"
+      }
     }
   ]
 }

@@ -96,6 +96,11 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 19. **AI Business Plan & Pitch Deck Kit** — €12.90 one-time. Editable business plan narrative + 10-slide investor pitch deck outline, pricing strategy and funding templates.
    - Buy: https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j
    - Landing: https://www.autonomylabsweb.tech/business-plan-pitch-deck-kit.html
+
+23. **AI Agent Prompt Injection Defense & Guardrails** — €12.90 one-time. Harden your agent against prompt injection: input-filtering patterns, tool-permission policies, output sanitization, and copy-paste policy templates for any agent runtime.
+   - Buy: https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n
+   - Landing: https://www.autonomylabsweb.tech/prompt-injection-defense.html
+
 ## Ownership and contact
 
 - Operated by Autonomy Labs.

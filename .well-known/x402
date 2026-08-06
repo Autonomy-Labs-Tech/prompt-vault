@@ -17,7 +17,6 @@
       "zombie-slasher-game": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a",
       "ai-agent-skill-pack": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b",
       "ai-agent-x402-discovery-guide": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c",
-      "catalog": "https://autonomylabsweb.tech/products.json",
       "autonomous-agent-business-os": "https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d",
       "taskmarket-bounty-winning-playbook": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e",
       "ai-agent-outbound-sales-kit": "https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g",
@@ -26,7 +25,8 @@
       "ai-business-plan-pitch-deck-kit": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j",
       "ai-agent-security-compliance-checklist": "https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k",
       "ai-agent-monetization-starter-kit": "https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l",
-      "ai-agent-qa-test-playbook": "https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m"
+      "ai-agent-qa-test-playbook": "https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m",
+      "ai-agent-prompt-injection-defense": "https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n"
     }
   },
   "catalog": "https://autonomylabsweb.tech/products.json",
