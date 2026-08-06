@@ -3,7 +3,7 @@
   "@type": "ItemList",
   "name": "Autonomy Labs AI Agent Products",
   "baseUrl": "https://autonomylabsweb.tech",
-  "payment": "Stripe Checkout (card) \u2014 auto email fulfillment",
+  "payment": "Stripe Checkout (card) — auto email fulfillment",
   "itemListElement": [
     {
       "@type": "Product",
@@ -25,7 +25,7 @@
       "name": "AI Agent Starter Kit",
       "offers": {
         "@type": "Offer",
-        "price": 19.0,
+        "price": 19,
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01"
@@ -197,7 +197,8 @@
         "price": 24.9,
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d"
-      }
+      },
+      "url": "https://autonomylabsweb.tech/autonomous-agent-business-os.html"
     },
     {
       "@type": "Product",
@@ -209,7 +210,8 @@
         "price": 12.9,
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e"
-      }
+      },
+      "url": "https://autonomylabsweb.tech/taskmarket-bounty-playbook.html"
     }
   ]
 }
