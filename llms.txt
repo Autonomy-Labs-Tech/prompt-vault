@@ -39,6 +39,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 ## Free tools
 - **AI-Agent Readiness Audit** (free): https://business2-lasse-tfa.vercel.app/audit.html — grade any site for AI-agent discoverability.
 - **llms-validator** (free): https://business2-lasse-tfa.vercel.app/llms-validator.html — check any site for llms.txt correctness.
+- **llms.txt generator** (free): https://business2-lasse-tfa.vercel.app/llms-generator.html — generate a spec-compliant llms.txt for your site.
 
 ## Blog
 - **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html

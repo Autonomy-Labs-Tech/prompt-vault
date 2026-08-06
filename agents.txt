@@ -65,6 +65,7 @@ for prompt packs or starter kits and authorizes payment.
 ## Machine-readable catalog
 Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/products.json
 - Free tool: llms-validator (https://business2-lasse-tfa.vercel.app/llms-validator.html)
+- Free tool: llms.txt generator (https://business2-lasse-tfa.vercel.app/llms-generator.html)
 - Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G
 - TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F
 - AI Agent Security & Compliance Checklist — €9.90 — https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z
