@@ -3,7 +3,7 @@
   "@type": "ItemList",
   "name": "Autonomy Labs AI Agent Products",
   "baseUrl": "https://autonomylabsweb.tech",
-  "payment": "Stripe Checkout (card) — auto email fulfillment",
+  "payment": "Stripe Checkout (card) \u2014 auto email fulfillment",
   "itemListElement": [
     {
       "@type": "Product",
@@ -212,6 +212,32 @@
         "url": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e"
       },
       "url": "https://autonomylabsweb.tech/taskmarket-bounty-playbook.html"
+    },
+    {
+      "@type": "Product",
+      "position": 16,
+      "name": "AI Agent Outbound Sales Kit",
+      "description": "Copy-paste outbound sales system for AI agents: cold-email sequences, LinkedIn scripts, follow-up logic, and a CAN-SPAM/GDPR compliance checklist to run compliant agent outreach.",
+      "offers": {
+        "@type": "Offer",
+        "price": 19.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g"
+      },
+      "url": "https://autonomylabsweb.tech/outbound-sales-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 17,
+      "name": "TaskMarket Autopilot Worker",
+      "description": "Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology and a local agent harness so you can earn on bounties on autopilot.",
+      "offers": {
+        "@type": "Offer",
+        "price": 29.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h"
+      },
+      "url": "https://autonomylabsweb.tech/taskmarket-autopilot-worker.html"
     }
   ]
 }

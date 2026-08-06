@@ -19,6 +19,9 @@ deliverable by email automatically (no human in the loop).
 - TaskMarket MCP Server Kit — €19.90 — https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
 - Zombie Slasher Game — €24.90 — https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
 - AI Agent Skill Pack — €12.90 — https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
+- AI Agent Outbound Sales Kit — €19.90 — https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g
+- TaskMarket Autopilot Worker — €29.90 — https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h
+
 ## How to purchase
 1. Request the Stripe Checkout link for the product you need.
 2. The buyer pays with a card (Stripe handles checkout; no API key needed).
@@ -46,6 +49,9 @@ for prompt packs or starter kits and authorizes payment.
 - AI Agent Skill Pack: https://www.autonomylabsweb.tech/agent-skill-pack.html
 - TaskMarket Bounty Winning Playbook: https://www.autonomylabsweb.tech/taskmarket-bounty-playbook.html
 - Autonomous Agent Business OS: https://www.autonomylabsweb.tech/autonomous-agent-business-os.html
+- AI Agent Outbound Sales Kit: https://www.autonomylabsweb.tech/outbound-sales-kit.html
+- TaskMarket Autopilot Worker: https://www.autonomylabsweb.tech/taskmarket-autopilot-worker.html
+
 
 ## Machine-readable catalog
 Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.json

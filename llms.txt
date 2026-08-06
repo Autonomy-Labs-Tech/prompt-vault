@@ -22,7 +22,10 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Agent Skill Pack** — €12.90 — https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b — landing: https://autonomylabsweb.tech/agent-skill-pack.html
 - **AI Agent x402 & Discovery Setup Guide** — €12.90 — https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c — landing: https://autonomylabsweb.tech/x402-guide.html
 - **Autonomous Agent Business OS** — €24.90 — https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d — landing: https://autonomylabsweb.tech/autonomous-agent-business-os.html
-- **TaskMarket Bounty Winning Playbook** — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e — landing: https://autonomylabsweb.tech/taskmarket-bounty-playbook.html
+- **TaskMarket Bounty Winning Playbook**
+- **AI Agent Outbound Sales Kit** — €19.90 — https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g — landing: https://autonomylabsweb.tech/outbound-sales-kit.html
+- **TaskMarket Autopilot Worker** — €29.90 — https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h — landing: https://autonomylabsweb.tech/taskmarket-autopilot-worker.html
+ — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e — landing: https://autonomylabsweb.tech/taskmarket-bounty-playbook.html
 
 ## Machine-readable files
 - products.json (Schema.org ItemList of all products): https://autonomylabsweb.tech/products.json
