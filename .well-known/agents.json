@@ -1,0 +1,47 @@
+{
+  "name": "Autonomy Labs Storefront",
+  "description": "AI-agent-discoverable digital storefront: browse a machine-readable catalog, buy with card via Stripe Checkout, receive products by email automatically. Free agent-readiness audit API included.",
+  "endpoints": [
+    {
+      "path": "/products.json",
+      "method": "GET",
+      "description": "Full product catalog (Schema.org ItemList): 28 products with names, prices in EUR, and per-product Stripe Checkout payment links."
+    },
+    {
+      "path": "/llms.txt",
+      "method": "GET",
+      "description": "Agent-friendly catalog index: products, prices, buy links, free tools, blog."
+    },
+    {
+      "path": "/llms-full.txt",
+      "method": "GET",
+      "description": "Full agent documentation: every product with buy + landing URLs, purchase flow, agent interoperability notes."
+    },
+    {
+      "path": "/api/audit",
+      "method": "GET",
+      "query": { "url": "https://example.com" },
+      "description": "Free AI-agent readiness audit for any website. Returns JSON: grade (A-D), score, per-surface checks (robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, .well-known/x402)."
+    }
+  ],
+  "workflows": [
+    {
+      "id": "buy-product",
+      "description": "Buy a digital product: read the catalog, pick a product's Stripe Checkout payment link, have the agent (or user) pay by card, and the product is delivered to the customer email automatically via webhook — no human in the loop.",
+      "steps": [
+        { "name": "browse-catalog", "action": "GET /products.json" },
+        { "name": "pick-product", "action": "read the product's offers.url (buy.stripe.com payment link)" },
+        { "name": "checkout", "action": "open the payment link; customer pays by card via Stripe Checkout" },
+        { "name": "delivery", "action": "checkout.session.completed webhook emails the product to the customer automatically" }
+      ]
+    },
+    {
+      "id": "run-free-audit",
+      "description": "Grade any website's AI-agent discoverability for free, then optionally order the deep €19 audit report.",
+      "steps": [
+        { "name": "audit", "action": "GET /api/audit?url=<target-site>" },
+        { "name": "deep-audit-option", "action": "if a deeper evidence-backed report is wanted, buy the AI Website Audit Report (€19) and enter the URL at checkout" }
+      ]
+    }
+  ]
+}
