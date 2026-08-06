@@ -72,6 +72,12 @@
     <tbody id="channels"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
   </table>
 
+  <h2>Custom Domain (autonomylabsweb.tech)</h2>
+  <table>
+    <thead><tr><th>Domain</th><th>Status</th><th>DNS</th></tr></thead>
+    <tbody id="domain"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
+  </table>
+
   <h2>Recent Activity</h2>
   <div class="log-scroll">
     <table>
@@ -134,6 +140,16 @@
     if(d.channels && d.channels.length){
       ct.innerHTML=d.channels.map(c=>'<tr><td>'+esc(c.name)+'</td><td>'+pill(c.status)+'</td><td>'+esc(c.note)+'</td></tr>').join('');
     } else ct.innerHTML='<tr><td colspan="3" class="empty">No channels.</td></tr>';
+    // Domain
+    const dt=document.getElementById('domain');
+    if(d.domain){
+      const ok=d.domain.points_to_vercel;
+      const cls=ok?'live':'dead';
+      const lab=ok?'LIVE (pointing at Vercel)':'NEEDS DNS';
+      dt.innerHTML='<tr><td>'+esc(d.domain.domain)+'</td><td><span class="pill '+cls+'">'+lab+'</span></td><td class="mono">current: '+esc(d.domain.current_ip)+' &middot; needed: '+esc(d.domain.needed)+'</td></tr>';
+    } else {
+      dt.innerHTML='<tr><td colspan="3" class="empty">Unknown</td></tr>';
+    }
     // Activity
     const at=document.getElementById('activity');
     if(d.recent_activity && d.recent_activity.length){
@@ -142,7 +158,7 @@
   }
   async function load(){
     try{
-      const r=await fetch('./dash.json?t='+Date.now());
+      const r=await fetch('/dash.json?t='+Date.now());
       if(!r.ok) throw new Error(r.status);
       render(await r.json());
     }catch(e){ /* keep last render */ }

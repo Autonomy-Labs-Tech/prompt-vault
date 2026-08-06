@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomy Labs — Status &amp; Setup</title>
+<meta name="robots" content="index, follow">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a2e;line-height:1.6;background:#faf8f5;}
+  .container{max-width:820px;margin:0 auto;padding:32px 24px;}
+  header{background:linear-gradient(135deg,#5b2a86,#3b0f6d);color:#fff;padding:36px 24px;text-align:center;}
+  h1{font-size:1.7rem;margin-bottom:6px;}
+  h2{font-size:1.2rem;margin:26px 0 12px;color:#3b0f6d;}
+  p{margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;font-size:.9rem;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eee;}
+  th{background:#5b2a86;color:#fff;font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+  .ok{color:#2e9e5b;font-weight:700;}
+  .warn{color:#c0560a;font-weight:700;}
+  code{background:#eee;padding:2px 6px;border-radius:5px;font-size:.85rem;}
+  pre{background:#1a1a2e;color:#e6e6e6;padding:14px;border-radius:8px;overflow-x:auto;font-size:.82rem;margin:10px 0;}
+  a{color:#7a2a86;}
+  footer{background:#1a1a2e;color:#aaa;text-align:center;padding:20px;font-size:.82rem;}
+  footer a{color:#ccc;}
+  .card{background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin:14px 0;}
+</style>
+</head>
+<body>
+<header><div class="container"><h1>Autonomy Labs — Status &amp; Setup</h1><p>Live status of the storefront, agent dashboard, and domain configuration.</p></div></header>
+
+<div class="container">
+  <h2>Live Agent Dashboard</h2>
+  <div class="card">
+    <p>The autonomous agent publishes a live dashboard of revenue, storefront products, channel status, and a daily self-grade report.</p>
+    <p><a href="dashboard" style="font-weight:700;">→ Open the Agent Dashboard</a></p>
+  </div>
+
+  <h2>Live Storefront</h2>
+  <table>
+    <tr><th>Item</th><th>Status</th></tr>
+    <tr><td>Site (Vercel deployment)</td><td><span class="ok">LIVE</span> — served from business2 project</td></tr>
+    <tr><td>Digital products</td><td><span class="ok">4 products</span> live with Stripe payment links</td></tr>
+    <tr><td>Stripe fulfillment webhook</td><td><span class="ok">ENABLED</span> (auto-email delivery)</td></tr>
+    <tr><td>Custom domain <code>autonomylabsweb.tech</code></td><td><span class="warn">NEEDS DNS</span> — see below</td></tr>
+  </table>
+
+  <h2>Custom Domain — autonomylabsweb.tech</h2>
+  <p>The domain is registered at IONOS and connected to the Vercel project, but its DNS records still point at IONOS (<code>217.160.0.207</code>) instead of Vercel. Until that's corrected, <code>www.autonomylabsweb.tech</code> shows an SSL error and the Vercel site is only reachable at the <code>.vercel.app</code> URL.</p>
+  <p>Vercel's own check flags the domain as <strong>not configured properly</strong> and recommends one of these two fixes:</p>
+
+  <h3>Option A — point DNS records at Vercel (recommended)</h3>
+  <p>In the IONOS panel (account <code>su606135</code>) set:</p>
+  <pre>A      @     → 76.76.21.21
+A      @     → 76.76.21.61
+CNAME  www   → cname.vercel-dns.com</pre>
+
+  <h3>Option B — switch nameservers to Vercel</h3>
+  <pre>ns1.vercel-dns.com
+ns2.vercel-dns.com</pre>
+
+  <div class="card">
+    <p><strong>Automated helper:</strong> the agent has a script <code>mission/fix_domain.sh</code> that applies Option A automatically once an <code>IONOS_API_KEY</code> is added to <code>.env</code>. Run it to verify and apply.</p>
+  </div>
+
+  <h2>How purchases work</h2>
+  <p>Buy via Stripe → instant email delivery with the download. No subscription, no login, lifetime access. Fulfilment is fully automatic.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? <a href="mailto:hello@autonomylabsweb.tech">hello@autonomylabsweb.tech</a></p>
+</div>
+
+<footer><div class="container"><p>© 2026 Autonomy Labs. All rights reserved.</p><p><a href="index.html">Home</a> · <a href="blog/">Blog</a> · <a href="dashboard">Dashboard</a> · <a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy</a></p></div></footer>
+</body>
+</html>

@@ -114,25 +114,25 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.65;
+renderer.toneMappingExposure=1.4;
 gameEl.appendChild(renderer.domElement);
 
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x1d2735);
-scene.fog=new THREE.FogExp2(0x1d2735,0.009);
+scene.background=new THREE.Color(0x0a0c12);
+scene.fog=new THREE.FogExp2(0x0a0c12,0.012);
 
 const camera=new THREE.PerspectiveCamera(72,window.innerWidth/window.innerHeight,0.08,200);
 camera.position.set(0,1.7,0);
 
 // ============ Lighting ============
-scene.add(new THREE.AmbientLight(0xa8b8d8,1.7));
-const moon=new THREE.DirectionalLight(0xdce6ff,3.2);
+scene.add(new THREE.AmbientLight(0x8899aa,1.1));
+const moon=new THREE.DirectionalLight(0xbbccff,2.0);
 moon.position.set(25,35,15);
 moon.castShadow=true;moon.shadow.mapSize.set(2048,2048);
 moon.shadow.camera.left=-30;moon.shadow.camera.right=30;
 moon.shadow.camera.top=30;moon.shadow.camera.bottom=-30;
 scene.add(moon);
-scene.add(new THREE.HemisphereLight(0xb0c0e0,0x66788c,1.8));
+scene.add(new THREE.HemisphereLight(0x8899aa,0x334455,1.2));
 // Flickering firelight for atmosphere
 const fireLight=new THREE.PointLight(0xff8844,20,30);
 fireLight.position.set(6,1.5,4);
@@ -145,7 +145,7 @@ torch.position.set(0,2.5,8);
 scene.add(torch);
 
 // ============ Ground & Arena ============
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150),new THREE.MeshStandardMaterial({color:0x2a2f3d,roughness:0.95}));
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150),new THREE.MeshStandardMaterial({color:0x23263a,roughness:0.9}));
 ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
 // Procedural ground detail (cracked slabs)
 for(let i=0;i<400;i++){
@@ -157,8 +157,8 @@ for(let i=0;i<400;i++){
   scene.add(p);
 }
 // Boundary walls with ruined look
-const wallMat=new THREE.MeshStandardMaterial({color:0x333a4c,roughness:0.92});
-const wallTopMat=new THREE.MeshStandardMaterial({color:0x3a4256,roughness:0.88});
+const wallMat=new THREE.MeshStandardMaterial({color:0x20222e,roughness:0.95});
+const wallTopMat=new THREE.MeshStandardMaterial({color:0x2a2c3a,roughness:0.9});
 function addWall(x,z,lenx,lenz,h){
   const g=new THREE.Group();
   const base=new THREE.Mesh(new THREE.BoxGeometry(lenx,h,lenz),wallMat);
@@ -179,7 +179,7 @@ addWall(45,0,1.2,90,3.2);
 addWall(-45,0,1.2,90,3.2);
 
 // ============ Environment props ============
-const propMat=new THREE.MeshStandardMaterial({color:0x3c4458,roughness:0.88});
+const propMat=new THREE.MeshStandardMaterial({color:0x2a2c38,roughness:0.9});
 const crateMat=new THREE.MeshStandardMaterial({color:0x4a3b26,roughness:0.85});
 for(let i=0;i<40;i++){
   const kind=Math.random();
@@ -212,13 +212,12 @@ addBarrel(6,5);addBarrel(-6,-4);addBarrel(8,-7);
 const player={speed:6,sprintSpeed:9.5,health:100,maxHealth:100,kills:0,score:0,wave:1,dead:false};
 const keys={};
 let running=false;
-let rafId=null;
 const camVel=new THREE.Vector3();
 let yaw=0,pitch=0;
 let stamina=100;
 let charging=false,charge=0,chargeCd=0;
 let sprinting=false,dashCooldown=0,dashTime=0,dashDir=new THREE.Vector3();
-let lastHit=-9999;
+let lastHit=performance.now();
 let nextSpawn=0;
 
 // ============ Controls ============
@@ -285,7 +284,6 @@ function doAttack(){
   chargeCd=heavy?0.8:0.35;
   weapon.rotation.set(0,0,0);
   camera.rotation.z+=heavy?0.05:0.0;
-  if(!heavy){charge=0;chargePct.textContent='100%';chargeSub.textContent='MELEE READY';return;}
   const dir=new THREE.Vector3();camera.getWorldDirection(dir);
   const origin=camera.position.clone();
   const range=heavy?3.2:2.6;
@@ -440,6 +438,8 @@ function update(dt){
   camera.position.z=Math.max(-43,Math.min(43,camera.position.z));
   // dash cooldown
   if(dashCooldown>0)dashCooldown-=dt;
+  // attack cooldown (was never decremented -> player could only attack once)
+  if(chargeCd>0)chargeCd-=dt;
   // ---- Charge meter ----
   if(charging&&chargeCd<=0){
     charge=Math.min(1,charge+dt*1.6);
@@ -473,11 +473,8 @@ function update(dt){
     z.group.lookAt(new THREE.Vector3(camera.position.x,z.group.position.y,camera.position.z));
     // zombie arm sway
     z.group.children.forEach((c,i)=>{if(i>=0&&c.isMesh&&c.position.x!==0&&Math.abs(c.position.x)>0.3){c.rotation.x=Math.sin(z.bob*2)*0.3;}});
-    // damage player (use horizontal distance — camera sits 1.7 above ground so full-3D distance can never reach the threshold)
-    const hdx=camera.position.x-z.group.position.x;
-    const hdz=camera.position.z-z.group.position.z;
-    const horizDist=Math.hypot(hdx,hdz);
-    if(horizDist<1.35&&performance.now()-lastHit>850){
+    // damage player
+    if(d<2.4&&performance.now()-lastHit>850){
       lastHit=performance.now();
       player.health-=z.damage;
       healthEl.textContent=Math.max(0,player.health);
@@ -507,8 +504,6 @@ function update(dt){
     spawnZombie();nextSpawn=performance.now()+spawnInterval;
   }
   zcountEl.textContent=zombies.length;
-  healthEl.textContent=Math.max(0,Math.round(player.health));
-  if(player.health<30)lowHealth.style.opacity=1;else lowHealth.style.opacity=0;
   // ---- Blood particles ----
   for(let i=bloodBursts.length-1;i>=0;i--){
     const b=bloodBursts[i];
@@ -521,35 +516,18 @@ function update(dt){
   fireLight2.intensity=12+Math.sin(time*8+2)*2+Math.random()*1.5;
 }
 function startGame(){
-  // cancel any previous animation loop to guarantee a clean single loop
-  if(rafId!==null){cancelAnimationFrame(rafId);rafId=null;}
-  // reset all player state
-  overlay.classList.add('hidden');
-  player.dead=false;player.health=100;player.maxHealth=100;
-  player.kills=0;player.score=0;player.wave=1;
+  overlay.classList.add('hidden');running=true;player.dead=false;
+  player.health=100;player.kills=0;player.score=0;player.wave=1;
   healthEl.textContent=100;killsEl.textContent=0;scoreEl.textContent=0;waveEl.textContent=1;
   lowHealth.style.opacity=0;damageFlash.style.opacity=0;
-  chargeCd=0;charge=0;dashCooldown=0;dashTime=0;stamina=100;swingT=0;swingDur=0;
-  lastHit=-9999;nextSpawn=performance.now()+500;
-  // remove all old zombies and blood
-  zombies.forEach(z=>{try{scene.remove(z.group);}catch(e){}});
-  zombies.length=0;
-  bloodBursts.forEach(b=>{try{scene.remove(b);}catch(e){}});
-  bloodBursts.length=0;
-  // reset camera to spawn
-  camera.position.set(0,1.7,0);yaw=0;pitch=0;
-  camera.rotation.set(0,0,0);
-  // spawn initial wave
+  chargeCd=0;charge=0;dashCooldown=0;stamina=100;
+  nextSpawn=performance.now()+500;
+  renderer.domElement.requestPointerLock();
+  zombies.forEach(z=>scene.remove(z.group));zombies.length=0;
+  bloodBursts.forEach(b=>scene.remove(b));bloodBursts.length=0;
   for(let i=0;i<4;i++)spawnZombie();
-  // restart clock and loop
   clock.start();
-  running=true;
-  requestPointerLockSafe();
   animate();
-}
-function requestPointerLockSafe(){
-  try{const p=renderer.domElement.requestPointerLock&&renderer.domElement.requestPointerLock();
-    if(p&&p.catch)p.catch(()=>{});}catch(e){}
 }
 function endGame(){
   player.dead=true;running=false;
@@ -567,10 +545,10 @@ function endGame(){
 }
 function animate(){
   if(!running)return;
+  requestAnimationFrame(animate);
   const dt=Math.min(clock.getDelta(),0.05);
   update(dt);
   renderer.render(scene,camera);
-  rafId=requestAnimationFrame(animate);
 }
 startBtn.addEventListener('click',startGame);
 window.addEventListener('resize',()=>{

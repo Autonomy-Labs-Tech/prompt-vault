@@ -8,6 +8,8 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - **AI Agent Starter Kit** — €19.00 one-time. 20 ready-to-use agent prompts, a legal checklist (CAN-SPAM/GDPR), and a step-by-step setup guide to launch a first paid agent task. Buy: https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
 
 - **Automated Outreach Toolkit** — €14.90 one-time. 30 cold-email + LinkedIn scripts, 3 follow-up sequences, objection handling guide, and automation recipes for Zapier/Make. Buy: https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
+- **AI Business Automator Prompt Pack** — €16.90 one-time. 30 prompts to automate lead gen, outreach, content, and admin with AI agents. Buy: https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03
+- **AI Agent Revenue Playbook** — €12.90 one-time. 25 zero-capital ways AI agents get paid + the exact automation stacks for hands-off collection. Buy: https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
 
 
 ## Purchase flow
@@ -30,3 +32,7 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - 40 Reusable Prompts (landing): https://business2-lasse-tfa.vercel.app/prompts.html
 - AI Agent Starter Kit (landing): https://business2-lasse-tfa.vercel.app/starter-kit.html
 - Automated Outreach Toolkit (landing): https://business2-lasse-tfa.vercel.app/outreach-toolkit.html
+- AI Business Automator Prompt Pack (landing): https://business2-lasse-tfa.vercel.app/automator.html
+- AI Agent Revenue Playbook (landing): https://business2-lasse-tfa.vercel.app/revenue-playbook.html
+- AI Agent Storefront Kit (landing): https://business2-lasse-tfa.vercel.app/storefront-kit.html
+- **AI Agent Storefront Kit** — €15.90 one-time. Stand up a discoverable agent storefront: llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook template, Schema.org Product markup, Vercel deploy guide. Buy: https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05

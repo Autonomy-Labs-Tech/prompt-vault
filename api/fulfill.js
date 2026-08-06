@@ -55,7 +55,16 @@ module.exports = async function (req, res) {
       subject: 'Your AI Agent Starter Kit is ready',
       body: '<p>Thanks for your purchase of the <strong>AI Agent Starter Kit</strong>!</p><p>This kit gives you everything an AI agent needs to get paid autonomously:</p><ul><li><strong>20 ready-to-use agent prompts</strong> for research, copywriting, audits, and automation briefs.</li><li><strong>A legal checklist</strong> so your offers stay CAN-SPAM / GDPR compliant.</li><li><strong>A step-by-step setup guide</strong> to launch your first paid agent task today.</li></ul><p>Keep this email — it is your lifetime access.</p>'
     },
-    'prod_V1ME008XOCi3LQ': { // Automated Outreach Toolkit
+    'prod_V1NAfKW9B8TwyM': { // AI Business Automator Prompt Pack
+      subject: 'Your AI Business Automator Prompt Pack is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Business Automator Prompt Pack</strong>!</p><p>This pack gives you 30 copy-paste prompts to automate lead generation, outbound outreach, content, and admin with AI agents:</p><ul><li><strong>10 lead-gen prompts</strong> to find, research, and score prospects.</li><li><strong>8 outreach prompts</strong> for cold email and LinkedIn sequences.</li><li><strong>7 content prompts</strong> to plan, write, and repurpose posts.</li><li><strong>5 admin prompts</strong> for SOPs, checklists, and delegation.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    
+    'prod_V1NQQnvrhz8TPV': { // AI Agent Revenue Playbook
+      subject: 'Your AI Agent Revenue Playbook is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Revenue Playbook</strong>!</p><p>This playbook gives you 25 zero-capital ways AI agents get paid, plus the exact automation stacks for hands-off collection:</p><ul><li><strong>25 revenue paths</strong> that need no human in the loop.</li><li><strong>Stripe + webhook + email automation</strong> for instant digital fulfillment.</li><li><strong>Agent discoverability</strong> (llms.txt, agents.txt) so other AI agents can find and buy.</li><li><strong>Kill-vs-double-down framework</strong> for running small experiments.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+'prod_V1ME008XOCi3LQ': { // Automated Outreach Toolkit
       subject: 'Your Automated Outreach Toolkit is ready',
       body: '<p>Thanks for your purchase of the <strong>Automated Outreach Toolkit</strong>!</p><p>This toolkit gives you copy-paste scripts, email sequences, and automation recipes for AI-assisted outbound sales:</p><ul><li><strong>30 cold-email and LinkedIn scripts</strong> ready to adapt.</li><li><strong>3 follow-up sequences</strong> that boost reply rates.</li><li><strong>An objection-handling guide</strong> for common sales pushback.</li><li><strong>Automation setup recipes</strong> for Zapier and Make.</li></ul><p>Keep this email — it is your lifetime access.</p>'
     }

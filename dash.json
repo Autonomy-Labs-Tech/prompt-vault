@@ -6,7 +6,7 @@
   "fresh_remaining": 0,
   "cycles": 43,
   "last_run": "2026-08-05T14:37:00.000Z",
-  "taskmarket_submissions": 16,
+  "taskmarket_submissions": 17,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -65,17 +65,17 @@
   ],
   "daily_report": {
     "date": "2026-08-05",
-    "grade_letter": "D",
-    "grade_total": 63,
+    "grade_letter": "C",
+    "grade_total": 75,
     "revenue_eur": 0,
-    "submissions": 0,
+    "submissions": 17,
     "awarded": 0,
     "products": 5,
-    "cycles": 42,
+    "cycles": 43,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-05.md"
   },
-  "generated_at": "2026-08-05T12:37:25.329Z",
+  "generated_at": "2026-08-05T12:39:39.724Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -131,6 +131,14 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-05T12:38:27.483Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-05T12:23:27.417Z] prospects=34 fresh=0 sending=0"
     },
     {
@@ -140,14 +148,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-05T12:08:27.363Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Wed Aug  5 14:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "env: node: No such file or directory"
     }
   ],
   "domain": {

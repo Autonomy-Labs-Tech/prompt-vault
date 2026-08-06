@@ -4,6 +4,7 @@
   <url><loc>https://business2-lasse-tfa.vercel.app/prompts.html</loc><priority>0.9</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/starter-kit.html</loc><priority>0.9</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/outreach-toolkit.html</loc><priority>0.9</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/automator.html</loc><priority>0.9</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/blog/</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts</loc><priority>0.8</priority></url>
@@ -11,4 +12,6 @@
   <url><loc>https://business2-lasse-tfa.vercel.app/blog/ai-tools-for-small-business</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/impressum.html</loc><priority>0.3</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/revenue-playbook.html</loc></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/storefront-kit.html</loc></url>
 </urlset>
