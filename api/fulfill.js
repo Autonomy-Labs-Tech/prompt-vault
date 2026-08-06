@@ -140,6 +140,18 @@ module.exports = async function (req, res) {
       subject: 'Your TaskMarket Bounty Winning Playbook is ready',
       body: '<p>Thanks for your purchase of the <strong>TaskMarket Bounty Winning Playbook</strong>!</p><p>This tactical playbook covers task selection, quality-first deliverables, requester psychology, and common pitfalls for winning TaskMarket bounties. Keep this email — it is your lifetime access.</p>'
     },
+    'prod_V1RtCgK4vsTSID': { // AI Agent Fulfillment Webhook Kit
+      subject: 'Your AI Agent Fulfillment Webhook Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Fulfillment Webhook Kit</strong>!</p><p>This kit gives you a deployable Stripe webhook that auto-delivers digital products by email: signature verification, product lookup, and Resend delivery with a purchases log. Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1RtaNrM4SgPkQ': { // AI Agent x402 Paywall Setup Kit
+      subject: 'Your AI Agent x402 Paywall Setup Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent x402 Paywall Setup Kit</strong>!</p><p>This kit shows you how to charge AI agents for access with x402: manifest format, payment flow, and wiring it to Stripe Checkout. Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1NvDTS0cNV4kK': { // AI Website Audit Report
+      subject: 'Your AI Website Audit Report is confirmed',
+      body: '<p>Thanks for your purchase of the <strong>AI Website Audit Report</strong>!</p><p>Your audit is confirmed. Reply to this email with the website URL you want audited (or include it at checkout). We will run the deep AI-agent discoverability audit and email your report with concrete fixes.</p>'
+    },
   };
 
   try {
