@@ -213,7 +213,7 @@ module.exports = async function (req, res) {
   }
 };
 
-const AUDIT_SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt'];
+const AUDIT_SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt', '/.well-known/agents.json', '/.well-known/security.txt'];
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
@@ -232,7 +232,7 @@ async function runAudit(base0) {
     } finally { clearTimeout(to); }
   }
   const present = results.filter((r) => r.status === 200).length;
-  const grade = present >= 5 ? 'A' : present >= 4 ? 'B' : present >= 3 ? 'C' : present >= 2 ? 'D' : 'F';
+  const grade = present >= 7 ? 'A' : present >= 5 ? 'B' : present >= 3 ? 'C' : present >= 1 ? 'D' : 'F';
   let rows = '';
   for (const r of results) {
     const st = r.status === 200 ? '<span style="color:#3f7a4f">OK 200</span>' : esc(r.status ? 'HTTP ' + r.status : (r.err || 'ERR'));
