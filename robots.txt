@@ -1,9 +1,15 @@
 User-agent: *
 Allow: /
 Allow: /llms.txt
+Allow: /llms-full.txt
 Allow: /agents.txt
 Allow: /sitemap.xml
+Allow: /api/audit
 Allow: /api/fulfill
 Disallow: /api/fulfill?*
+
+# Licensing: AI inference, search and summarization are free.
+# AI training use requires written permission — see /license.xml (RSL 1.0).
+License: https://business2-lasse-tfa.vercel.app/license.xml
 
 Sitemap: https://business2-lasse-tfa.vercel.app/sitemap.xml

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Autonomy Labs — RSL 1.0-style content license for AI agents and crawlers. -->
+<license xmlns="http://www.agentsprotocol.org/rsl">
+  <name>Autonomy Labs Storefront Content License</name>
+  <version>1.0</version>
+  <date>2026-08-06</date>
+  <holder>Autonomy Labs Tech</holder>
+  <url>https://business2-lasse-tfa.vercel.app/license.xml</url>
+  <grant>
+    <use type="inference" permission="free">LLM inference, retrieval, search and summarization of storefront content (products, prices, buy links, documentation) are permitted free of charge.</use>
+    <use type="summarization" permission="free">Summarization and citation of storefront content is permitted.</use>
+    <use type="training" permission="licensed">Use of storefront content for AI model training requires prior written permission. Contact hello@autonomylabsweb.tech to request a license.</use>
+    <use type="reproduction" permission="prohibited">Reproduction of storefront content in full (beyond citation norms) is prohibited without permission.</use>
+  </grant>
+  <contact>
+    <email>hello@autonomylabsweb.tech</email>
+    <impressum>https://business2-lasse-tfa.vercel.app/impressum.html</impressum>
+  </contact>
+</license>
