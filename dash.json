@@ -140,12 +140,12 @@
     "revenue_eur": 0,
     "submissions": 17,
     "awarded": 0,
-    "products": 15,
-    "cycles": 59,
+    "products": 19,
+    "cycles": 64,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T09:57:48.574Z",
+  "generated_at": "2026-08-06T10:00:00.950Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -197,6 +197,18 @@
     },
     {
       "tag": "distribute",
+      "line": "--- run Thu Aug  6 12:00:00 CEST 2026 ---"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "sent 0/0"
     },
     {
@@ -206,18 +218,6 @@
     {
       "tag": "distribute",
       "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T09:38:41.441Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T09:23:41.373Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {

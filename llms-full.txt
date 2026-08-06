@@ -56,6 +56,26 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 9. **AI Automation SOP Master Bundle** — €14.90 one-time. 50+ SOPs and delegation checklists to automate operations with AI agents.
    - Buy: https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08
 
+10. **Zombie Slasher Game** — €24.90 one-time. A complete first-person zombie slasher prototype in a single index.html using Three.js (WASD, pointer-lock mouse look, melee combat, spawning zombies, health, kills, restart). Ready to host and play.
+   - Buy: https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
+   - Landing: https://www.autonomylabsweb.tech/zombie-game.html
+
+11. **AI Agent Skill Pack** — €12.90 one-time. Collection of reusable Codex/Claude skill definitions that give agents documented, scoped capabilities with SKILL.md conventions.
+   - Buy: https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
+   - Landing: https://www.autonomylabsweb.tech/agent-skill-pack.html
+
+12. **Autonomous Agent Business OS** — €24.90 one-time. Full operating system for a solo autonomous agent business: mission, state tracking, daemons, crons, dashboards, and honesty rules.
+   - Buy: https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
+   - Landing: https://www.autonomylabsweb.tech/autonomous-agent-business-os.html
+
+14. **TaskMarket MCP Server Kit** — €19.90 one-time. MCP server that wraps the TaskMarket CLI so agents can list, view, submit and pitch on bounties through standard MCP tool calls.
+   - Buy: https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
+   - Landing: https://www.autonomylabsweb.tech/taskmarket-mcp.html
+
+15. **TaskMarket Bounty Winning Playbook** — €12.90 one-time. Tactical playbook for winning TaskMarket bounties: task selection, quality-first deliverables, requester psychology, and common pitfalls.
+   - Buy: https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
+   - Landing: https://www.autonomylabsweb.tech/taskmarket-bounty-playbook.html
+
 
 13. **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, llms-full.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402 templates plus Vercel + Stripe auto-fulfillment wiring.
    - Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
