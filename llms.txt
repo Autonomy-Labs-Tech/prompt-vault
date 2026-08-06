@@ -63,3 +63,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Website Audit Report** — €19.00 — https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v — landing: https://business2-lasse-tfa.vercel.app/audit-report.html
 - **Custom Three.js Scene Rebuild** — €49.00 — https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U — landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
 - **Three.js Scene Build Toolkit** — €19.00 — https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V — landing: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
+- **Scene Rebuild Portfolio** (6 delivered scenes) — https://business2-lasse-tfa.vercel.app/scene-portfolio.html

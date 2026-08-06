@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Three.js Scene Rebuild Portfolio — Autonomy Labs</title>
+<meta name="description" content="Six iconic movie moments rebuilt as self-contained offline Three.js r185 scenes: Raiders of the Lost Ark, The Shining, Back to the Future, Ghostbusters, RoboCop, E.T. — geometric silhouettes, original synthesized scores, full provenance.">
+<meta name="robots" content="index,follow">
+<style>
+  :root{--bg:#0d1117;--bg2:#161b22;--card:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--accent2:#7c3aed;--green:#3fb950}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+  .topbar{border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:28px}
+  .brand{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:10px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:inline-flex;align-items:center;justify-content:center}
+  h1{font-size:1.9rem;font-weight:800;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:1.05rem;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-bottom:28px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;border-bottom:1px solid var(--border)}
+  .card .body{padding:14px}
+  .card h3{font-size:1.05rem;margin-bottom:4px}
+  .card .film{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+  .card .meta{font-size:.82rem;color:var(--muted)}
+  .card .meta b{color:var(--text)}
+  .buy{display:inline-block;background:var(--accent);color:#0d1117;font-weight:700;padding:14px 30px;border-radius:10px;font-size:1rem;text-decoration:none;margin:4px 8px 4px 0}
+  .buy2{display:inline-block;background:transparent;color:var(--accent);border:1px solid var(--accent);font-weight:700;padding:13px 28px;border-radius:10px;font-size:1rem;text-decoration:none;margin:4px 0}
+  .cta{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin:8px 0 28px;text-align:center}
+  .small{color:var(--muted);font-size:.85rem}
+  .back{display:inline-block;margin-top:20px;color:var(--muted);text-decoration:none;font-size:.9rem}
+  .back:hover{color:var(--text)}
+</style></head><body>
+<div class="container">
+  <div class="topbar"><div class="brand"><span class="logo">⚡</span> Autonomy Labs — Scene Rebuild Portfolio</div></div>
+  <h1>Iconic Movie Moments, Rebuilt in Three.js</h1>
+  <p class="sub">Six delivered scene rebuilds. Every entry is a single self-contained offline HTML (Three.js r185, no CDN, no runtime fetch), geometric silhouettes only, an original Web Audio score, deterministic <code>renderAt(seconds)</code>, and a full <code>sources.md</code> provenance file.</p>
+
+  <div class="grid">
+    <div class="card">
+      <img src="scene-raiders.png" alt="Raiders of the Lost Ark boulder run homage — preview frame">
+      <div class="body"><h3>Outrun the Boulder</h3><div class="film">Raiders of the Lost Ark (1981)</div><div class="meta"><b>34s</b> · idol → swap → gauntlet → boulder · 17 draw calls, 528 tris</div></div>
+    </div>
+    <div class="card">
+      <img src="scene-shining.png" alt="The Shining corridor homage — preview frame">
+      <div class="body"><h3>Two Girls at the End of the Hall</h3><div class="film">The Shining (1980)</div><div class="meta"><b>30s</b> · Danny's corridor circuit · rhythm + twins beat</div></div>
+    </div>
+    <div class="card">
+      <img src="scene-bttf.png" alt="Back to the Future clock tower homage — preview frame">
+      <div class="body"><h3>Eighty-Eight at 10:04</h3><div class="film">Back to the Future (1985)</div><div class="meta"><b>36s</b> · the clock-tower run · 88 mph beats</div></div>
+    </div>
+    <div class="card">
+      <img src="scene-ghostbusters.png" alt="Ghostbusters rooftop homage — preview frame">
+      <div class="body"><h3>Cross the Streams</h3><div class="film">Ghostbusters (1984)</div><div class="meta"><b>36s</b> · rooftop climax · four figures, crossed streams</div></div>
+    </div>
+    <div class="card">
+      <img src="scene-robocop.png" alt="RoboCop boardroom homage — preview frame">
+      <div class="body"><h3>Directive Failure</h3><div class="film">RoboCop (1987)</div><div class="meta"><b>36s</b> · the ED-209 boardroom demo · countdown beats</div></div>
+    </div>
+    <div class="card">
+      <img src="scene-etmoon.png" alt="E.T. moon shot homage — preview frame">
+      <div class="body"><h3>The Moon Shot</h3><div class="film">E.T. the Extra-Terrestrial (1982)</div><div class="meta"><b>36s</b> · 1280×720 · bike on moon t=22–30s · 59 calls, 9.5k tris</div></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p style="font-weight:700;font-size:1.15rem">Want your iconic scene rebuilt?</p>
+    <p class="small" style="margin-bottom:12px">20–45s offline scene, original score, sources.md + concept note + screenshots, delivered by email in 5–7 days.</p>
+    <a class="buy" href="https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U">Order a scene rebuild — €49</a>
+    <a class="buy2" href="threejs-build-toolkit.html">Or get the build toolkit — €19</a>
+  </div>
+
+  <p class="small">All geometry authored from primitives; no likenesses, no ripped assets, no traced frames, no film audio. Each entry ships with provenance docs. See the <a href="blog/rebuilding-movie-scenes-threejs.html" style="color:var(--accent)">build write-up</a>.</p>
+  <a class="back" href="index.html">← Back to store</a>
+</div></body></html>

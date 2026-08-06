@@ -73,3 +73,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - AI Website Audit Report: https://business2-lasse-tfa.vercel.app/audit-report.html
 - Custom Three.js Scene Rebuild: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
 - Three.js Scene Build Toolkit: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
+- Scene Rebuild Portfolio: https://business2-lasse-tfa.vercel.app/scene-portfolio.html
