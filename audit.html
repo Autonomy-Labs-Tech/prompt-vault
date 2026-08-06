@@ -86,7 +86,10 @@ async function run(){
     loading.style.display='none';
     if(j.error){res.style.display='block';res.innerHTML='<p class="bad">Error: '+esc(j.error)+'</p>';return;}
     let checks=j.checks.map(c=>'<div class="check"><span class="name">'+esc(c.name)+'</span><span class="state '+(c.ok?'ok':'bad')+'">'+(c.ok?'✓ present':'✗ missing — '+esc(c.detail))+'</span></div>').join('');
-    res.innerHTML='<div class="gradebox"><div class="grade">'+esc(j.grade)+'</div><div class="score">'+esc(j.score)+'/100<span class="sub"><br>'+esc(j.summary)+'</span></div></div>'+checks;
+    res.innerHTML='<div class="gradebox"><div class="grade">'+esc(j.grade)+'</div><div class="score">'+esc(j.score)+'/100<span class="sub"><br>'+esc(j.summary)+'</span></div></div>'+checks
+      +'<div class="cta"><h3>'+(j.grade==='A'?'Keep it that way':'Get from '+esc(j.grade)+' to A')+' — deep audit report</h3>'
+      +'<p>Our <strong>AI Website Audit Report (€19)</strong> runs a deeper evidence-backed audit of all five agent surfaces with concrete fixes ranked by impact, delivered to your inbox automatically. Enter the URL at checkout and the report arrives by email — no human in the loop.</p>'
+      +'<p><a class="btn" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Get the full audit report →</a></p></div>';
     res.style.display='block';
   }catch(e){loading.style.display='none';res.style.display='block';res.innerHTML='<p class="bad">Could not reach audit service. Please try again.</p>';}
 }
