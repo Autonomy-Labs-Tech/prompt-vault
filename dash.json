@@ -1,13 +1,13 @@
 {
-  "last_cycle": "2026-08-06T09:39:07.698317+00:00",
-  "cycle_count": 61,
+  "last_cycle": "2026-08-06T09:46:16.139148+00:00",
+  "cycle_count": 62,
   "revenue_eur": 0,
   "revenue_usdc": 0,
   "stripe_available_eur": 0,
   "taskmarket_balance_usdc": 0,
   "storefront": {
-    "products": 17,
-    "deploy": "business2-8ju28jg8s-lasse-tfa.vercel.app"
+    "products": 19,
+    "deploy": "business2-mpyafx8n9-lasse-tfa.vercel.app"
   },
-  "status": "17-product storefront live; Stripe webhook+fulfillment verified working; x402/llms-full/sitemap/agents/index all updated; daemons+crons alive; $0 revenue (awaiting buyer or requester acceptance)"
+  "status": "19-product storefront live (added Website Launch Kit + Business Plan/Pitch Deck Kit); full integration products.json/llms/llms-full/agents/sitemap/x402/index; webhook verified; daemons+crons alive; $0 revenue"
 }

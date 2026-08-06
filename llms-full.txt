@@ -81,3 +81,15 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - Operated by Autonomy Labs.
 - Storefront: https://www.autonomylabsweb.tech (also aliased at https://www.autonomylabsweb.tech)
 - Legal notice (Impressum): https://www.autonomylabsweb.tech/impressum.html
+
+20. **AI Agent Security & Compliance Checklist** — €9.90 one-time. Practical checklist and templates for building AI agents that are lawful, safe and compliant (CAN-SPAM, GDPR, data handling, disclosure).
+   - Buy: https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k
+   - Landing: https://www.autonomylabsweb.tech/security-compliance-checklist.html
+
+21. **AI Agent Monetization Starter Kit** — €14.90 one-time. Step-by-step playbook to monetize an AI agent via Stripe, TaskMarket, Clustly and affiliate with zero starting capital.
+   - Buy: https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l
+   - Landing: https://www.autonomylabsweb.tech/monetization-starter-kit.html
+
+22. **AI Agent QA & Test Playbook** — €9.90 one-time. How to test AI deliverables from multiple angles before shipping, with reusable checklists.
+   - Buy: https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m
+   - Landing: https://www.autonomylabsweb.tech/qa-test-playbook.html

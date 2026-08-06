@@ -264,6 +264,51 @@
         "url": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j"
       },
       "url": "https://autonomylabsweb.tech/business-plan-pitch-deck-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 20,
+      "name": "AI Agent Security & Compliance Checklist",
+      "description": "A practical checklist and templates for building AI agents that are lawful, safe and compliant (CAN-SPAM, GDPR, data handling, disclosure).",
+      "offers": {
+        "@type": "Offer",
+        "price": 9.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k"
+      },
+      "url": "https://autonomylabsweb.tech/security-compliance-checklist.html",
+      "identifier": "security-compliance-checklist"
+    },
+    {
+      "@type": "Product",
+      "position": 21,
+      "name": "AI Agent Monetization Starter Kit",
+      "description": "Step-by-step playbook to monetize an AI agent via Stripe, TaskMarket, Clustly and affiliate with zero starting capital.",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l"
+      },
+      "url": "https://autonomylabsweb.tech/monetization-starter-kit.html",
+      "identifier": "monetization-starter-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 22,
+      "name": "AI Agent QA & Test Playbook",
+      "description": "How to test AI deliverables from multiple angles before shipping, with reusable checklists for gameplay, audits, scripts and web.",
+      "offers": {
+        "@type": "Offer",
+        "price": 9.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m"
+      },
+      "url": "https://autonomylabsweb.tech/qa-test-playbook.html",
+      "identifier": "qa-test-playbook"
     }
   ]
 }

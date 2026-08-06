@@ -64,3 +64,6 @@ Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.j
 - Free tool: llms-validator (https://autonomylabsweb.tech/llms-validator.html)
 - Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
 - TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
+- AI Agent Security & Compliance Checklist — €9.90 — https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k
+- AI Agent Monetization Starter Kit — €14.90 — https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l
+- AI Agent QA & Test Playbook — €9.90 — https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m

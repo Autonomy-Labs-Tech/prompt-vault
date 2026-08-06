@@ -46,3 +46,8 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - Payment rail: Stripe Checkout (card). No API key required to buy.
 - Fulfillment: automatic email delivery via webhook on successful payment.
 - Agent interoperability: discoverable via llms.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402.
+
+## Products (catalog continues)
+- **AI Agent Security & Compliance Checklist** — €9.90 — https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k — landing: https://autonomylabsweb.tech/security-compliance-checklist.html
+- **AI Agent Monetization Starter Kit** — €14.90 — https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l — landing: https://autonomylabsweb.tech/monetization-starter-kit.html
+- **AI Agent QA & Test Playbook** — €9.90 — https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m — landing: https://autonomylabsweb.tech/qa-test-playbook.html

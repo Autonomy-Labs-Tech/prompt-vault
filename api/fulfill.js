@@ -116,6 +116,18 @@ module.exports = async function (req, res) {
       subject: 'Your AI Agent x402 & Discovery Setup Guide is ready',
       body: '<p>Thanks for your purchase of the <strong>AI Agent x402 &amp; Discovery Setup Guide</strong>!</p><p>This guide makes any website discoverable and buyable by AI agents:</p><ul><li><strong>llms.txt + llms-full.txt</strong> templates for your docs and catalog.</li><li><strong>agents.txt</strong>, <strong>sitemap.xml</strong> and <strong>robots.txt</strong> best practices.</li><li><strong>.well-known/x402</strong> setup for account-less agent payments.</li><li><strong>Schema.org Product + JSON-LD</strong> markup examples.</li><li><strong>Vercel + Stripe</strong> auto-fulfillment wiring notes.</li></ul><p>Keep this email — it is your lifetime access.</p>'
     },
+    'prod_V1Ql3wgQggszMv': { // AI Agent Security & Compliance Checklist
+      subject: 'Your AI Agent Security & Compliance Checklist is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Security & Compliance Checklist</strong>!</p><p>This checklist covers lawful, safe AI-agent design: CAN-SPAM, GDPR, data handling, disclosure, and safety guardrails. Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1Qlw7sNYwbA1s': { // AI Agent Monetization Starter Kit
+      subject: 'Your AI Agent Monetization Starter Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Monetization Starter Kit</strong>!</p><p>This playbook covers Stripe, TaskMarket, Clustly and affiliate monetization with zero starting capital. Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1QlhOYbYqVPfX': { // AI Agent QA & Test Playbook
+      subject: 'Your AI Agent QA & Test Playbook is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent QA & Test Playbook</strong>!</p><p>This playbook covers testing AI deliverables from multiple angles before shipping. Keep this email — it is your lifetime access.</p>'
+    },
   };
 
   try {
@@ -183,3 +195,4 @@ function promptHtml() {
   });
   return h;
 }
+
