@@ -226,7 +226,7 @@
     }
   ],
   "domain": {
-    "domain": "autonomylabsweb.tech",
+    "domain": "business2-lasse-tfa.vercel.app",
     "points_to_vercel": true,
     "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"

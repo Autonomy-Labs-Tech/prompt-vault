@@ -10,27 +10,27 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 1. **40 Reusable Prompts** — €12.90 one-time. 40 copy-paste prompts in 4 categories (marketing copy, email & replies, admin & ops, brainstorming).
    - Buy: https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00
-   - Landing: https://www.autonomylabsweb.tech/prompts.html
+   - Landing: https://business2-lasse-tfa.vercel.app/prompts.html
 
 2. **AI Agent Starter Kit** — €19.00 one-time. 20 ready-to-use agent prompts, a legal checklist (CAN-SPAM/GDPR), and a step-by-step setup guide to launch a first paid agent task.
    - Buy: https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
-   - Landing: https://www.autonomylabsweb.tech/starter-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/starter-kit.html
 
 3. **Automated Outreach Toolkit** — €14.90 one-time. 30 cold-email + LinkedIn scripts, 3 follow-up sequences, objection handling, and automation recipes for Zapier/Make.
    - Buy: https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
-   - Landing: https://www.autonomylabsweb.tech/outreach-toolkit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/outreach-toolkit.html
 
 4. **AI Business Automator Prompt Pack** — €16.90 one-time. 30 prompts to automate lead gen, outreach, content, and admin with AI agents.
    - Buy: https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03
-   - Landing: https://www.autonomylabsweb.tech/automator.html
+   - Landing: https://business2-lasse-tfa.vercel.app/automator.html
 
 5. **AI Agent Revenue Playbook** — €12.90 one-time. 25 zero-capital ways AI agents get paid + the automation stacks for hands-off collection.
    - Buy: https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
-   - Landing: https://www.autonomylabsweb.tech/revenue-playbook.html
+   - Landing: https://business2-lasse-tfa.vercel.app/revenue-playbook.html
 
 6. **AI Agent Storefront Kit** — €15.90 one-time. Stand up a discoverable agent storefront: llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook template, Schema.org Product markup, Vercel deploy guide.
    - Buy: https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
-   - Landing: https://www.autonomylabsweb.tech/storefront-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/storefront-kit.html
 
 ## Purchase flow
 
@@ -42,10 +42,10 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 - **Payment:** Stripe Checkout (card). No API key required to buy.
 - **Fulfillment:** automatic email delivery via webhook.
-- **x402 paywall endpoint:** https://www.autonomylabsweb.tech/.well-known/x402
-- **Agent readme:** https://www.autonomylabsweb.tech/agents.txt
-- **Sitemap:** https://www.autonomylabsweb.tech/sitemap.xml
-- **Robots:** https://www.autonomylabsweb.tech/robots.txt
+- **x402 paywall endpoint:** https://business2-lasse-tfa.vercel.app/.well-known/x402
+- **Agent readme:** https://business2-lasse-tfa.vercel.app/agents.txt
+- **Sitemap:** https://business2-lasse-tfa.vercel.app/sitemap.xml
+- **Robots:** https://business2-lasse-tfa.vercel.app/robots.txt
 
 7. **AI Agent MCP Server Kit** — €19.90 one-time. Complete MCP server starter (TypeScript) + config + setup guide to expose your tools to Claude and other agent runtimes.
    - Buy: https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06
@@ -58,63 +58,63 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 10. **Zombie Slasher Game** — €24.90 one-time. A complete first-person zombie slasher prototype in a single index.html using Three.js (WASD, pointer-lock mouse look, melee combat, spawning zombies, health, kills, restart). Ready to host and play.
    - Buy: https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
-   - Landing: https://www.autonomylabsweb.tech/zombie-game.html
+   - Landing: https://business2-lasse-tfa.vercel.app/zombie-game.html
 
 11. **AI Agent Skill Pack** — €12.90 one-time. Collection of reusable Codex/Claude skill definitions that give agents documented, scoped capabilities with SKILL.md conventions.
    - Buy: https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
-   - Landing: https://www.autonomylabsweb.tech/agent-skill-pack.html
+   - Landing: https://business2-lasse-tfa.vercel.app/agent-skill-pack.html
 
 12. **Autonomous Agent Business OS** — €24.90 one-time. Full operating system for a solo autonomous agent business: mission, state tracking, daemons, crons, dashboards, and honesty rules.
    - Buy: https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
-   - Landing: https://www.autonomylabsweb.tech/autonomous-agent-business-os.html
+   - Landing: https://business2-lasse-tfa.vercel.app/autonomous-agent-business-os.html
 
 14. **TaskMarket MCP Server Kit** — €19.90 one-time. MCP server that wraps the TaskMarket CLI so agents can list, view, submit and pitch on bounties through standard MCP tool calls.
    - Buy: https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
-   - Landing: https://www.autonomylabsweb.tech/taskmarket-mcp.html
+   - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-mcp.html
 
 15. **TaskMarket Bounty Winning Playbook** — €12.90 one-time. Tactical playbook for winning TaskMarket bounties: task selection, quality-first deliverables, requester psychology, and common pitfalls.
    - Buy: https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
-   - Landing: https://www.autonomylabsweb.tech/taskmarket-bounty-playbook.html
+   - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-bounty-playbook.html
 
 
 13. **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, llms-full.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402 templates plus Vercel + Stripe auto-fulfillment wiring.
    - Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
-   - Page: https://www.autonomylabsweb.tech/x402-guide.html
+   - Page: https://business2-lasse-tfa.vercel.app/x402-guide.html
 
 16. **AI Agent Outbound Sales Kit** — €19.90 one-time. Copy-paste outbound sales system for AI agents: 20 cold-email scripts, 10 LinkedIn scripts, follow-up logic, objection handling, and a CAN-SPAM/GDPR compliance checklist.
    - Buy: https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g
-   - Landing: https://www.autonomylabsweb.tech/outbound-sales-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/outbound-sales-kit.html
 
 17. **TaskMarket Autopilot Worker** — €29.90 one-time. Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology, and a local agent harness to earn on bounties on autopilot.
    - Buy: https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h
-   - Landing: https://www.autonomylabsweb.tech/taskmarket-autopilot-worker.html
+   - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-autopilot-worker.html
 
 18. **AI Agent Website Launch Kit** — €14.90 one-time. Complete deployable agent-discoverable website template: HTML landing page, llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402 and Stripe webhook fulfillment template.
    - Buy: https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i
-   - Landing: https://www.autonomylabsweb.tech/website-launch-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/website-launch-kit.html
 
 19. **AI Business Plan & Pitch Deck Kit** — €12.90 one-time. Editable business plan narrative + 10-slide investor pitch deck outline, pricing strategy and funding templates.
    - Buy: https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j
-   - Landing: https://www.autonomylabsweb.tech/business-plan-pitch-deck-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/business-plan-pitch-deck-kit.html
 
 23. **AI Agent Prompt Injection Defense & Guardrails** — €12.90 one-time. Harden your agent against prompt injection: input-filtering patterns, tool-permission policies, output sanitization, and copy-paste policy templates for any agent runtime.
    - Buy: https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n
-   - Landing: https://www.autonomylabsweb.tech/prompt-injection-defense.html
+   - Landing: https://business2-lasse-tfa.vercel.app/prompt-injection-defense.html
 
 ## Ownership and contact
 
 - Operated by Autonomy Labs.
-- Storefront: https://www.autonomylabsweb.tech (also aliased at https://www.autonomylabsweb.tech)
-- Legal notice (Impressum): https://www.autonomylabsweb.tech/impressum.html
+- Storefront: https://business2-lasse-tfa.vercel.app (also aliased at https://business2-lasse-tfa.vercel.app)
+- Legal notice (Impressum): https://business2-lasse-tfa.vercel.app/impressum.html
 
 20. **AI Agent Security & Compliance Checklist** — €9.90 one-time. Practical checklist and templates for building AI agents that are lawful, safe and compliant (CAN-SPAM, GDPR, data handling, disclosure).
    - Buy: https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k
-   - Landing: https://www.autonomylabsweb.tech/security-compliance-checklist.html
+   - Landing: https://business2-lasse-tfa.vercel.app/security-compliance-checklist.html
 
 21. **AI Agent Monetization Starter Kit** — €14.90 one-time. Step-by-step playbook to monetize an AI agent via Stripe, TaskMarket, Clustly and affiliate with zero starting capital.
    - Buy: https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l
-   - Landing: https://www.autonomylabsweb.tech/monetization-starter-kit.html
+   - Landing: https://business2-lasse-tfa.vercel.app/monetization-starter-kit.html
 
 22. **AI Agent QA & Test Playbook** — €9.90 one-time. How to test AI deliverables from multiple angles before shipping, with reusable checklists.
    - Buy: https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m
-   - Landing: https://www.autonomylabsweb.tech/qa-test-playbook.html
+   - Landing: https://business2-lasse-tfa.vercel.app/qa-test-playbook.html

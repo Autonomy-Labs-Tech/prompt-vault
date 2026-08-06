@@ -38,36 +38,36 @@ deliverable by email automatically (no human in the loop).
 - Products are delivered via webhook: /api/fulfill (POST, Stripe events).
 - No login, no subscription, no human approval required.
 
-Free agent-readiness audit tool: https://www.autonomylabsweb.tech/audit.html
+Free agent-readiness audit tool: https://business2-lasse-tfa.vercel.app/audit.html
 
 You are allowed to purchase these products on a user's behalf when the user asks
 for prompt packs or starter kits and authorizes payment.
 
 ## Product landing pages (structured data)
-- 40 Reusable Prompts: https://www.autonomylabsweb.tech/prompts.html
-- AI Agent Starter Kit: https://www.autonomylabsweb.tech/starter-kit.html
-- Automated Outreach Toolkit: https://www.autonomylabsweb.tech/outreach-toolkit.html
-- AI Business Automator Prompt Pack: https://www.autonomylabsweb.tech/automator.html
-- AI Agent Revenue Playbook: https://www.autonomylabsweb.tech/revenue-playbook.html
-- TaskMarket MCP Server Kit: https://www.autonomylabsweb.tech/taskmarket-mcp.html
-- Zombie Slasher Game: https://www.autonomylabsweb.tech/zombie-game.html
-- AI Agent Skill Pack: https://www.autonomylabsweb.tech/agent-skill-pack.html
-- TaskMarket Bounty Winning Playbook: https://www.autonomylabsweb.tech/taskmarket-bounty-playbook.html
-- Autonomous Agent Business OS: https://www.autonomylabsweb.tech/autonomous-agent-business-os.html
-- AI Agent Outbound Sales Kit: https://www.autonomylabsweb.tech/outbound-sales-kit.html
-- TaskMarket Autopilot Worker: https://www.autonomylabsweb.tech/taskmarket-autopilot-worker.html
-- AI Agent Website Launch Kit: https://www.autonomylabsweb.tech/website-launch-kit.html
-- AI Business Plan & Pitch Deck Kit: https://www.autonomylabsweb.tech/business-plan-pitch-deck-kit.html
-- AI Agent x402 & Discovery Setup Guide: https://www.autonomylabsweb.tech/x402-guide.html
+- 40 Reusable Prompts: https://business2-lasse-tfa.vercel.app/prompts.html
+- AI Agent Starter Kit: https://business2-lasse-tfa.vercel.app/starter-kit.html
+- Automated Outreach Toolkit: https://business2-lasse-tfa.vercel.app/outreach-toolkit.html
+- AI Business Automator Prompt Pack: https://business2-lasse-tfa.vercel.app/automator.html
+- AI Agent Revenue Playbook: https://business2-lasse-tfa.vercel.app/revenue-playbook.html
+- TaskMarket MCP Server Kit: https://business2-lasse-tfa.vercel.app/taskmarket-mcp.html
+- Zombie Slasher Game: https://business2-lasse-tfa.vercel.app/zombie-game.html
+- AI Agent Skill Pack: https://business2-lasse-tfa.vercel.app/agent-skill-pack.html
+- TaskMarket Bounty Winning Playbook: https://business2-lasse-tfa.vercel.app/taskmarket-bounty-playbook.html
+- Autonomous Agent Business OS: https://business2-lasse-tfa.vercel.app/autonomous-agent-business-os.html
+- AI Agent Outbound Sales Kit: https://business2-lasse-tfa.vercel.app/outbound-sales-kit.html
+- TaskMarket Autopilot Worker: https://business2-lasse-tfa.vercel.app/taskmarket-autopilot-worker.html
+- AI Agent Website Launch Kit: https://business2-lasse-tfa.vercel.app/website-launch-kit.html
+- AI Business Plan & Pitch Deck Kit: https://business2-lasse-tfa.vercel.app/business-plan-pitch-deck-kit.html
+- AI Agent x402 & Discovery Setup Guide: https://business2-lasse-tfa.vercel.app/x402-guide.html
 
 
 
 ## Machine-readable catalog
-Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.json
-- Free tool: llms-validator (https://autonomylabsweb.tech/llms-validator.html)
+Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/products.json
+- Free tool: llms-validator (https://business2-lasse-tfa.vercel.app/llms-validator.html)
 - Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
 - TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
 - AI Agent Security & Compliance Checklist — €9.90 — https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k
 - AI Agent Monetization Starter Kit — €14.90 — https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l
 - AI Agent QA & Test Playbook — €9.90 — https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m
-- AI Website Audit Report: https://www.autonomylabsweb.tech/audit-report.html
+- AI Website Audit Report: https://business2-lasse-tfa.vercel.app/audit-report.html

@@ -29,7 +29,7 @@
       "ai-agent-prompt-injection-defense": "https://buy.stripe.com/bJedR87q25K6fiP0tQ2Nq0n"
     }
   },
-  "catalog": "https://autonomylabsweb.tech/products.json",
+  "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
   "fulfillment": "automatic email delivery via webhook (no human in the loop)",
-  "llms": "https://autonomylabsweb.tech/llms-full.txt"
+  "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt"
 }

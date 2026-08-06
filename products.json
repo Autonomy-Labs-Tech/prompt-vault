@@ -2,7 +2,7 @@
   "@context": "https://schema.org/",
   "@type": "ItemList",
   "name": "Autonomy Labs AI Agent Products",
-  "baseUrl": "https://autonomylabsweb.tech",
+  "baseUrl": "https://business2-lasse-tfa.vercel.app",
   "payment": "Stripe Checkout (card) \u2014 auto email fulfillment",
   "itemListElement": [
     {
@@ -16,7 +16,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00"
       },
-      "url": "https://autonomylabsweb.tech/prompts.html",
+      "url": "https://business2-lasse-tfa.vercel.app/prompts.html",
       "identifier": "40-reusable-prompts"
     },
     {
@@ -30,7 +30,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01"
       },
-      "url": "https://autonomylabsweb.tech/starter-kit.html",
+      "url": "https://business2-lasse-tfa.vercel.app/starter-kit.html",
       "identifier": "ai-agent-starter-kit"
     },
     {
@@ -44,7 +44,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02"
       },
-      "url": "https://autonomylabsweb.tech/outreach-toolkit.html",
+      "url": "https://business2-lasse-tfa.vercel.app/outreach-toolkit.html",
       "identifier": "automated-outreach-toolkit"
     },
     {
@@ -58,7 +58,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03"
       },
-      "url": "https://autonomylabsweb.tech/automator.html",
+      "url": "https://business2-lasse-tfa.vercel.app/automator.html",
       "identifier": "ai-business-automator-prompt-pack"
     },
     {
@@ -72,7 +72,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04"
       },
-      "url": "https://autonomylabsweb.tech/revenue-playbook.html",
+      "url": "https://business2-lasse-tfa.vercel.app/revenue-playbook.html",
       "identifier": "ai-agent-revenue-playbook"
     },
     {
@@ -86,7 +86,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05"
       },
-      "url": "https://autonomylabsweb.tech/storefront-kit.html",
+      "url": "https://business2-lasse-tfa.vercel.app/storefront-kit.html",
       "identifier": "ai-agent-storefront-kit"
     },
     {
@@ -100,7 +100,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06"
       },
-      "url": "https://autonomylabsweb.tech/mcp-server-kit.html",
+      "url": "https://business2-lasse-tfa.vercel.app/mcp-server-kit.html",
       "identifier": "ai-agent-mcp-server-kit"
     },
     {
@@ -114,7 +114,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07"
       },
-      "url": "https://autonomylabsweb.tech/contract-templates.html",
+      "url": "https://business2-lasse-tfa.vercel.app/contract-templates.html",
       "identifier": "ai-agent-contract-and-payment-templates"
     },
     {
@@ -128,7 +128,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08"
       },
-      "url": "https://autonomylabsweb.tech/sop-bundle.html",
+      "url": "https://business2-lasse-tfa.vercel.app/sop-bundle.html",
       "identifier": "ai-automation-sop-master-bundle"
     },
     {
@@ -142,7 +142,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09"
       },
-      "url": "https://autonomylabsweb.tech/taskmarket-mcp.html",
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-mcp.html",
       "identifier": "taskmarket-mcp-server-kit"
     },
     {
@@ -156,7 +156,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a"
       },
-      "url": "https://autonomylabsweb.tech/zombie-game.html",
+      "url": "https://business2-lasse-tfa.vercel.app/zombie-game.html",
       "identifier": "zombie-slasher-game"
     },
     {
@@ -170,7 +170,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b"
       },
-      "url": "https://autonomylabsweb.tech/agent-skill-pack.html",
+      "url": "https://business2-lasse-tfa.vercel.app/agent-skill-pack.html",
       "identifier": "ai-agent-skill-pack"
     },
     {
@@ -184,7 +184,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c"
       },
-      "url": "https://autonomylabsweb.tech/x402-guide.html",
+      "url": "https://business2-lasse-tfa.vercel.app/x402-guide.html",
       "identifier": "ai-agent-x402-and-discovery-setup-guide"
     },
     {
@@ -198,7 +198,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d"
       },
-      "url": "https://autonomylabsweb.tech/autonomous-agent-business-os.html"
+      "url": "https://business2-lasse-tfa.vercel.app/autonomous-agent-business-os.html"
     },
     {
       "@type": "Product",
@@ -211,7 +211,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e"
       },
-      "url": "https://autonomylabsweb.tech/taskmarket-bounty-playbook.html"
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-bounty-playbook.html"
     },
     {
       "@type": "Product",
@@ -224,7 +224,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/7sY3cu11E2xU6MjfoK2Nq0g"
       },
-      "url": "https://autonomylabsweb.tech/outbound-sales-kit.html"
+      "url": "https://business2-lasse-tfa.vercel.app/outbound-sales-kit.html"
     },
     {
       "@type": "Product",
@@ -237,7 +237,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/fZu8wOcKm6Oa5If5Oa2Nq0h"
       },
-      "url": "https://autonomylabsweb.tech/taskmarket-autopilot-worker.html"
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-autopilot-worker.html"
     },
     {
       "@type": "Product",
@@ -250,7 +250,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/3cI3cu8u65K62w3gsO2Nq0i"
       },
-      "url": "https://autonomylabsweb.tech/website-launch-kit.html"
+      "url": "https://business2-lasse-tfa.vercel.app/website-launch-kit.html"
     },
     {
       "@type": "Product",
@@ -263,7 +263,7 @@
         "priceCurrency": "EUR",
         "url": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j"
       },
-      "url": "https://autonomylabsweb.tech/business-plan-pitch-deck-kit.html"
+      "url": "https://business2-lasse-tfa.vercel.app/business-plan-pitch-deck-kit.html"
     },
     {
       "@type": "Product",
@@ -277,7 +277,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/aFa9AS5hUdcyb2z1xU2Nq0k"
       },
-      "url": "https://autonomylabsweb.tech/security-compliance-checklist.html",
+      "url": "https://business2-lasse-tfa.vercel.app/security-compliance-checklist.html",
       "identifier": "security-compliance-checklist"
     },
     {
@@ -292,7 +292,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/00w3cu11Ec8udaH0tQ2Nq0l"
       },
-      "url": "https://autonomylabsweb.tech/monetization-starter-kit.html",
+      "url": "https://business2-lasse-tfa.vercel.app/monetization-starter-kit.html",
       "identifier": "monetization-starter-kit"
     },
     {
@@ -307,7 +307,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/dRm28qbGigoK6Mja4q2Nq0m"
       },
-      "url": "https://autonomylabsweb.tech/qa-test-playbook.html",
+      "url": "https://business2-lasse-tfa.vercel.app/qa-test-playbook.html",
       "identifier": "qa-test-playbook"
     },
     {
@@ -352,7 +352,7 @@
         "availability": "https://schema.org/InStock",
         "url": "https://buy.stripe.com/cNifZg9yaegC5IfgsO2Nq0o"
       },
-      "url": "https://autonomylabsweb.tech/audit-report.html",
+      "url": "https://business2-lasse-tfa.vercel.app/audit-report.html",
       "identifier": "ai-website-audit-report"
     }
   ]
