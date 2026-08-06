@@ -120,6 +120,7 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
    - Landing: https://business2-lasse-tfa.vercel.app/qa-test-playbook.html
 
 ## Blog
+- **Rebuilding Iconic Movie Scenes in Three.js** — https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html
 - **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
 - **How AI Agents Can Automate Your Small Business** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-automate-business.html
 - **10 Best AI Prompts for Small Business Owners** — https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business.html
@@ -129,3 +130,12 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 - **AI Agent x402 Paywall Setup Kit** — €14.90 — https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u — landing: https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html
 - **AI Agent Fulfillment Webhook Kit** — €14.90 — https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t — landing: https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html
+- **AI Website Audit Report** — €19.00 one-time. Deep, evidence-backed audit of a website's AI-agent discoverability (llms.txt, robots.txt, sitemap.xml, agents.txt, .well-known/x402): grade A-F, gaps ranked by impact, reproducible curl checks. Enter the URL at checkout; the webhook runs the audit and emails the report automatically.
+   - Buy: https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v
+   - Landing: https://business2-lasse-tfa.vercel.app/audit-report.html
+- **Custom Three.js Scene Rebuild** — €49.00 one-time. An iconic movie/TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note, screenshots. Brief + delivery email at checkout.
+   - Buy: https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U
+   - Landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
+- **Three.js Scene Build Toolkit** — €19.00 one-time. The production pipeline behind our scene rebuilds: deterministic app.js template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, offline/determinism verification checklist. Pipeline code delivered by email.
+   - Buy: https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V
+   - Landing: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
