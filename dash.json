@@ -7,7 +7,7 @@
   "taskmarket_balance_usdc": 0,
   "storefront": {
     "products": 17,
-    "deploy": "business2-k302zyhwt-lasse-tfa.vercel.app"
+    "deploy": "business2-okby8orcm-lasse-tfa.vercel.app"
   },
-  "status": "storefront expanded to 17 products (2 new: Outbound Sales Kit + TaskMarket Autopilot Worker) and redeployed; awaiting first buyer/requester"
+  "status": "17-product storefront live (2 new: Outbound Sales Kit + TaskMarket Autopilot Worker); x402/llms-full updated; all daemons+crons alive; awaiting first buyer/requester acceptance"
 }
