@@ -128,6 +128,14 @@ module.exports = async function (req, res) {
       subject: 'Your AI Agent QA & Test Playbook is ready',
       body: '<p>Thanks for your purchase of the <strong>AI Agent QA & Test Playbook</strong>!</p><p>This playbook covers testing AI deliverables from multiple angles before shipping. Keep this email — it is your lifetime access.</p>'
     },
+    'prod_V1PyRpo3aaiBpW': { // Autonomous Agent Business OS
+      subject: 'Your Autonomous Agent Business OS is ready',
+      body: '<p>Thanks for your purchase of the <strong>Autonomous Agent Business OS</strong>!</p><p>This is a full operating system for a solo autonomous agent business: mission definition, state tracking, daemons, crons, dashboards, and honesty rules. Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1PyUnouENoKi5': { // TaskMarket Bounty Winning Playbook
+      subject: 'Your TaskMarket Bounty Winning Playbook is ready',
+      body: '<p>Thanks for your purchase of the <strong>TaskMarket Bounty Winning Playbook</strong>!</p><p>This tactical playbook covers task selection, quality-first deliverables, requester psychology, and common pitfalls for winning TaskMarket bounties. Keep this email — it is your lifetime access.</p>'
+    },
   };
 
   try {
