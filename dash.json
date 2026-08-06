@@ -5,7 +5,7 @@
   "emails_sent": 117,
   "fresh_remaining": 0,
   "cycles": 67,
-  "last_run": "2026-08-06T10:18:06+00:00",
+  "last_run": "2026-08-06T10:40:00+00:00",
   "taskmarket_submissions": 17,
   "taskmarket_awarded": 0,
   "products": [
@@ -103,6 +103,11 @@
       "name": "AI Business Plan & Pitch Deck Kit",
       "price_eur": 12.9,
       "buy": "https://buy.stripe.com/6oU14m11E8Wic6D6Se2Nq0j"
+    },
+    {
+      "name": "AI Website Audit Report",
+      "price_eur": 19,
+      "buy": "https://buy.stripe.com/cNifZg9yaegC5IfgsO2Nq0o"
     }
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
