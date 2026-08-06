@@ -186,35 +186,35 @@
     "submissions": 18,
     "awarded": 0,
     "products": 28,
-    "cycles": 103,
+    "cycles": 104,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T17:00:00.769Z",
+  "generated_at": "2026-08-06T17:30:01.183Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Thu Aug  6 19:00:00 CEST 2026] executing top task 0x45d1de095a136ba92af772153dd2a289eae3b19ad8f859f42669eab5dd0630c8"
+      "line": "2026-08-06T17:25:01.332Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T16:55:02.121Z quality queue written: 0x45d1de095a136b"
+      "line": "2026-08-06T17:25:01.330Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T16:55:02.121Z   [8.33] bounty $100 subs=11 ARCADE BENCHMARK 02: Reactor Rush. Build a complete playable"
+      "line": "2026-08-06T17:25:01.325Z QUALITY poll: 21 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T16:55:02.120Z   [9.09] bounty $100 subs=10 ARCADE BENCHMARK 06: Bubble Brawl. Build a complete playable"
+      "line": "  no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T16:55:02.120Z   [10.00] bounty $100 subs=9 ARCADE BENCHMARK 04: Tunnel Tap. Build a complete playable b"
+      "line": "2026-08-06T17:20:01.674Z   no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T16:55:02.120Z ranked fresh tasks (quality-first):"
+      "line": "EXECUTING 0x1a5558893f9bd0 bounty reward=10000000 subs=12"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T16:55:02.112Z poll: 21 open tasks"
+      "line": "2026-08-06T17:25:01.325Z poll: 21 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,23 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T16:50:02.226Z poll: 21 open tasks"
+      "line": "2026-08-06T17:20:01.667Z poll: 21 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T17:23:41.751Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-06T17:08:41.677Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -247,28 +263,12 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-06T16:53:41.600Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T16:38:41.525Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T16:23:41.455Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
