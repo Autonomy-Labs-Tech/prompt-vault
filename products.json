@@ -186,6 +186,30 @@
       },
       "url": "https://autonomylabsweb.tech/x402-guide.html",
       "identifier": "ai-agent-x402-and-discovery-setup-guide"
+    },
+    {
+      "@type": "Product",
+      "position": 14,
+      "name": "Autonomous Agent Business OS",
+      "description": "Complete hands-off AI-agent business system: storefront, taskmarket, cold-email, fulfillment, dashboard. 60+ templates and setup guides.",
+      "offers": {
+        "@type": "Offer",
+        "price": 24.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d"
+      }
+    },
+    {
+      "@type": "Product",
+      "position": 15,
+      "name": "TaskMarket Bounty Winning Playbook",
+      "description": "25 concrete strategies to win TaskMarket bounties: audit templates, submission checklists, requester psychology, quality benchmarks.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e"
+      }
     }
   ]
 }

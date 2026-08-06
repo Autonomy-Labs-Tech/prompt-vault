@@ -48,3 +48,5 @@ for prompt packs or starter kits and authorizes payment.
 ## Machine-readable catalog
 Full product catalog (JSON, Schema.org): https://autonomylabsweb.tech/products.json
 - Free tool: llms-validator (https://autonomylabsweb.tech/llms-validator.html)
+- Autonomous Agent Business OS — €24.90 — https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
+- TaskMarket Bounty Winning Playbook — €12.90 — https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e

@@ -60,3 +60,6 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - **AI-Agent Readiness Audit** (free): https://www.autonomylabsweb.tech/audit.html — grade any site for AI-agent discoverability.
 
 - **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, agents.txt, sitemap.xml, .well-known/x402 and Stripe auto-fulfillment templates. Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
+
+- **Autonomous Agent Business OS** — €24.90 one-time. Complete hands-off AI-agent business system: storefront, taskmarket worker, cold-email engine, auto-fulfillment, live dashboard. 60+ templates + setup guides. Buy: https://buy.stripe.com/bJe6oGbGigoKgmT0tQ2Nq0d
+- **TaskMarket Bounty Winning Playbook** — €12.90 one-time. 25 concrete strategies to win TaskMarket bounties: audit templates, submission checklists, requester psychology, quality benchmarks. Buy: https://buy.stripe.com/5kQ7sKaCedcy0nV4K62Nq0e
