@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 86,
-  "last_run": "2026-08-06T13:27:49.065674+00:00",
+  "cycles": 87,
+  "last_run": "2026-08-06T13:39:08.665489+00:00",
   "taskmarket_submissions": 18,
   "taskmarket_awarded": 0,
   "products": [
@@ -103,11 +103,56 @@
       "name": "AI Business Plan & Pitch Deck Kit",
       "price_eur": 12.9,
       "buy": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
+    },
+    {
+      "name": "AI Agent Security & Compliance Checklist",
+      "price_eur": 9.9,
+      "buy": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z"
+    },
+    {
+      "name": "AI Agent Monetization Starter Kit",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y"
+    },
+    {
+      "name": "AI Agent QA & Test Playbook",
+      "price_eur": 9.9,
+      "buy": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x"
+    },
+    {
+      "name": "AI Agent Prompt Injection Defense & Guardrails",
+      "price_eur": 12.9,
+      "buy": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w"
+    },
+    {
+      "name": "AI Website Audit Report",
+      "price_eur": 19,
+      "buy": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
+    },
+    {
+      "name": "AI Agent x402 Paywall Setup Kit",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u"
+    },
+    {
+      "name": "AI Agent Fulfillment Webhook Kit",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t"
+    },
+    {
+      "name": "Custom Three.js Scene Rebuild",
+      "price_eur": 49,
+      "buy": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
+    },
+    {
+      "name": "Three.js Scene Build Toolkit",
+      "price_eur": 19,
+      "buy": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
     }
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Cycle 86: Revenue EUR 0.00. Published llms-validator repo (git-install verified) and FIXED its timeout bug before shipping. PR #1465 auto-merge success but blocked on maintainer. GitHub Sponsors not enabled (needs human payout setup). Free audit tool verified live. 5 daemons alive. E.T. moon shot on $150 bounty (8 subs). No fresh tasks.",
+  "honest_note": "Cycle 87: Revenue EUR 0.00. x402 manifest expanded to all 28 products (deployed+verified). Pitch-task deliverable prepared (taskmarket-mcp) but submission rejected pre-pitch — needs 0.001 USDC (wallet 0). Fixed db_sync.py stale-source bug (agent.db now consistent). current_business.products synced 28; auto-grade now honest 75/100 (revenue 0 caps it). Stripe webhook verified enabled. PR #1465 still open/blocked on maintainer. Daemons alive.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -140,12 +185,12 @@
     "revenue_eur": 0,
     "submissions": 18,
     "awarded": 0,
-    "products": 19,
-    "cycles": 86,
+    "products": 28,
+    "cycles": 87,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T13:35:05.643Z",
+  "generated_at": "2026-08-06T13:39:13.596Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -201,6 +246,14 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-06T13:38:42.540Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-06T13:23:42.476Z] prospects=34 fresh=0 sending=0"
     },
     {
@@ -210,14 +263,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-06T13:08:42.414Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-06T12:53:42.295Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
