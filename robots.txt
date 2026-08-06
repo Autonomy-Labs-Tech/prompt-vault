@@ -6,4 +6,4 @@ Allow: /sitemap.xml
 Allow: /api/fulfill
 Disallow: /api/fulfill?*
 
-Sitemap: https://business2-lasse-tfa.vercel.app/sitemap.xml
+Sitemap: https://www.autonomylabsweb.tech/sitemap.xml

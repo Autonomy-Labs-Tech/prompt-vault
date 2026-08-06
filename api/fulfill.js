@@ -67,7 +67,39 @@ module.exports = async function (req, res) {
 'prod_V1ME008XOCi3LQ': { // Automated Outreach Toolkit
       subject: 'Your Automated Outreach Toolkit is ready',
       body: '<p>Thanks for your purchase of the <strong>Automated Outreach Toolkit</strong>!</p><p>This toolkit gives you copy-paste scripts, email sequences, and automation recipes for AI-assisted outbound sales:</p><ul><li><strong>30 cold-email and LinkedIn scripts</strong> ready to adapt.</li><li><strong>3 follow-up sequences</strong> that boost reply rates.</li><li><strong>An objection-handling guide</strong> for common sales pushback.</li><li><strong>Automation setup recipes</strong> for Zapier and Make.</li></ul><p>Keep this email — it is your lifetime access.</p>'
-    }
+    },
+    'prod_V1Ocv95jQSnRec': { // AI Agent MCP Server Kit
+      subject: 'Your AI Agent MCP Server Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent MCP Server Kit</strong>!</p><p>This kit gives you a complete Model Context Protocol (MCP) server starter in TypeScript plus the config you need to expose your own tools to Claude and other agent runtimes:</p><ul><li><strong>Ready-to-deploy MCP server skeleton</strong> (TypeScript + schema).</li><li><strong>Tool registration + JSON config</strong> templates.</li><li><strong>Setup guide</strong> to connect Claude Code and other clients.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1OcEPbGwAnxZU': { // AI Agent Contract & Payment Templates
+      subject: 'Your AI Agent Contract & Payment Templates is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Contract &amp; Payment Templates</strong>!</p><p>This pack gives you the documents an AI agent needs to get paid compliantly:</p><ul><li><strong>Service contract</strong> and <strong>scope-of-work</strong> templates.</li><li><strong>Invoice + NDA</strong> templates.</li><li><strong>Payment-collection automation notes</strong>.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+            'prod_V1OyyqT342L06c': { // Zombie Slasher Game
+      subject: 'Your Zombie Slasher Game source is ready',
+      body: '<p>Thanks for your purchase of the <strong>Zombie Slasher Game (Three.js)</strong>!</p><p>Your download is a single <code>index.html</code> — a complete first-person zombie slasher prototype:</p><ul><li><strong>WASD</strong> movement, <strong>pointer-lock</strong> mouse camera, visible melee weapon.</li><li><strong>Left-click</strong> to attack; zombies chase and damage you.</li><li><strong>Health</strong>, <strong>kill counter</strong>, spawning waves, <strong>game-over</strong> and <strong>restart</strong> (R).</li><li>No build step, no external assets — open it in any modern browser or serve it from a static server.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1Oydy1pZSBuEb': { // AI Agent Skill Pack
+      subject: 'Your AI Agent Skill Pack is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Skill Pack (MCP + Tools)</strong>!</p><p>This pack gives you ready-to-use MCP server and agent skill templates:</p><ul><li><strong>TaskMarket MCP server</strong> — self-contained, zero dependencies.</li><li><strong>Agent status dashboard</strong> template.</li><li><strong>Client config</strong> for Claude Code and Codex.</li><li><strong>Setup guide</strong> + usage instructions.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+'prod_V1OoFbbQP4mX3f': { // TaskMarket MCP Server Kit
+      subject: 'Your TaskMarket MCP Server Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>TaskMarket MCP Server Kit</strong>!</p><p>This kit gives you a self-contained MCP server that integrates the TaskMarket worker market into Claude, Codex and other agentic products:</p><ul><li><strong>server.js</strong> — zero-dependency MCP server over stdio (JSON-RPC).</li><li><strong>5 tools</strong>: tm_list_tasks, tm_get_task, tm_wallet_balance, tm_my_submissions, tm_submit_work.</li><li><strong>Open source</strong> on GitHub: https://github.com/Autonomy-Labs-Tech/taskmarket-mcp</li><li><strong>Setup guide</strong> to connect any MCP-compatible client.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+'prod_V1OcQN6ajUdvEG': { // AI Automation SOP Master Bundle
+      subject: 'Your AI Automation SOP Master Bundle is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Automation SOP Master Bundle</strong>!</p><p>This bundle gives you 50+ standard operating procedures and delegation checklists to automate operations with AI agents:</p><ul><li><strong>50+ SOPs</strong> across sales, marketing, support, and admin.</li><li><strong>Delegation checklists</strong> for handing tasks to agents.</li><li><strong>Handoff templates</strong> for recurring automations.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1NoiM3wT26ouC': { // AI Agent Storefront Kit
+      subject: 'Your AI Agent Storefront Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent Storefront Kit</strong>!</p><p>This kit gives you a complete, AI-agent-discoverable storefront you can deploy on Vercel in minutes:</p><ul><li><strong>llms.txt, agents.txt, sitemap.xml, robots.txt, and .well-known/x402</strong> so AI agents can find and buy from you.</li><li><strong>Stripe Checkout + auto-fulfillment webhook template</strong> for hands-off digital delivery.</li><li><strong>Schema.org Product markup</strong> and a Vercel deploy guide.</li><li><strong>Product landing pages</strong> you can copy and customize.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
+    'prod_V1P7mJYRxMsCfJ': { // AI Agent x402 & Discovery Setup Guide
+      subject: 'Your AI Agent x402 & Discovery Setup Guide is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent x402 &amp; Discovery Setup Guide</strong>!</p><p>This guide makes any website discoverable and buyable by AI agents:</p><ul><li><strong>llms.txt + llms-full.txt</strong> templates for your docs and catalog.</li><li><strong>agents.txt</strong>, <strong>sitemap.xml</strong> and <strong>robots.txt</strong> best practices.</li><li><strong>.well-known/x402</strong> setup for account-less agent payments.</li><li><strong>Schema.org Product + JSON-LD</strong> markup examples.</li><li><strong>Vercel + Stripe</strong> auto-fulfillment wiring notes.</li></ul><p>Keep this email — it is your lifetime access.</p>'
+    },
   };
 
   try {

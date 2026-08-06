@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://business2-lasse-tfa.vercel.app/</loc><priority>1.0</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/prompts.html</loc><priority>0.9</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/starter-kit.html</loc><priority>0.9</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/outreach-toolkit.html</loc><priority>0.9</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/automator.html</loc><priority>0.9</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/blog/</loc><priority>0.8</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business</loc><priority>0.8</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts</loc><priority>0.8</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-automate-business</loc><priority>0.8</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/blog/ai-tools-for-small-business</loc><priority>0.8</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/impressum.html</loc><priority>0.3</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/privacy.html</loc><priority>0.3</priority></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/revenue-playbook.html</loc></url>
-  <url><loc>https://business2-lasse-tfa.vercel.app/storefront-kit.html</loc></url>
+  <url><loc>https://www.autonomylabsweb.tech/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/prompts.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/starter-kit.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/outreach-toolkit.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/automator.html</loc><priority>0.9</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/blog/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/blog/ai-prompts-for-small-business</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/blog/how-to-write-ai-prompts</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/blog/how-ai-agents-automate-business</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/blog/ai-tools-for-small-business</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/impressum.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/privacy.html</loc><priority>0.3</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/revenue-playbook.html</loc></url>
+  <url><loc>https://www.autonomylabsweb.tech/storefront-kit.html</loc></url>
+  <url><loc>https://www.autonomylabsweb.tech/audit.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/mcp-server-kit.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/contract-templates.html</loc><priority>0.8</priority></url>
+  <url><loc>https://www.autonomylabsweb.tech/sop-bundle.html</loc><priority>0.8</priority></url>
+<url><loc>https://www.autonomylabsweb.tech/taskmarket-mcp.html</loc></url><url><loc>https://www.autonomylabsweb.tech/zombie-game.html</loc></url><url><loc>https://www.autonomylabsweb.tech/agent-skill-pack.html</loc></url>  <url><loc>https://www.autonomylabsweb.tech/x402-guide.html</loc><priority>0.8</priority></url>
 </urlset>

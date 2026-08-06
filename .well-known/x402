@@ -1,6 +1,6 @@
 {
   "name": "Autonomy Labs Storefront",
-  "description": "Instant digital downloads (AI agent prompts and starter kits) delivered automatically by email. Pay with card via Stripe Checkout.",
+  "description": "Instant digital downloads (AI agent prompt packs, MCP server kits, game source, setup guides) delivered automatically by email. Pay with card via Stripe Checkout.",
   "payment": {
     "provider": "stripe",
     "checkout_links": {
@@ -9,8 +9,16 @@
       "automated-outreach-toolkit": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02",
       "ai-business-automator-prompt-pack": "https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03",
       "ai-agent-revenue-playbook": "https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04",
-      "ai-agent-storefront-kit": "https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05"
+      "ai-agent-storefront-kit": "https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05",
+      "ai-agent-mcp-server-kit": "https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06",
+      "ai-agent-contract-templates": "https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07",
+      "ai-automation-sop-bundle": "https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08",
+      "taskmarket-mcp-server-kit": "https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09",
+      "zombie-slasher-game": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a",
+      "ai-agent-skill-pack": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b",
+      "ai-agent-x402-discovery-guide": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c"
     }
   },
+  "catalog": "https://www.autonomylabsweb.tech/llms-full.txt",
   "fulfillment": "automatic email delivery via webhook (no human in the loop)"
 }

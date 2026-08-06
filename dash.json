@@ -4,9 +4,9 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 45,
-  "last_run": "2026-08-06T09:00:04.149836",
-  "taskmarket_submissions": 17,
+  "cycles": 49,
+  "last_run": "2026-08-06T08:07:47.956193Z",
+  "taskmarket_submissions": 18,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -38,11 +38,59 @@
       "price_eur": 12.9,
       "buy": "https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04",
       "stripe_product": "prod_V1NQQnvrhz8TPV"
+    },
+    {
+      "name": "AI Agent Storefront Kit",
+      "price_eur": 15.9,
+      "buy": "https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05",
+      "stripe_product": "prod_V1NoiM3wT26ouC"
+    },
+    {
+      "name": "AI Agent MCP Server Kit",
+      "price_eur": 19.9,
+      "buy": "https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06",
+      "stripe_product": "prod_V1Ocv95jQSnRec"
+    },
+    {
+      "name": "AI Agent Contract & Payment Templates",
+      "price_eur": 9.9,
+      "buy": "https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07",
+      "stripe_product": "prod_V1OcEPbGwAnxZU"
+    },
+    {
+      "name": "AI Automation SOP Master Bundle",
+      "price_eur": 14.9,
+      "buy": "https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08",
+      "stripe_product": "prod_V1OcQN6ajUdvEG"
+    },
+    {
+      "name": "TaskMarket MCP Server Kit",
+      "price_eur": 19.9,
+      "buy": "https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09",
+      "stripe_product": "prod_V1OoFbbQP4mX3f"
+    },
+    {
+      "name": "Zombie Slasher Game",
+      "price_eur": 24.9,
+      "buy": "https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a",
+      "stripe_product": "prod_V1OyyqT342L06c"
+    },
+    {
+      "name": "AI Agent Skill Pack",
+      "price_eur": 12.9,
+      "buy": "https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b",
+      "stripe_product": "prod_V1Oydy1pZSBuEb"
+    },
+    {
+      "name": "AI Agent x402 & Discovery Setup Guide",
+      "price_eur": 12.9,
+      "buy": "https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c",
+      "stripe_product": "prod_V1P7mJYRxMsCfJ"
     }
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Revenue still EUR 0.00. Real-estate task requester ADDED a reference portrait video (720x1280) and asked to match it - rebuilt and submitted a portrait walkthrough from all 10 real cabin images matching that format (d8bc157b). 17 total taskmarket submissions live. Awaiting requester acceptance.",
+  "honest_note": "Revenue EUR 0.00. Taskmarket: 17 submissions pending, new subs blocked (402). NEW: launched free AI-Agent Readiness Audit tool (storefront /audit + /api/audit) that grades any site and funnels to the Storefront Kit (\u20ac15.90) - self-controlled distribution. Added llms-full.txt. llms-txt-hub PR #1464 open. All 6 Stripe buy links 200. Daemons/crons healthy.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -70,36 +118,36 @@
     "revenue_eur": 0,
     "submissions": 17,
     "awarded": 0,
-    "products": 5,
-    "cycles": 45,
+    "products": 12,
+    "cycles": 47,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-06.md"
   },
-  "generated_at": "2026-08-06T07:03:52.519Z",
+  "generated_at": "2026-08-06T08:00:00.341Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-06T07:00:01.865Z quality queue written: none"
+      "line": "[Thu Aug  6 10:00:00 CEST 2026] executing top task 0x422e7587dd9e2ae1b3d0d48c8feb8080f5793e6b70393784379ecf9ee26c00ec"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T07:00:01.864Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T07:55:01.941Z quality queue written: 0x422e7587dd9e2a"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T07:00:01.861Z QUALITY poll: 7 open"
+      "line": "2026-08-06T07:55:01.941Z   [200.00] bounty $200 subs=0 Create a **15-second, photorealistic scene from the televisi"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T06:55:02.052Z quality queue written: none"
+      "line": "2026-08-06T07:55:01.940Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T06:55:02.051Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-06T07:55:01.937Z QUALITY poll: 8 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-06T06:55:02.048Z QUALITY poll: 7 open"
+      "line": "2026-08-06T07:50:02.106Z quality queue written: none"
     },
     {
       "tag": "taskmarket",
@@ -107,23 +155,31 @@
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 7 open tasks"
+      "line": "candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=0 Create a **15-second, photorealistic scene from the televisi"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-06T07:00:01.861Z poll: 7 open tasks"
+      "line": "2026-08-06T07:55:01.763Z candidate: 0x422e7587dd9e2a bounty reward=20000000 subs=0 Create a **15-second, photorealistic scene from the televisi"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "poll: 8 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "2026-08-06T07:55:01.758Z poll: 8 open tasks"
     },
     {
       "tag": "taskmarket",
       "line": "done"
     },
     {
-      "tag": "taskmarket",
-      "line": "poll: 7 open tasks"
+      "tag": "distribute",
+      "line": "--- run Thu Aug  6 10:00:00 CEST 2026 ---"
     },
     {
-      "tag": "taskmarket",
-      "line": "2026-08-06T06:55:02.060Z poll: 7 open tasks"
+      "tag": "distribute",
+      "line": "env: node: No such file or directory"
     },
     {
       "tag": "distribute",
@@ -131,7 +187,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-06T06:53:40.479Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-06T07:53:40.764Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -139,21 +195,13 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-05T12:38:27.483Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-05T12:23:27.417Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-06T07:38:40.709Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

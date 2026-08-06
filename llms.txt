@@ -25,14 +25,32 @@ Autonomy Labs sells instant digital downloads for small business owners and AI a
 - This storefront is discoverable to AI agents via llms.txt, robots.txt, and x402.
 
 ## Agent discoverability
-- `agents.txt` (agent readme): https://business2-lasse-tfa.vercel.app/agents.txt
-- `sitemap.xml`: https://business2-lasse-tfa.vercel.app/sitemap.xml
+- `agents.txt` (agent readme): https://www.autonomylabsweb.tech/agents.txt
+- `sitemap.xml`: https://www.autonomylabsweb.tech/sitemap.xml
 
 ## Product pages
-- 40 Reusable Prompts (landing): https://business2-lasse-tfa.vercel.app/prompts.html
-- AI Agent Starter Kit (landing): https://business2-lasse-tfa.vercel.app/starter-kit.html
-- Automated Outreach Toolkit (landing): https://business2-lasse-tfa.vercel.app/outreach-toolkit.html
-- AI Business Automator Prompt Pack (landing): https://business2-lasse-tfa.vercel.app/automator.html
-- AI Agent Revenue Playbook (landing): https://business2-lasse-tfa.vercel.app/revenue-playbook.html
-- AI Agent Storefront Kit (landing): https://business2-lasse-tfa.vercel.app/storefront-kit.html
+- 40 Reusable Prompts (landing): https://www.autonomylabsweb.tech/prompts.html
+- AI Agent Starter Kit (landing): https://www.autonomylabsweb.tech/starter-kit.html
+- Automated Outreach Toolkit (landing): https://www.autonomylabsweb.tech/outreach-toolkit.html
+- AI Business Automator Prompt Pack (landing): https://www.autonomylabsweb.tech/automator.html
+- AI Agent Revenue Playbook (landing): https://www.autonomylabsweb.tech/revenue-playbook.html
+- TaskMarket MCP Server Kit (landing): https://www.autonomylabsweb.tech/taskmarket-mcp.html
+- Zombie Slasher Game (landing): https://www.autonomylabsweb.tech/zombie-game.html
+- AI Agent Skill Pack (landing): https://www.autonomylabsweb.tech/agent-skill-pack.html
+- AI Agent Storefront Kit (landing): https://www.autonomylabsweb.tech/storefront-kit.html
 - **AI Agent Storefront Kit** — €15.90 one-time. Stand up a discoverable agent storefront: llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook template, Schema.org Product markup, Vercel deploy guide. Buy: https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
+
+- **AI Agent MCP Server Kit** — €19.90 one-time. Complete MCP server starter in TypeScript + config + setup guide to expose your tools to Claude and other agent runtimes. Buy: https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06
+- **AI Agent Contract & Payment Templates** — €9.90 one-time. Service contract, scope-of-work, invoice, and NDA templates plus payment-collection automation notes. Buy: https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07
+- **AI Automation SOP Master Bundle** — €14.90 one-time. 50+ standard operating procedures and delegation checklists to automate operations with AI agents. Buy: https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08
+- **TaskMarket MCP Server Kit** — €19.90 one-time. Self-contained MCP server integrating the TaskMarket worker market into Claude, Codex and other agent products (list tasks, wallet balance, submit work). Open source on GitHub. Buy: https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
+- **Zombie Slasher Game (Three.js)** — €24.90 one-time. Complete first-person zombie slasher in one HTML file (WASD, pointer-lock, melee, health, kills, spawn waves, restart). Buy: https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
+- **AI Agent Skill Pack (MCP + Tools)** — €12.90 one-time. TaskMarket MCP server, agent status dashboard template, and Claude/Codex client config. Buy: https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
+
+## Full documentation
+- Full llms.txt (llms-full.txt): https://www.autonomylabsweb.tech/llms-full.txt
+
+## Free tools
+- **AI-Agent Readiness Audit** (free): https://www.autonomylabsweb.tech/audit.html — grade any site for AI-agent discoverability.
+
+- **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, agents.txt, sitemap.xml, .well-known/x402 and Stripe auto-fulfillment templates. Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c

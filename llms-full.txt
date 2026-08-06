@@ -1,0 +1,67 @@
+# Autonomy Labs Storefront — Full Agent Documentation
+
+Autonomy Labs sells instant digital downloads for small business owners and AI agents: reusable prompts, starter kits, automation toolkits, and revenue playbooks. Buy once, get instant access via email. No subscription, no login, no human in the loop.
+
+## What this site offers
+
+This is an AI-agent-discoverable product storefront. AI agents and humans can browse the catalog, click a Stripe payment link, pay by card, and receive the digital product automatically by email. Everything is hands-off: purchase triggers a webhook that emails the product immediately.
+
+## Products
+
+1. **40 Reusable Prompts** — €12.90 one-time. 40 copy-paste prompts in 4 categories (marketing copy, email & replies, admin & ops, brainstorming).
+   - Buy: https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00
+   - Landing: https://www.autonomylabsweb.tech/prompts.html
+
+2. **AI Agent Starter Kit** — €19.00 one-time. 20 ready-to-use agent prompts, a legal checklist (CAN-SPAM/GDPR), and a step-by-step setup guide to launch a first paid agent task.
+   - Buy: https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01
+   - Landing: https://www.autonomylabsweb.tech/starter-kit.html
+
+3. **Automated Outreach Toolkit** — €14.90 one-time. 30 cold-email + LinkedIn scripts, 3 follow-up sequences, objection handling, and automation recipes for Zapier/Make.
+   - Buy: https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02
+   - Landing: https://www.autonomylabsweb.tech/outreach-toolkit.html
+
+4. **AI Business Automator Prompt Pack** — €16.90 one-time. 30 prompts to automate lead gen, outreach, content, and admin with AI agents.
+   - Buy: https://buy.stripe.com/6oU8wO6lYfkG6MjfoK2Nq03
+   - Landing: https://www.autonomylabsweb.tech/automator.html
+
+5. **AI Agent Revenue Playbook** — €12.90 one-time. 25 zero-capital ways AI agents get paid + the automation stacks for hands-off collection.
+   - Buy: https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
+   - Landing: https://www.autonomylabsweb.tech/revenue-playbook.html
+
+6. **AI Agent Storefront Kit** — €15.90 one-time. Stand up a discoverable agent storefront: llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook template, Schema.org Product markup, Vercel deploy guide.
+   - Buy: https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
+   - Landing: https://www.autonomylabsweb.tech/storefront-kit.html
+
+## Purchase flow
+
+1. Click a Stripe payment link.
+2. Pay with card (Stripe handles checkout).
+3. The product is delivered automatically to the customer email by the fulfillment webhook. No human in the loop.
+
+## Agent interoperability
+
+- **Payment:** Stripe Checkout (card). No API key required to buy.
+- **Fulfillment:** automatic email delivery via webhook.
+- **x402 paywall endpoint:** https://www.autonomylabsweb.tech/.well-known/x402
+- **Agent readme:** https://www.autonomylabsweb.tech/agents.txt
+- **Sitemap:** https://www.autonomylabsweb.tech/sitemap.xml
+- **Robots:** https://www.autonomylabsweb.tech/robots.txt
+
+7. **AI Agent MCP Server Kit** — €19.90 one-time. Complete MCP server starter (TypeScript) + config + setup guide to expose your tools to Claude and other agent runtimes.
+   - Buy: https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06
+
+8. **AI Agent Contract & Payment Templates** — €9.90 one-time. Service contract, scope-of-work, invoice, NDA templates + payment-collection automation notes.
+   - Buy: https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07
+
+9. **AI Automation SOP Master Bundle** — €14.90 one-time. 50+ SOPs and delegation checklists to automate operations with AI agents.
+   - Buy: https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08
+
+
+13. **AI Agent x402 & Discovery Setup Guide** — €12.90 one-time. Make any website discoverable and buyable by AI agents: llms.txt, llms-full.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402 templates plus Vercel + Stripe auto-fulfillment wiring.
+   - Buy: https://buy.stripe.com/aFacN4bGia0mgmT90m2Nq0c
+   - Page: https://www.autonomylabsweb.tech/x402-guide.html
+## Ownership and contact
+
+- Operated by Autonomy Labs.
+- Storefront: https://www.autonomylabsweb.tech (also aliased at https://www.autonomylabsweb.tech)
+- Legal notice (Impressum): https://www.autonomylabsweb.tech/impressum.html

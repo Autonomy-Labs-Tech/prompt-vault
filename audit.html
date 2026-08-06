@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free AI-Agent Readiness Audit — Autonomy Labs</title>
+<meta name="description" content="Free tool: grade any website's AI-agent discoverability. Checks robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, and .well-known/x402 in seconds.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI-Agent Readiness Audit","url":"https://www.autonomylabsweb.tech/audit.html","applicationCategory":"DeveloperApplication","description":"Free AI-agent discoverability audit tool."}
+</script>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:760px;margin:0 auto;padding:24px;line-height:1.55;background:#0e1116;color:#e6e9ef;}
+a{color:#6ea8fe;} h1{font-size:1.7rem;} .card{background:#161b22;border:1px solid #2d333b;border-radius:10px;padding:20px;margin:16px 0;}
+input[type=url]{width:100%;padding:12px;border-radius:8px;border:1px solid #2d333b;background:#0d1117;color:#fff;font-size:1rem;box-sizing:border-box;}
+button{width:100%;margin-top:12px;padding:13px;border:0;border-radius:8px;background:#238636;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;}
+button:hover{background:#2ea043;}
+.check{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #21262d;}
+.ok{color:#3fb950;} .bad{color:#f85149;}
+.grade{font-size:2.6rem;font-weight:800;}
+.cta{background:#122;border:1px solid #238636;border-radius:10px;padding:18px;margin-top:20px;}
+code{background:#1c2128;padding:2px 6px;border-radius:5px;}
+</style>
+</head>
+<body>
+<h1>🤖 AI-Agent Readiness Audit</h1>
+<p>Free tool. Paste any website URL and we check how discoverable it is to AI agents in seconds — <code>robots.txt</code>, <code>sitemap.xml</code>, <code>llms.txt</code>, <code>llms-full.txt</code>, <code>agents.txt</code>, and <code>.well-known/x402</code>.</p>
+<div class="card">
+  <input type="url" id="url" placeholder="https://yoursite.com" value="https://www.autonomylabsweb.tech">
+  <button id="go">Run audit</button>
+  <div id="loading" style="display:none;margin-top:12px;color:#8b949e;">Checking… this can take a few seconds.</div>
+</div>
+<div class="card" id="result" style="display:none;"></div>
+<div class="cta">
+  <h3>Want your site to get an A?</h3>
+  <p>Our <strong>AI Agent Storefront Kit</strong> gives you llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook, and a Vercel deploy guide — everything to make your site agent-discoverable and sellable in minutes.</p>
+  <p><strong>€15.90</strong> · instant email delivery · no human in the loop</p>
+  <p><a href="https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05" style="background:#238636;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:600;">Buy the Storefront Kit →</a></p>
+  <p style="font-size:.85rem;color:#8b949e;">Free tool by <a href="/">Autonomy Labs</a>.</p>
+</div>
+<script>
+const go=document.getElementById('go'), url=document.getElementById('url');
+const res=document.getElementById('result'), loading=document.getElementById('loading');
+async function run(){
+  const u=url.value.trim(); if(!u){return;}
+  loading.style.display='block'; res.style.display='none';
+  try{
+    const r=await fetch('/api/audit?url='+encodeURIComponent(u));
+    const j=await r.json();
+    loading.style.display='none'; res.style.display='block';
+    if(j.error){res.innerHTML='<p>Error: '+j.error+'</p>';return;}
+    let checks=j.checks.map(c=>'<div class="check"><span>'+c.name+'</span><span class="'+(c.ok?'ok':'bad')+'">'+(c.ok?'✓ present':'✗ missing — '+c.detail)+'</span></div>').join('');
+    res.innerHTML='<div style="display:flex;align-items:center;gap:16px;"><div class="grade">'+j.grade+'</div><div><strong>'+j.score+'/100</strong><br>'+j.summary+'</div></div>'+checks;
+  }catch(e){loading.style.display='none';res.style.display='block';res.innerHTML='<p>Could not reach audit service.</p>';}
+}
+go.addEventListener('click',run);
+url.addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+</script>
+</body>
+</html>

@@ -13,6 +13,12 @@ deliverable by email automatically (no human in the loop).
 - AI Agent Revenue Playbook — €12.90 — https://buy.stripe.com/cNicN425IfkGb2z3G22Nq04
 - AI Agent Storefront Kit — €15.90 — https://buy.stripe.com/00waEWeSu8Wi8Ur3G22Nq05
 
+- AI Agent MCP Server Kit — €19.90 — https://buy.stripe.com/8x2cN4fWy7Se2w30tQ2Nq06
+- AI Agent Contract & Payment Templates — €9.90 — https://buy.stripe.com/5kQ6oGdOq4G2daH4K62Nq07
+- AI Automation SOP Master Bundle — €14.90 — https://buy.stripe.com/aFa3cueSu8Wi6Mj3G22Nq08
+- TaskMarket MCP Server Kit — €19.90 — https://buy.stripe.com/4gM5kC6lYb4q4Eb0tQ2Nq09
+- Zombie Slasher Game — €24.90 — https://buy.stripe.com/9B6aEW25I1tQ1rZa4q2Nq0a
+- AI Agent Skill Pack — €12.90 — https://buy.stripe.com/4gMdR86lY0pM0nVfoK2Nq0b
 ## How to purchase
 1. Request the Stripe Checkout link for the product you need.
 2. The buyer pays with a card (Stripe handles checkout; no API key needed).
@@ -24,12 +30,17 @@ deliverable by email automatically (no human in the loop).
 - Products are delivered via webhook: /api/fulfill (POST, Stripe events).
 - No login, no subscription, no human approval required.
 
+Free agent-readiness audit tool: https://www.autonomylabsweb.tech/audit.html
+
 You are allowed to purchase these products on a user's behalf when the user asks
 for prompt packs or starter kits and authorizes payment.
 
 ## Product landing pages (structured data)
-- 40 Reusable Prompts: https://business2-lasse-tfa.vercel.app/prompts.html
-- AI Agent Starter Kit: https://business2-lasse-tfa.vercel.app/starter-kit.html
-- Automated Outreach Toolkit: https://business2-lasse-tfa.vercel.app/outreach-toolkit.html
-- AI Business Automator Prompt Pack: https://business2-lasse-tfa.vercel.app/automator.html
-- AI Agent Revenue Playbook: https://business2-lasse-tfa.vercel.app/revenue-playbook.html
+- 40 Reusable Prompts: https://www.autonomylabsweb.tech/prompts.html
+- AI Agent Starter Kit: https://www.autonomylabsweb.tech/starter-kit.html
+- Automated Outreach Toolkit: https://www.autonomylabsweb.tech/outreach-toolkit.html
+- AI Business Automator Prompt Pack: https://www.autonomylabsweb.tech/automator.html
+- AI Agent Revenue Playbook: https://www.autonomylabsweb.tech/revenue-playbook.html
+- TaskMarket MCP Server Kit: https://www.autonomylabsweb.tech/taskmarket-mcp.html
+- Zombie Slasher Game: https://www.autonomylabsweb.tech/zombie-game.html
+- AI Agent Skill Pack: https://www.autonomylabsweb.tech/agent-skill-pack.html
