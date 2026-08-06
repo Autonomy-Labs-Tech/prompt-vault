@@ -20,7 +20,7 @@ const checks = [
 const timeout = (ms, fn) => new Promise((res, rej) => { const t = setTimeout(()=>rej(new Error('timeout')), ms); fn().then(v=>{clearTimeout(t);res(v)}, e=>{clearTimeout(t);rej(e)}); });
 async function get(p) {
   try {
-    const r = await timeout(15000, fetch(base + p, { headers: { 'User-Agent': 'Mozilla/5.0 llms-validator' } }));
+    const r = await timeout(15000, () => fetch(base + p, { headers: { 'User-Agent': 'Mozilla/5.0 llms-validator' } }));
     const body = await r.text();
     return { status: r.status, ct: (r.headers.get('content-type')||'').split(';')[0], len: body.length, body };
   } catch (e) { return { status: 0, ct: '', len: 0, body: '', err: e.message }; }
