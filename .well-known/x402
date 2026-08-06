@@ -4,6 +4,8 @@
   "payment": {
     "provider": "stripe",
     "checkout_links": {
+      "x402-paywall-kit": "https://buy.stripe.com/dRm5kC25I0pM0nV6Se2Nq0p",
+      "fulfillment-webhook-kit": "https://buy.stripe.com/7sY14m8u6a0m1rZ5Oa2Nq0q",
       "40-reusable-prompts": "https://buy.stripe.com/4gMaEW5hU3BYb2za4q2Nq00",
       "ai-agent-starter-kit": "https://buy.stripe.com/9B614m5hUa0mdaHekG2Nq01",
       "automated-outreach-toolkit": "https://buy.stripe.com/7sY28qbGi1tQ0nV0tQ2Nq02",

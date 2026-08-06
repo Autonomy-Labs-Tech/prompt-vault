@@ -355,6 +355,52 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/audit-report.html",
    "identifier": "ai-website-audit-report"
+  },
+  {
+   "@type": "Product",
+   "position": 25,
+   "name": "AI Agent x402 Paywall Setup Kit",
+   "description": "Step-by-step guide to set up an x402 paywall for AI agents: manifest, checkout, and automated fulfillment.",
+   "category": "Setup",
+   "tagline": "Turn any digital product into an agent-payable x402 endpoint",
+   "features": [
+    "x402 manifest setup",
+    "Stripe Checkout integration",
+    "Automated fulfillment webhook",
+    "llms.txt + agents.txt files"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 14.9,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/dRm5kC25I0pM0nV6Se2Nq0p"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html",
+   "identifier": "x402-paywall-kit"
+  },
+  {
+   "@type": "Product",
+   "position": 26,
+   "name": "AI Agent Fulfillment Webhook Kit",
+   "description": "Copy-paste webhook code to auto-deliver digital products by email the moment a Stripe payment succeeds.",
+   "category": "Automation",
+   "tagline": "Auto-deliver digital products by email the moment payment succeeds",
+   "features": [
+    "Stripe webhook handler",
+    "Email delivery via Resend/SendGrid",
+    "Purchase logging",
+    "Zero-human fulfillment"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 14.9,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/7sY14m8u6a0m1rZ5Oa2Nq0q"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html",
+   "identifier": "fulfillment-webhook-kit"
   }
  ]
 }
