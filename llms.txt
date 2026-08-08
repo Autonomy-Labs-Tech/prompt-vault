@@ -34,6 +34,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - sitemap.xml: https://business2-lasse-tfa.vercel.app/sitemap.xml
 - robots.txt: https://business2-lasse-tfa.vercel.app/robots.txt
 - .well-known/x402 (payment discovery): https://business2-lasse-tfa.vercel.app/.well-known/x402
+- MCP endpoint (Streamable-HTTP, pay-per-call tools via x402 USDC): https://business2-lasse-tfa.vercel.app/api/mcp
 - llms-full.txt: https://business2-lasse-tfa.vercel.app/llms-full.txt
 
 ## Free tools
