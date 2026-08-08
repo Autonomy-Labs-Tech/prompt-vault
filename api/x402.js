@@ -24,26 +24,40 @@ const PRODUCTS = {
 
 function runProbe(target) {
   return new Promise((resolve) => {
-    const u = new URL(target);
-    const mod = u.protocol === 'https:' ? https : require('http');
-    const r = mod.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 8000 }, (res) => {
-      let b = ''; res.on('data', (c) => { b += c; if (b.length > 150000) r.destroy(); });
-      res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }));
-    });
-    r.on('error', () => resolve({ status: 0 }));
-    r.on('timeout', () => { r.destroy(); resolve({ status: 0 }); });
+    try {
+      const u = new URL(target);
+      if (u.protocol !== 'https:') return resolve({ status: 0 });
+      const mod = https;
+      const r = mod.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 4000 }, (res) => {
+        let b = ''; res.on('data', (c) => { b += c; if (b.length > 100000) { r.destroy(); resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }); } });
+        res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }));
+      });
+      r.on('error', () => resolve({ status: 0 }));
+      r.setTimeout(4000, () => { r.destroy(); resolve({ status: 0 }); });
+    } catch (e) { resolve({ status: 0 }); }
   });
+}
+
+function isPrivateHost(u) {
+  const host = u.hostname.toLowerCase();
+  return /(^|\.)(local|localhost)$/.test(host) ||
+    /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) ||
+    /^169\.254\./.test(host) || /^172\.(1[6-9]|2[0-9]|3[01])\./.test(host) ||
+    /^0\.0\.0\.0$/.test(host) || /^::1$/.test(host) || /[[](::1|fc|fd)/.test(host) ||
+    /\.internal$/.test(host) || /\.home$/.test(host);
 }
 
 async function deliverAudit(body) {
   let target = (body.url || '').trim();
   if (!target) return { ok: false, error: 'url required for product=audit' };
   if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
-  let origin;
-  try { origin = new URL(target).origin; } catch (e) { return { ok: false, error: 'invalid url' }; }
+  let u;
+  try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
+  if (isPrivateHost(u)) return { ok: false, error: 'private/loopback targets not allowed' };
+  if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
+  const origin = u.origin;
   const paths = ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/agents.txt', '/.well-known/x402', '/.well-known/agents.json', '/.well-known/security.txt'];
-  const res = [];
-  for (const p of paths) res.push(await runProbe(origin + p));
+  const res = await Promise.all(paths.map((p) => runProbe(origin + p)));
   const checks = ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'agents.txt', 'x402', 'agents.json', 'security.txt'].map((n, i) => ({
     name: n, ok: res[i].status >= 200 && res[i].status < 400,
   }));
