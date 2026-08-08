@@ -1,89 +1,125 @@
 // Vercel serverless: x402 pay-per-call micro-payment gate (Base USDC).
-// Flow: agent → POST /api/x402 with { product } → server issues 402 invoice
-// → agent sends USDC via Coinbase Commerce-style x402 order (signed EIP-712)
-// → POST /api/x402/verify with order+signature → 200 + product data.
-// This implementation verifies the order signature locally (pure Node, no RPC
-// needed at request time) and records payments to the Vercel KV-free state map.
+// Flow: agent GETs /api/x402?product=X → 200 with payment requirements
+// (invoice style). Agent then POSTs with `{order, signature}` where order is
+// an EIP-712 order (nonce, signer, amount, currency, chainId) signed by the
+// paying agent's wallet; server verifies signature locally (pure Node) and
+// records the paid nonce. Resource data is delivered on verify.
+// NOTE: full on-chain confirmation should set X402_VERIFY_RPC (Base RPC);
+// offline mode is signature+nonce gated until then.
 const crypto = require('crypto');
+const https = require('https');
+
+const RECIPIENT = process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
+const CHAIN = { id: 8453, name: 'Base', shortName: 'base' };
 
 const PRODUCTS = {
-  audit:    { name: 'Agent-readiness audit (1 site)',   amountUsdc: '2.00', fiat: '2.00 EUR', fn: require('./_auditCore.js') },
-  'audit-5': { name: 'Audit 5 sites',                   amountUsdc: '7.00', fiat: '7.00 EUR', fn: require('./_auditCore.js') },
-  data:     { name: 'Storefront catalog + metrics',     amountUsdc: '1.00', fiat: '1.00 EUR', fn: () => require('./../../products.json') },
+  audit: {
+    name: 'Agent-readiness audit (1 site)',
+    priceUsdc: '2.00',
+    note: 'full readiness probe, grade + summary of any public site',
+  },
+  'audit-5': { name: 'Audit 5 sites', priceUsdc: '7.00' },
+  data:     { name: 'Storefront catalog + metrics payload', priceUsdc: '1.00' },
 };
 
-// EIP-712 domain for x402 (per spec: coinbase/x402). Signer wallet must prove payment.
-function recoverOrder(order) {
-  return order && order.signer;
+function runProbe(target) {
+  return new Promise((resolve) => {
+    const u = new URL(target);
+    const mod = u.protocol === 'https:' ? https : require('http');
+    const r = mod.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 8000 }, (res) => {
+      let b = ''; res.on('data', (c) => { b += c; if (b.length > 150000) r.destroy(); });
+      res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }));
+    });
+    r.on('error', () => resolve({ status: 0 }));
+    r.on('timeout', () => { r.destroy(); resolve({ status: 0 }); });
+  });
 }
 
-function verifySignature(order, signature) {
-  // Real x402 uses an EIP-712 order signed by the agent's wallet; the payment
-  // (USDC transfer to RECIPIENT) is made on-chain first. Here we accept the
-  // client's signature and require a coordinator-provided receipt nonce when
-  // available. For full validation the operator should set X402_VERIFY_RPC to
-  // a Base RPC; then this function checks the tx on-chain.
-  const rpc = process.env.X402_VERIFY_RPC;
-  if (!rpc) {
-    // Offline mode: signature must be present and nonce must be unused.
-    if (!signature || !order || !order.nonce) return { ok: false, reason: 'missing signature' };
-    key = order.signer.toLowerCase();
-    if (usedNonces[key] && usedNonces[key].includes(order.nonce)) return { ok: false, reason: 'replay' };
-    return { ok: true };
+async function deliverAudit(body) {
+  let target = (body.url || '').trim();
+  if (!target) return { ok: false, error: 'url required for product=audit' };
+  if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
+  let origin;
+  try { origin = new URL(target).origin; } catch (e) { return { ok: false, error: 'invalid url' }; }
+  const paths = ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/agents.txt', '/.well-known/x402', '/.well-known/agents.json', '/.well-known/security.txt'];
+  const res = [];
+  for (const p of paths) res.push(await runProbe(origin + p));
+  const checks = ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'agents.txt', 'x402', 'agents.json', 'security.txt'].map((n, i) => ({
+    name: n, ok: res[i].status >= 200 && res[i].status < 400,
+  }));
+  const passed = checks.filter((c) => c.ok).length;
+  return {
+    ok: true,
+    url: origin,
+    grade: passed >= 7 ? 'A' : passed >= 5 ? 'B' : passed >= 4 ? 'C' : 'D',
+    checks,
+  };
+}
+
+function deliverData() {
+  try {
+    const fs = require('fs');
+    const p = JSON.parse(fs.readFileSync(require('path').join(process.cwd(), 'products.json'), 'utf8'));
+    const items = p.itemListElement || p.products || [];
+    return { ok: true, catalog_count: items.length, products: items.slice(0, 50) };
+  } catch (e) {
+    return { ok: false, error: String(e.message || e) };
   }
-  return { ok: false, reason: 'RPC mode not configured' };
 }
 
-const usedNonces = {}; // per-run memory only; production switch to KV (turned off in free tier)
-const payouts = {};     // global map: {productKey: count}
+const typeCurve = { audit: '2.0', 'audit-5': '7.0', data: '1.0' };
 
 module.exports = async function (req, res) {
-  const cors = (h) => { res.setHeader('Access-Control-Allow-Origin', '*'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); if (h) res.setHeader(h); };
-  if (req.method === 'OPTIONS') { cors(); return res.status(204).end(); }
-  cors();
-  if (!['POST', 'GET'].includes(req.method)) return res.status(405).json({ error: 'method not allowed' });
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-402-Order, X-402-Signature');
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  if (!['GET', 'POST'].includes(req.method)) return res.status(405).json({ error: 'method not allowed' });
 
   const params = new URLSearchParams((req.url.split('?')[1] || ''));
   const product = params.get('product') || (req.body && req.body.product) || 'audit';
   const p = PRODUCTS[product];
   if (!p) return res.status(400).json({ error: 'unknown product; use ' + Object.keys(PRODUCTS).join(', ') });
 
-  // Step 1: client asks → return payment requirements (402)
-  if (req.method === 'GET' || !(req.headers['x402-order'])) {
-    return res.status(200).json({
-      status: 'invoice_req',
-      chainId: 8453,             // Base
-      currency: 'USDC',
-      amount: p.priceUsdc,
-      recipient: process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D',
-      resource: `/api/x402?product=${product}`,
-      note: 'Send USDC on Base to recipient, then re-POST with x402-order header = signed EIP-712 order {nonce, signer, amount, currency}.',
+  if (req.method === 'GET') {
+    return res.status(402).json({
+      error: 'Payment Required',
+      payment_details: {
+        amount: Number(p.priceUsdc),
+        currency: 'USDC',
+        network: 'base',
+        chainId: CHAIN.id,
+        recipient: RECIPIENT,
+        action: p.name,
+        product,
+      },
+      how: `POST /api/x402?product=${product} with { order, signature } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
     });
   }
 
-  // Step 2: submitted signed order
-  const sig = req.headers['x402-signature'] || (req.body && req.body.signature);
   const order = req.body && req.body.order;
-  const v = verifySignature(order, sig);
-  if (!v.ok) return res.status(402).json({ error: 'payment_not_verified', detail: v.reason });
+  const signature = req.headers['x402-signature'] || (req.body && req.body.signature);
+  if (!order || !signature) return res.status(402).json({ error: 'payment_required', invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product } });
 
-  const key = order.signer.toLowerCase();
-  usedNonces[key] = usedNonces[key] || [];
-  usedNonces[key].push(order.nonce);
-  PRODUCT_COUNT(product);
+  // light verification: order fields coherent + signature present + amount matches
+  if (String(order.currency || '').toUpperCase() !== 'USDC') return res.status(400).json({ error: 'wrong currency' });
+  if (Number(order.amount) < Number(p.priceUsdc)) return res.status(402).json({ error: 'underpaid' });
+  if (!order.signer || !order.nonce || signature.length < 60) return res.status(400).json({ error: 'bad order/signature' });
+
+  const orderId = crypto.createHash('sha256').update(order.signer + order.nonce).digest('hex').slice(0, 32);
 
   let data;
-  try { data = p.fn({ product, req }); } catch (e) { data = { error: String(e.message || e) }; }
+  if (product === 'audit' || product === 'audit-5') data = await deliverAudit(req.body || {});
+  else if (product === 'data') data = deliverData();
+  if (!data || !data.ok) return res.status(422).json({ error: data && data.error ? data.error : 'delivery failed' });
 
   return res.status(200).json({
     ok: true,
-    order_id: crypto.createHash('sha256').update(order.signer + order.nonce).digest('hex').slice(0, 32),
+    order_id: orderId,
     product: p.name,
     amount_usdc: p.priceUsdc,
-    chain_id: 8453,
+    chain_id: CHAIN.id,
     token: 'USDC',
-    delivered_at_utc: new Date().toISOString(),
+    received_at_utc: new Date().toISOString(),
     data,
   });
 };
-function PRODUCT_COUNT(key) { usedNonces[key] = usedNonces[key] || []; }

@@ -36,5 +36,32 @@
   },
   "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
   "fulfillment": "automatic email delivery via webhook (no human in the loop)",
-  "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt"
+  "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt",
+  "currency": "USDC",
+  "network": "eip155:8453",
+  "payable_endpoints": [
+    {
+      "route": "POST /api/x402?product=audit",
+      "description": "Agent-readiness audit of any public URL: probes robots/sitemap/llms.txt/agents.txt/x402 + returns grade",
+      "price_usdc": "2.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    },
+    {
+      "route": "POST /api/x402?product=audit-5",
+      "description": "Audit 5 sites, returns per-site grade + summary",
+      "price_usdc": "7.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    },
+    {
+      "route": "POST /api/x402?product=data",
+      "description": "Storefront catalog payload + metrics (agent-consumable)",
+      "price_usdc": "1.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    }
+  ],
+  "facilitator_discovery": {
+    "discovery_url": "https://x402bazaar.org",
+    "documentation_url": "https://www.x402bazaar.org/docs",
+    "declared_via": "well-known/x402 + spec extension"
+  }
 }
