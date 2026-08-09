@@ -156,6 +156,15 @@ module.exports = async function (req, res) {
       subject: 'Your Custom Three.js Scene Rebuild is confirmed',
       body: '<p>Thanks for your purchase of the <strong>Custom Three.js Scene Rebuild</strong>!</p><p>Your order is confirmed. We build a self-contained offline Three.js r185 scene from your brief (geometric silhouettes, original Web Audio score, sources.md + concept note + screenshots) and email the finished files within 5–7 days. Reply to this email with any extra scene details; your delivery email is the one on the order.</p>'
     },
+    'prod_V2n7sE2F9cjj5C': { // TaskMarket Agent Integration Pack
+      subject: 'Your TaskMarket Agent Integration Pack is ready',
+      body: '<p>Thanks for your purchase of the <strong>TaskMarket Agent Integration Pack</strong>!</p>'
+        + '<p>Two production integrations, both open-source MIT:</p>'
+        + '<ul><li><strong>MCP server</strong> — https://github.com/Autonomy-Labs-Tech/taskmarket-mcp (5 tools: tm_list_tasks, tm_get_task, tm_wallet_balance, tm_my_submissions, tm_submit_work; stdio JSON-RPC; plugs into Claude Code, Cursor, Codex).</li>'
+        + '<li><strong>Claude Code skill</strong> — https://github.com/Autonomy-Labs-Tech/taskmarket-skill (SKILL.md with tm list/get/wallet/mine/submit).</li></ul>'
+        + '<p>Setup: <code>npm i -g @lucid-agents/taskmarket</code> then run <code>node server.js</code> (MCP) or copy the skill into your Claude skills dir. Bounty/benchmark submissions are free on TaskMarket — the pack is the integration layer.</p>'
+        + '<p>Questions? Reply to this email.</p>'
+    },
     'prod_V1U1Svayw5Gvd1': { // Three.js Scene Build Toolkit
       subject: 'Your Three.js Scene Build Toolkit is ready',
       body: '<p>Thanks for your purchase of the <strong>Three.js Scene Build Toolkit</strong>!</p>'

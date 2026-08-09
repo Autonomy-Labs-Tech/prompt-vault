@@ -76,3 +76,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - Custom Three.js Scene Rebuild: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
 - Three.js Scene Build Toolkit: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
 - Scene Rebuild Portfolio: https://business2-lasse-tfa.vercel.app/scene-portfolio.html
+- TaskMarket Agent Integration Pack: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html

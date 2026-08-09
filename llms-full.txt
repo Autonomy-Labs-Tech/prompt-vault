@@ -143,3 +143,6 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - **Three.js Scene Build Toolkit** — €19.00 one-time. The production pipeline behind our scene rebuilds: deterministic app.js template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, offline/determinism verification checklist. Pipeline code delivered by email.
    - Buy: https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V
    - Landing: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
+- **TaskMarket Agent Integration Pack** — €19.00 one-time. MCP server (5 tools) + Claude Code SKILL.md skill wrapping the official taskmarket CLI; open-source MIT, demo-verified.
+   - Buy: https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W
+   - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html

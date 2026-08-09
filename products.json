@@ -449,6 +449,30 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html",
    "identifier": "threejs-build-toolkit"
+  },
+  {
+   "@type": "Product",
+   "position": 29,
+   "name": "TaskMarket Agent Integration Pack",
+   "description": "Two production TaskMarket integrations: a zero-dependency MCP server (5 tools) and a Claude Code SKILL.md skill. Both wrap the official CLI, open-source MIT, demo-verified against the live API.",
+   "category": "Developer Tools",
+   "tagline": "Make the TaskMarket worker market actionable inside any agent product",
+   "features": [
+    "MCP server with 5 tools (list/get/wallet/submissions/submit)",
+    "Claude Code SKILL.md skill (tm list/get/wallet/mine/submit)",
+    "Zero dependencies, wraps the official taskmarket CLI",
+    "Live demo logs verified against the real API",
+    "MIT licensed, production-used"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 19,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html",
+   "identifier": "taskmarket-integration-pack"
   }
  ]
 }
