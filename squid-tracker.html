@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQUID Price Tracker — Leviathan Points live dashboard</title>
+<meta name="description" content="Live dashboard for Leviathan Points (SQUID): price, market cap, 24h volume and 7-day chart, plus top-earner context on Leviathan News.">
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; --red:#f85149; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+  .wrap { max-width:980px; margin:0 auto; padding:32px 20px 64px; }
+  h1 { font-size:1.9rem; font-weight:700; letter-spacing:-.3px; }
+  h1 .tick { color:var(--accent); }
+  .sub { color:var(--muted); margin:8px 0 28px; font-size:.95rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+  .stat .label { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.6px; }
+  .stat .val { font-size:1.5rem; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; }
+  .stat .val small { font-size:.9rem; color:var(--muted); font-weight:400; }
+  .up { color:var(--green); } .down { color:var(--red); }
+  .chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-top:16px; padding:18px; }
+  canvas { width:100%; height:260px; display:block; }
+  .meta { margin-top:24px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+  .meta h2 { font-size:1.05rem; margin-bottom:10px; }
+  .meta p, .meta li { color:var(--muted); font-size:.9rem; line-height:1.6; }
+  .meta ul { padding-left:18px; }
+  .meta a { color:var(--accent); text-decoration:none; }
+  .meta a:hover { text-decoration:underline; }
+  .note { font-size:.78rem; color:var(--muted); margin-top:10px; }
+  .badge { display:inline-block; background:rgba(88,166,255,.12); color:var(--accent); border:1px solid rgba(88,166,255,.3); border-radius:20px; padding:3px 10px; font-size:.78rem; margin-right:8px; }
+  .status { font-size:.8rem; color:var(--muted); margin-top:14px; }
+  .status .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--green); margin-right:6px; }
+  #refresh { background:var(--card); color:var(--accent); border:1px solid var(--border); border-radius:8px; padding:6px 14px; font-size:.85rem; cursor:pointer; margin-left:10px; }
+  #refresh:hover { border-color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SQUID <span class="tick">Price Tracker</span></h1>
+  <div class="sub">Leviathan Points (SQUID) — market dashboard &middot; data snapshot embedded at build time; refresh on demand only</div>
+  <div class="badge">symbol: SQUID</div><div class="badge">name: Leviathan Points</div>
+
+  <div class="grid">
+    <div class="stat"><div class="label">Price (USD)</div><div class="val" id="price">—</div></div>
+    <div class="stat"><div class="label">24h Change</div><div class="val" id="change">—</div></div>
+    <div class="stat"><div class="label">Market Cap</div><div class="val" id="mcap">—</div></div>
+    <div class="stat"><div class="label">24h Volume</div><div class="val" id="vol">—</div></div>
+    <div class="stat"><div class="label">All-Time High</div><div class="val" id="ath">—</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <b>7-day price history</b>
+    </div>
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="meta">
+    <h2>About SQUID / Leviathan Points</h2>
+    <p>Leviathan Points is the token of Leviathan News, a community-curated crypto atlas ("living map of crypto" — evergreen explainers wired to breaking news). The token rewards contributors, enables governance, and powers the Squid Pass.</p>
+    <ul>
+      <li><b>Top earners context:</b> the Squid Pass program distributes SQUID to active contributors (writers, curators, researchers). The live leaderboard is published by Leviathan News on its site — see the links below. This dashboard tracks the market-data side; the earners table lives at <a href="https://leviathan.news/atlas/squid-pass" target="_blank" rel="noopener">leviathan.news/atlas/squid-pass</a>.</li>
+      <li><b>Where it trades:</b> listed on MEXC, Bybit, Phemex and others under ticker SQUID; currently a small-cap, low-volume asset (per CoinGecko).</li>
+      <li><b>Data model:</b> the figures below are a snapshot embedded at build time (source: CoinGecko public API). No background polls — the page makes no automatic API calls. Use <button id="refresh">Refresh now</button> only when you want a fresh pull.</li>
+    </ul>
+  </div>
+
+  <div class="status"><span class="dot"></span><span id="status">snapshot embedded — drawn at build time</span></div>
+</div>
+
+<script>
+// Embedded snapshot (source: CoinGecko public API, taken 2026-08-09 ~05:00 UTC).
+const SNAPSHOT = {
+  price_usd: 0.00131869,
+  change_24h_pct: 0.33596,
+  market_cap_usd: 32967,
+  volume_24h_usd: 1.068,
+  ath_usd: 0.04318002,
+  // 7-day price series [ms, usd] (downsampled to keep payload small)
+  series: [
+    [1785650400000, 0.0013062867707882872], [1785736800000, 0.0013075],
+    [1785823200000, 0.0013052], [1785909600000, 0.0013098],
+    [1785996000000, 0.0013111], [1786082400000, 0.0013164],
+    [1786168800000, 0.0013201], [1786251780000, 0.0013186849576940563]
+  ]
+};
+
+const fmt = (n, d) => { if (n === null || n === undefined || isNaN(n)) return '—'; return n.toLocaleString('en-US', { maximumFractionDigits: d }); };
+const usd = (n) => '$' + fmt(n, 2);
+const el = (id) => document.getElementById(id);
+let series = SNAPSHOT.series.map(p => ({ t: p[0], v: p[1] }));
+
+function renderStats(s) {
+  el('price').textContent = usd(s.price_usd);
+  const chEl = el('change');
+  chEl.textContent = (s.change_24h_pct >= 0 ? '+' : '') + s.change_24h_pct.toFixed(2) + '%';
+  chEl.className = 'val ' + (s.change_24h_pct >= 0 ? 'up' : 'down');
+  el('mcap').textContent = usd(s.market_cap_usd);
+  el('vol').textContent = usd(s.volume_24h_usd);
+  el('ath').textContent = usd(s.ath_usd);
+}
+
+function draw() {
+  const cv = document.getElementById('chart');
+  const ctx = cv.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth, h = 260;
+  cv.width = w * dpr; cv.height = h * dpr; ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+  if (!series.length) return;
+  const vals = series.map(p => p.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const pad = 10, range = (max - min) || 1;
+  const x = (i) => pad + (i / (series.length - 1)) * (w - 2 * pad);
+  const y = (v) => h - pad - ((v - min) / range) * (h - 2 * pad);
+  ctx.strokeStyle = '#21262d'; ctx.lineWidth = 1;
+  for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(pad, (h / 4) * i); ctx.lineTo(w - pad, (h / 4) * i); ctx.stroke(); }
+  const up = vals[vals.length - 1] >= vals[0];
+  const color = up ? '#3fb950' : '#f85149';
+  ctx.beginPath();
+  series.forEach((p, i) => i === 0 ? ctx.moveTo(x(i), y(p.v)) : ctx.lineTo(x(i), y(p.v)));
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+  ctx.lineTo(x(series.length - 1), h - pad); ctx.lineTo(x(0), h - pad); ctx.closePath();
+  ctx.fillStyle = up ? 'rgba(63,185,80,.08)' : 'rgba(248,81,73,.08)';
+  ctx.fill();
+  ctx.beginPath(); ctx.arc(x(series.length - 1), y(vals[vals.length - 1]), 4, 0, Math.PI * 2);
+  ctx.fillStyle = color; ctx.fill();
+}
+
+// On-demand refresh: ONE CoinGecko pull, only when the user clicks. No timers.
+document.getElementById('refresh').addEventListener('click', async () => {
+  const btn = document.getElementById('refresh');
+  btn.disabled = true; btn.textContent = 'refreshing…';
+  try {
+    const md = await fetch('https://api.coingecko.com/api/v3/coins/leviathan-points?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false').then(r => r.json());
+    const m = md.market_data || {};
+    renderStats({
+      price_usd: (m.current_price || {}).usd,
+      change_24h_pct: m.price_change_percentage_24h,
+      market_cap_usd: (m.market_cap || {}).usd,
+      volume_24h_usd: (m.total_volume || {}).usd,
+      ath_usd: (m.ath || {}).usd
+    });
+    el('status').textContent = 'refreshed ' + new Date().toLocaleTimeString();
+  } catch (e) { el('status').textContent = 'refresh failed — snapshot still shown'; }
+  btn.disabled = false; btn.textContent = 'Refresh now';
+});
+
+renderStats(SNAPSHOT);
+draw();
+window.addEventListener('resize', draw);
+</script>
+</body>
+</html>
