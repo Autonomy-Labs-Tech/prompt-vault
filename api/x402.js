@@ -20,6 +20,7 @@ const PRODUCTS = {
   },
   'audit-5': { name: 'Audit 5 sites', priceUsdc: '7.00' },
   data:     { name: 'Storefront catalog + metrics payload', priceUsdc: '1.00' },
+  llms:     { name: 'llms.txt generator (1 site)', priceUsdc: '3.00' },
 };
 
 function runProbe(target) {
@@ -70,6 +71,57 @@ async function deliverAudit(body) {
   };
 }
 
+function runProbeFetch(target) {
+  // Like runProbe but returns body text (for llms.txt/sitemap generation).
+  return new Promise((resolve) => {
+    try {
+      const u = new URL(target);
+      if (u.protocol !== 'https:') return resolve({ status: 0, body: '' });
+      const r = https.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 5000 }, (res) => {
+        let b = '';
+        res.on('data', (c) => { b += c; if (b.length > 300000) { r.destroy(); resolve({ status: res.statusCode, body: b }); } });
+        res.on('end', () => resolve({ status: res.statusCode, body: b }));
+      });
+      r.on('error', () => resolve({ status: 0, body: '' }));
+      r.setTimeout(5000, () => { r.destroy(); resolve({ status: 0, body: '' }); });
+    } catch (e) { resolve({ status: 0, body: '' }); }
+  });
+}
+
+async function delivillms(body) {
+  let target = (body.url || '').trim();
+  if (!target) return { ok: false, error: 'url required for product=llms' };
+  if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
+  let u;
+  try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
+  if (isPrivateHost(u)) return { ok: false, error: 'private/loopback targets not allowed' };
+  if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
+  const origin = u.origin;
+
+  const sitemap = await runProbeFetch(origin + '/sitemap.xml');
+  const links = [];
+  if (sitemap.status >= 200 && sitemap.status < 400 && sitemap.body) {
+    const re = /<loc>\s*([^<\s]+)\s*<\/loc>/gi;
+    let m; while ((m = re.exec(sitemap.body)) && links.length < 40) links.push(m[1]);
+  }
+  const title = u.hostname.replace(/^www\./, '');
+  const lines = [
+    '# ' + title,
+    '',
+    '> ' + title + ' — agent-friendly site summary. See /llms.txt, /robots.txt, /sitemap.xml.',
+    '',
+  ];
+  lines.push('## Pages');
+  if (links.length) {
+    for (const l of links.slice(0, 40)) lines.push('- [' + l.replace(/^https?:\/\//, '') + '](' + l + '): page on ' + title);
+  } else {
+    lines.push('- [/](' + origin + '/): home page of ' + title);
+    lines.push('> Note: no <loc> entries found in ' + origin + '/sitemap.xml — add URLs above as your content grows.');
+  }
+  const llmsContent = lines.join('\n') + '\n';
+  return { ok: true, url: origin, llms_txt: llmsContent, sitemap_found: links.length > 0 };
+}
+
 function deliverData() {
   try {
     const fs = require('fs');
@@ -81,7 +133,7 @@ function deliverData() {
   }
 }
 
-const typeCurve = { audit: '2.0', 'audit-5': '7.0', data: '1.0' };
+const typeCurve = { audit: '2.0', 'audit-5': '7.0', data: '1.0', llms: '3.0' };
 
 module.exports = async function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -123,6 +175,7 @@ module.exports = async function (req, res) {
 
   let data;
   if (product === 'audit' || product === 'audit-5') data = await deliverAudit(req.body || {});
+  else if (product === 'llms') data = await delivLlms(req.body || {});
   else if (product === 'data') data = deliverData();
   if (!data || !data.ok) return res.status(422).json({ error: data && data.error ? data.error : 'delivery failed' });
 
