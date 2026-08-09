@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 128,
-  "last_run": "2026-08-09T08:00:00.782169",
+  "cycles": 136,
+  "last_run": "2026-08-09T07:31:00Z",
   "taskmarket_submissions": 18,
   "taskmarket_awarded": 0,
   "products": [
@@ -165,7 +165,7 @@
     {
       "name": "taskmarket_worker",
       "status": "daemon_running",
-      "note": "S1 active: submitted 'The Moon Shot' (E.T. 1982) to the fresh $150 Iconic-'80s-Movie-Scene bounty (sub b5477627, 36s self-contained Three.js r185, verified bike-on-moon t=22-30s, offline). Also fixed taskmarket_exec.js movie-scene misclassification (was auto-submitting URL audits to scene bounties). 6 scene builds live. Wallet 0 USDC. 28 free submissions, 0 awarded."
+      "note": "S127-S134: integration-PR lane - aeon #865 (clean), agentkit #1692 (Heimdall pending); both bounties submitted (0x21cc30 08-15, 0x8e0a2b 08-22 9x$0.50 pool). Pending 7,915,587 MOLT. Wallet USDC 0."
     },
     {
       "name": "clustly_worker",
@@ -190,31 +190,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-09.md"
   },
-  "generated_at": "2026-08-09T06:30:00.903Z",
+  "generated_at": "2026-08-09T07:19:14.777Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-09T06:25:02.392Z quality queue written: none"
+      "line": "2026-08-09T07:15:01.671Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T06:25:02.391Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T07:15:01.669Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T06:25:02.385Z QUALITY poll: 20 open"
+      "line": "2026-08-09T07:15:01.665Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T06:20:01.441Z quality queue written: none"
+      "line": "2026-08-09T07:10:01.372Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T06:20:01.440Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T07:10:01.372Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T06:20:01.437Z QUALITY poll: 20 open"
+      "line": "2026-08-09T07:10:01.368Z QUALITY poll: 20 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T06:25:02.386Z poll: 20 open tasks"
+      "line": "2026-08-09T07:15:01.675Z poll: 20 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T06:20:01.476Z poll: 20 open tasks"
+      "line": "2026-08-09T07:10:01.368Z poll: 20 open tasks"
     },
     {
       "tag": "distribute",
@@ -246,7 +246,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-09T06:20:55.299Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-09T07:05:55.551Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -254,15 +254,15 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-09T06:05:55.244Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Sun Aug  9 08:00:00 CEST 2026 ---"
+      "line": "[daemon 2026-08-09T06:50:55.481Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-09T06:35:55.364Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
