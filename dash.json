@@ -190,31 +190,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-09.md"
   },
-  "generated_at": "2026-08-09T11:30:00.782Z",
+  "generated_at": "2026-08-09T12:00:00.916Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-09T11:25:01.270Z quality queue written: none"
+      "line": "2026-08-09T11:55:02.237Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T11:25:01.270Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T11:55:02.236Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T11:25:01.267Z QUALITY poll: 13 open"
+      "line": "2026-08-09T11:55:02.228Z QUALITY poll: 13 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T11:20:01.664Z quality queue written: none"
+      "line": "2026-08-09T11:50:01.221Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T11:20:01.663Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T11:50:01.220Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T11:20:01.660Z QUALITY poll: 13 open"
+      "line": "2026-08-09T11:50:01.217Z QUALITY poll: 13 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T11:25:01.248Z poll: 13 open tasks"
+      "line": "2026-08-09T11:55:02.228Z poll: 13 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,11 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T11:20:01.638Z poll: 13 open tasks"
+      "line": "2026-08-09T11:50:01.217Z poll: 13 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "--- run Sun Aug  9 14:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -246,7 +250,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-09T11:23:10.247Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -254,15 +258,11 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-09T11:08:10.171Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-09T11:53:10.417Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-09T10:53:10.024Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
