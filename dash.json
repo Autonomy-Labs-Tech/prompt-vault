@@ -4,9 +4,9 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 245,
-  "last_run": "2026-08-09T18:00:00.873392",
-  "taskmarket_submissions": 18,
+  "cycles": 251,
+  "last_run": "2026-08-09T19:00:01.208808",
+  "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -152,7 +152,7 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Cycle 116: first-payout push. Claimed 11 more BTNOMB positions (12 total, all unfunded). Funded bounties all locked by other claimers (verified 409). Balance checks: 0 ETH/0 USDC both wallets. Storefront 0 orders. All other channels empty or gas-gated. Bot poll 5min, re-claim logic added. Waiting: bounty poster funding, FiatDock review, external buyers.",
+  "honest_note": "Cycle 251: Revenue EUR 0.00. Storefront 29 products (new TaskMarket Agent Integration Pack EUR19, built from the two live integration artifacts submitted on the 0.50 USDC task). Deployed + verified. GoldenEye $400 window closes 08-12. 21 submissions live. Daemons/crons alive.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -175,7 +175,7 @@
     {
       "name": "storefront",
       "status": "live_deployed",
-      "note": "28 products; audit-report.html shows a real sample report (grade A run of own storefront); full agent stack (llms/agents/robots/sitemap/x402/agents.json); portfolio page; webhook verified."
+      "note": "29 products. NEW: TaskMarket Agent Integration Pack EUR19 (MCP server + Claude Code skill; plink fZu7sKcKmc8u4EbekG2Nq0W). Landing, products.json, llms.txt, agents.txt, sitemap, llms-full, index card, webhook delivery — deployed+verified."
     }
   ],
   "daily_report": {
@@ -183,38 +183,38 @@
     "grade_letter": "C",
     "grade_total": 75,
     "revenue_eur": 0,
-    "submissions": 18,
+    "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 245,
+    "cycles": 250,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-09.md"
   },
-  "generated_at": "2026-08-09T16:30:01.077Z",
+  "generated_at": "2026-08-09T17:00:01.266Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-09T16:25:01.512Z quality queue written: none"
+      "line": "2026-08-09T16:55:01.386Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T16:25:01.511Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T16:55:01.386Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T16:25:01.507Z QUALITY poll: 6 open"
+      "line": "2026-08-09T16:55:01.382Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T16:20:01.666Z quality queue written: none"
+      "line": "2026-08-09T16:50:01.501Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T16:20:01.666Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-09T16:50:01.501Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-09T16:20:01.663Z QUALITY poll: 6 open"
+      "line": "2026-08-09T16:50:01.498Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T16:25:01.508Z poll: 6 open tasks"
+      "line": "2026-08-09T16:55:01.382Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,23 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-09T16:20:01.655Z poll: 6 open tasks"
+      "line": "2026-08-09T16:50:01.722Z poll: 6 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-09T16:53:12.619Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-09T16:38:12.545Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -247,22 +263,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-09T16:23:11.857Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-09T16:08:11.792Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Sun Aug  9 18:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
