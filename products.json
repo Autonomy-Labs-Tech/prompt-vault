@@ -545,6 +545,30 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/agent-memory-api.html",
    "identifier": "agent-memory-api"
+  },
+  {
+   "@type": "Product",
+   "position": 31,
+   "name": "Custom Browser Game Prototype",
+   "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
+   "category": "Services",
+   "tagline": "Your game idea, playable in one HTML file",
+   "features": [
+    "Single-file Three.js game, opens straight off disk",
+    "Your genre + core mechanic (FPS, top-down, platformer, arcade, mission)",
+    "Low-poly art + synthesized audio, no external assets",
+    "HUD, win/lose states, restart, one revision round",
+    "MIT-licensed original code + build note"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 99,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/custom-game-prototype.html",
+   "identifier": "custom-game-prototype"
   }
  ]
 }

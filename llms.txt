@@ -88,3 +88,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **LLM completion (500 tokens)** — $0.05 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm
 - **LLM completion (4096 tokens)** — $0.20 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm-plus
 - Payment: USDC on Base → 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D, then POST {order, signature, txHash, prompt}. On-chain verified.
+- **Custom Browser Game Prototype** — €99.00 — https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10 — landing: https://business2-lasse-tfa.vercel.app/custom-game-prototype.html

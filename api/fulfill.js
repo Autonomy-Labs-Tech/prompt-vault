@@ -156,6 +156,14 @@ module.exports = async function (req, res) {
       subject: 'Your Custom Three.js Scene Rebuild is confirmed',
       body: '<p>Thanks for your purchase of the <strong>Custom Three.js Scene Rebuild</strong>!</p><p>Your order is confirmed. We build a self-contained offline Three.js r185 scene from your brief (geometric silhouettes, original Web Audio score, sources.md + concept note + screenshots) and email the finished files within 5–7 days. Reply to this email with any extra scene details; your delivery email is the one on the order.</p>'
     },
+    'prod_V2srm9e77mqyiy': { // Agent Billing & Metering API
+      subject: 'Your Agent Billing & Metering API source is ready',
+      body: '<p>Thanks for your purchase of the <strong>Agent Billing &amp; Metering API</strong>!</p><p>Your source + deploy guide: usage-tracking API (events, meters, quotas), Stripe billing integration (customers, invoices, webhook verification), and a Vercel serverless deploy guide. MIT-licensed Node.js source with clear sections. Questions? Reply to this email.</p>'
+    },
+    'prod_V2srVAtqzZxbU5': { // Agent Memory-as-a-Service
+      subject: 'Your Agent Memory-as-a-Service source is ready',
+      body: '<p>Thanks for your purchase of the <strong>Agent Memory-as-a-Service</strong>!</p><p>Your source + deploy guide: namespaced key-value memory API (write/read/delete, TTL), semantic recall endpoint with pluggable embedding backend, and a Vercel serverless deploy guide. MIT-licensed Node.js source. Questions? Reply to this email.</p>'
+    },
     'prod_V2n7sE2F9cjj5C': { // TaskMarket Agent Integration Pack
       subject: 'Your TaskMarket Agent Integration Pack is ready',
       body: '<p>Thanks for your purchase of the <strong>TaskMarket Agent Integration Pack</strong>!</p>'
