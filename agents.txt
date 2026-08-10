@@ -86,3 +86,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - How to pay: send USDC on Base to 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D, then POST {order, signature, txHash, prompt, product} — on-chain verified before completion is served.
 - Model: Ornith-1.0-35B (local, private, no data leaves the host)
 - Custom Browser Game Prototype: https://business2-lasse-tfa.vercel.app/custom-game-prototype.html
+- Wallet Watch API: https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x... (x402, 1 USDC)

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Wallet Watch — Base wallet monitor for AI agents</title>
+  <meta name="description" content="Pay-per-call API that monitors any Base wallet: balances, token holdings, and recent transactions. Built for autonomous agents." />
+  <link rel="canonical" href="https://www.autonomylabsweb.tech/wallet-watch.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Agent Wallet Watch",
+    "description": "Pay-per-call Base wallet monitor for autonomous agents",
+    "offers": [
+      { "@type": "Offer", "price": "1.00", "priceCurrency": "USDC", "name": "Wallet Watch snapshot" },
+      { "@type": "Offer", "price": "5.00", "priceCurrency": "USDC", "name": "Wallet Watch Pro snapshot" }
+    ],
+    "seller": { "@type": "Organization", "name": "Autonomy Labs" }
+  }
+  </script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 2rem; line-height: 1.6; color: #222; }
+    h1 { margin-top: 0; }
+    code, pre { background: #f4f4f4; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.95em; }
+    pre { padding: 1rem; overflow-x: auto; }
+    .price { display: inline-block; background: #111; color: #fff; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.85rem; margin-right: 0.5rem; }
+    .cta { margin: 1.5rem 0; }
+    .cta a { display: inline-block; background: #2563eb; color: #fff; padding: 0.7rem 1.2rem; border-radius: 6px; text-decoration: none; font-weight: 600; }
+    .cta a:hover { background: #1d4ed8; }
+    footer { margin-top: 3rem; font-size: 0.85rem; color: #666; }
+  </style>
+</head>
+<body>
+  <h1>Agent Wallet Watch</h1>
+  <p>A pay-per-call API that gives any autonomous agent a real-time snapshot of any <strong>Base</strong> wallet:</p>
+  <ul>
+    <li>ETH balance + transaction history</li>
+    <li>ERC-20 token balances (USDC and more)</li>
+    <li>Transaction direction labels (in / out / self)</li>
+    <li>No signup, no API key, no KYC — x402 micro-payment to agent wallet</li>
+  </ul>
+
+  <h2>Products</h2>
+  <p><span class="price">1 USDC</span> <strong>Wallet Watch snapshot</strong> — last 10 transactions + token balances for one address.</p>
+  <p><span class="price">5 USDC</span> <strong>Wallet Watch Pro</strong> — last 100 transactions + full token list + deeper history.</p>
+
+  <h2>How to buy</h2>
+  <ol>
+    <li>GET the invoice: <code>GET https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x...</code></li>
+    <li>Send USDC on Base to <code>0x7e0190af0951485dFd08bE2FE19Fa638e94F426D</code></li>
+    <li>POST with your signed EIP-712 order: <code>POST /api/wallet_watch?product=watch&address=0x... { order, signature }</code></li>
+  </ol>
+
+  <h2>MCP tool</h2>
+  <p>Agents can discover this via our Streamable-HTTP MCP server:</p>
+  <pre>POST https://www.autonomylabsweb.tech/api/mcp
+{ "jsonrpc": "2.0", "id": 1, "method": "tools/list" }</pre>
+  <p>Tools: <code>wallet_watch_snapshot</code> and <code>wallet_watch_pro</code>.</p>
+
+  <div class="cta">
+    <a href="/api/wallet_watch?product=watch&address=0xd580ed58342aa489BDD6DCA11e57E2FB9a00438E">Try invoice for sample address</a>
+  </div>
+
+  <h2>Use cases</h2>
+  <ul>
+    <li>Revenue agents watching their own payout wallet</li>
+    <li>Treasury bots tracking hot wallets</li>
+    <li>Bounty hunters waiting for a funder to deposit USDC</li>
+    <li>Any agent that needs an on-chain trigger without running its own indexer</li>
+  </ul>
+
+  <footer>
+    Built by Autonomy Labs · Data from Blockscout keyless API · Payouts on Base USDC ·
+    <a href="/llms.txt">/llms.txt</a> · <a href="/agents.txt">/agents.txt</a>
+  </footer>
+</body>
+</html>

@@ -21,6 +21,8 @@ const PRODUCTS = {
   'audit-5': { name: 'Audit 5 sites', priceUsdc: '7.00' },
   data:     { name: 'Storefront catalog + metrics payload', priceUsdc: '1.00' },
   llms:     { name: 'llms.txt generator (1 site)', priceUsdc: '3.00' },
+  watch:    { name: 'Wallet Watch snapshot (1 Base address)', priceUsdc: '1.00' },
+  'watch-pro': { name: 'Wallet Watch Pro snapshot (1 Base address)', priceUsdc: '5.00' },
 };
 
 function runProbe(target) {

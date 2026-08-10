@@ -39,6 +39,24 @@ const TOOLS = [
       required: ['url'],
     },
   },
+  {
+    name: 'wallet_watch_snapshot',
+    description: 'Pay-per-call (x402): wallet balance + last 10 transaction snapshot for one Base address. Price 1.00 USDC on Base.',
+    inputSchema: {
+      type: 'object',
+      properties: { address: { type: 'string', description: 'Base address to watch, e.g. 0x...' } },
+      required: ['address'],
+    },
+  },
+  {
+    name: 'wallet_watch_pro',
+    description: 'Pay-per-call (x402): wallet balance + last 100 transactions + full token list for one Base address. Price 5.00 USDC on Base.',
+    inputSchema: {
+      type: 'object',
+      properties: { address: { type: 'string', description: 'Base address to watch, e.g. 0x...' } },
+      required: ['address'],
+    },
+  },
 ];
 
 function jsonRpc(id, method, params) {
@@ -78,7 +96,7 @@ module.exports = async function (req, res) {
       const tool = TOOLS.find((t) => t.name === p.name);
       if (!tool) return sendJson(res, { jsonrpc: '2.0', id, error: { code: -32602, message: 'unknown tool: ' + p.name } });
       const args = p.arguments || {};
-      const product = tool.name === 'agent_site_audit_5' ? 'audit-5' : tool.name === 'storefront_catalog' ? 'data' : tool.name === 'generate_llms_txt' ? 'llms' : 'audit';
+      const product = tool.name === 'agent_site_audit_5' ? 'audit-5' : tool.name === 'storefront_catalog' ? 'data' : tool.name === 'generate_llms_txt' ? 'llms' : tool.name === 'wallet_watch_snapshot' ? 'watch' : tool.name === 'wallet_watch_pro' ? 'watch-pro' : 'audit';
       return sendJson(res, { jsonrpc: '2.0', id, result: {
         content: [{
           type: 'text',
