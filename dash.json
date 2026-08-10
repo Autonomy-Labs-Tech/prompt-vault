@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 319,
-  "last_run": "2026-08-10T07:29:40Z",
+  "cycles": 352,
+  "last_run": "2026-08-10T10:00:00.934964",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 319,
+    "cycles": 351,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T07:30:01.121Z",
+  "generated_at": "2026-08-10T08:00:01.000Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:02.571Z quality queue written: none"
+      "line": "2026-08-10T07:56:24.507Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:02.570Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T07:56:24.506Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:02.564Z QUALITY poll: 6 open"
+      "line": "2026-08-10T07:56:24.506Z QUALITY poll: 0 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:02.187Z quality queue written: none"
+      "line": "2026-08-10T07:56:24.506Z list err Unexpected end of JSON input"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:02.186Z ranked fresh tasks (quality-first):"
+      "line": "{\"ok\":false,\"error\":\"terminated\"}"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:02.183Z QUALITY poll: 6 open"
+      "line": "2026-08-10T07:56:24.504Z ERR task list --status open --limit 100: Command failed: taskmarket task list --status open --limit 100"
     },
     {
       "tag": "taskmarket",
@@ -222,23 +222,27 @@
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 6 open tasks"
+      "line": "poll: 0 open tasks"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:25:02.564Z poll: 6 open tasks"
+      "line": "2026-08-10T07:56:21.469Z poll: 0 open tasks"
     },
     {
       "tag": "taskmarket",
-      "line": "done"
+      "line": "list parse err Unexpected end of JSON input"
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 6 open tasks"
+      "line": "2026-08-10T07:56:21.469Z list parse err Unexpected end of JSON input"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:20:02.183Z poll: 6 open tasks"
+      "line": "{\"ok\":false,\"error\":\"fetch failed\"}"
+    },
+    {
+      "tag": "distribute",
+      "line": "--- run Mon Aug 10 10:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -246,7 +250,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-10T07:23:34.520Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -254,21 +258,17 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-10T07:08:32.298Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-10T07:53:34.665Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-10T06:53:32.229Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
