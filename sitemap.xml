@@ -51,4 +51,5 @@
   <url><loc>https://business2-lasse-tfa.vercel.app/api-integration-kit.html</loc></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/agent-billing-api.html</loc></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/agent-memory-api.html</loc></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/custom-game-prototype.html</loc><priority>0.9</priority></url>
 </urlset>
