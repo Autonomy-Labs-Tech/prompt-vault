@@ -146,4 +146,4 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - **TaskMarket Agent Integration Pack** — €19.00 one-time. MCP server (5 tools) + Claude Code SKILL.md skill wrapping the official taskmarket CLI; open-source MIT, demo-verified.
    - Buy: https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W
    - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html
-- **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html
+- **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html

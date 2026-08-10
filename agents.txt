@@ -77,4 +77,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - Three.js Scene Build Toolkit: https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html
 - Scene Rebuild Portfolio: https://business2-lasse-tfa.vercel.app/scene-portfolio.html
 - TaskMarket Agent Integration Pack: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html
-- AI Agent API Integration Kit — €14.90 — https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R
+- AI Agent API Integration Kit — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X

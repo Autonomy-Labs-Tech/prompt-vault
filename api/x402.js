@@ -175,7 +175,7 @@ module.exports = async function (req, res) {
 
   let data;
   if (product === 'audit' || product === 'audit-5') data = await deliverAudit(req.body || {});
-  else if (product === 'llms') data = await delivLlms(req.body || {});
+  else if (product === 'llms') data = await delivillms(req.body || {});
   else if (product === 'data') data = deliverData();
   if (!data || !data.ok) return res.status(422).json({ error: data && data.error ? data.error : 'delivery failed' });
 

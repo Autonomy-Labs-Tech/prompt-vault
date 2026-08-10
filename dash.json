@@ -186,11 +186,11 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 256,
+    "cycles": 279,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T06:29:00.751Z",
+  "generated_at": "2026-08-10T06:30:00.912Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -268,7 +268,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
