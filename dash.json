@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 879,
-  "last_run": "2026-08-11T04:05:50Z",
+  "cycles": 3006,
+  "last_run": "2026-08-10T23:00:00.995421",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 879,
+    "cycles": 3005,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T20:30:00.716Z",
+  "generated_at": "2026-08-10T21:00:01.036Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-10T20:25:01.246Z quality queue written: none"
+      "line": "2026-08-10T20:55:01.578Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T20:25:01.246Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T20:55:01.577Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T20:25:01.243Z QUALITY poll: 7 open"
+      "line": "2026-08-10T20:55:01.574Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T20:20:01.790Z quality queue written: none"
+      "line": "2026-08-10T20:50:01.180Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T20:20:01.789Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T20:50:01.179Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T20:20:01.785Z QUALITY poll: 7 open"
+      "line": "2026-08-10T20:50:01.176Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T20:25:01.243Z poll: 7 open tasks"
+      "line": "2026-08-10T20:55:01.573Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,23 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T20:20:01.763Z poll: 7 open tasks"
+      "line": "2026-08-10T20:50:01.178Z poll: 7 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T20:56:40.707Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T20:41:40.642Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -247,22 +263,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-10T20:26:40.585Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-10T20:11:40.522Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Mon Aug 10 22:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
