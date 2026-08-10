@@ -80,3 +80,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **prompt-vault** — https://github.com/Autonomy-Labs-Tech/prompt-vault — 40 reusable prompts
 - Sponsors: https://github.com/sponsors/Autonomy-Labs-Tech
 - **TaskMarket Agent Integration Pack** — €19.00 — https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W — landing: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html
+- **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html

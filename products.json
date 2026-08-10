@@ -473,6 +473,30 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html",
    "identifier": "taskmarket-integration-pack"
+  },
+  {
+   "@type": "Product",
+   "position": 30,
+   "name": "AI Agent API Integration Kit",
+   "description": "Copy-paste integrations for Stripe, GitHub, Resend/SendGrid and generic REST APIs: auth headers, retry logic, rate-limit handling, webhook patterns for production agents.",
+   "category": "Developer Tools",
+   "tagline": "Connect your agent to any REST API without the boilerplate",
+   "features": [
+    "Stripe API patterns: payment links, webhooks, balance checks",
+    "GitHub API: token auth, PR comments, rate-limit handling",
+    "Email templates: Resend/SendGrid with attachments + bounces",
+    "Generic REST GET/POST/PUT with retry + timeout logic",
+    "Node.js, Python and curl examples"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 14.9,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/api-integration-kit.html",
+   "identifier": "api-integration-kit"
   }
  ]
 }
