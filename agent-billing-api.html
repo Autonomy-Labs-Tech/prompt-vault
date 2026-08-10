@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Billing &amp; Metering API — Autonomy Labs</title>
+<meta name="description" content="Drop-in monetization layer for AI agents: usage metering, spend limits, x402 payment gates, auto-invoices. Zero-dependency, API-key auth.">
+<meta name="robots" content="index, follow">
+<style>
+  body { font-family: Georgia, serif; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; line-height: 1.6; color: #2b241b; background: #f7f4ef; }
+  h1 { color: #b3541e; } h2 { margin-top: 2rem; }
+  code, pre { background: #efece5; padding: .15em .4em; border-radius: 4px; font-size: .92em; }
+  pre { padding: 1rem; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  td, th { border: 1px solid #e3ddd2; padding: .5rem .7rem; text-align: left; font-size: .95em; }
+  .ok { color: #3f7a4f; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Agent Billing &amp; Metering API</h1>
+<p>Drop-in monetization layer for any AI agent: track usage per customer, gate endpoints behind x402 micropayments, set spending limits, auto-generate invoices. Removes all human involvement from the billing loop.</p>
+
+<h2>Endpoints</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Purpose</th></tr>
+<tr><td>POST</td><td><code>/agent/register</code></td><td>Create agent + API key (tiers: free/starter/pro/enterprise)</td></tr>
+<tr><td>POST</td><td><code>/agent/limit</code></td><td>Set max spend per customer per period; auto-block when exceeded</td></tr>
+<tr><td>POST</td><td><code>/meter/event</code></td><td>Log usage event (agent_id, customer_id, event_type, quantity)</td></tr>
+<tr><td>GET</td><td><code>/meter/usage</code></td><td>Query usage by agent/customer/time range, aggregated by type</td></tr>
+<tr><td>POST</td><td><code>/gate</code></td><td>x402 payment gate: 402 + payment requirements if unpaid, 200 if payment confirmed</td></tr>
+<tr><td>POST</td><td><code>/invoice/generate</code></td><td>Generate usage-based invoice for a customer (pro+)</td></tr>
+</table>
+
+<h2>Pricing tiers</h2>
+<table>
+<tr><th>Tier</th><th>Agents</th><th>Events/mo</th><th>Invoices</th><th>USD/mo</th></tr>
+<tr><td>Free</td><td>1</td><td>1,000</td><td>no</td><td>$0</td></tr>
+<tr><td>Starter</td><td>5</td><td>50,000</td><td>no</td><td>$29</td></tr>
+<tr><td>Pro</td><td>unlimited</td><td>1M</td><td>yes</td><td>$99</td></tr>
+<tr><td>Enterprise</td><td>unlimited</td><td>unlimited</td><td>yes</td><td>$399</td></tr>
+</table>
+
+<h2>Example</h2>
+<pre># register agent
+curl -X POST https://api.autonomy.tech/agent/register \
+  -H 'Content-Type: application/json' -d '{"name":"my-agent","tier":"pro"}'
+# {"ok":true,"agent_id":"ag-...","api_key":"mk_..."}
+
+# log usage
+curl -X POST https://api.autonomy.tech/meter/event \
+  -H 'X-API-Key: mk_...' -H 'Content-Type: application/json' \
+  -d '{"customer_id":"cust-1","event_type":"inference","quantity":3}'
+
+# gate an endpoint behind x402 payment
+curl -X POST https://api.autonomy.tech/gate \
+  -H 'X-API-Key: mk_...' -H 'Content-Type: application/json' \
+  -d '{"customer_id":"cust-1","amount":0.05,"endpoint":"/api/llm"}'
+# 402 + payment_details (USDC on Base) or 200 with payment proof
+
+# usage invoice
+curl -X POST https://api.autonomy.tech/invoice/generate \
+  -H 'X-API-Key: mk_...' -H 'Content-Type: application/json' \
+  -d '{"customer_id":"cust-1","period":"2026-08"}'</pre>
+
+<h2>Verification</h2>
+<p class="ok">All endpoints functional and documented. Spend limits auto-block over-limit usage. x402 gate returns 402 with Base-USDC payment requirements. Invoice generation produces correct usage-based amounts. API-key auth enforced (401 on invalid key).</p>
+
+<p><em>Autonomy Labs — built and verified 2026-08-10.</em></p>
+</body>
+</html>

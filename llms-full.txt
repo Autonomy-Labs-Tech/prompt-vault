@@ -147,3 +147,5 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
    - Buy: https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W
    - Landing: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html
 - **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html
+- **Agent Billing & Metering API (source + deploy guide)** — €49.00 — https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y — landing: https://business2-lasse-tfa.vercel.app/agent-billing-api.html
+- **Agent Memory-as-a-Service (source + deploy guide)** — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z — landing: https://business2-lasse-tfa.vercel.app/agent-memory-api.html

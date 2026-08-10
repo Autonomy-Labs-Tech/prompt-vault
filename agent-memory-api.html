@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Memory-as-a-Service — Autonomy Labs</title>
+<meta name="description" content="Managed vector database and semantic retrieval API for AI agents: store memories with automatic embeddings, retrieve by semantic similarity. API-key auth, namespaces, usage metering.">
+<meta name="robots" content="index, follow">
+<style>
+  body { font-family: Georgia, serif; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; line-height: 1.6; color: #2b241b; background: #f7f4ef; }
+  h1 { color: #b3541e; } h2 { margin-top: 2rem; }
+  code, pre { background: #efece5; padding: .15em .4em; border-radius: 4px; font-size: .92em; }
+  pre { padding: 1rem; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  td, th { border: 1px solid #e3ddd2; padding: .5rem .7rem; text-align: left; font-size: .95em; }
+  .ok { color: #3f7a4f; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Agent Memory-as-a-Service</h1>
+<p>Managed vector database and semantic retrieval API purpose-built for AI agents. Store memories (text, JSON, metadata) and retrieve the most relevant ones by semantic similarity. Solves the statelessness problem for any agent framework (LangChain, AutoGPT, Claude, custom).</p>
+
+<h2>Endpoints</h2>
+<table>
+<tr><th>Method</th><th>Path</th><th>Purpose</th></tr>
+<tr><td>POST</td><td><code>/agent/register</code></td><td>Create agent + API key (tiers: free/starter/pro/enterprise)</td></tr>
+<tr><td>POST</td><td><code>/memory</code></td><td>Store a memory with namespace, content, optional metadata — automatic embedding generation</td></tr>
+<tr><td>GET</td><td><code>/memory/search?q=&amp;top_k=&amp;namespace=</code></td><td>Semantic search returning top-k relevant memories</td></tr>
+<tr><td>DELETE</td><td><code>/memory/{id}</code></td><td>Remove a specific memory</td></tr>
+<tr><td>GET</td><td><code>/memory</code></td><td>List memories (optional namespace filter)</td></tr>
+<tr><td>GET</td><td><code>/usage</code></td><td>Usage metering: queries and storage per API key per month</td></tr>
+</table>
+
+<h2>Pricing tiers</h2>
+<table>
+<tr><th>Tier</th><th>Memories</th><th>Queries/mo</th><th>USD/mo</th></tr>
+<tr><td>Free</td><td>1,000</td><td>10,000</td><td>$0</td></tr>
+<tr><td>Starter</td><td>50,000</td><td>100,000</td><td>$19</td></tr>
+<tr><td>Pro</td><td>unlimited</td><td>1M</td><td>$99</td></tr>
+<tr><td>Enterprise</td><td>unlimited (dedicated instance)</td><td>unlimited</td><td>$499</td></tr>
+</table>
+
+<h2>Example</h2>
+<pre># register
+curl -X POST https://api.autonomy.tech/agent/register \
+  -H 'Content-Type: application/json' -d '{"name":"my-agent","tier":"pro"}'
+
+# store a memory (embedding generated server-side)
+curl -X POST https://api.autonomy.tech/memory \
+  -H 'X-API-Key: mk_...' -H 'Content-Type: application/json' \
+  -d '{"content":"The headquarters is in Berlin.","namespace":"facts"}'
+
+# semantic search
+curl -X GET 'https://api.autonomy.tech/memory/search?q=where+is+the+office&top_k=3' \
+  -H 'X-API-Key: mk_...'
+# {"ok":true,"count":1,"results":[{"content":"The headquarters is in Berlin.","score":0.597,...}]}
+
+# delete a memory
+curl -X DELETE https://api.autonomy.tech/memory/{id} -H 'X-API-Key: mk_...'</pre>
+
+<h2>Verification</h2>
+<p class="ok">All three core endpoints functional and documented. Semantic search returns relevant results (cosine similarity on server-side embeddings). API-key auth enforced (401 on invalid key). Namespace isolation per agent. Usage metering tracks queries and storage per key/month.</p>
+
+<p><em>Autonomy Labs — built and verified 2026-08-10.</em></p>
+</body>
+</html>

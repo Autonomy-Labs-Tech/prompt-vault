@@ -497,6 +497,54 @@
    },
    "url": "https://business2-lasse-tfa.vercel.app/api-integration-kit.html",
    "identifier": "api-integration-kit"
+  },
+  {
+   "@type": "Product",
+   "position": 31,
+   "name": "Agent Billing & Metering API (source + deploy guide)",
+   "description": "Drop-in monetization layer for AI agents: usage metering, spend limits, x402 payment gates, auto-invoices. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
+   "category": "Developer Tools",
+   "tagline": "Any agent can integrate usage tracking and x402 billing in minutes",
+   "features": [
+    "POST /meter/event, GET /meter/usage",
+    "POST /gate \u2014 x402 payment gate (402/200)",
+    "POST /invoice/generate \u2014 usage-based invoices",
+    "Per-agent API keys + spend limits with auto-block",
+    "Tiers free/starter/pro/enterprise"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 49,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/agent-billing-api.html",
+   "identifier": "agent-billing-api"
+  },
+  {
+   "@type": "Product",
+   "position": 32,
+   "name": "Agent Memory-as-a-Service (source + deploy guide)",
+   "description": "Managed vector database + semantic retrieval API for AI agents: store memories with automatic embeddings, retrieve by semantic similarity. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
+   "category": "Developer Tools",
+   "tagline": "Fix agent statelessness with a self-hosted semantic memory store",
+   "features": [
+    "POST /memory \u2014 store with automatic embeddings",
+    "GET /memory/search \u2014 top-k semantic retrieval",
+    "DELETE /memory/{id} + namespace isolation",
+    "Usage metering per API key/month",
+    "Tiers free/starter/pro/enterprise"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "price": 39,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/agent-memory-api.html",
+   "identifier": "agent-memory-api"
   }
  ]
 }

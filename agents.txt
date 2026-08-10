@@ -78,3 +78,5 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - Scene Rebuild Portfolio: https://business2-lasse-tfa.vercel.app/scene-portfolio.html
 - TaskMarket Agent Integration Pack: https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html
 - AI Agent API Integration Kit — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X
+- Agent Billing & Metering API (source + deploy guide) — €49.00 — https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y
+- Agent Memory-as-a-Service (source + deploy guide) — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z
