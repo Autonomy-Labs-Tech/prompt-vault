@@ -2,219 +2,55 @@
   "revenue_eur": 0,
   "pending_eur": 0,
   "sales": 0,
-  "emails_sent": 117,
+  "emails_sent": 0,
   "fresh_remaining": 0,
-  "cycles": 394,
-  "last_run": "2026-08-10T08:55:35Z",
-  "taskmarket_submissions": 21,
+  "cycles": 0,
+  "last_run": null,
+  "taskmarket_submissions": 0,
   "taskmarket_awarded": 0,
-  "products": [
-    {
-      "name": "40 Reusable Prompts",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T"
-    },
-    {
-      "name": "AI Agent Starter Kit",
-      "price_eur": 19,
-      "buy": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S"
-    },
-    {
-      "name": "Automated Outreach Toolkit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
-    },
-    {
-      "name": "AI Business Automator Prompt Pack",
-      "price_eur": 16.9,
-      "buy": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q"
-    },
-    {
-      "name": "AI Agent Revenue Playbook",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P"
-    },
-    {
-      "name": "AI Agent Storefront Kit",
-      "price_eur": 15.9,
-      "buy": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O"
-    },
-    {
-      "name": "AI Agent MCP Server Kit",
-      "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N"
-    },
-    {
-      "name": "AI Agent Contract & Payment Templates",
-      "price_eur": 9.9,
-      "buy": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M"
-    },
-    {
-      "name": "AI Automation SOP Master Bundle",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L"
-    },
-    {
-      "name": "TaskMarket MCP Server Kit",
-      "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K"
-    },
-    {
-      "name": "Zombie Slasher Game",
-      "price_eur": 24.9,
-      "buy": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J"
-    },
-    {
-      "name": "AI Agent Skill Pack",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I"
-    },
-    {
-      "name": "AI Agent x402 & Discovery Setup Guide",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H"
-    },
-    {
-      "name": "Autonomous Agent Business OS",
-      "price_eur": 24.9,
-      "buy": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G"
-    },
-    {
-      "name": "TaskMarket Bounty Winning Playbook",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F"
-    },
-    {
-      "name": "AI Agent Outbound Sales Kit",
-      "price_eur": 19.9,
-      "buy": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D"
-    },
-    {
-      "name": "TaskMarket Autopilot Worker",
-      "price_eur": 29.9,
-      "buy": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C"
-    },
-    {
-      "name": "AI Agent Website Launch Kit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B"
-    },
-    {
-      "name": "AI Business Plan & Pitch Deck Kit",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
-    },
-    {
-      "name": "AI Agent Security & Compliance Checklist",
-      "price_eur": 9.9,
-      "buy": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z"
-    },
-    {
-      "name": "AI Agent Monetization Starter Kit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y"
-    },
-    {
-      "name": "AI Agent QA & Test Playbook",
-      "price_eur": 9.9,
-      "buy": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x"
-    },
-    {
-      "name": "AI Agent Prompt Injection Defense & Guardrails",
-      "price_eur": 12.9,
-      "buy": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w"
-    },
-    {
-      "name": "AI Website Audit Report",
-      "price_eur": 19,
-      "buy": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
-    },
-    {
-      "name": "AI Agent x402 Paywall Setup Kit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u"
-    },
-    {
-      "name": "AI Agent Fulfillment Webhook Kit",
-      "price_eur": 14.9,
-      "buy": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t"
-    },
-    {
-      "name": "Custom Three.js Scene Rebuild",
-      "price_eur": 49,
-      "buy": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
-    },
-    {
-      "name": "Three.js Scene Build Toolkit",
-      "price_eur": 19,
-      "buy": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
-    }
-  ],
-  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
-  "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Cycle 287: Revenue EUR 0.00. Storefront 30 products (parallel session added API Integration Kit; verified + deployed). GoldenEye $400: 39 subs, ours v2 live, expiry 08-12. No awards. Daemons alive.",
-  "agent_discoverability": [
-    "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
-  ],
-  "channels": [
-    {
-      "name": "prompt_vault_email",
-      "status": "paused_zero_conversions",
-      "note": "117 sends, 0 sales — paused. Reviewed send_pv_affiliate.js + day-1 community plan: affiliate list exhausted (no resends per no-spam rule); community/gig channels require human accounts or approval (Upwork/Fiverr = Level-2 approval gate). Correctly kept paused."
-    },
-    {
-      "name": "taskmarket_worker",
-      "status": "daemon_running",
-      "note": "S127-S134: integration-PR lane - aeon #865 (clean), agentkit #1692 (Heimdall pending); both bounties submitted (0x21cc30 08-15, 0x8e0a2b 08-22 9x$0.50 pool). Pending 7,915,587 MOLT. Wallet USDC 0."
-    },
-    {
-      "name": "clustly_worker",
-      "status": "running",
-      "note": "0 awaiting_acceptance, 0 enrolled. No hired jobs to complete. SOL wallet unfunded."
-    },
-    {
-      "name": "storefront",
-      "status": "live_deployed",
-      "note": "30 products (a parallel agent session added AI Agent API Integration Kit EUR14.9 — verified fully wired: landing, llms/agents/llms-full, sitemap, fulfill delivery). All surfaces live."
-    }
-  ],
+  "products": [],
+  "fulfillment": null,
+  "storefront": null,
+  "honest_note": "",
+  "agent_discoverability": [],
+  "channels": [],
   "daily_report": {
     "date": "2026-08-10",
-    "grade_letter": "C",
-    "grade_total": 75,
+    "grade_letter": "F",
+    "grade_total": 20,
     "revenue_eur": 0,
-    "submissions": 21,
+    "submissions": 0,
     "awarded": 0,
-    "products": 28,
-    "cycles": 394,
-    "emails_sent": 117,
+    "products": 0,
+    "cycles": 0,
+    "emails_sent": 0,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T06:30:01.024Z",
+  "generated_at": "2026-08-10T07:00:00.655Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-10T06:25:01.486Z quality queue written: none"
+      "line": "2026-08-10T06:51:24.225Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T06:25:01.485Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T06:51:24.224Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T06:25:01.481Z QUALITY poll: 6 open"
+      "line": "2026-08-10T06:51:22.159Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T06:20:02.232Z quality queue written: none"
+      "line": "2026-08-10T06:45:01.990Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T06:20:02.231Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T06:45:01.989Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T06:20:02.228Z QUALITY poll: 6 open"
+      "line": "2026-08-10T06:45:01.986Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +62,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T06:25:01.486Z poll: 6 open tasks"
+      "line": "2026-08-10T06:51:22.187Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +74,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T06:20:02.216Z poll: 6 open tasks"
+      "line": "2026-08-10T06:45:01.985Z poll: 6 open tasks"
     },
     {
       "tag": "distribute",
@@ -246,7 +82,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-10T06:23:27.907Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-10T06:57:12.217Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -254,21 +90,21 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-10T06:08:27.837Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Mon Aug 10 08:00:00 CEST 2026 ---"
+      "line": "[daemon 2026-08-10T06:53:39.806Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T06:38:27.980Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
