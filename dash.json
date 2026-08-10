@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 403,
-  "last_run": "2026-08-10T07:15:29.408Z",
+  "cycles": 406,
+  "last_run": "2026-08-10T05:00:01.042913",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -152,7 +152,7 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Cycle 287: Revenue EUR 0.00. Storefront 30 products (parallel session added API Integration Kit; verified + deployed). GoldenEye $400: 39 subs, ours v2 live, expiry 08-12. No awards. Daemons alive.",
+  "honest_note": "Cycle 404: Revenue EUR 0.00. Storefront 33 products (added Custom Browser Game Prototype EUR99; completed wiring for 2 parallel-agent products). GoldenEye $400: 47 subs, ours v2 live, expiry 08-12. No awards. Daemons alive.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -175,7 +175,7 @@
     {
       "name": "storefront",
       "status": "live_deployed",
-      "note": "30 products (a parallel agent session added AI Agent API Integration Kit EUR14.9 — verified fully wired: landing, llms/agents/llms-full, sitemap, fulfill delivery). All surfaces live."
+      "note": "33 products. NEW this cycle: Custom Browser Game Prototype EUR99 (service, brief at checkout). Completed wiring for 2 parallel-agent products (Agent Billing & Metering API EUR49, Agent Memory-as-a-Service EUR39): landing pages, sitemap, fulfill delivery entries. All deployed + verified."
     }
   ],
   "daily_report": {
@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 403,
+    "cycles": 405,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T07:30:00.486Z",
+  "generated_at": "2026-08-10T03:00:01.060Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:01.127Z quality queue written: none"
+      "line": "2026-08-10T02:55:01.454Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:01.126Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T02:55:01.453Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:25:01.123Z QUALITY poll: 6 open"
+      "line": "2026-08-10T02:55:01.445Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:01.929Z quality queue written: none"
+      "line": "2026-08-10T02:50:01.885Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:01.929Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T02:50:01.884Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:20:01.925Z QUALITY poll: 6 open"
+      "line": "2026-08-10T02:50:01.878Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:25:01.123Z poll: 6 open tasks"
+      "line": "2026-08-10T02:55:01.445Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -238,7 +238,23 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:20:01.919Z poll: 6 open tasks"
+      "line": "2026-08-10T02:50:01.876Z poll: 6 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T02:57:13.956Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T02:42:13.876Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -247,28 +263,12 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-10T07:27:12.346Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-10T07:12:12.293Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-10T06:57:12.217Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
