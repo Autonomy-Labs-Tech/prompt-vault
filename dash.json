@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 352,
-  "last_run": "2026-08-10T10:00:00.934964",
+  "cycles": 377,
+  "last_run": "2026-08-10T08:17:26Z",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 351,
+    "cycles": 377,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-10.md"
   },
-  "generated_at": "2026-08-10T08:00:01.000Z",
+  "generated_at": "2026-08-10T08:30:01.457Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-10T07:56:24.507Z quality queue written: none"
+      "line": "2026-08-10T08:25:01.618Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:56:24.506Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-10T08:25:01.617Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:56:24.506Z QUALITY poll: 0 open"
+      "line": "2026-08-10T08:25:01.615Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:56:24.506Z list err Unexpected end of JSON input"
+      "line": "2026-08-10T08:20:01.385Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "{\"ok\":false,\"error\":\"terminated\"}"
+      "line": "2026-08-10T08:20:01.384Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-10T07:56:24.504Z ERR task list --status open --limit 100: Command failed: taskmarket task list --status open --limit 100"
+      "line": "2026-08-10T08:20:01.381Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -222,43 +222,43 @@
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 0 open tasks"
+      "line": "poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:56:21.469Z poll: 0 open tasks"
+      "line": "2026-08-10T08:25:01.615Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
-      "line": "list parse err Unexpected end of JSON input"
+      "line": "done"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-10T07:56:21.469Z list parse err Unexpected end of JSON input"
+      "line": "poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
-      "line": "{\"ok\":false,\"error\":\"fetch failed\"}"
+      "line": "2026-08-10T08:20:01.381Z poll: 6 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T08:23:34.728Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-10T08:08:34.732Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "--- run Mon Aug 10 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-10T07:53:34.665Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
