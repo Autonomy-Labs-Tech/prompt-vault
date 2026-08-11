@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3022,
+    "cycles": 3023,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-11.md"
   },
-  "generated_at": "2026-08-11T07:00:01.146Z",
+  "generated_at": "2026-08-11T07:30:01.082Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-11T06:55:02.317Z quality queue written: none"
+      "line": "2026-08-11T07:25:01.474Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:55:02.316Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T07:25:01.473Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:55:02.311Z QUALITY poll: 8 open"
+      "line": "2026-08-11T07:25:01.468Z QUALITY poll: 8 open"
     },
     {
       "tag": "quality",
-      "line": "  SUBMITTED audit report for 0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1: "
+      "line": "2026-08-11T07:20:01.781Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:50:05.557Z   SUBMITTED audit report for 0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1: "
+      "line": "2026-08-11T07:20:01.780Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "{\"ok\":false,\"error\":\"POST /api/tasks/0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1/submissions/from-keys failed (400): {\\\"message\\\":\\\"submissions.submit requires an X-Taskmarket-I"
+      "line": "2026-08-11T07:20:01.776Z QUALITY poll: 8 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T06:55:02.315Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-11T07:25:01.473Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -234,7 +234,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T06:55:02.315Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
+      "line": "2026-08-11T07:25:01.473Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
     },
     {
       "tag": "taskmarket",
@@ -246,29 +246,29 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-11T07:26:42.699Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T07:11:42.630Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-11T06:56:42.559Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T06:41:42.494Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T06:26:42.424Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
