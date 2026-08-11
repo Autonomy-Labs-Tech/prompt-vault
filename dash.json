@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3022,
-  "last_run": "2026-08-11T08:00:00.561192",
+  "cycles": 3023,
+  "last_run": "2026-08-11T09:00:01.106490",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -190,31 +190,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-11.md"
   },
-  "generated_at": "2026-08-11T06:30:01.167Z",
+  "generated_at": "2026-08-11T07:00:01.146Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-11T06:25:01.454Z quality queue written: none"
+      "line": "2026-08-11T06:55:02.317Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:25:01.453Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T06:55:02.316Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:25:01.449Z QUALITY poll: 7 open"
+      "line": "2026-08-11T06:55:02.311Z QUALITY poll: 8 open"
     },
     {
       "tag": "quality",
-      "line": "  SKIP: PROXYWAR benchmark requires Docker + softmax login — cannot fabricate benchmark results."
+      "line": "  SUBMITTED audit report for 0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1: "
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T06:20:01.564Z   SKIP: PROXYWAR benchmark requires Docker + softmax login — cannot fabricate benchmark results."
+      "line": "2026-08-11T06:50:05.557Z   SUBMITTED audit report for 0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1: "
     },
     {
       "tag": "quality",
-      "line": "EXECUTING 0xf41d2979b5765b bounty reward=100000000 subs=0"
+      "line": "{\"ok\":false,\"error\":\"POST /api/tasks/0xfb182f610d57a6c056a8cfd1c9b691a0869c1e0d67c041ac27ed9f42a9c732a1/submissions/from-keys failed (400): {\\\"message\\\":\\\"submissions.submit requires an X-Taskmarket-I"
     },
     {
       "tag": "taskmarket",
@@ -222,23 +222,39 @@
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xf41d2979b5765b bounty reward=100000000 subs=0 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T06:25:01.452Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=0 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-11T06:55:02.315Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 7 open tasks"
+      "line": "candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T06:25:01.449Z poll: 7 open tasks"
+      "line": "2026-08-11T06:55:02.315Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
     },
     {
       "tag": "taskmarket",
-      "line": "done"
+      "line": "poll: 8 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T06:56:42.559Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T06:41:42.494Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -247,22 +263,6 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-11T06:26:42.424Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T06:11:42.358Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Tue Aug 11 08:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
