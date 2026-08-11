@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3023,
+    "cycles": 3024,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-11.md"
   },
-  "generated_at": "2026-08-11T08:00:00.670Z",
+  "generated_at": "2026-08-11T08:30:00.253Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-11T07:55:02.129Z quality queue written: none"
+      "line": "2026-08-11T08:25:01.543Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T07:55:02.129Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T08:25:01.543Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T07:55:02.124Z QUALITY poll: 6 open"
+      "line": "2026-08-11T08:25:01.539Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T07:50:02.222Z quality queue written: none"
+      "line": "2026-08-11T08:20:01.634Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T07:50:02.221Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T08:20:01.633Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T07:50:02.218Z QUALITY poll: 6 open"
+      "line": "2026-08-11T08:20:01.631Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T07:55:02.128Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-11T08:25:01.542Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -234,7 +234,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T07:55:02.128Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
+      "line": "2026-08-11T08:25:01.542Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
     },
     {
       "tag": "taskmarket",
@@ -242,23 +242,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T08:26:42.967Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T08:11:42.899Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Tue Aug 11 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T07:56:42.829Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
