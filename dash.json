@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3024,
-  "last_run": "2026-08-11T10:00:00.646982",
+  "cycles": 3025,
+  "last_run": "2026-08-11T11:00:00.655826",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -190,31 +190,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-11.md"
   },
-  "generated_at": "2026-08-11T08:30:00.253Z",
+  "generated_at": "2026-08-11T09:00:00.674Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-11T08:25:01.543Z quality queue written: none"
+      "line": "2026-08-11T08:55:01.837Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T08:25:01.543Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T08:55:01.836Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T08:25:01.539Z QUALITY poll: 6 open"
+      "line": "2026-08-11T08:55:01.831Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T08:20:01.634Z quality queue written: none"
+      "line": "2026-08-11T08:50:01.950Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T08:20:01.633Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T08:50:01.950Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T08:20:01.631Z QUALITY poll: 6 open"
+      "line": "2026-08-11T08:50:01.945Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +226,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T08:25:01.542Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-11T08:55:01.835Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -234,7 +234,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T08:25:01.542Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
+      "line": "2026-08-11T08:55:01.835Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=1 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
     },
     {
       "tag": "taskmarket",
@@ -246,23 +246,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-11T08:56:43.099Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T08:41:43.035Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-11T08:26:42.967Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T08:11:42.899Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Tue Aug 11 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
