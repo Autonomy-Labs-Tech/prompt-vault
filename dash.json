@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3021,
+    "cycles": 3022,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-11.md"
   },
-  "generated_at": "2026-08-11T06:00:00.568Z",
+  "generated_at": "2026-08-11T06:30:01.167Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-11T05:55:02.060Z quality queue written: none"
+      "line": "2026-08-11T06:25:01.454Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T05:55:02.059Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T06:25:01.453Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T05:55:02.056Z QUALITY poll: 7 open"
+      "line": "2026-08-11T06:25:01.449Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T05:50:02.438Z quality queue written: none"
+      "line": "  SKIP: PROXYWAR benchmark requires Docker + softmax login — cannot fabricate benchmark results."
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T05:50:02.437Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-11T06:20:01.564Z   SKIP: PROXYWAR benchmark requires Docker + softmax login — cannot fabricate benchmark results."
     },
     {
       "tag": "quality",
-      "line": "2026-08-11T05:50:02.431Z QUALITY poll: 7 open"
+      "line": "EXECUTING 0xf41d2979b5765b bounty reward=100000000 subs=0"
     },
     {
       "tag": "taskmarket",
@@ -222,11 +222,11 @@
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xccab1ca952b925 bounty reward=100000000 subs=2 Softmax coworld Paintbot league (league_b8fa9b35): get the r"
+      "line": "candidate: 0xf41d2979b5765b bounty reward=100000000 subs=0 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T05:55:02.041Z candidate: 0xccab1ca952b925 bounty reward=100000000 subs=2 Softmax coworld Paintbot league (league_b8fa9b35): get the r"
+      "line": "2026-08-11T06:25:01.452Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=0 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -234,7 +234,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-11T05:55:02.038Z poll: 7 open tasks"
+      "line": "2026-08-11T06:25:01.449Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -242,23 +242,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T06:26:42.424Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-11T06:11:42.358Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Tue Aug 11 08:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-11T05:56:42.290Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -268,7 +268,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
