@@ -216,35 +216,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3047,
+    "cycles": 3048,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-12.md"
   },
-  "generated_at": "2026-08-12T17:00:01.860Z",
+  "generated_at": "2026-08-12T17:30:00.488Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-12T16:55:01.652Z quality queue written: none"
+      "line": "2026-08-12T17:25:01.681Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T16:55:01.651Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T17:25:01.681Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T16:55:01.647Z QUALITY poll: 6 open"
+      "line": "2026-08-12T17:25:01.678Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T16:50:02.025Z quality queue written: none"
+      "line": "2026-08-12T17:20:03.038Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T16:50:02.024Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T17:20:03.038Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T16:50:02.021Z QUALITY poll: 6 open"
+      "line": "2026-08-12T17:20:03.034Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -256,7 +256,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-12T16:55:01.650Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-12T17:25:01.659Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -264,7 +264,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-12T16:55:01.647Z poll: 6 open tasks"
+      "line": "2026-08-12T17:25:01.657Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
