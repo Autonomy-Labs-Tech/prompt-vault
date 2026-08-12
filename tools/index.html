@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Tools - Calculators, Converters, and Utilities</title>
+    <meta name="description" content="Free online tools including unit converters, calculators, time zone converters, and more. Fast, free, and easy to use tools for everyday calculations.">
+    <meta name="keywords" content="online tools, calculators, converters, unit converter, time zone converter, BMI calculator, free tools">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .tool-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        .tool-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .tool-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .tool-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .tool-features {
+            list-style: none;
+            padding: 0;
+        }
+        .tool-features li {
+            padding: 5px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .tool-features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+        .category-section {
+            margin-bottom: 40px;
+        }
+        .category-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .ad-space {
+            margin: 30px 0;
+            height: 120px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.1em;
+        }
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-item {
+            padding: 15px;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        .new-badge {
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .popular-badge {
+            background: #ffc107;
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Free Online Tools</h1>
+        <p class="subtitle">Fast, free, and easy-to-use calculators, converters, and utilities for everyday tasks</p>
+
+        <div class="stats-section">
+            <h2>Why Use Our Tools?</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free to Use</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">No</div>
+                    <div class="stat-label">Registration Required</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Instant</div>
+                    <div class="stat-label">Results</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Mobile</div>
+                    <div class="stat-label">Friendly</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">📏 Converters <span class="popular-badge">Popular</span></h2>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="window.location.href='unit-converter.html'">
+                    <div class="tool-icon">🔄</div>
+                    <div class="tool-title">Unit Converter <span class="popular-badge">Popular</span></div>
+                    <div class="tool-description">Convert between length, weight, temperature, area, volume, speed, and data storage units instantly.</div>
+                    <ul class="tool-features">
+                        <li>7 unit categories</li>
+                        <li>50+ unit conversions</li>
+                        <li>Instant results</li>
+                        <li>Swap functionality</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card" onclick="window.location.href='timezone-converter.html'">
+                    <div class="tool-icon">🌍</div>
+                    <div class="tool-title">Time Zone Converter <span class="new-badge">New</span></div>
+                    <div class="tool-description">Convert time between different cities and time zones worldwide with business hours indicator.</div>
+                    <ul class="tool-features">
+                        <li>19 major cities</li>
+                        <li>World clock display</li>
+                        <li>Business hours check</li>
+                        <li>Date & time conversion</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">💱</div>
+                    <div class="tool-title">Currency Converter <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Convert between 150+ world currencies with live exchange rates updated daily.</div>
+                    <ul class="tool-features">
+                        <li>150+ currencies</li>
+                        <li>Live exchange rates</li>
+                        <li>Historical data</li>
+                        <li>Offline mode</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">🧮 Calculators <span class="new-badge">New</span></h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">⚖️</div>
+                    <div class="tool-title">BMI Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate your Body Mass Index and get health recommendations based on your results.</div>
+                    <ul class="tool-features">
+                        <li>Metric & Imperial units</li>
+                        <li>Health recommendations</li>
+                        <li>Category classification</li>
+                        <li>Visual results</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <div class="tool-title">Percentage Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate percentages, percentage increase/decrease, discounts, and more.</div>
+                    <ul class="tool-features">
+                        <li>5 calculation modes</li>
+                        <li>Instant results</li>
+                        <li>Step-by-step explanations</li>
+                        <li>History tracking</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">📅</div>
+                    <div class="tool-title">Age Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate your exact age in years, months, days, hours, and seconds.</div>
+                    <ul class="tool-features">
+                        <li>Precise calculations</li>
+                        <li>Birthday countdown</li>
+                        <li>Zodiac sign</li>
+                        <li>Next birthday info</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">💻 Developer Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">💾</div>
+                    <div class="tool-title">Data Storage Converter <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Convert between bytes, kilobytes, megabytes, gigabytes, and terabytes.</div>
+                    <ul class="tool-features">
+                        <li>All storage units</li>
+                        <li>Binary & decimal</li>
+                        <li>Instant conversion</li>
+                        <li>Copy results</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🎨</div>
+                    <div class="tool-title">Color Converter <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Convert between HEX, RGB, HSL, and other color formats for web design.</div>
+                    <ul class="tool-features">
+                        <li>Multiple formats</li>
+                        <li>Color picker</li>
+                        <li>Palette generator</li>
+                        <li>Contrast checker</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">🔢</div>
+                    <div class="tool-title">Timestamp Converter <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Convert Unix timestamps to human-readable dates and vice versa.</div>
+                    <ul class="tool-features">
+                        <li>Unix timestamp</li>
+                        <li>Multiple timezones</li>
+                        <li>Batch conversion</li>
+                        <li>API integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-space">
+            Advertisement Space - Reach millions of tool users
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">🏥 Health & Fitness</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🍎</div>
+                    <div class="tool-title">Calorie Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate your daily calorie needs based on your activity level and goals.</div>
+                    <ul class="tool-features">
+                        <li>BMR calculation</li>
+                        <li>Activity levels</li>
+                        <li>Goal settings</li>
+                        <li>Macronutrients</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">❤️</div>
+                    <div class="tool-title">Heart Rate Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate your target heart rate zones for optimal exercise intensity.</div>
+                    <ul class="tool-features">
+                        <li>Max heart rate</li>
+                        <li>Training zones</li>
+                        <li>Resting heart rate</li>
+                        <li>Intensity guide</li>
+                    </ul>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon">💧</div>
+                    <div class="tool-title">Water Intake Calculator <span class="new-badge">Coming Soon</span></div>
+                    <div class="tool-description">Calculate your daily water intake needs based on your body and activity.</div>
+                    <ul class="tool-features">
+                        <li>Personalized goals</li>
+                        <li>Activity adjustment</li>
+                        <li>Climate factors</li>
+                        <li>Tracking reminders</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #666;">
+            <p>🚀 More tools are being added regularly. Bookmark this page for the latest free online tools!</p>
+            <p style="margin-top: 10px;">All tools are free to use and work on all devices.</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
