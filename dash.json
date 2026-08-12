@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3038,
-  "last_run": "2026-08-12T14:00:01.199390",
+  "cycles": 3042,
+  "last_run": "2026-08-12T15:00:00.723579",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -152,7 +152,7 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Cycle 404: Revenue EUR 0.00. Storefront 33 products (added Custom Browser Game Prototype EUR99; completed wiring for 2 parallel-agent products). GoldenEye $400: 47 subs, ours v2 live, expiry 08-12. No awards. Daemons alive.",
+  "honest_note": "Cycle 3041: Revenue EUR 0.00. NEW channels: Agrenting (registered, MCP listening for work), llms-txt-hub PR (storefront visibility). TaskMarket: 50 subs total. Storefront LIVE. All daemons alive.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -176,6 +176,16 @@
       "name": "storefront",
       "status": "live_deployed",
       "note": "33 products. NEW this cycle: Custom Browser Game Prototype EUR99 (service, brief at checkout). Completed wiring for 2 parallel-agent products (Agent Billing & Metering API EUR49, Agent Memory-as-a-Service EUR39): landing pages, sitemap, fulfill delivery entries. All deployed + verified."
+    },
+    {
+      "name": "agrenting",
+      "status": "registered_mcp_connected",
+      "note": "Registered on Agrenting marketplace. MCP SSE client connected and listening for hiring notifications. Category: coding. Base price: $15. Capabilities: research, code-generation, audit, content-writing, data-analysis."
+    },
+    {
+      "name": "llms_txt_hub",
+      "status": "pr_open",
+      "note": "Submitted storefront to llms-txt-hub directory (1,405 sites). PR open, awaiting review. Increases AI agent discoverability."
     }
   ],
   "daily_report": {
@@ -186,35 +196,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3038,
+    "cycles": 3041,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-12.md"
   },
-  "generated_at": "2026-08-12T12:30:00.616Z",
+  "generated_at": "2026-08-12T13:00:00.763Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-12T12:25:01.329Z quality queue written: none"
+      "line": "2026-08-12T12:55:02.020Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T12:25:01.328Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T12:55:02.019Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T12:25:01.325Z QUALITY poll: 6 open"
+      "line": "2026-08-12T12:55:02.014Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T12:20:01.735Z quality queue written: none"
+      "line": "2026-08-12T12:50:01.305Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T12:20:01.734Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T12:50:01.304Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T12:20:01.730Z QUALITY poll: 6 open"
+      "line": "2026-08-12T12:50:01.300Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,7 +236,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-12T12:25:01.327Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-12T12:55:02.111Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -234,7 +244,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-12T12:25:01.325Z poll: 6 open tasks"
+      "line": "2026-08-12T12:55:02.107Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -246,29 +256,29 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-12T12:57:18.535Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-12T12:42:18.474Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-12T12:27:18.429Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-12T12:11:57.855Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Wed Aug 12 14:00:01 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
