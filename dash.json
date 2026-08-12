@@ -186,35 +186,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3033,
+    "cycles": 3034,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-12.md"
   },
-  "generated_at": "2026-08-12T08:00:00.378Z",
+  "generated_at": "2026-08-12T08:30:01.166Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-12T07:55:01.515Z quality queue written: none"
+      "line": "2026-08-12T08:25:02.386Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T07:55:01.515Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T08:25:02.386Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T07:55:01.511Z QUALITY poll: 6 open"
+      "line": "2026-08-12T08:25:02.382Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T07:50:01.551Z quality queue written: none"
+      "line": "2026-08-12T08:20:02.325Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T07:50:01.551Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-12T08:20:02.325Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-12T07:50:01.546Z QUALITY poll: 6 open"
+      "line": "2026-08-12T08:20:02.320Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -226,39 +226,39 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-12T07:55:01.517Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
-    },
-    {
-      "tag": "taskmarket",
-      "line": "candidate: 0xfb182f610d57a6 bounty reward=398000 subs=5 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
-    },
-    {
-      "tag": "taskmarket",
-      "line": "2026-08-12T07:55:01.516Z candidate: 0xfb182f610d57a6 bounty reward=398000 subs=5 # Ship a Merge-Ready Taskmarket Integration PR  ## End goal "
+      "line": "2026-08-12T08:25:02.347Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=1 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
       "line": "poll: 6 open tasks"
     },
     {
+      "tag": "taskmarket",
+      "line": "2026-08-12T08:25:02.344Z poll: 6 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "done"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-12T08:26:56.787Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-12T08:11:56.771Z] prospects=34 fresh=0 sending=0"
+    },
+    {
       "tag": "distribute",
       "line": "--- run Wed Aug 12 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-12T07:56:56.704Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -268,7 +268,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
