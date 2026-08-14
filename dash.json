@@ -220,31 +220,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-14.md"
   },
-  "generated_at": "2026-08-14T04:30:00.969Z",
+  "generated_at": "2026-08-14T05:30:00.575Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-14T04:25:01.523Z quality queue written: none"
+      "line": "2026-08-14T05:25:02.100Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T04:25:01.522Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-14T05:25:02.100Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T04:25:01.518Z QUALITY poll: 7 open"
+      "line": "2026-08-14T05:25:02.097Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T04:20:02.934Z quality queue written: none"
+      "line": "2026-08-14T05:20:01.702Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T04:20:02.933Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-14T05:20:01.701Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T04:20:02.929Z QUALITY poll: 7 open"
+      "line": "2026-08-14T05:20:01.697Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -256,7 +256,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T04:25:01.522Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=5 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-14T05:25:02.090Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=5 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -264,7 +264,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T04:25:01.521Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-14T05:25:02.090Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
