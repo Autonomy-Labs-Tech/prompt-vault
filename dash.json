@@ -216,35 +216,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3051,
+    "cycles": 3052,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-14.md"
   },
-  "generated_at": "2026-08-14T04:00:00.559Z",
+  "generated_at": "2026-08-14T04:30:00.969Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Fri Aug 14 06:00:00 CEST 2026] executing top task 0xb4e0e2150a5b69a781769fe71f9092de3cffe978a03fd7286ebd408b99b152e3"
+      "line": "2026-08-14T04:25:01.523Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T03:56:06.143Z quality queue written: 0xb4e0e2150a5b69"
+      "line": "2026-08-14T04:25:01.522Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T03:56:06.143Z   [32.00] bounty $640 subs=19 The World of Base, 2030 — make a living world in six seconds"
+      "line": "2026-08-14T04:25:01.518Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T03:56:06.142Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-14T04:20:02.934Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T03:56:06.139Z QUALITY poll: 7 open"
+      "line": "2026-08-14T04:20:02.933Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T03:22:43.199Z quality queue written: 0xb4e0e2150a5b69"
+      "line": "2026-08-14T04:20:02.929Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -256,7 +256,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T03:56:06.141Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=5 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
+      "line": "2026-08-14T04:25:01.522Z candidate: 0xf41d2979b5765b bounty reward=100000000 subs=5 Softmax coworld Paintbot league — bounty for the #1 leaderbo"
     },
     {
       "tag": "taskmarket",
@@ -264,7 +264,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T03:56:06.141Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-14T04:25:01.521Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
