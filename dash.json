@@ -216,35 +216,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3057,
+    "cycles": 3058,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-14.md"
   },
-  "generated_at": "2026-08-14T01:00:00.313Z",
+  "generated_at": "2026-08-14T01:30:00.436Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-14T00:55:01.823Z quality queue written: none"
+      "line": "2026-08-14T01:25:01.953Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T00:55:01.823Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-14T01:25:01.952Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T00:55:01.820Z QUALITY poll: 7 open"
+      "line": "2026-08-14T01:25:01.947Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T00:50:01.314Z quality queue written: none"
+      "line": "2026-08-14T01:20:01.478Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T00:50:01.313Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-14T01:20:01.477Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-14T00:50:01.310Z QUALITY poll: 7 open"
+      "line": "2026-08-14T01:20:01.474Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -256,7 +256,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T00:55:01.821Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-14T01:25:01.954Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=2 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -264,7 +264,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-14T00:55:01.817Z poll: 7 open tasks"
+      "line": "2026-08-14T01:25:01.952Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
