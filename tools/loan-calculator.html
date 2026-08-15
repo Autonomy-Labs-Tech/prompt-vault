@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator - Calculate Monthly Payments & Amortization</title>
+    <meta name="description" content="Free loan calculator to calculate monthly payments, total interest, and amortization schedule. Works for mortgages, auto loans, personal loans.">
+    <meta name="keywords" content="loan calculator, mortgage calculator, monthly payment calculator, amortization schedule, loan amortization, auto loan calculator">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/loan-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input, select { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s ease; }
+        input:focus, select:focus { outline: none; border-color: #667eea; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn { width: 100%; padding: 15px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s ease; }
+        .btn:hover { background: #5a6fd6; }
+        .results { margin-top: 30px; display: none; }
+        .results.visible { display: block; }
+        .result-card { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .result-label { color: #666; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .result-value { font-size: 2.5em; font-weight: bold; color: #333; }
+        .result-value.highlight { color: #667eea; }
+        .result-value.warning { color: #e74c3c; }
+        .breakdown { margin-top: 20px; }
+        .breakdown h3 { margin-bottom: 15px; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #f8f9fa; font-weight: 600; color: #555; }
+        tr:hover { background: #f8f9fa; }
+        @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Calculator</h1>
+        <p class="subtitle">Calculate monthly payments, total interest, and full amortization schedule</p>
+        
+        <div class="input-group">
+            <label>Loan Amount ($)</label>
+            <input type="number" id="loanAmount" value="300000" min="1000" step="1000" placeholder="300000">
+        </div>
+        
+        <div class="row">
+            <div class="input-group">
+                <label>Annual Interest Rate (%)</label>
+                <input type="number" id="interestRate" value="6.5" min="0.1" max="30" step="0.01" placeholder="6.5">
+            </div>
+            <div class="input-group">
+                <label>Loan Term (Years)</label>
+                <input type="number" id="loanTerm" value="30" min="1" max="50" step="1" placeholder="30">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-group">
+                <label>Payment Frequency</label>
+                <select id="paymentFrequency">
+                    <option value="12">Monthly</option>
+                    <option value="26">Bi-weekly</option>
+                    <option value="52">Weekly</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Start Date</label>
+                <input type="date" id="startDate" value="">
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calculate()">Calculate Payments</button>
+        
+        <div class="results" id="results">
+            <div class="row">
+                <div class="result-card">
+                    <div class="result-label">Monthly Payment</div>
+                    <div class="result-value highlight" id="monthlyPayment">$0.00</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Total Payment</div>
+                    <div class="result-value" id="totalPayment">$0.00</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Total Interest</div>
+                    <div class="result-value warning" id="totalInterest">$0.00</div>
+                </div>
+            </div>
+            
+            <div class="result-card breakdown">
+                <h3>Amortization Schedule (First 12 & Last 12 Payments)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Payment #</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="amortizationTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = (parseFloat(document.getElementById('interestRate').value) || 0) / 100;
+            const years = parseInt(document.getElementById('loanTerm').value) || 0;
+            const frequency = parseInt(document.getElementById('paymentFrequency').value);
+            const startDateStr = document.getElementById('startDate').value;
+            const startDate = startDateStr ? new Date(startDateStr) : new Date();
+            
+            const periodicRate = annualRate / frequency;
+            const totalPayments = years * frequency;
+            const payment = loanAmount * periodicRate / (1 - Math.pow(1 + periodicRate, -totalPayments));
+            
+            const totalPayment = payment * totalPayments;
+            const totalInterest = totalPayment - loanAmount;
+            
+            document.getElementById('monthlyPayment').textContent = '$' + payment.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalPayment').textContent = '$' + totalPayment.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            // Build amortization schedule
+            let balance = loanAmount;
+            const schedule = [];
+            
+            for (let i = 1; i <= totalPayments; i++) {
+                const interest = balance * periodicRate;
+                const principal = payment - interest;
+                balance -= principal;
+                
+                const paymentDate = new Date(startDate);
+                if (frequency === 12) paymentDate.setMonth(paymentDate.getMonth() + i);
+                else if (frequency === 26) paymentDate.setDate(paymentDate.getDate() + i * 14);
+                else if (frequency === 52) paymentDate.setDate(paymentDate.getDate() + i * 7);
+                
+                if (i <= 12 || i > totalPayments - 12) {
+                    schedule.push({
+                        num: i,
+                        date: paymentDate.toLocaleDateString(),
+                        payment: payment,
+                        principal: principal,
+                        interest: interest,
+                        balance: Math.max(0, balance)
+                    });
+                }
+            }
+            
+            const tbody = document.getElementById('amortizationTable');
+            let html = '';
+            for (let i = 0; i < schedule.length; i++) {
+                const s = schedule[i];
+                if (i === 12 && schedule.length > 24) {
+                    html += '<tr><td colspan="6" style="text-align:center; color:#666; font-style:italic;">... ' + (totalPayments - 24) + ' payments omitted ...</td></tr>';
+                }
+                html += `
+                    <tr>
+                        <td>${s.num}</td>
+                        <td>${s.date}</td>
+                        <td>$${s.payment.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td>$${s.principal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td>$${s.interest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td>$${s.balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    </tr>
+                `;
+            }
+            tbody.innerHTML = html;
+            
+            document.getElementById('results').classList.add('visible');
+        }
+        
+        // Set default start date to today
+        document.getElementById('startDate').value = new Date().toISOString().split('T')[0];
+        
+        ['loanAmount', 'interestRate', 'loanTerm'].forEach(id => {
+            document.getElementById(id).addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+        });
+        
+        calculate();
+    </script>
+</body>
+</html>

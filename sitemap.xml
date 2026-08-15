@@ -46,10 +46,25 @@
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html</ns0:loc><ns0:priority>0.9</ns0:priority></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html</ns0:loc></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/blog/how-compound-interest-works.html</ns0:loc></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/blog/how-to-convert-currency.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/api-integration-kit.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/agent-billing-api.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/agent-memory-api.html</ns0:loc></ns0:url>
   <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/custom-game-prototype.html</ns0:loc><ns0:priority>0.9</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/unit-converter.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/timezone-converter.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/currency-converter.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/bmi-calculator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/percentage-calculator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/age-calculator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/color-converter.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/compound-interest-calculator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/loan-calculator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/json-formatter.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/base64-encoder.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
+  <ns0:url><ns0:loc>https://business2-lasse-tfa.vercel.app/tools/password-generator.html</ns0:loc><ns0:priority>0.8</ns0:priority></ns0:url>
 <url><loc>https://www.autonomylabsweb.tech/wallet-watch.html</loc><lastmod>2026-08-10</lastmod></url></ns0:urlset>

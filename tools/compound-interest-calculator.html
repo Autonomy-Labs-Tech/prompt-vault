@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator - Calculate Investment Growth</title>
+    <meta name="description" content="Free compound interest calculator to calculate investment growth over time. Calculate future value, total interest, and see year-by-year breakdown.">
+    <meta name="keywords" content="compound interest calculator, investment calculator, future value calculator, savings growth calculator, compound interest formula">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/compound-interest-calculator.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input, select { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s ease; }
+        input:focus, select:focus { outline: none; border-color: #667eea; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn { width: 100%; padding: 15px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s ease; }
+        .btn:hover { background: #5a6fd6; }
+        .results { margin-top: 30px; display: none; }
+        .results.visible { display: block; }
+        .result-card { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        .result-label { color: #666; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .result-value { font-size: 2.5em; font-weight: bold; color: #333; }
+        .result-value.highlight { color: #667eea; }
+        .breakdown { margin-top: 20px; }
+        .breakdown h3 { margin-bottom: 15px; color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e0e0; }
+        th { background: #f8f9fa; font-weight: 600; color: #555; }
+        tr:hover { background: #f8f9fa; }
+        .chart-container { height: 200px; margin-top: 20px; position: relative; }
+        .bar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px 4px 0 0; transition: height 0.5s ease; }
+        @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compound Interest Calculator</h1>
+        <p class="subtitle">Calculate how your investments grow over time with compound interest</p>
+        
+        <div class="input-group">
+            <label>Initial Investment ($)</label>
+            <input type="number" id="principal" value="10000" min="0" step="100" placeholder="10000">
+        </div>
+        
+        <div class="row">
+            <div class="input-group">
+                <label>Monthly Contribution ($)</label>
+                <input type="number" id="monthlyContribution" value="500" min="0" step="50" placeholder="500">
+            </div>
+            <div class="input-group">
+                <label>Annual Interest Rate (%)</label>
+                <input type="number" id="interestRate" value="7" min="0" max="100" step="0.1" placeholder="7">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-group">
+                <label>Years to Grow</label>
+                <input type="number" id="years" value="20" min="1" max="100" step="1" placeholder="20">
+            </div>
+            <div class="input-group">
+                <label>Compound Frequency</label>
+                <select id="compoundFrequency">
+                    <option value="12">Monthly</option>
+                    <option value="4">Quarterly</option>
+                    <option value="1">Annually</option>
+                    <option value="365">Daily</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="calculate()">Calculate Growth</button>
+        
+        <div class="results" id="results">
+            <div class="result-card">
+                <div class="result-label">Final Balance</div>
+                <div class="result-value highlight" id="finalBalance">$0.00</div>
+            </div>
+            
+            <div class="row">
+                <div class="result-card">
+                    <div class="result-label">Total Contributions</div>
+                    <div class="result-value" id="totalContributions">$0.00</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Total Interest Earned</div>
+                    <div class="result-value highlight" id="totalInterest">$0.00</div>
+                </div>
+            </div>
+            
+            <div class="result-card breakdown">
+                <h3>Year-by-Year Breakdown</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Start Balance</th>
+                            <th>Contributions</th>
+                            <th>Interest</th>
+                            <th>End Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="breakdownTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = (parseFloat(document.getElementById('interestRate').value) || 0) / 100;
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const frequency = parseInt(document.getElementById('compoundFrequency').value);
+            
+            const periodicRate = annualRate / frequency;
+            const totalPeriods = years * frequency;
+            const periodicContribution = monthlyContribution * 12 / frequency;
+            
+            let balance = principal;
+            let totalContributions = principal;
+            let totalInterest = 0;
+            
+            const breakdown = [];
+            let periodContribution = periodicContribution;
+            let periodCount = 0;
+            
+            for (let period = 1; period <= totalPeriods; period++) {
+                const interest = balance * periodicRate;
+                balance += interest + periodContribution;
+                totalInterest += interest;
+                totalContributions += periodContribution;
+                periodCount++;
+                
+                if (period % frequency === 0) {
+                    breakdown.push({
+                        year: period / frequency,
+                        startBalance: balance - interest - periodContribution,
+                        contributions: periodCount * periodContribution,
+                        interest: totalInterest - (breakdown.reduce((sum, b) => sum + b.interest, 0)),
+                        endBalance: balance
+                    });
+                    periodCount = 0;
+                }
+            }
+            
+            document.getElementById('finalBalance').textContent = '$' + balance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalContributions').textContent = '$' + totalContributions.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            
+            const tbody = document.getElementById('breakdownTable');
+            tbody.innerHTML = breakdown.map(b => `
+                <tr>
+                    <td>${b.year}</td>
+                    <td>$${b.startBalance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td>$${b.contributions.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td>$${b.interest.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td><strong>$${b.endBalance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong></td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('results').classList.add('visible');
+        }
+        
+        document.getElementById('principal').addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+        document.getElementById('monthlyContribution').addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+        document.getElementById('interestRate').addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+        document.getElementById('years').addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+        
+        calculate();
+    </script>
+</body>
+</html>

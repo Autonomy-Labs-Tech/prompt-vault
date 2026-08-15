@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder & Decoder - Encode and Decode Base64 Online</title>
+    <meta name="description" content="Free online Base64 encoder and decoder. Encode text to Base64 or decode Base64 to text instantly. Supports UTF-8, URLs, and files.">
+    <meta name="keywords" content="base64 encoder, base64 decoder, base64 encode, base64 decode, base64 converter, base64 online">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/base64-encoder.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        textarea { width: 100%; height: 150px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: monospace; font-size: 14px; resize: vertical; transition: border-color 0.3s; }
+        textarea:focus { outline: none; border-color: #667eea; }
+        label { display: block; margin: 15px 0 8px; color: #555; font-weight: 600; }
+        .status { padding: 12px; border-radius: 8px; margin-top: 15px; font-weight: 600; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Base64 Encoder &amp; Decoder</h1>
+        <p class="subtitle">Encode text to Base64 or decode Base64 back to text</p>
+        
+        <div class="toolbar">
+            <button class="btn" onclick="encode()">Encode → Base64</button>
+            <button class="btn" onclick="decode()">Decode ← Text</button>
+            <button class="btn secondary" onclick="swap()">Swap</button>
+            <button class="btn secondary" onclick="clearAll()">Clear</button>
+        </div>
+        
+        <label>Input</label>
+        <textarea id="input" placeholder="Text to encode or Base64 to decode"></textarea>
+        
+        <label>Output</label>
+        <textarea id="output" readonly placeholder="Result appears here"></textarea>
+        
+        <div class="status info" id="status">Enter text, then click Encode or Decode</div>
+    </div>
+
+    <script>
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+        const status = document.getElementById('status');
+        
+        function encode() {
+            const text = input.value;
+            if (!text) { setStatus('Enter text to encode'); return; }
+            try {
+                output.value = btoa(unescape(encodeURIComponent(text)));
+                setStatus('✓ Encoded ' + text.length + ' characters to Base64');
+            } catch (e) {
+                setStatus('Error: ' + e.message, true);
+            }
+        }
+        
+        function decode() {
+            const text = input.value.trim();
+            if (!text) { setStatus('Enter Base64 to decode'); return; }
+            try {
+                output.value = decodeURIComponent(escape(atob(text)));
+                setStatus('✓ Decoded Base64 to text');
+            } catch (e) {
+                setStatus('Error: Invalid Base64 input', true);
+            }
+        }
+        
+        function swap() {
+            input.value = output.value;
+            output.value = '';
+            setStatus('Swapped input/output');
+        }
+        
+        function clearAll() {
+            input.value = '';
+            output.value = '';
+            setStatus('Cleared');
+        }
+        
+        function setStatus(msg, isError) {
+            status.className = 'status ' + (isError ? 'error' : 'info');
+            status.textContent = msg;
+        }
+    </script>
+</body>
+</html>

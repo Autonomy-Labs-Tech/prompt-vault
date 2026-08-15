@@ -46,6 +46,18 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI-Agent Readiness Audit** (free): https://business2-lasse-tfa.vercel.app/audit.html — grade any site for AI-agent discoverability.
 - **llms-validator** (free): https://business2-lasse-tfa.vercel.app/llms-validator.html — check any site for llms.txt correctness.
 - **llms.txt generator** (free): https://business2-lasse-tfa.vercel.app/llms-generator.html — generate a spec-compliant llms.txt for your site.
+- **Unit Converter** (free): https://business2-lasse-tfa.vercel.app/tools/unit-converter.html — length, weight, temperature, area, volume, speed, data storage.
+- **Time Zone Converter** (free): https://business2-lasse-tfa.vercel.app/tools/timezone-converter.html — convert between 19 major cities.
+- **Currency Converter** (free): https://business2-lasse-tfa.vercel.app/tools/currency-converter.html — 160+ currencies, live rates.
+- **BMI Calculator** (free): https://business2-lasse-tfa.vercel.app/tools/bmi-calculator.html — metric & imperial.
+- **Percentage Calculator** (free): https://business2-lasse-tfa.vercel.app/tools/percentage-calculator.html — 3 calculation modes.
+- **Age Calculator** (free): https://business2-lasse-tfa.vercel.app/tools/age-calculator.html — precise age.
+- **Color Converter** (free): https://business2-lasse-tfa.vercel.app/tools/color-converter.html — HEX, RGB, HSL, HSV.
+- **Compound Interest Calculator** (free): https://business2-lasse-tfa.vercel.app/tools/compound-interest-calculator.html — investment growth.
+- **Loan Calculator** (free): https://business2-lasse-tfa.vercel.app/tools/loan-calculator.html — monthly payments & amortization.
+- **JSON Formatter & Validator** (free): https://business2-lasse-tfa.vercel.app/tools/json-formatter.html — format, minify, validate JSON.
+- **Base64 Encoder & Decoder** (free): https://business2-lasse-tfa.vercel.app/tools/base64-encoder.html — encode/decode Base64.
+- **Password Generator** (free): https://business2-lasse-tfa.vercel.app/tools/password-generator.html — secure random passwords.
 
 ## Blog
 - **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
@@ -54,6 +66,8 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **10 Best AI Prompts for Small Business Owners** — https://business2-lasse-tfa.vercel.app/blog/ai-prompts-for-small-business.html
 - **How to Write AI Prompts That Actually Work** — https://business2-lasse-tfa.vercel.app/blog/how-to-write-ai-prompts.html
 - **Best AI Tools for Small Business in 2026** — https://business2-lasse-tfa.vercel.app/blog/ai-tools-for-small-business.html
+- **How Compound Interest Works** — https://business2-lasse-tfa.vercel.app/blog/how-compound-interest-works.html
+- **How to Convert Currency** — https://business2-lasse-tfa.vercel.app/blog/how-to-convert-currency.html
 
 - **AI Agent x402 Paywall Setup Kit** — €14.90 — https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u — landing: https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html
 - **AI Agent Fulfillment Webhook Kit** — €14.90 — https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t — landing: https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html

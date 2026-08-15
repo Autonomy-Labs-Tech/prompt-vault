@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Converter - HEX, RGB, HSL, HSV Converter</title>
+    <meta name="description" content="Free color converter between HEX, RGB, HSL, and HSV color formats. Convert any color code and get color previews.">
+    <meta name="keywords" content="color converter, HEX to RGB, HEX to HSL, color code converter, CSS colors, rgb to hex converter, web colors">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/color-converter.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input, select { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: border-color 0.3s ease; }
+        input:focus, select:focus { outline: none; border-color: #667eea; }
+        .color-preview { width: 120px; height: 50px; border-radius: 8px; margin: 10px auto; display: block; }
+        .formats { margin-top: 20px; }
+        .format-group { margin-bottom: 15px; }
+        .format-label { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 8px; }
+        .format-value { background: #f8f9fa; padding: 10px; border-radius: 5px; word-break: break-all; font-family: monospace; font-size: 1em; }
+        .btn { width: 100%; padding: 15px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s ease; }
+        .btn:hover { background: #5a6fd6; }
+        .results { margin-top: 30px; display: none; }
+        .results.visible { display: block; }
+        @media (max-width: 600px) { .container { margin: 10px; padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Converter</h1>
+        <p class="subtitle">Convert between HEX, RGB, HSL, and HSV color formats</p>
+        
+        <div class="input-group">
+            <label>HEX Code (e.g., #ff0000)</label>
+            <input type="text" id="hexInput" value="#ff0000" maxlength="7" placeholder="#ff0000" pattern="^#[0-9A-Fa-f]{6}$">
+        </div>
+        
+        <div class="formats" id="formats"></div>
+        
+        <button class="btn" onclick="convertColor()">Convert</button>
+        
+        <div class="results" id="results">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div class="color-preview" id="colorPreview" style="background: #ff0000;"></div>
+            </div>
+            <div class="format-group">
+                <div class="format-label">RGB</div>
+                <div class="format-value" id="rgbOutput">rgb(0, 0, 0)</div>
+            </div>
+            <div class="format-group">
+                <div class="format-label">HSL</div>
+                <div class="format-value" id="hslOutput">hsl(0, 0%, 0%)</div>
+            </div>
+            <div class="format-group">
+                <div class="format-label">HSV</div>
+                <div class="format-value" id="hsvOutput">hsv(0, 0%, 0%)</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertColor() {
+            const hexInput = document.getElementById('hexInput').value.trim();
+            const hex = hexInput.replace('#', '');
+            
+            if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+                alert('Please enter a valid HEX code (6 hex characters, e.g., #ff0000)');
+                return;
+            }
+            
+            // Parse HEX to RGB
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            
+            // RGB
+            document.getElementById('rgbOutput').textContent = `rgb(${r}, ${g}, ${b})`;
+            
+            // HSL
+            const rNorm = r / 255;
+            const gNorm = g / 255;
+            const bNorm = b / 255;
+            
+            const max = Math.max(rNorm, gNorm, bNorm);
+            const min = Math.min(rNorm, gNorm, bNorm);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case rNorm: h = (60 * ((gNorm - bNorm) / d) + 360) % 360; break;
+                    case gNorm: h = (60 * ((bNorm - rNorm) / d) + 120) % 360; break;
+                    case bNorm: h = (60 * ((rNorm - gNorm) / d) + 240) % 360; break;
+                }
+                s = s * 100;
+            }
+            
+            const hslStr = `${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l * 100)}%`;
+            document.getElementById('hslOutput').textContent = `hsl${hslStr}`;
+            
+            // HSV
+            const v = max;
+            const sV = max === 0 ? 0 : (max - min) / max;
+            const hsvStr = `${Math.round(h)}, ${Math.round(sV * 100)}%, ${Math.round(v * 100)}%`;
+            document.getElementById('hsvOutput').textContent = `hsv${hsvStr}`;
+            
+            // Update preview
+            document.getElementById('colorPreview').style.background = hexInput;
+            
+            document.getElementById('results').classList.add('visible');
+        }
+        
+        // Auto-convert on input
+        document.getElementById('hexInput').addEventListener('keypress', e => { if (e.key === 'Enter') convertColor(); });
+        document.getElementById('hexInput').addEventListener('input', e => { if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') convertColor(); });
+        
+        convertColor();
+    </script>
+</body>
+</html>

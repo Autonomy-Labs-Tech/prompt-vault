@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Validator - Format, Minify, Validate JSON</title>
+    <meta name="description" content="Free online JSON formatter and validator. Format, minify, and validate JSON with syntax highlighting and error detection.">
+    <meta name="keywords" content="JSON formatter, JSON validator, JSON pretty print, JSON beautifier, format JSON online, JSON minifier">
+    <link rel="canonical" href="https://www.autonomylabsweb.tech/tools/json-formatter.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        textarea { width: 100%; height: 300px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: monospace; font-size: 14px; resize: vertical; transition: border-color 0.3s; }
+        textarea:focus { outline: none; border-color: #667eea; }
+        .status { padding: 12px; border-radius: 8px; margin-top: 15px; font-weight: 600; }
+        .status.valid { background: #d4edda; color: #155724; }
+        .status.invalid { background: #f8d7da; color: #721c24; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+        .error-detail { margin-top: 8px; font-family: monospace; font-size: 13px; white-space: pre-wrap; }
+        .copy-btn { margin-top: 10px; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JSON Formatter &amp; Validator</h1>
+        <p class="subtitle">Format, minify, and validate JSON with instant error detection</p>
+        
+        <div class="toolbar">
+            <button class="btn" onclick="formatJson()">Format</button>
+            <button class="btn" onclick="minifyJson()">Minify</button>
+            <button class="btn secondary" onclick="clearJson()">Clear</button>
+            <button class="btn secondary" onclick="copyJson()">Copy</button>
+        </div>
+        
+        <textarea id="jsonInput" placeholder='{"name": "Example", "items": [1, 2, 3], "active": true}'></textarea>
+        
+        <div class="status info" id="status">Enter JSON to validate and format</div>
+    </div>
+
+    <script>
+        const input = document.getElementById('jsonInput');
+        const status = document.getElementById('status');
+        
+        function validateJson(text) {
+            try {
+                return { valid: true, data: JSON.parse(text) };
+            } catch (e) {
+                return { valid: false, error: e.message };
+            }
+        }
+        
+        function formatJson() {
+            const text = input.value.trim();
+            if (!text) { setStatus('info', 'Enter JSON to format'); return; }
+            const result = validateJson(text);
+            if (result.valid) {
+                input.value = JSON.stringify(result.data, null, 2);
+                setStatus('valid', '✓ Valid JSON — formatted with 2-space indentation');
+            } else {
+                setStatus('invalid', '✗ Invalid JSON', result.error);
+            }
+        }
+        
+        function minifyJson() {
+            const text = input.value.trim();
+            if (!text) { setStatus('info', 'Enter JSON to minify'); return; }
+            const result = validateJson(text);
+            if (result.valid) {
+                input.value = JSON.stringify(result.data);
+                setStatus('valid', '✓ Valid JSON — minified');
+            } else {
+                setStatus('invalid', '✗ Invalid JSON', result.error);
+            }
+        }
+        
+        function clearJson() {
+            input.value = '';
+            setStatus('info', 'Enter JSON to validate and format');
+        }
+        
+        function copyJson() {
+            if (!input.value) { setStatus('info', 'Nothing to copy'); return; }
+            navigator.clipboard.writeText(input.value).then(() => {
+                setStatus('valid', '✓ Copied to clipboard');
+            });
+        }
+        
+        function setStatus(type, msg, detail) {
+            status.className = 'status ' + type;
+            status.innerHTML = msg + (detail ? '<div class="error-detail">' + detail + '</div>' : '');
+        }
+        
+        input.addEventListener('input', () => {
+            const text = input.value.trim();
+            if (!text) { setStatus('info', 'Enter JSON to validate and format'); return; }
+            const result = validateJson(text);
+            if (result.valid) {
+                setStatus('valid', '✓ Valid JSON');
+            } else {
+                setStatus('invalid', '✗ Invalid JSON', result.error);
+            }
+        });
+    </script>
+</body>
+</html>
