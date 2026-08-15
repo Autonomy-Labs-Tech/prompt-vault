@@ -377,6 +377,37 @@
             });
         }
 
+        // Milliseconds that must be added to a UTC instant to get the wall-clock
+        // time shown in `timeZone` at that instant.
+        function zoneOffsetMs(instant, timeZone) {
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone, hour12: false,
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            }).formatToParts(instant).reduce((acc, p) => {
+                acc[p.type] = p.value;
+                return acc;
+            }, {});
+            const asUtc = Date.UTC(
+                Number(parts.year), Number(parts.month) - 1, Number(parts.day),
+                Number(parts.hour) % 24, Number(parts.minute), Number(parts.second)
+            );
+            return asUtc - instant.getTime();
+        }
+
+        // `new Date("2026-08-15T12:00")` is resolved against the *browser's* time
+        // zone, which silently ignored the selected "from" city. This resolves the
+        // wall-clock time inside `timeZone` instead, with a second pass so times
+        // near a DST transition land on the right offset.
+        function wallClockToInstant(dateStr, timeStr, timeZone) {
+            const naive = new Date(`${dateStr}T${timeStr}:00Z`);
+            if (isNaN(naive.getTime())) return null;
+            let instant = new Date(naive.getTime() - zoneOffsetMs(naive, timeZone));
+            const corrected = new Date(naive.getTime() - zoneOffsetMs(instant, timeZone));
+            if (corrected.getTime() !== instant.getTime()) instant = corrected;
+            return instant;
+        }
+
         // Convert time function
         function convertTime() {
             const fromDate = document.getElementById('from-date').value;
@@ -384,8 +415,8 @@
             const fromCity = document.getElementById('from-city').value;
             const toCity = document.getElementById('to-city').value;
 
-            // Create date object in from timezone
-            const fromDateTime = new Date(`${fromDate}T${fromTime}`);
+            const fromDateTime = wallClockToInstant(fromDate, fromTime, fromCity);
+            if (!fromDateTime) return;
             
             // Format for from timezone
             const fromTimeStr = fromDateTime.toLocaleTimeString('en-US', {

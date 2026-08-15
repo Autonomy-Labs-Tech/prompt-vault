@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIBMI Calculator</title>
+    <title>BMI Calculator - Free Body Mass Index Tool</title>
+    <meta name="description" content="Free BMI calculator. Enter your height and weight in metric or imperial units to get your Body Mass Index, weight category, and healthy weight range.">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
@@ -18,14 +19,20 @@
         .result-box { background: #ecf0f1; border-radius: 8px; padding: 20px; margin-top: 20px; text-align: center; border: 2px solid #3498db; }
         .result-box h2 { color: #2c3e50; margin-bottom: 10px; }
         .bmi-score { font-size: 48px; font-weight: 700; color: #2c3e50; }
-        .badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 14px; margin-top: 10px; }
-        .badge.overweight { background: #e74c3c; color: white; }
-        .badge.overweight-fat { background: #c0392b; color: white; }
-        .badge.healthy { background: #27ae60; color: white; }
-        .recs { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-top: 20px; border-radius: 4px; }
+        .category { font-size: 20px; font-weight: 700; color: #2c3e50; margin-top: 4px; }
+        .badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 14px; margin-top: 10px; color: white; }
+        .badge.underweight { background: #f39c12; }
+        .badge.healthy { background: #27ae60; }
+        .badge.overweight { background: #e67e22; }
+        .badge.obese { background: #c0392b; }
+        .range { margin-top: 16px; color: #34495e; font-size: 15px; }
+        .recs { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-top: 20px; border-radius: 4px; text-align: left; }
+        .recs h4 { margin-bottom: 8px; color: #8e6b3f; }
         .recs ul { list-style: none; }
         .recs li { margin: 5px 0; padding-left: 20px; position: relative; }
         .recs li:before { content: "•"; color: #8e6b3f; position: absolute; left: 0; }
+        .error { color: #e74c3c; font-weight: 600; margin-top: 12px; }
+        .back { display: inline-block; margin-top: 24px; color: #3498db; text-decoration: none; }
         footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
     </style>
 </head>
@@ -33,106 +40,157 @@
     <div class="container">
         <h1>🧮 BMI Calculator</h1>
         <p class="subtitle">Determine your Body Mass Index and health recommendations</p>
-        
-        <form class="calc-form" id="bmiForm">
+
+        <form class="calc-form" id="bmiForm" novalidate>
             <div class="form-group">
-                <label for="height">Height (meters)</label>
-                <input type="number" id="height" name="height" step="0.1" min="0.1" required>
+                <label for="units">Units</label>
+                <select id="units" name="units">
+                    <option value="metric">Metric (cm / kg)</option>
+                    <option value="imperial">Imperial (in / lb)</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="weight">Weight (kg)</label>
-                <input type="number" id="weight" name="weight" step="0.1" min="0.1" required>
+                <label for="height" id="heightLabel">Height (cm)</label>
+                <input type="number" id="height" name="height" step="any" min="0" placeholder="175">
+            </div>
+            <div class="form-group">
+                <label for="weight" id="weightLabel">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="any" min="0" placeholder="70">
             </div>
             <div class="form-group">
                 <button type="submit" style="width: 100%; padding: 14px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Calculate BMI</button>
             </div>
+            <div id="error" class="error" style="display: none;"></div>
         </form>
 
         <div id="result" class="result-box" style="display: none;">
             <h2>Your BMI</h2>
             <div class="bmi-score" id="bmiValue">--</div>
-            <div id="badgeContainer"></div>
-            <div id="chartContainer" class="chart" style="display: none;"></div>
+            <div class="category" id="categoryLabel"></div>
+            <div id="badgeContainer" class="badge" style="display: none;"></div>
+            <div id="rangeContainer" class="range" style="display: none;"></div>
             <div id="recsContainer" class="recs" style="display: none;"></div>
         </div>
+
+        <a class="back" href="/tools/">&larr; All free tools</a>
     </div>
 
     <script>
-        document.getElementById('bmiForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const height = parseFloat(document.getElementById('height').value);
-            const weight = parseFloat(document.getElementById('weight').value);
-            
-            if (height <= 0 || weight <= 0) {
-                alert('Please enter valid positive numbers');
-                return;
+        (function () {
+            var form = document.getElementById('bmiForm');
+            var unitsEl = document.getElementById('units');
+            var heightEl = document.getElementById('height');
+            var weightEl = document.getElementById('weight');
+            var errorEl = document.getElementById('error');
+
+            var RECOMMENDATIONS = {
+                underweight: [
+                    'Your BMI is below the healthy range. A healthcare provider can help you rule out an underlying cause.',
+                    'Add nutrient-dense foods (nuts, dairy, whole grains) to increase daily energy intake.',
+                    'Strength training helps build muscle mass rather than fat.'
+                ],
+                healthy: [
+                    'Your BMI is in the healthy range. Keep up your current habits.',
+                    'Aim for 150 minutes of moderate activity per week to stay there.',
+                    'Re-check occasionally, especially after a change in routine.'
+                ],
+                overweight: [
+                    'Your BMI is above the healthy range. Small, sustained changes work better than crash diets.',
+                    'A 5-10% reduction in body weight already lowers cardiovascular risk measurably.',
+                    'Combine a moderate calorie deficit with regular activity.'
+                ],
+                obese: [
+                    'Your BMI indicates obesity, which carries significant health risks.',
+                    'Speak to a healthcare provider about a structured weight-management plan.',
+                    'Focus on sustainable changes to diet and daily movement rather than rapid loss.'
+                ]
+            };
+
+            function syncLabels() {
+                var imperial = unitsEl.value === 'imperial';
+                document.getElementById('heightLabel').textContent = imperial ? 'Height (inches)' : 'Height (cm)';
+                document.getElementById('weightLabel').textContent = imperial ? 'Weight (lb)' : 'Weight (kg)';
+                heightEl.placeholder = imperial ? '69' : '175';
+                weightEl.placeholder = imperial ? '154' : '70';
             }
-            
-            const bmi = weight / (height * height);
-            document.getElementById('bmiValue').textContent = bmi.toFixed(2);
-            
-            // Calculate category
-            let category, badgeClass, badgeText, chartVisible, recsVisible;
-            
-            if (bmi < 18.5) {
-                category = 'Underweight';
-                badgeClass = 'underweight';
-                badgeText = 'Low body weight - Potential health risk';
-                chartVisible = false;
-                recsVisible = true;
-                recs = [
-                    'You are underweight. Consider consulting a healthcare provider to determine if you are at a healthy weight for your height.',
-                    'If you are underweight, ensure you are eating nutritious foods and maintaining an active lifestyle.',
-                    'Consider strength training to help build muscle mass.'
-                ];
-            } else if (bmi < 25) {
-                category = 'Normal Weight';
-                badgeClass = 'healthy';
-                badgeText = 'Welcome to a healthy weight range';
-                chartVisible = true;
-                recsVisible = false;
-                recs = [];
-                // Generate weight range chart
-                const minWeight = height * (18.5 - 1.7);
-                const maxWeight = height * (25 - 1.7);
-                document.getElementById('chartContainer').style.display = 'block';
-                document.getElementById('chartContainer').innerHTML = '';
-                for (let w = Math.ceil(minWeight); w <= Math.floor(maxWeight); w++) {
-                    const pct = ((w - minWeight) / (maxWeight - minWeight)) * 100;
-                    const bar = document.createElement('div');
-                    bar.className = 'chart-bar';
-                    bar.style.width = pct + '%';
-                    document.getElementById('chartContainer').appendChild(bar);
-                }
-            } else {
-                category = 'Overweight';
-                if (bmi < 30) {
-                    badgeClass = 'overweight-fat';
-                    badgeText = 'Overweight - Risk of health issues';
-                } else {
-                    badgeClass = 'overweight';
-                    badgeText = 'Obese - Significant health risks';
-                }
-                chartVisible = false;
-                recsVisible = true;
-                recs = [
-                    'You are overweight. Excess body weight increases the risk of numerous health conditions.',
-                    'Consider adopting a balanced diet and regular exercise.',
-                    'Professional medical consultation is strongly recommended.'
-                ];
+
+            function classify(bmi) {
+                if (bmi < 18.5) return { key: 'underweight', label: 'Underweight' };
+                if (bmi < 25) return { key: 'healthy', label: 'Normal weight' };
+                if (bmi < 30) return { key: 'overweight', label: 'Overweight' };
+                return { key: 'obese', label: 'Obese' };
             }
-            
-            document.getElementById('badgeContainer').style.display = 'block';
-            document.getElementById('badgeContainer').textContent = badgeText;
-            document.getElementById('badgeContainer').className = 'badge ' + badgeClass;
-            document.getElementById('recsContainer').style.display = recsVisible ? 'block' : 'none';
-            document.getElementById('recsContainer').innerHTML = '<h4>Recommendations:</h4><ul>' + recs.map(r => '<li>' + r + '</li>').join('') + '</ul>';
-            document.getElementById('result').style.display = 'block';
-            
-            // Scroll to result on mobile
-            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
+
+            function showError(message) {
+                errorEl.textContent = message;
+                errorEl.style.display = 'block';
+                document.getElementById('result').style.display = 'none';
+            }
+
+            // Height is accepted in cm (or inches) but people habitually type metres,
+            // so a metric value under 3 is treated as metres instead of rejecting it.
+            function heightInMetres(raw, imperial) {
+                if (imperial) return raw * 0.0254;
+                return raw < 3 ? raw : raw / 100;
+            }
+
+            function calculate() {
+                var imperial = unitsEl.value === 'imperial';
+                var rawHeight = parseFloat(heightEl.value);
+                var rawWeight = parseFloat(weightEl.value);
+
+                if (!isFinite(rawHeight) || !isFinite(rawWeight) || rawHeight <= 0 || rawWeight <= 0) {
+                    showError('Please enter a positive height and weight.');
+                    return;
+                }
+
+                var metres = heightInMetres(rawHeight, imperial);
+                var kg = imperial ? rawWeight * 0.45359237 : rawWeight;
+                var bmi = kg / (metres * metres);
+
+                if (!isFinite(bmi) || bmi <= 0) {
+                    showError('Those values do not produce a usable BMI. Please check them.');
+                    return;
+                }
+
+                errorEl.style.display = 'none';
+
+                var category = classify(bmi);
+                document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+                document.getElementById('categoryLabel').textContent = category.label;
+
+                var badge = document.getElementById('badgeContainer');
+                badge.textContent = category.label + ' (BMI ' + bmi.toFixed(1) + ')';
+                badge.className = 'badge ' + category.key;
+                badge.style.display = 'inline-block';
+
+                var minKg = 18.5 * metres * metres;
+                var maxKg = 24.9 * metres * metres;
+                var unitLabel = imperial ? 'lb' : 'kg';
+                var toDisplay = function (v) { return imperial ? v / 0.45359237 : v; };
+                var range = document.getElementById('rangeContainer');
+                range.textContent = 'Healthy weight range for your height: ' +
+                    toDisplay(minKg).toFixed(1) + ' - ' + toDisplay(maxKg).toFixed(1) + ' ' + unitLabel + '.';
+                range.style.display = 'block';
+
+                var recs = RECOMMENDATIONS[category.key];
+                var recsEl = document.getElementById('recsContainer');
+                recsEl.innerHTML = '<h4>Recommendations</h4><ul>' +
+                    recs.map(function (r) { return '<li>' + r + '</li>'; }).join('') + '</ul>';
+                recsEl.style.display = 'block';
+
+                document.getElementById('result').style.display = 'block';
+            }
+
+            unitsEl.addEventListener('change', syncLabels);
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                calculate();
+            });
+            syncLabels();
+        })();
     </script>
+
+    <footer>Free tool by Autonomy Labs. BMI is a screening measure, not a diagnosis.</footer>
 </body>
 </html>

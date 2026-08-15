@@ -2,143 +2,328 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Data Converter Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Converter - JSON, CSV and XML Converter</title>
+    <meta name="description" content="Free online data converter. Convert JSON to CSV, CSV to JSON, JSON to XML and back, directly in your browser. Nothing is uploaded.">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
         .container { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         h1 { color: #2c3e50; margin-bottom: 10px; }
         .subtitle { color: #7f8c8d; margin-bottom: 30px; }
-        .formats { display: flex; gap: 10px; margin-bottom: 20px; }
-        .format-btn { padding: 10px 20px; background: #ecf0f1; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .formats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .format-btn { padding: 10px 20px; background: #ecf0f1; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; }
         .format-btn.active { background: #3498db; color: white; border-color: #3498db; }
         .converter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
         .converter-group { background: #f8f9fa; padding: 16px; border-radius: 8px; }
-        .converter-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 14px; }
-        .converter-group input, .converter-group select { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; }
-        .result-box { background: #ecf0f1; border-radius: 8px; padding: 24px; margin-top: 20px; text-align: center; border: 2px solid #3498db; }
-        .result-box h2 { color: #2c3e50; margin-bottom: 12px; }
-        .download-btn { display: inline-block; margin-top: 16px; padding: 12px 24px; background: #3498db; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; }
-        .error { color: #e74c3c; }
-        footer { margin-top: 40px; text-align: center; color: #95a5a6; }
+        .converter-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #34495e; }
+        .converter-group input, .converter-group select, .converter-group textarea { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; }
+        .converter-group textarea { min-height: 150px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; resize: vertical; }
+        .meta { display: flex; gap: 20px; color: #7f8c8d; font-size: 13px; margin-bottom: 12px; }
+        .result-box { background: #ecf0f1; border-radius: 8px; padding: 24px; margin-top: 20px; border: 2px solid #3498db; }
+        .result-box h2 { color: #2c3e50; margin-bottom: 12px; font-size: 20px; }
+        #output { margin: 12px 0; padding: 12px; background: #2c3e50; color: #ecf0f1; border-radius: 6px; overflow-x: auto; min-height: 60px; white-space: pre-wrap; word-break: break-word; text-align: left; }
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .download-btn { padding: 12px 24px; background: #3498db; color: white; border: none; text-decoration: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; }
+        .download-btn.secondary { background: #7f8c8d; }
+        .error { color: #c0392b; font-weight: 600; margin-top: 10px; }
+        .back { display: inline-block; margin-top: 24px; color: #3498db; text-decoration: none; }
+        footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
+        @media (max-width: 600px) { .converter-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🔄 Data Converter Tool</h1>
-        <p class="subtitle">Convert between JSON, CSV, XML, and other formats</p>
-        
-        <div class="formats">
-            <button class="format-btn active" onclick="showFormat('json', this)">JSON</button>
-            <button class="format-btn" onclick="showFormat('csv', this)">CSV</button>
-            <button class="format-btn" onclick="showFormat('xml', this)">XML</button>
-            <button class="format-btn" onclick="showFormat('all', this)">All Formats</button>
+        <p class="subtitle">Convert between JSON, CSV and XML entirely in your browser — nothing is uploaded</p>
+
+        <div class="formats" id="formatButtons">
+            <button type="button" class="format-btn active" data-format="json">JSON</button>
+            <button type="button" class="format-btn" data-format="csv">CSV</button>
+            <button type="button" class="format-btn" data-format="xml">XML</button>
         </div>
-        
+
         <div class="converter-grid">
             <div class="converter-group">
-                <label>From (JSON, CSV, or XML)</label>
-                <select id="fromFormat" onchange="showFormat(this.value, null);">
+                <label for="fromFormat">From</label>
+                <select id="fromFormat">
                     <option value="json">JSON</option>
                     <option value="csv">CSV</option>
                     <option value="xml">XML</option>
                 </select>
-                <input type="text" id="input" placeholder='{"field":"value"}' oninput="updatePreview()">
+                <label for="input" style="margin-top: 12px;">Input</label>
+                <textarea id="input" spellcheck="false" placeholder='[{"name":"Ada","role":"Engineer"}]'></textarea>
             </div>
             <div class="converter-group">
-                <label>To</label>
-                <select id="toFormat" onchange="showFormat(this.value, null);">
+                <label for="toFormat">To</label>
+                <select id="toFormat">
                     <option value="json">JSON</option>
                     <option value="csv">CSV</option>
                     <option value="xml">XML</option>
                 </select>
-            </div>
-            <div class="converter-group">
-                <label>Size (bytes)</label>
-                <input type="text" id="size" readonly value="0">
-            </div>
-            <div class="converter-group">
-                <label>To/From Size (optional)</label>
-                <input type="text" id="sizeFrom" placeholder="New size if different">
+                <label for="rootName" style="margin-top: 12px;">XML root / row names</label>
+                <input type="text" id="rootName" value="root" placeholder="root">
+                <input type="text" id="rowName" value="row" placeholder="row" style="margin-top: 8px;">
             </div>
         </div>
-        
+
+        <div class="meta">
+            <span>Input size: <strong id="size">0</strong> bytes</span>
+            <span>Output size: <strong id="outputSize">0</strong> bytes</span>
+            <span>Records: <strong id="recordCount">0</strong></span>
+        </div>
+
         <div class="result-box">
-            <h2>Output</h2>
-            <pre id="output" style="margin: 12px 0; padding: 12px; background: #2c3e50; color: #ecf0f1; border-radius: 6px; overflow-x: auto;"></pre>
-            <a href="data:text/csv;charset=utf-8," + encodeURIComponent('converted_data.csv') + '" class="download-btn" download="output.csv" onclick="downloadOutput('csv')">Download CSV</a>
-            <a href="data:text/xml;charset=utf-8," + encodeURIComponent('converted_data.xml') + '" class="download-btn" download="output.xml" onclick="downloadOutput('xml')">Download XML</a>
+            <h2 id="outputHeading">Output (JSON)</h2>
+            <pre id="output"></pre>
+            <div id="error" class="error" style="display: none;"></div>
+            <div class="actions">
+                <button type="button" class="download-btn" id="downloadBtn">Download</button>
+                <button type="button" class="download-btn secondary" id="copyBtn">Copy</button>
+                <button type="button" class="download-btn secondary" id="sampleBtn">Load sample</button>
+            </div>
         </div>
+
+        <a class="back" href="/tools/">&larr; All free tools</a>
     </div>
 
     <script>
-        let currentFormat = 'json';
-        
-        function showFormat(format, btn) {
-            currentFormat = format;
-            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-            document.getElementById('size').value = 0;
-            document.getElementById('output').textContent = '';
-            document.getElementById('output').classList.add('hidden');
-        }
-        
-        document.getElementById('input').addEventListener('input', updatePreview);
-        document.getElementById('fromFormat').addEventListener('change', function() { showFormat(this.value, this); updatePreview(); });
-        document.getElementById('toFormat').addEventListener('change', function() { showFormat(this.value, this); clearOutput(); });
-        
-        function updatePreview() {
-            const input = document.getElementById('input').value;
-            const size = input.length;
-            document.getElementById('size').value = size;
-            
-            try {
-                const parsed = JSON.parse(input);
-                const json = JSON.stringify(parsed, null, 2);
-                document.getElementById('output').textContent = json;
-                document.getElementById('output').classList.remove('hidden');
-                document.querySelector('.result-box h2').textContent = 'Output (JSON)';
-            } catch (e) {
-                // Try CSV
-                const lines = input.split('\n').filter(l => l.trim());
-                document.getElementById('output').textContent = `CSV Lines: ${lines.length}\n(Use CSV format for tables)`;
-                document.getElementById('output').classList.remove('hidden');
-                document.querySelector('.result-box h2').textContent = 'Output (CSV)';
+        (function () {
+            var inputEl = document.getElementById('input');
+            var fromEl = document.getElementById('fromFormat');
+            var toEl = document.getElementById('toFormat');
+            var rootEl = document.getElementById('rootName');
+            var rowEl = document.getElementById('rowName');
+            var outputEl = document.getElementById('output');
+            var headingEl = document.getElementById('outputHeading');
+            var errorEl = document.getElementById('error');
+
+            var LABELS = { json: 'JSON', csv: 'CSV', xml: 'XML' };
+            var MIME = { json: 'application/json', csv: 'text/csv', xml: 'application/xml' };
+            var SAMPLES = {
+                json: '[\n  {"name": "Ada", "role": "Engineer", "city": "London"},\n  {"name": "Grace", "role": "Admiral", "city": "New York"}\n]',
+                csv: 'name,role,city\nAda,Engineer,London\nGrace,Admiral,New York',
+                xml: '<root>\n  <row><name>Ada</name><role>Engineer</role><city>London</city></row>\n  <row><name>Grace</name><role>Admiral</role><city>New York</city></row>\n</root>'
+            };
+
+            function parseCsv(text) {
+                var rows = [];
+                var row = [];
+                var field = '';
+                var inQuotes = false;
+                var i = 0;
+                var pushField = function () { row.push(field); field = ''; };
+                var pushRow = function () { pushField(); rows.push(row); row = []; };
+
+                while (i < text.length) {
+                    var ch = text[i];
+                    if (inQuotes) {
+                        if (ch === '"') {
+                            if (text[i + 1] === '"') { field += '"'; i += 2; continue; }
+                            inQuotes = false; i++; continue;
+                        }
+                        field += ch; i++; continue;
+                    }
+                    if (ch === '"') { inQuotes = true; i++; continue; }
+                    if (ch === ',') { pushField(); i++; continue; }
+                    if (ch === '\r') { i++; continue; }
+                    if (ch === '\n') { pushRow(); i++; continue; }
+                    field += ch; i++;
+                }
+                if (field.length || row.length) pushRow();
+                return rows.filter(function (r) { return r.length > 1 || (r[0] || '').trim() !== ''; });
             }
-        }
-        
-        function clearOutput() {
-            document.getElementById('output').classList.add('hidden');
-        }
-        
-        function downloadOutput(format) {
-            const output = document.getElementById('output');
-            if (output.classList.contains('hidden') || !output.textContent) {
-                alert('No output to download');
-                return;
+
+            function csvToRecords(text) {
+                var rows = parseCsv(text);
+                if (!rows.length) return [];
+                var header = rows[0];
+                return rows.slice(1).map(function (cells) {
+                    var obj = {};
+                    header.forEach(function (key, idx) {
+                        obj[key || ('column' + (idx + 1))] = cells[idx] === undefined ? '' : cells[idx];
+                    });
+                    return obj;
+                });
             }
-            const content = output.textContent;
-            const filename = 'converted.' + format;
-            
-            if (format === 'csv') {
-                const csv = content.replace(/\n$/g, '').replace(/\r/g, '');
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
+
+            function xmlToRecords(text) {
+                var doc = new DOMParser().parseFromString(text, 'application/xml');
+                if (doc.getElementsByTagName('parsererror').length) throw new Error('Input is not well-formed XML.');
+                var root = doc.documentElement;
+                if (!root) throw new Error('Input is not well-formed XML.');
+                var children = Array.prototype.filter.call(root.children, function (n) { return n.nodeType === 1; });
+                if (!children.length) return [nodeToObject(root)];
+                return children.map(nodeToObject);
+            }
+
+            function nodeToObject(node) {
+                var children = Array.prototype.filter.call(node.children, function (n) { return n.nodeType === 1; });
+                if (!children.length) {
+                    var single = {};
+                    single[node.nodeName] = node.textContent;
+                    return single;
+                }
+                var obj = {};
+                children.forEach(function (child) {
+                    var grand = Array.prototype.filter.call(child.children, function (n) { return n.nodeType === 1; });
+                    obj[child.nodeName] = grand.length ? nodeToObject(child) : child.textContent;
+                });
+                return obj;
+            }
+
+            function toRecords(value) {
+                if (Array.isArray(value)) {
+                    return value.map(function (v) {
+                        return (v !== null && typeof v === 'object' && !Array.isArray(v)) ? v : { value: v };
+                    });
+                }
+                if (value !== null && typeof value === 'object') return [value];
+                return [{ value: value }];
+            }
+
+            function cell(value) {
+                if (value === null || value === undefined) return '';
+                if (typeof value === 'object') return JSON.stringify(value);
+                return String(value);
+            }
+
+            function recordsToCsv(records) {
+                if (!records.length) return '';
+                var keys = [];
+                records.forEach(function (r) {
+                    Object.keys(r).forEach(function (k) { if (keys.indexOf(k) === -1) keys.push(k); });
+                });
+                var escape = function (v) {
+                    var s = cell(v);
+                    return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+                };
+                var lines = [keys.map(escape).join(',')];
+                records.forEach(function (r) {
+                    lines.push(keys.map(function (k) { return escape(r[k]); }).join(','));
+                });
+                return lines.join('\n');
+            }
+
+            function escapeXml(s) {
+                return String(s)
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+            }
+
+            function safeTag(name, fallback) {
+                var tag = String(name || '').trim().replace(/[^A-Za-z0-9_.-]/g, '_');
+                if (!tag || /^[^A-Za-z_]/.test(tag)) tag = fallback + (tag ? '_' + tag : '');
+                return tag;
+            }
+
+            function recordsToXml(records, rootName, rowName) {
+                var root = safeTag(rootName, 'root');
+                var rowTag = safeTag(rowName, 'row');
+                var out = ['<?xml version="1.0" encoding="UTF-8"?>', '<' + root + '>'];
+                records.forEach(function (record) {
+                    out.push('  <' + rowTag + '>');
+                    Object.keys(record).forEach(function (key) {
+                        var tag = safeTag(key, 'field');
+                        out.push('    <' + tag + '>' + escapeXml(cell(record[key])) + '</' + tag + '>');
+                    });
+                    out.push('  </' + rowTag + '>');
+                });
+                out.push('</' + root + '>');
+                return out.join('\n');
+            }
+
+            function convert() {
+                var from = fromEl.value;
+                var to = toEl.value;
+                var text = inputEl.value;
+
+                headingEl.textContent = 'Output (' + LABELS[to] + ')';
+                document.getElementById('size').textContent = text.length;
+
+                if (!text.trim()) {
+                    outputEl.textContent = '';
+                    errorEl.style.display = 'none';
+                    document.getElementById('outputSize').textContent = 0;
+                    document.getElementById('recordCount').textContent = 0;
+                    return;
+                }
+
+                var records;
+                try {
+                    if (from === 'json') records = toRecords(JSON.parse(text));
+                    else if (from === 'csv') records = csvToRecords(text);
+                    else records = xmlToRecords(text);
+                } catch (err) {
+                    errorEl.textContent = 'Could not parse the input as ' + LABELS[from] + ': ' + err.message;
+                    errorEl.style.display = 'block';
+                    outputEl.textContent = '';
+                    document.getElementById('outputSize').textContent = 0;
+                    document.getElementById('recordCount').textContent = 0;
+                    return;
+                }
+
+                errorEl.style.display = 'none';
+                var result;
+                if (to === 'json') result = JSON.stringify(records.length === 1 ? records[0] : records, null, 2);
+                else if (to === 'csv') result = recordsToCsv(records);
+                else result = recordsToXml(records, rootEl.value, rowEl.value);
+
+                outputEl.textContent = result;
+                document.getElementById('outputSize').textContent = result.length;
+                document.getElementById('recordCount').textContent = records.length;
+            }
+
+            function syncButtons() {
+                Array.prototype.forEach.call(document.querySelectorAll('.format-btn'), function (btn) {
+                    btn.classList.toggle('active', btn.getAttribute('data-format') === toEl.value);
+                });
+            }
+
+            Array.prototype.forEach.call(document.querySelectorAll('.format-btn'), function (btn) {
+                btn.addEventListener('click', function () {
+                    toEl.value = btn.getAttribute('data-format');
+                    syncButtons();
+                    convert();
+                });
+            });
+
+            inputEl.addEventListener('input', convert);
+            fromEl.addEventListener('change', convert);
+            toEl.addEventListener('change', function () { syncButtons(); convert(); });
+            rootEl.addEventListener('input', convert);
+            rowEl.addEventListener('input', convert);
+
+            document.getElementById('downloadBtn').addEventListener('click', function () {
+                var content = outputEl.textContent;
+                if (!content) { alert('No output to download'); return; }
+                var to = toEl.value;
+                var blob = new Blob([content], { type: MIME[to] + ';charset=utf-8;' });
+                var link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = filename;
+                link.download = 'converted.' + to;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-            } else if (format === 'xml') {
-                const blob = new Blob([content], { type: 'application/xml' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
+                URL.revokeObjectURL(link.href);
+            });
+
+            document.getElementById('copyBtn').addEventListener('click', function () {
+                var content = outputEl.textContent;
+                if (!content) { alert('No output to copy'); return; }
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(content);
+            });
+
+            document.getElementById('sampleBtn').addEventListener('click', function () {
+                inputEl.value = SAMPLES[fromEl.value];
+                convert();
+            });
+
+            syncButtons();
+            convert();
+        })();
     </script>
+
+    <footer>Free tool by Autonomy Labs. All conversion happens locally in your browser.</footer>
 </body>
 </html>

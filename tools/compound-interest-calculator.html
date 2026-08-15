@@ -130,22 +130,27 @@
             const breakdown = [];
             let periodContribution = periodicContribution;
             let periodCount = 0;
+            let yearStartBalance = principal;
+            let yearInterest = 0;
             
             for (let period = 1; period <= totalPeriods; period++) {
                 const interest = balance * periodicRate;
                 balance += interest + periodContribution;
                 totalInterest += interest;
                 totalContributions += periodContribution;
+                yearInterest += interest;
                 periodCount++;
                 
                 if (period % frequency === 0) {
                     breakdown.push({
                         year: period / frequency,
-                        startBalance: balance - interest - periodContribution,
+                        startBalance: yearStartBalance,
                         contributions: periodCount * periodContribution,
-                        interest: totalInterest - (breakdown.reduce((sum, b) => sum + b.interest, 0)),
+                        interest: yearInterest,
                         endBalance: balance
                     });
+                    yearStartBalance = balance;
+                    yearInterest = 0;
                     periodCount = 0;
                 }
             }

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Stage Calculator</title>
+    <title>Age Calculator - Exact Age in Years, Months and Days</title>
+    <meta name="description" content="Free age calculator. Enter your birth date to get your exact age in years, months and days, plus life stage, zodiac sign and days until your next birthday.">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
@@ -14,61 +15,230 @@
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 600; color: #34495e; }
         input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .picker-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+        .picker-row label { margin: 0; font-weight: 400; font-size: 13px; color: #7f8c8d; white-space: nowrap; }
+        .picker-row input { padding: 8px; font-size: 14px; }
+        .hint { color: #95a5a6; font-size: 13px; margin-top: 6px; }
         .result-box { background: #ecf0f1; border-radius: 8px; padding: 20px; margin-top: 20px; text-align: center; border: 2px solid #3498db; }
         .result-box h2 { color: #2c3e50; margin-bottom: 10px; }
-        .percentage { font-size: 48px; font-weight: 700; color: #2c3e50; }
+        .age-value { font-size: 48px; font-weight: 700; color: #2c3e50; }
+        .age-exact { color: #34495e; font-size: 18px; margin-top: 4px; }
+        .category-badge { display: inline-block; margin-top: 12px; padding: 6px 14px; border-radius: 20px; background: #3498db; color: white; font-weight: 600; font-size: 14px; }
+        .facts { list-style: none; margin-top: 18px; text-align: left; }
+        .facts li { padding: 6px 0; border-top: 1px solid #dfe4e6; color: #34495e; display: flex; justify-content: space-between; gap: 12px; }
+        .facts li span:first-child { color: #7f8c8d; }
+        .error { color: #e74c3c; font-weight: 600; margin-top: 12px; }
+        .back { display: inline-block; margin-top: 24px; color: #3498db; text-decoration: none; }
         footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📅 Life Stage Calculator</h1>
-        <p class="subtitle">Determine your life stage and major transitions</p>
-        <form class="calc-form" id="ageForm">
+        <h1>📅 Age Calculator</h1>
+        <p class="subtitle">Enter your birth date to get your exact age, life stage and next birthday</p>
+
+        <form class="calc-form" id="ageForm" novalidate>
             <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+                <label for="birthDate">Birth Date</label>
+                <input type="text" id="birthDate" name="birthDate" placeholder="YYYY-MM-DD" autocomplete="bday" spellcheck="false">
+                <div class="picker-row">
+                    <label for="birthDatePicker">or pick from a calendar</label>
+                    <input type="date" id="birthDatePicker">
+                </div>
+                <div class="hint">Accepts 1990-05-15, 15.05.1990 or 05/15/1990.</div>
             </div>
             <div class="form-group">
-                <label for="birthYear">Birth Year</label>
-                <input type="number" id="birthYear" name="birthYear" min="1900" max="2026" required>
+                <label for="asOf">Age As Of (optional)</label>
+                <input type="text" id="asOf" name="asOf" placeholder="today" spellcheck="false">
             </div>
             <div class="form-group">
                 <button type="submit" style="width: 100%; padding: 14px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Calculate Age</button>
             </div>
+            <div id="error" class="error" style="display: none;"></div>
         </form>
+
         <div id="result" class="result-box" style="display: none;">
             <h2>Your Age</h2>
-            <div class="percentage" id="ageValue">--</div>
-            <div id="ageCategory"></div>
+            <div class="age-value" id="ageValue">--</div>
+            <div class="age-exact" id="ageExact"></div>
+            <div class="category-badge" id="ageCategory"></div>
+            <ul class="facts">
+                <li><span>Total days lived</span><span id="totalDays">--</span></li>
+                <li><span>Total months</span><span id="totalMonths">--</span></li>
+                <li><span>Zodiac sign</span><span id="zodiac">--</span></li>
+                <li><span>Next birthday</span><span id="nextBirthday">--</span></li>
+            </ul>
         </div>
+
+        <a class="back" href="/tools/">&larr; All free tools</a>
     </div>
+
     <script>
-        document.getElementById('ageForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const gender = document.getElementById('gender').value;
-            const birthYear = parseInt(document.getElementById('birthYear').value);
-            const currentYear = new Date().getFullYear();
-            const age = currentYear - birthYear;
-            document.getElementById('ageValue').textContent = age;
-            const categories = {
-                male: ['Child', 'Teen', 'Young Adult', 'Adult', 'Senior'],
-                female: ['Child', 'Teen', 'Young Adult', 'Adult', 'Senior'],
-                other: ['Child', 'Teen', 'Young Adult', 'Adult', 'Senior']
-            };
-            let idx;
-            if (age <= 12) idx = 0;
-            else if (age <= 19) idx = 1;
-            else if (age <= 34) idx = 2;
-            else if (age <= 64) idx = 3;
-            else idx = 4;
-            const labels = ['0-12', '13-19', '20-34', '35-64', '65+'];
-            document.getElementById('ageCategory').innerHTML = '<strong>' + categories[gender][idx] + '</strong><br><small>' + labels[idx] + '</small>';
-        });
+        (function () {
+            var form = document.getElementById('ageForm');
+            var birthEl = document.getElementById('birthDate');
+            var asOfEl = document.getElementById('asOf');
+            var errorEl = document.getElementById('error');
+
+            var ZODIAC = [
+                { sign: 'Capricorn', until: [1, 19] }, { sign: 'Aquarius', until: [2, 18] },
+                { sign: 'Pisces', until: [3, 20] }, { sign: 'Aries', until: [4, 19] },
+                { sign: 'Taurus', until: [5, 20] }, { sign: 'Gemini', until: [6, 20] },
+                { sign: 'Cancer', until: [7, 22] }, { sign: 'Leo', until: [8, 22] },
+                { sign: 'Virgo', until: [9, 22] }, { sign: 'Libra', until: [10, 22] },
+                { sign: 'Scorpio', until: [11, 21] }, { sign: 'Sagittarius', until: [12, 21] }
+            ];
+
+            var STAGES = [
+                { max: 2, label: 'Infant', range: '0-2' },
+                { max: 12, label: 'Child', range: '3-12' },
+                { max: 19, label: 'Teen', range: '13-19' },
+                { max: 34, label: 'Young Adult', range: '20-34' },
+                { max: 64, label: 'Adult', range: '35-64' },
+                { max: Infinity, label: 'Senior', range: '65+' }
+            ];
+
+            function buildDate(year, month, day) {
+                var d = new Date(year, month - 1, day);
+                if (d.getFullYear() !== year || d.getMonth() !== month - 1 || d.getDate() !== day) return null;
+                return d;
+            }
+
+            // `new Date("1990-05-15")` is parsed as UTC and shifts a day in western
+            // timezones, so every supported format is split into parts by hand.
+            // For an all-slash date the leading number is the month unless it is
+            // above 12, which makes "15/05/1990" work as well as "05/15/1990".
+            function parseDateInput(value) {
+                var text = (value || '').trim();
+                if (!text) return null;
+
+                var iso = /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/.exec(text);
+                if (iso) return buildDate(Number(iso[1]), Number(iso[2]), Number(iso[3]));
+
+                var dotted = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(text);
+                if (dotted) return buildDate(Number(dotted[3]), Number(dotted[2]), Number(dotted[1]));
+
+                var slashed = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(text);
+                if (slashed) {
+                    var first = Number(slashed[1]);
+                    var second = Number(slashed[2]);
+                    return first > 12
+                        ? buildDate(Number(slashed[3]), second, first)
+                        : buildDate(Number(slashed[3]), first, second);
+                }
+                return null;
+            }
+
+            function toIso(d) {
+                return d.getFullYear() + '-' +
+                    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(d.getDate()).padStart(2, '0');
+            }
+
+            function startOfDay(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+
+            function diffYMD(from, to) {
+                var years = to.getFullYear() - from.getFullYear();
+                var months = to.getMonth() - from.getMonth();
+                var days = to.getDate() - from.getDate();
+                if (days < 0) {
+                    months -= 1;
+                    days += new Date(to.getFullYear(), to.getMonth(), 0).getDate();
+                }
+                if (months < 0) {
+                    years -= 1;
+                    months += 12;
+                }
+                return { years: years, months: months, days: days };
+            }
+
+            function zodiacFor(d) {
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+                for (var i = 0; i < ZODIAC.length; i++) {
+                    var z = ZODIAC[i];
+                    if (month < z.until[0] || (month === z.until[0] && day <= z.until[1])) return z.sign;
+                }
+                return 'Capricorn';
+            }
+
+            function stageFor(years) {
+                for (var i = 0; i < STAGES.length; i++) {
+                    if (years <= STAGES[i].max) return STAGES[i];
+                }
+                return STAGES[STAGES.length - 1];
+            }
+
+            function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+
+            function showError(message) {
+                errorEl.textContent = message;
+                errorEl.style.display = 'block';
+                document.getElementById('result').style.display = 'none';
+            }
+
+            function calculate() {
+                var birth = parseDateInput(birthEl.value);
+                if (!birth) {
+                    showError('Please enter a valid birth date, for example 1990-05-15.');
+                    return;
+                }
+
+                var reference = asOfEl.value.trim() ? parseDateInput(asOfEl.value) : startOfDay(new Date());
+                if (!reference) {
+                    showError('Please enter a valid "as of" date, for example 2026-08-15.');
+                    return;
+                }
+                if (birth > reference) {
+                    showError('Birth date cannot be in the future.');
+                    return;
+                }
+
+                errorEl.style.display = 'none';
+
+                var age = diffYMD(birth, reference);
+                var msPerDay = 24 * 60 * 60 * 1000;
+                var totalDays = Math.round((reference - birth) / msPerDay);
+                var totalMonths = age.years * 12 + age.months;
+                var stage = stageFor(age.years);
+
+                var nextBirthday = new Date(reference.getFullYear(), birth.getMonth(), birth.getDate());
+                if (nextBirthday < reference) nextBirthday = new Date(reference.getFullYear() + 1, birth.getMonth(), birth.getDate());
+                var daysToBirthday = Math.round((nextBirthday - reference) / msPerDay);
+
+                document.getElementById('ageValue').textContent = age.years + (age.years === 1 ? ' year' : ' years');
+                document.getElementById('ageExact').textContent =
+                    plural(age.years, 'year') + ', ' + plural(age.months, 'month') + ', ' + plural(age.days, 'day');
+                document.getElementById('ageCategory').textContent = stage.label + ' (' + stage.range + ')';
+                document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+                document.getElementById('totalMonths').textContent = totalMonths.toLocaleString();
+                document.getElementById('zodiac').textContent = zodiacFor(birth);
+                document.getElementById('nextBirthday').textContent = daysToBirthday === 0
+                    ? 'Today 🎉'
+                    : 'in ' + plural(daysToBirthday, 'day');
+
+                document.getElementById('result').style.display = 'block';
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                calculate();
+            });
+
+            var pickerEl = document.getElementById('birthDatePicker');
+            pickerEl.max = toIso(startOfDay(new Date()));
+            pickerEl.addEventListener('change', function () {
+                if (!pickerEl.value) return;
+                birthEl.value = pickerEl.value;
+                calculate();
+            });
+            birthEl.addEventListener('input', function () {
+                var parsed = parseDateInput(birthEl.value);
+                pickerEl.value = parsed ? toIso(parsed) : '';
+            });
+        })();
     </script>
+
+    <footer>Free tool by Autonomy Labs. Ages are calculated on calendar dates, ignoring time of day.</footer>
 </body>
 </html>

@@ -63,12 +63,14 @@
     </div>
 
     <script>
-        function convertColor() {
+        // `showErrors` is false while the user is still typing, so a half-finished
+        // hex code does not raise an alert on every keystroke.
+        function convertColor(showErrors = true) {
             const hexInput = document.getElementById('hexInput').value.trim();
             const hex = hexInput.replace('#', '');
             
             if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
-                alert('Please enter a valid HEX code (6 hex characters, e.g., #ff0000)');
+                if (showErrors) alert('Please enter a valid HEX code (6 hex characters, e.g., #ff0000)');
                 return;
             }
             
@@ -104,13 +106,13 @@
             }
             
             const hslStr = `${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l * 100)}%`;
-            document.getElementById('hslOutput').textContent = `hsl${hslStr}`;
+            document.getElementById('hslOutput').textContent = `hsl(${hslStr})`;
             
             // HSV
             const v = max;
             const sV = max === 0 ? 0 : (max - min) / max;
             const hsvStr = `${Math.round(h)}, ${Math.round(sV * 100)}%, ${Math.round(v * 100)}%`;
-            document.getElementById('hsvOutput').textContent = `hsv${hsvStr}`;
+            document.getElementById('hsvOutput').textContent = `hsv(${hsvStr})`;
             
             // Update preview
             document.getElementById('colorPreview').style.background = hexInput;
@@ -120,7 +122,7 @@
         
         // Auto-convert on input
         document.getElementById('hexInput').addEventListener('keypress', e => { if (e.key === 'Enter') convertColor(); });
-        document.getElementById('hexInput').addEventListener('input', e => { if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') convertColor(); });
+        document.getElementById('hexInput').addEventListener('input', () => convertColor(false));
         
         convertColor();
     </script>
