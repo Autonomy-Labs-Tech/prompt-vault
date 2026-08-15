@@ -71,6 +71,23 @@ function sendJson(res, obj, sessionId) {
 }
 
 module.exports = async function (req, res) {
+  if (req.method === 'GET') {
+    // Streamable-HTTP reserves GET for the server->client SSE stream, which this
+    // server does not offer; any other GET is treated as a discovery request.
+    const accept = String(req.headers.accept || '');
+    if (accept.includes('text/event-stream')) {
+      return res.status(405).json({ error: 'SSE stream not supported; POST JSON-RPC to this endpoint' });
+    }
+    return res.status(200).json({
+      protocolVersion: '2025-03-26',
+      transport: 'streamable-http',
+      endpoint: BASE + '/api/mcp',
+      usage: 'POST JSON-RPC 2.0 to this endpoint (initialize, tools/list, tools/call).',
+      capabilities: { tools: { listChanged: false } },
+      serverInfo: { name: 'autonomy-x402-tools', version: '1.0.0' },
+      tools: TOOLS,
+    });
+  }
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only (Streamable-HTTP MCP)' });
   let body = '';
   req.on('data', (c) => { body += c; if (body.length > 1000000) req.destroy(); });

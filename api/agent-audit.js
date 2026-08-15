@@ -14,6 +14,12 @@ const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 
 const SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt'];
 
+// Node's res.setHeader() throws ERR_INVALID_CHAR for any code point above U+00FF,
+// so JSON destined for a header must have its non-ASCII escaped (still valid JSON).
+function headerSafeJson(obj) {
+  return JSON.stringify(obj).replace(/[\u007f-\uffff]/g, (c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'));
+}
+
 function fetchPath(base, p) {
   return new Promise((resolve) => {
     const mod = base.startsWith('https') ? https : http;
@@ -65,61 +71,65 @@ async function runAudit(targetUrl) {
 }
 
 module.exports = async function (req, res) {
-  // CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-PAYMENT, PAYMENT-REQUIRED');
-  if (req.method === 'OPTIONS') return res.status(204).end();
-
-  const targetUrl = req.query.url || req.query.target || (req.body && req.body.url);
-
-  // Check for payment
-  const paymentHeader = req.headers['x-payment'] || req.headers['payment'];
-  const paymentRequiredHeader = req.headers['payment-required'];
-
-  if (!paymentHeader && !paymentRequiredHeader) {
-    // Return 402 with payment requirements
-    res.status(402);
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('X-PAYMENT', JSON.stringify({
-      accepts: [{
-        scheme: 'gateway',
-        network: '8453', // Base
-        asset: USDC_BASE,
-        amount: PRICE_USDC,
-        payTo: SELLER_ADDRESS,
-        description: 'AI Agent Readiness Audit — per-site report',
-      }],
-    }));
-    return res.json({
-      error: 'Payment Required',
-      status: 402,
-      price: '$0.01 USDC on Base',
-      description: 'Audit any website for AI-agent discoverability (llms.txt, robots.txt, sitemap.xml, x402, agents.txt). Returns a graded Markdown report with concrete fixes.',
-      accepts: [{
-        scheme: 'gateway',
-        network: '8453',
-        asset: USDC_BASE,
-        amount: PRICE_USDC,
-        payTo: SELLER_ADDRESS,
-      }],
-      usage: 'GET /api/agent-audit?url=https://example.com with X-PAYMENT header',
-    });
-  }
-
-  // If payment is present, verify and serve
-  // For now, we accept any payment header (full verification requires Circle Gateway SDK)
-  // In production, use @circle-fin/x402-batching middleware for proper settlement
-  if (!targetUrl) {
-    return res.status(400).json({ error: 'Missing url parameter. Usage: /api/agent-audit?url=https://example.com' });
-  }
-
   try {
+    // CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-PAYMENT, PAYMENT-REQUIRED');
+    if (req.method === 'OPTIONS') return res.status(204).end();
+
+    const query = req.query || Object.fromEntries(new URLSearchParams((req.url || '').split('?')[1] || ''));
+    const targetUrl = query.url || query.target || (req.body && req.body.url);
+
+    // Check for payment
+    const paymentHeader = req.headers['x-payment'] || req.headers['payment'];
+    const paymentRequiredHeader = req.headers['payment-required'];
+
+    if (!paymentHeader && !paymentRequiredHeader) {
+      // Return 402 with payment requirements
+      res.status(402);
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('X-PAYMENT', headerSafeJson({
+        accepts: [{
+          scheme: 'gateway',
+          network: '8453', // Base
+          asset: USDC_BASE,
+          amount: PRICE_USDC,
+          payTo: SELLER_ADDRESS,
+          description: 'AI Agent Readiness Audit - per-site report',
+        }],
+      }));
+      return res.json({
+        error: 'Payment Required',
+        status: 402,
+        price: '$0.01 USDC on Base',
+        description: 'Audit any website for AI-agent discoverability (llms.txt, robots.txt, sitemap.xml, x402, agents.txt). Returns a graded Markdown report with concrete fixes.',
+        accepts: [{
+          scheme: 'gateway',
+          network: '8453',
+          asset: USDC_BASE,
+          amount: PRICE_USDC,
+          payTo: SELLER_ADDRESS,
+        }],
+        usage: 'GET /api/agent-audit?url=https://example.com with X-PAYMENT header',
+      });
+    }
+
+    // If payment is present, verify and serve
+    // For now, we accept any payment header (full verification requires Circle Gateway SDK)
+    // In production, use @circle-fin/x402-batching middleware for proper settlement
+    if (!targetUrl) {
+      return res.status(400).json({ error: 'Missing url parameter. Usage: /api/agent-audit?url=https://example.com' });
+    }
+
     const result = await runAudit(targetUrl);
     res.status(200);
     res.setHeader('Content-Type', 'application/json');
     return res.json(result);
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    if (res.headersSent) return res.end();
+    res.status(500);
+    res.setHeader('Content-Type', 'application/json');
+    return res.end(JSON.stringify({ error: String((e && e.message) || e) }));
   }
 };

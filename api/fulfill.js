@@ -1,34 +1,56 @@
 // Vercel serverless function: Stripe webhook → automated digital download delivery
-const crypto = require('crypto');
 const https = require('https');
+
+const FULFILLABLE_EVENTS = ['checkout.session.completed', 'payment_intent.succeeded'];
+const SIGNATURE_TOLERANCE_SEC = 300;
+
+// Stripe sends `t=<unix-seconds>,v1=<hex-hmac>` (repeated v1 during secret rotation).
+function parseStripeSignature(header) {
+  const raw = String(header == null ? '' : header).trim();
+  if (!raw) return { present: false, valid: false, timestamp: NaN };
+  let t = null;
+  const v1 = [];
+  for (const part of raw.split(',')) {
+    const i = part.indexOf('=');
+    if (i <= 0) continue;
+    const key = part.slice(0, i).trim();
+    const value = part.slice(i + 1).trim();
+    if (key === 't') t = value;
+    else if (key === 'v1') v1.push(value);
+  }
+  const timestamp = parseInt(t, 10);
+  const valid = t !== null && String(timestamp) === t && Number.isFinite(timestamp) &&
+    v1.length > 0 && v1.every((s) => /^[a-f0-9]{64}$/i.test(s));
+  return { present: true, valid, timestamp };
+}
 
 module.exports = async function (req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'method not allowed' });
   const env = process.env;
   const STRIPE_KEY = env.STRIPE_SECRET_KEY;
   const RESEND_KEY = env.RESEND_API_KEY;
-  const WEBHOOK_SECRET = env.STRIPE_WEBHOOK_SECRET;
   const FROM = 'Prompt Vault <hello@autonomylabsweb.tech>';
-  if (!STRIPE_KEY || !RESEND_KEY) return res.status(500).json({ error: 'missing keys' });
-
-  // Signature verification (best-effort)
-  if (WEBHOOK_SECRET) {
-    const sigHeader = req.headers['stripe-signature'] || '';
-    const parts = {};
-    sigHeader.split(',').forEach(p => { const i = p.indexOf('='); parts[p.slice(0, i)] = p.slice(i + 1); });
-    const payload = parts.t && parts.v1 ? parts.t + '.' + parts.v1 : '';
-    const expected = crypto.createHmac('sha256', WEBHOOK_SECRET).update(payload).digest('hex');
-    const [timestamp, signature] = payload.split('.');
-    const ts = parseInt(timestamp, 10);
-    if (!isNaN(ts) && Math.abs(Date.now() / 1000 - ts) > 300) {
-      return res.status(400).json({ error: 'invalid signature' });
-    }
-  }
+  if (!STRIPE_KEY || !RESEND_KEY) return res.status(503).json({ error: 'fulfillment not configured' });
 
   const event = req.body;
-  const etype = event && event.type;
-  if (etype !== 'checkout.session.completed' && etype !== 'payment_intent.succeeded') {
+  if (!event || typeof event !== 'object' || Array.isArray(event) || typeof event.type !== 'string') {
+    return res.status(400).json({ error: 'malformed event body' });
+  }
+  const etype = event.type;
+  if (!FULFILLABLE_EVENTS.includes(etype)) {
     return res.status(200).json({ ok: true, ignored: etype });
+  }
+
+  // Past this point the request can send a paid deliverable, so the caller has to
+  // prove the event really came from Stripe.
+  const sig = parseStripeSignature(req.headers['stripe-signature']);
+  if (!sig.present) return res.status(401).json({ error: 'missing stripe-signature header' });
+  if (!sig.valid) return res.status(400).json({ error: 'malformed stripe-signature header' });
+  if (Math.abs(Date.now() / 1000 - sig.timestamp) > SIGNATURE_TOLERANCE_SEC) {
+    return res.status(400).json({ error: 'stripe-signature timestamp outside tolerance' });
+  }
+  if (typeof event.id !== 'string' || !/^evt_[A-Za-z0-9]+$/.test(event.id)) {
+    return res.status(401).json({ error: 'missing or malformed event id' });
   }
 
   function api(host, method, path_, body, headers) {
@@ -189,8 +211,20 @@ module.exports = async function (req, res) {
     },
   };
 
+  // Vercel parses the JSON body before this handler runs, so the exact bytes Stripe
+  // signed are gone and the v1 HMAC cannot be recomputed. Re-reading the event from
+  // Stripe with our secret key is the authoritative substitute: a forged event id
+  // does not exist there, and the returned copy is the one we act on.
+  const lookup = await stripe('GET', '/v1/events/' + encodeURIComponent(event.id));
+  if (lookup.error) return res.status(503).json({ error: 'could not reach stripe to verify event' });
+  if (lookup.status === 404) return res.status(401).json({ error: 'event not found at stripe' });
+  if (lookup.status !== 200) return res.status(503).json({ error: 'stripe event lookup failed', status: lookup.status });
+  let verified;
+  try { verified = JSON.parse(lookup.body); } catch (e) { return res.status(503).json({ error: 'unreadable stripe event' }); }
+  if (!verified || verified.type !== etype) return res.status(401).json({ error: 'event type mismatch' });
+
   try {
-    const data = (event.data || {}).object || {};
+    const data = (verified.data || {}).object || {};
     const sid = data.id || '';
     let productId = null;
     if (data.object === 'checkout.session') {
