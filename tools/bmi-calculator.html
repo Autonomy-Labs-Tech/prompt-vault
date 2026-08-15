@@ -96,8 +96,6 @@
                 // Generate weight range chart
                 const minWeight = height * (18.5 - 1.7);
                 const maxWeight = height * (25 - 1.7);
-                const min kg = Math.max(30, minWeight);
-                const max kg = Math.min(100, maxWeight);
                 document.getElementById('chartContainer').style.display = 'block';
                 document.getElementById('chartContainer').innerHTML = '';
                 for (let w = Math.ceil(minWeight); w <= Math.floor(maxWeight); w++) {

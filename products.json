@@ -548,7 +548,7 @@
   },
   {
    "@type": "Product",
-   "position": 31,
+   "position": 33,
    "name": "Custom Browser Game Prototype",
    "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
    "category": "Services",

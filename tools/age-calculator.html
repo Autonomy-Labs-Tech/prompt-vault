@@ -60,8 +60,13 @@
                 female: ['Child', 'Teen', 'Young Adult', 'Adult', 'Senior'],
                 other: ['Child', 'Teen', 'Young Adult', 'Adult', 'Senior']
             };
-            const idx = Math.min(Math.max(age - 1, 0), 4);
-            const labels = ['0-1', '1-2', '3-6', '7-13', '14+'];
+            let idx;
+            if (age <= 12) idx = 0;
+            else if (age <= 19) idx = 1;
+            else if (age <= 34) idx = 2;
+            else if (age <= 64) idx = 3;
+            else idx = 4;
+            const labels = ['0-12', '13-19', '20-34', '35-64', '65+'];
             document.getElementById('ageCategory').innerHTML = '<strong>' + categories[gender][idx] + '</strong><br><small>' + labels[idx] + '</small>';
         });
     </script>
