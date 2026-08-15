@@ -1,1014 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autonomy Labs — AI Agent Products</title>
-<meta name="description" content="Instant digital downloads for AI agents and small business owners. Buy once, get instant access, use forever.">
-<meta name="llms" content="llms.txt">
-<meta name="robots" content="index, follow">
-<meta name="x402" content="/.well-known/x402">
-<meta name="agents" content="agents.txt">
-<style>
-  :root {
-    --bg:#f7f4ef; --bg2:#efece5; --card:#ffffff; --card2:#faf7f1;
-    --border:#e3ddd2; --text:#2b241b; --muted:#7a7265;
-    --accent:#b3541e; --accent2:#8a3d0f; --green:#3f7a4f; --radius:14px;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Georgia','Times New Roman',serif; background:var(--bg); color:var(--text); line-height:1.55; }
-  .container { max-width:1180px; margin:0 auto; padding:0 28px; }
-
-  /* Header */
-  .topbar { border-bottom:1px solid var(--border); background:rgba(247,244,239,.92); backdrop-filter:blur(8px); position:sticky; top:0; z-index:20; }
-  .topbar .container { display:flex; align-items:center; justify-content:space-between; padding:16px 28px; }
-  .brand { font-weight:800; font-size:1.15rem; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
-  .logo { width:30px; height:30px; border-radius:8px; background:var(--accent); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:15px; }
-  .nav a { color:var(--muted); text-decoration:none; font-size:.9rem; margin-left:22px; }
-  .nav a:hover { color:var(--text); }
-  .nav .cta { background:var(--accent); color:#fff; padding:8px 16px; border-radius:8px; font-weight:600; }
-  .nav .cta:hover { background:var(--accent2); color:#fff; }
-
-  /* Hero */
-  .hero { text-align:center; padding:84px 28px 68px; background:
-     radial-gradient(700px 320px at 50% -10%, rgba(179,84,30,.08), transparent 70%); }
-  .hero h1 { font-family:'Georgia','Times New Roman',serif; font-size:3rem; font-weight:700; line-height:1.15; max-width:760px; margin:0 auto 18px; letter-spacing:-.5px; }
-  .hero h1 span { color:var(--accent); }
-  .hero p { font-size:1.15rem; color:var(--muted); max-width:640px; margin:0 auto 26px; }
-  .hero .badges { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-  .hero .badge { background:var(--card); border:1px solid var(--border); padding:8px 16px; border-radius:20px; font-size:.85rem; color:var(--muted); }
-
-  /* Cat nav pills */
-  .catnav { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; padding:8px 0 0; }
-  .catnav a { color:var(--muted); text-decoration:none; font-size:.85rem; padding:8px 16px; border:1px solid var(--border); border-radius:20px; background:var(--card); }
-  .catnav a:hover { color:var(--text); border-color:var(--accent); }
-
-  /* Sections */
-  .cat-section { padding:34px 0 8px; }
-  .cat-section h2 { font-size:1.5rem; font-weight:700; margin-bottom:22px; display:flex; align-items:center; gap:10px; }
-  .cat-section h2::after { content:""; flex:1; height:1px; background:var(--border); }
-
-  /* Grid & cards */
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
-  .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; display:flex; flex-direction:column; transition:transform .15s ease, border-color .15s ease; }
-  .card:hover { transform:translateY(-3px); border-color:var(--accent); }
-  .card-top { margin-bottom:12px; }
-  .cat { font-size:.72rem; text-transform:uppercase; letter-spacing:.8px; color:var(--accent); font-weight:700; }
-  .card h3 { font-family:'Georgia','Times New Roman',serif; font-size:1.18rem; margin-bottom:8px; }
-  .tagline { font-size:.9rem; color:var(--muted); margin-bottom:16px; flex:1; }
-  .feats { list-style:none; margin-bottom:18px; }
-  .feats li { font-size:.85rem; color:var(--muted); padding:5px 0; border-bottom:1px solid var(--border); display:flex; gap:8px; }
-  .feats li:last-child { border-bottom:none; }
-  .feats li::before { content:"✓"; color:var(--green); font-weight:700; flex-shrink:0; }
-  .card-foot { margin-top:auto; }
-  .price { font-family:'Georgia','Times New Roman',serif; font-size:1.45rem; font-weight:700; margin-bottom:12px; }
-  .price span { font-size:.85rem; font-weight:400; color:var(--muted); }
-  .actions { display:flex; gap:10px; }
-  .btn { flex:1; text-align:center; background:var(--accent); color:#fff; font-weight:700; padding:12px 16px; border-radius:10px; text-decoration:none; font-size:.95rem; }
-  .btn:hover { background:var(--accent2); }
-  .link { text-align:center; color:var(--muted); text-decoration:none; padding:12px 12px; font-size:.9rem; border:1px solid var(--border); border-radius:10px; }
-  .link:hover { color:var(--text); border-color:var(--accent); }
-
-  footer { border-top:1px solid var(--border); margin-top:48px; padding:36px 0; text-align:center; color:var(--muted); font-size:.85rem; }
-  footer a { color:var(--muted); text-decoration:none; margin:0 8px; }
-  footer a:hover { color:var(--text); }
-
-  @media (max-width:720px) {
-    .hero h1 { font-size:2rem; }
-    .nav a { margin-left:14px; }
-  }
-</style>
-,
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Store",
-  "name": "Autonomy Labs",
-  "description": "Instant digital downloads: AI agent prompts, playbooks and developer kits.",
-  "url": "https://business2-lasse-tfa.vercel.app",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Digital Products",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "40 Reusable Prompts",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Starter Kit",
-        "price": "19",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S"
-      },
-      {
-        "@type": "Offer",
-        "name": "Automated Outreach Toolkit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Business Automator Prompt Pack",
-        "price": "16.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Revenue Playbook",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Storefront Kit",
-        "price": "15.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent MCP Server Kit",
-        "price": "19.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Contract & Payment Templates",
-        "price": "9.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Automation SOP Master Bundle",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L"
-      },
-      {
-        "@type": "Offer",
-        "name": "TaskMarket MCP Server Kit",
-        "price": "19.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K"
-      },
-      {
-        "@type": "Offer",
-        "name": "Zombie Slasher Game",
-        "price": "24.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Skill Pack",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent x402 & Discovery Setup Guide",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H"
-      },
-      {
-        "@type": "Offer",
-        "name": "Autonomous Agent Business OS",
-        "price": "24.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G"
-      },
-      {
-        "@type": "Offer",
-        "name": "TaskMarket Bounty Winning Playbook",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Outbound Sales Kit",
-        "price": "19.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D"
-      },
-      {
-        "@type": "Offer",
-        "name": "TaskMarket Autopilot Worker",
-        "price": "29.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Website Launch Kit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Business Plan & Pitch Deck Kit",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Security & Compliance Checklist",
-        "price": "9.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Monetization Starter Kit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent QA & Test Playbook",
-        "price": "9.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Prompt Injection Defense & Guardrails",
-        "price": "12.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Website Audit Report",
-        "price": "19",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent x402 Paywall Setup Kit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent Fulfillment Webhook Kit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t"
-      },
-      {
-        "@type": "Offer",
-        "name": "Custom Three.js Scene Rebuild",
-        "price": "49",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
-      },
-      {
-        "@type": "Offer",
-        "name": "Three.js Scene Build Toolkit",
-        "price": "19",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
-      },
-      {
-        "@type": "Offer",
-        "name": "TaskMarket Agent Integration Pack",
-        "price": "19",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W"
-      },
-      {
-        "@type": "Offer",
-        "name": "AI Agent API Integration Kit",
-        "price": "14.9",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X"
-      },
-      {
-        "@type": "Offer",
-        "name": "Agent Billing & Metering API (source + deploy guide)",
-        "price": "49",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y"
-      },
-      {
-        "@type": "Offer",
-        "name": "Agent Memory-as-a-Service (source + deploy guide)",
-        "price": "39",
-        "priceCurrency": "EUR",
-        "url": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z"
-      }
-    ]
-  }
-}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation Services | Business Solutions</title>
+    <style>
+        :root { --primary: #2c3e50; --secondary: #3498db; --accent: #e74c3c; --light: #ecf0f1; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #34495e; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { font-size: 24px; font-weight: 700; text-decoration: none; color: #2c3e50; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { color: #34495e; text-decoration: none; font-weight: 500; }
+        .hero { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; text-align: center; padding: 100px 20px; }
+        .hero h1 { font-size: 3em; margin-bottom: 20px; }
+        .hero p { font-size: 1.2em; max-width: 600px; margin: 0 auto 30px; opacity: 0.9; }
+        .cta-button { display: inline-block; padding: 16px 40px; background: #e74c3c; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1em; transition: transform 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); }
+        .features { padding: 80px 0; background: var(--light); }
+        .features h2 { text-align: center; margin-bottom: 40px; font-size: 2em; color: #2c3e50; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #ecf0f1; }
+        .pricing { padding: 80px 0; background: var(--light); }
+        .pricing h2 { text-align: center; margin-bottom: 40px; font-size: 2em; color: #2c3e50; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .pricing-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: center; }
+        .price { font-size: 2.5em; font-weight: 700; color: #2c3e50; margin: 20px 0; }
+        .price span { font-size: 1em; color: #7f8c8d; }
+        .trust { background: var(--light); padding: 30px; text-align: center; font-size: 14px; color: #7f8c8d; }
+    </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="container">
-    <div class="brand"><span class="logo">⚡</span> Autonomy Labs</div>
-    <nav class="nav">
-      <a href="#agent-business-kits">Business</a>
-      <a href="#developer-kits">Developer</a>
-      <a href="#prompts-playbooks">Prompts</a>
-      <a href="#sales-outreach">Sales</a>
-      <a href="scene-portfolio.html">Portfolio</a>
-      <a href="status.html">Status</a>
-      <a href="dashboard.html">Dashboard</a>
+    <nav class="container">
+        <a href="#" class="logo">AI Solutions</a>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container">
-    <h1>AI Agent Products, <span>built to get results fast</span></h1>
-    <p>Practical, ready-to-use prompts, playbooks and developer kits. Buy once, get instant access, use forever — no subscription, no login.</p>
-    <div class="badges">
-      <span class="badge">⚡ Instant digital download</span>
-      <span class="badge">🔒 Pay via Stripe</span>
-      <span class="badge">📬 Auto email delivery</span>
+    <div class="hero">
+        <h1>Automate Business Processes with AI</h1>
+        <p>Deploy intelligent automation solutions that save time, reduce costs, and scale your business. Fully autonomous, no human intervention required.</p>
+        <a href="#contact" class="cta-button">Request a Free Quote</a>
     </div>
-  </div>
-</section>
-
-<div class="container catnav">
-  <a href="#agent-business-kits">Agent Business Kits</a>
-  <a href="#developer-kits">Developer Kits</a>
-  <a href="#prompts-playbooks">Prompts & Playbooks</a>
-  <a href="#sales-outreach">Sales & Outreach</a>
-  <a href="#automation-ops">Automation & Ops</a>
-  <a href="#games-fun">Games & Fun</a>
-</div>
-
-
-    
-
-<section class="cat-section" id="how-it-works" style="padding-top:8px">
-  <h2>How it works</h2>
-  <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">
-    <div class="card"><div class="card-top"><span class="cat">Step 1</span></div><h3>Pick a product</h3><p class="tagline">Choose a prompt pack, playbook, or developer kit that fits your workflow.</p></div>
-    <div class="card"><div class="card-top"><span class="cat">Step 2</span></div><h3>Pay once</h3><p class="tagline">Checkout via Stripe — card only, no account, no subscription, no API key.</p></div>
-    <div class="card"><div class="card-top"><span class="cat">Step 3</span></div><h3>Get it instantly</h3><p class="tagline">Your download is emailed to you automatically by our fulfillment webhook. No human in the loop.</p></div>
-  </div>
-</section>
-
-    <section class="cat-section" id="agent-business-kits">
-      <h2>Agent Business Kits</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Starter Kit</h3>
-            <p class="tagline">Everything an AI agent needs to get paid autonomously — prompts, legal checklist, and setup guide.</p>
-            <ul class="feats">
-<li>20 ready-to-use agent prompts</li>
-<li>Legal checklist (CAN-SPAM / GDPR)</li>
-<li>Step-by-step setup guide</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S">Buy now</a>
-                <a class="link" href="starter-kit.html">Details</a>
-              </div>
+    <div class="features">
+        <div class="container">
+            <h2>Why Choose Us</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Lightning Fast Setup</h3>
+                    <p>Launch your automated business in under an hour with our optimized infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Data-Driven Insights</h3>
+                    <p>Real-time analytics and performance metrics to track your ROI.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-grade security and compliance with GDPR, SOC 2, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Scaling</h3>
+                    <p>Scale from 1 to 10,000 processes without changing your architecture.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>24/7 Support</h3>
+                    <p>Dedicated account managers for enterprise support and premium assistance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Innovative Solutions</h3>
+                    <p>Custom AI solutions tailored to your specific business needs.</p>
+                </div>
             </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Revenue Playbook</h3>
-            <p class="tagline">25 zero-capital ways AI agents get paid, plus the exact automation stacks.</p>
-            <ul class="feats">
-<li>25 revenue paths for agents</li>
-<li>Stripe + webhook automation</li>
-<li>llms.txt &amp; agents.txt discovery</li>
-<li>Kill-vs-double-down framework</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P">Buy now</a>
-                <a class="link" href="revenue-playbook.html">Details</a>
-              </div>
+        </div>
+    </div>
+    <div class="pricing">
+        <div class="container">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$49 <span>/month</span></div>
+                    <ul class="features-list">
+                        <li>500 automated processes/month</li>
+                        <li>Basic analytics dashboard</li>
+                        <li>Email support</li>
+                        <li>1 user license</li>
+                    </ul>
+                    <a href="#" class="submit-btn">Get Started</a>
+                </div>
+                <div class="pricing-card featured" style="border: 2px solid var(--accent)">
+                    <h3>Professional</h3>
+                    <div class="price">$149 <span>/month</span></div>
+                    <ul class="features-list">
+                        <li>5,000 automated processes/month</li>
+                        <li>Advanced analytics & reports</li>
+                        <li>Priority email & chat support</li>
+                        <li>5 user licenses</li>
+                        <li>Custom AI integrations</li>
+                    </ul>
+                    <a href="#" class="submit-btn">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <ul class="features-list">
+                        <li>Unlimited processes</li>
+                        <li>Full analytics suite</li>
+                        <li>Dedicated account manager</li>
+                        <li>Unlimited user licenses</li>
+                        <li>24/7 phone support</li>
+                        <li>SLA guarantees</li>
+                    </ul>
+                    <a href="#" class="submit-btn">Contact Us</a>
+                </div>
             </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Contract &amp; Payment Templates</h3>
-            <p class="tagline">The documents an AI agent needs to get paid compliantly.</p>
-            <ul class="feats">
-<li>Service contract + scope-of-work</li>
-<li>Invoice + NDA templates</li>
-<li>Payment automation notes</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€9.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M">Buy now</a>
-                <a class="link" href="contract-templates.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>Autonomous Agent Business OS</h3>
-            <p class="tagline">The complete operating system for an autonomous AI business.</p>
-            <ul class="feats">
-<li>Full agent business blueprint</li>
-<li>Automation + monetization stack</li>
-<li>Run entirely on autopilot</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€24.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G">Buy now</a>
-                <a class="link" href="autonomous-agent-business-os.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>TaskMarket Bounty Winning Playbook</h3>
-            <p class="tagline">The exact playbook for winning TaskMarket bounties with quality work.</p>
-            <ul class="feats">
-<li>Bounty-selection framework</li>
-<li>Quality-first submission tactics</li>
-<li>Requester psychology notes</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F">Buy now</a>
-                <a class="link" href="taskmarket-bounty-playbook.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Security &amp; Compliance Checklist</h3>
-            <p class="tagline">Practical checklist + templates for lawful, safe and compliant AI agents.</p>
-            <ul class="feats">
-<li>Compliance checklist</li>
-<li>Data-handling templates</li>
-<li>Disclosure guardrails</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€9.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z">Buy now</a>
-                <a class="link" href="security-compliance-checklist.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Monetization Starter Kit</h3>
-            <p class="tagline">Step-by-step playbook to monetize an AI agent with zero capital.</p>
-            <ul class="feats">
-<li>Stripe + TaskMarket setup</li>
-<li>Clustly job workflow</li>
-<li>Affiliate strategy</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y">Buy now</a>
-                <a class="link" href="monetization-starter-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Agent Business Kits</span></div>
-            <h3>AI Agent Prompt Injection Defense &amp; Guardrails</h3>
-            <p class="tagline">Harden agents against prompt injection with copy-paste guardrails.</p>
-            <ul class="feats">
-<li>Input-filtering patterns</li>
-<li>Tool-permission policies</li>
-<li>Output sanitization</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w">Buy now</a>
-                <a class="link" href="prompt-injection-defense.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Services</span></div>
-            <h3>AI Website Audit Report</h3>
-            <p class="tagline">Deep AI-agent discoverability audit with concrete fixes.</p>
-            <ul class="feats">
-<li>Measured checks of 5 agent surfaces</li>
-<li>Grade (A-F) + score out of 100</li>
-<li>Top gaps ranked by impact</li>
-<li>Delivered to your inbox automatically</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Buy now</a>
-                <a class="link" href="audit-report.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Services</span></div>
-            <h3>Custom Three.js Scene Rebuild</h3>
-            <p class="tagline">Your iconic movie/TV moment, rebuilt as an offline Three.js scene.</p>
-            <ul class="feats">
-<li>Self-contained offline single HTML</li>
-<li>20-45s scene, original Web Audio score</li>
-<li>Geometric silhouettes — no likenesses</li>
-<li>sources.md + concept note + screenshots</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€49 <span>per scene</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U">Order now</a>
-                <a class="link" href="threejs-scene-rebuild.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Tools</span></div>
-            <h3>Three.js Scene Build Toolkit</h3>
-            <p class="tagline">Deterministic, offline, single-file Three.js scenes — our production pipeline.</p>
-            <ul class="feats">
-<li>renderAt(seconds) deterministic template</li>
-<li>esbuild single-file inline build</li>
-<li>Headless captures + renderer.info stats</li>
-<li>Offline/determinism verification checklist</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V">Buy now</a>
-                <a class="link" href="threejs-build-toolkit.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Tools</span></div>
-            <h3>TaskMarket Agent Integration Pack</h3>
-            <p class="tagline">MCP server + Claude Code skill — make TaskMarket actionable inside any agent product.</p>
-            <ul class="feats">
-<li>MCP server with 5 tools</li>
-<li>Claude Code SKILL.md skill</li>
-<li>Zero deps, wraps official CLI</li>
-<li>MIT, demo-verified, production-used</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W">Buy now</a>
-                <a class="link" href="taskmarket-integration-pack.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-<section class="cat-section" id="developer-kits">
-      <h2>Developer Kits</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent Storefront Kit</h3>
-            <p class="tagline">Stand up a discoverable agent storefront: llms.txt, agents.txt, sitemap, robots, x402, Stripe.</p>
-            <ul class="feats">
-<li>Agent-discovery file templates</li>
-<li>Stripe + webhook fulfillment</li>
-<li>Schema.org Product markup</li>
-<li>Vercel deploy guide</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€15.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O">Buy now</a>
-                <a class="link" href="storefront-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent MCP Server Kit</h3>
-            <p class="tagline">A complete Model Context Protocol (MCP) server starter in TypeScript.</p>
-            <ul class="feats">
-<li>Ready-to-deploy MCP skeleton</li>
-<li>Tool registration + JSON config</li>
-<li>Claude Code connection guide</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N">Buy now</a>
-                <a class="link" href="mcp-server-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>TaskMarket MCP Server Kit</h3>
-            <p class="tagline">A self-contained MCP server that integrates the TaskMarket worker market.</p>
-            <ul class="feats">
-<li>Zero-dependency server.js (stdio)</li>
-<li>5 tools: list/get/balance/submissions/submit</li>
-<li>Open source on GitHub</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K">Buy now</a>
-                <a class="link" href="taskmarket-mcp.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent Skill Pack</h3>
-            <p class="tagline">Ready-to-use MCP server and agent skill templates for Claude and Codex.</p>
-            <ul class="feats">
-<li>TaskMarket MCP server (zero deps)</li>
-<li>Agent status dashboard template</li>
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent API Integration Kit</h3>
-            <p class="tagline">Connect your AI agent to Stripe, GitHub, email, and any REST API. Auth patterns, code snippets, and error handling.</p>
-            <ul class="feats">
-<li>Stripe API integration patterns</li>
-<li>GitHub API auth & rate-limit handling</li>
-<li>Email API templates (Resend/SendGrid)</li>
-<li>Generic REST patterns with retry logic</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X">Buy now</a>
-                <a class="link" href="api-integration-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-<li>Claude + Codex client config</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I">Buy now</a>
-                <a class="link" href="agent-skill-pack.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent x402 &amp; Discovery Setup Guide</h3>
-            <p class="tagline">Make any website discoverable and buyable by AI agents.</p>
-            <ul class="feats">
-<li>llms.txt + llms-full.txt templates</li>
-<li>.well-known/x402 agent payments</li>
-<li>Schema.org Product + JSON-LD markup</li>
-<li>Vercel + Stripe auto-fulfillment</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H">Buy now</a>
-                <a class="link" href="x402-guide.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent Website Launch Kit</h3>
-            <p class="tagline">A complete deployable AI-agent-discoverable website template.</p>
-            <ul class="feats">
-<li>Ready-to-deploy landing page</li>
-<li>llms.txt + agents.txt + x402</li>
-<li>Auto-fulfillment webhook template</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B">Buy now</a>
-                <a class="link" href="website-launch-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent x402 Paywall Setup Kit</h3>
-            <p class="tagline">Turn any digital product into an agent-payable x402 endpoint.</p>
-            <ul class="feats">
-<li>x402 manifest setup</li>
-<li>Stripe Checkout integration</li>
-<li>Automated fulfillment webhook</li>
-<li>llms.txt + agents.txt files</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u">Buy now</a>
-                <a class="link" href="x402-paywall-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>AI Agent Fulfillment Webhook Kit</h3>
-            <p class="tagline">Auto-deliver digital products by email the moment payment succeeds.</p>
-            <ul class="feats">
-<li>Stripe webhook handler</li>
-<li>Email delivery via Resend/SendGrid</li>
-<li>Purchase logging</li>
-<li>Zero-human fulfillment</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t">Buy now</a>
-                <a class="link" href="fulfillment-webhook-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-    <section class="cat-section" id="prompts-&-playbooks">
-      <h2>Prompts & Playbooks</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Prompts &amp; Playbooks</span></div>
-            <h3>40 Reusable Prompts</h3>
-            <p class="tagline">40 copy-paste prompts across marketing, writing, email, admin and brainstorming.</p>
-            <ul class="feats">
-<li>Works with any ChatGPT version</li>
-<li>Marketing, email, admin &amp; ops</li>
-<li>Delivered instantly by email</li>
-<li>Lifetime access</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T">Buy now</a>
-                <a class="link" href="prompts.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Prompts &amp; Playbooks</span></div>
-            <h3>AI Business Automator Prompt Pack</h3>
-            <p class="tagline">30 prompts to automate lead gen, outreach, content and admin with AI agents.</p>
-            <ul class="feats">
-<li>10 lead-generation prompts</li>
-<li>8 outreach prompts</li>
-<li>7 content prompts</li>
-<li>5 admin &amp; ops prompts</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€16.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q">Buy now</a>
-                <a class="link" href="automator.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Prompts &amp; Playbooks</span></div>
-            <h3>AI Agent QA &amp; Test Playbook</h3>
-            <p class="tagline">How to test AI deliverables from multiple angles before shipping.</p>
-            <ul class="feats">
-<li>Multi-angle test plan</li>
-<li>Reusable checklists</li>
-<li>Regression testing tips</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€9.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x">Buy now</a>
-                <a class="link" href="qa-test-playbook.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-    <section class="cat-section" id="sales-&-outreach">
-      <h2>Sales & Outreach</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Sales &amp; Outreach</span></div>
-            <h3>Automated Outreach Toolkit</h3>
-            <p class="tagline">Copy-paste scripts, email sequences and automations for AI-assisted outbound sales.</p>
-            <ul class="feats">
-<li>30 cold-email + LinkedIn scripts</li>
-<li>3 follow-up sequences</li>
-<li>Objection handling guide</li>
-<li>Automation recipes (Zapier/Make)</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R">Buy now</a>
-                <a class="link" href="outreach-toolkit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Sales &amp; Outreach</span></div>
-            <h3>AI Agent Outbound Sales Kit</h3>
-            <p class="tagline">A complete copy-paste outbound sales system for AI agents.</p>
-            <ul class="feats">
-<li>20 cold-email scripts</li>
-<li>10 LinkedIn scripts + follow-ups</li>
-<li>Compliance checklist</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€19.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D">Buy now</a>
-                <a class="link" href="outbound-sales-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Sales &amp; Outreach</span></div>
-            <h3>AI Business Plan &amp; Pitch Deck Kit</h3>
-            <p class="tagline">Editable business plan + 10-slide investor pitch deck outline.</p>
-            <ul class="feats">
-<li>Full business plan template</li>
-<li>10-slide pitch deck outline</li>
-<li>Pricing + funding sections</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€12.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A">Buy now</a>
-                <a class="link" href="business-plan-pitch-deck-kit.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-    <section class="cat-section" id="automation-&-ops">
-      <h2>Automation & Ops</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Automation &amp; Ops</span></div>
-            <h3>AI Automation SOP Master Bundle</h3>
-            <p class="tagline">50+ standard operating procedures and delegation checklists to automate operations.</p>
-            <ul class="feats">
-<li>50+ SOPs across sales &amp; ops</li>
-<li>Delegation checklists</li>
-<li>Handoff templates</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€14.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L">Buy now</a>
-                <a class="link" href="sop-bundle.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Automation &amp; Ops</span></div>
-            <h3>TaskMarket Autopilot Worker</h3>
-            <p class="tagline">A deployable TaskMarket worker config that earns on autopilot.</p>
-            <ul class="feats">
-<li>Task-scanning loop templates</li>
-<li>Submission quality gates</li>
-<li>Requester psychology notes</li>
-<li>Zero-capital free-submit rules</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€29.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C">Buy now</a>
-                <a class="link" href="taskmarket-autopilot-worker.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section>
-    <section class="cat-section" id="games-&-fun">
-      <h2>Games & Fun</h2>
-      <div class="grid">
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Games &amp; Fun</span></div>
-            <h3>Zombie Slasher Game</h3>
-            <p class="tagline">A complete first-person zombie slasher in one HTML file.</p>
-            <ul class="feats">
-<li>Single index.html, no build step</li>
-<li>Working health, kills, restart</li>
-<li>Delivered instantly by email</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€24.9 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J">Buy now</a>
-                <a class="link" href="zombie-game.html">Details</a>
-              </div>
-            </div>
-          </article>
-      </div>
-    </section><section class="cat-section" id="developer-kits-new">
-  <h2>Developer Kits</h2>
-  <div class="grid">
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>Agent Billing &amp; Metering API</h3>
-            <p class="tagline">Drop-in monetization layer: usage metering, spend limits, x402 gates, auto-invoices. Zero-dep source + deploy guide.</p>
-            <ul class="feats">
-<li>Meter events, query usage, x402 gate</li>
-<li>Spend limits auto-block overage</li>
-<li>Usage-based invoice generation</li>
-<li>Verified end-to-end 2026-08-10</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€49 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y">Buy now</a>
-                <a class="link" href="agent-billing-api.html">Details</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top"><span class="cat">Developer Kits</span></div>
-            <h3>Agent Memory-as-a-Service</h3>
-            <p class="tagline">Managed vector store + semantic retrieval for agents. Automatic embeddings, namespaces, usage metering.</p>
-            <ul class="feats">
-<li>Store memories with auto-embeddings</li>
-<li>Top-k semantic search</li>
-<li>Namespace isolation + delete</li>
-<li>Verified end-to-end 2026-08-10</li>
-            </ul>
-            <div class="card-foot">
-              <div class="price">€39 <span>one-time</span></div>
-              <div class="actions">
-                <a class="btn" href="https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z">Buy now</a>
-                <a class="link" href="agent-memory-api.html">Details</a>
-              </div>
-            </div>
-          </article>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>© 2026 Autonomy Labs. All rights reserved.</p>
-    <p><a href="audit.html">Free Agent Audit</a> · <a href="blog/">Blog</a> · <a href="status.html">Status</a> · <a href="impressum.html">Impressum</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:hello@business2-lasse-tfa.vercel.app">Contact</a></p>
-  </div>
-</footer>
-
+        </div>
+    </div>
+    <div class="trust">
+        <div class="container">
+            <p>© 2026 AI Solutions. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -3,353 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Percentage Calculator - Free Percentage Calculator</title>
-    <meta name="description" content="Free percentage calculator for all percentage calculations. Calculate percentages, percentage increase/decrease, and more. Instant results.">
-    <meta name="keywords" content="percentage calculator, percent calculator, calculate percentage, percentage increase, percentage decrease">
-    <link rel="canonical" href="https://autonomylabsweb.tech/tools/percentage-calculator.html">
+    <title>Percentage Calculator</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 100%;
-            padding: 40px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 25px;
-            background: #f0f0f0;
-            padding: 5px;
-            border-radius: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 12px 8px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .tab.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .calculator-section {
-            display: none;
-        }
-
-        .calculator-section.active {
-            display: block;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
-
-        input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .calculate-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .result {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #f9f9f9;
-            border: 2px solid #667eea;
-            display: none;
-        }
-
-        .result.show {
-            display: block;
-        }
-
-        .result-label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .result-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .formula {
-            margin-top: 15px;
-            padding: 15px;
-            background: #e8f5e9;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #2e7d32;
-        }
-
-        .formula-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            .tab {
-                font-size: 11px;
-                padding: 10px 5px;
-            }
-
-            .result-value {
-                font-size: 24px;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; margin-bottom: 10px; }
+        .subtitle { color: #7f8c8d; margin-bottom: 30px; }
+        .calc-form { max-width: 400px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #34495e; }
+        input[type="number"], select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; }
+        .result-box { background: #ecf0f1; border-radius: 8px; padding: 20px; margin-top: 20px; text-align: center; border: 2px solid #3498db; }
+        .result-box h2 { color: #2c3e50; margin-bottom: 10px; }
+        .percentage { font-size: 48px; font-weight: 700; color: #2c3e50; }
+        .arrow { font-size: 48px; color: #3498db; margin: 10px 0; }
+        .trend-up { color: #27ae60; }
+        .trend-down { color: #e74c3c; }
+        .chart { margin-top: 30px; text-align: center; }
+        .chart-bar-container { background: #ecf0f1; border-radius: 10px; padding: 15px; margin: 10px 0; }
+        .chart-bar-label { display: flex; justify-content: space-between; font-size: 14px; color: #34495e; margin-top: 5px; }
+        .chart-bar { height: 24px; background: linear-gradient(90deg, #3498db 0%, #3498db var(--progress, 0%), #ecf0f1 var(--progress, 0%), #ecf0f1 100%); border-radius: 12px; margin: 5px 0; transition: all 0.3s ease; }
+        .trend-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 10px; }
+        .trend-badge.up { background: #d4edda; color: #155724; }
+        .trend-badge.down { background: #f8d7da; color: #721c24; }
+        footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Percentage Calculator</h1>
-        <p class="subtitle">Calculate percentages, increases, decreases and more</p>
+        <h1>📊 Percentage Calculator</h1>
+        <p class="subtitle">Calculate percentage change with visual indicators</p>
+        
+        <form class="calc-form" id="permForm">
+            <div class="form-group">
+                <label for="value">Original Value</label>
+                <input type="number" id="value" name="value" step="0.01" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="change">Change Amount</label>
+                <input type="number" id="change" name="change" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="period">Period</label>
+                <select id="period" name="period">
+                    <option value="original">Original to New</option>
+                    <option value="new-to-original">New to Original</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" style="width: 100%; padding: 14px; background: #3498db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Calculate Percentage</button>
+            </div>
+        </form>
 
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('what-percent')">What is %</button>
-            <button class="tab" onclick="showTab('percent-of')">% of What</button>
-            <button class="tab" onclick="showTab('percent-change')">% Change</button>
-        </div>
-
-        <!-- What is X% of Y -->
-        <div class="calculator-section active" id="what-percent">
-            <div class="input-group">
-                <label>What is</label>
-                <input type="number" id="wp-percent" placeholder="Enter percentage" step="0.01">
-            </div>
-            <div class="input-group">
-                <label>% of</label>
-                <input type="number" id="wp-number" placeholder="Enter number" step="0.01">
-            </div>
-            <button class="calculate-btn" onclick="calculateWhatPercent()">Calculate</button>
-            <div class="result" id="wp-result">
-                <div class="result-label">Result:</div>
-                <div class="result-value" id="wp-value">0</div>
-                <div class="formula">
-                    <div class="formula-title">Formula:</div>
-                    <div id="wp-formula">X% of Y = (X/100) × Y</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- X is what % of Y -->
-        <div class="calculator-section" id="percent-of">
-            <div class="input-group">
-                <label></label>
-                <input type="number" id="po-number" placeholder="Enter number" step="0.01">
-            </div>
-            <div class="input-group">
-                <label>is what % of</label>
-                <input type="number" id="po-total" placeholder="Enter total" step="0.01">
-            </div>
-            <button class="calculate-btn" onclick="calculatePercentOf()">Calculate</button>
-            <div class="result" id="po-result">
-                <div class="result-label">Result:</div>
-                <div class="result-value" id="po-value">0%</div>
-                <div class="formula">
-                    <div class="formula-title">Formula:</div>
-                    <div id="po-formula">X is what % of Y = (X/Y) × 100</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Percentage Change -->
-        <div class="calculator-section" id="percent-change">
-            <div class="input-group">
-                <label>From</label>
-                <input type="number" id="pc-from" placeholder="Enter original value" step="0.01">
-            </div>
-            <div class="input-group">
-                <label>To</label>
-                <input type="number" id="pc-to" placeholder="Enter new value" step="0.01">
-            </div>
-            <button class="calculate-btn" onclick="calculatePercentChange()">Calculate</button>
-            <div class="result" id="pc-result">
-                <div class="result-label">Result:</div>
-                <div class="result-value" id="pc-value">0%</div>
-                <div class="formula">
-                    <div class="formula-title">Formula:</div>
-                    <div id="pc-formula">% Change = ((New - Original) / Original) × 100</div>
-                </div>
-            </div>
+        <div id="result" class="result-box" style="display: none;">
+            <h2>Change Percentage</h2>
+            <div id="percentageValue" class="percentage">--</div>
+            <div class="arrow" id="arrowIcon">➡️</div>
+            <div id="trendBadge" class="trend-badge" style="display: none;"></div>
+            <div id="chartContainer" class="chart" style="display: none;"></div>
+            <div id="notesContainer" class="recs" style="display: none;"></div>
         </div>
     </div>
 
     <script>
-        function showTab(tabId) {
-            // Hide all sections
-            document.querySelectorAll('.calculator-section').forEach(section => {
-                section.classList.remove('active');
-            });
+        document.getElementById('permForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            const value = parseFloat(document.getElementById('value').value);
+            const change = parseFloat(document.getElementById('change').value);
+            const period = document.getElementById('period').value;
             
-            // Show selected section
-            document.getElementById(tabId).classList.add('active');
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-            
-            // Hide all results
-            document.querySelectorAll('.result').forEach(result => {
-                result.classList.remove('show');
-            });
-        }
-
-        function calculateWhatPercent() {
-            const percent = parseFloat(document.getElementById('wp-percent').value);
-            const number = parseFloat(document.getElementById('wp-number').value);
-            
-            if (isNaN(percent) || isNaN(number)) {
-                alert('Please enter valid numbers');
+            if (value === 0) {
+                alert('Please enter a non-zero original value');
                 return;
             }
             
-            const result = (percent / 100) * number;
-            const rounded = Math.round(result * 100) / 100;
+            let percentage, isUp, trendText, trendClass, badgeText, notes;
             
-            document.getElementById('wp-value').textContent = rounded;
-            document.getElementById('wp-formula').textContent = 
-                `${percent}% of ${number} = (${percent}/100) × ${number} = ${rounded}`;
-            document.getElementById('wp-result').classList.add('show');
-        }
-
-        function calculatePercentOf() {
-            const number = parseFloat(document.getElementById('po-number').value);
-            const total = parseFloat(document.getElementById('po-total').value);
-            
-            if (isNaN(number) || isNaN(total) || total === 0) {
-                alert('Please enter valid numbers (total cannot be 0)');
-                return;
+            if (period === 'original-to-new') {
+                percentage = (change / value) * 100;
+                isUp = change >= 0;
+                trendText = isUp ? 'Increased' : 'Decreased';
+                trendClass = isUp ? 'up' : 'down';
+            } else {
+                percentage = (change / (value + change)) * 100;
+                isUp = change > -value;
+                trendText = isUp ? 'Increased' : 'Decreased';
+                trendClass = isUp ? 'up' : 'down';
             }
             
-            const result = (number / total) * 100;
-            const rounded = Math.round(result * 100) / 100;
+            document.getElementById('percentageValue').textContent = (percentage >= 0 ? '+' : '') + percentage.toFixed(2) + '%';
+            document.getElementById('arrowIcon').textContent = isUp ? '➡️' : '⬅️';
+            document.getElementById('arrowIcon').className = 'trend-' + trendClass;
+            document.getElementById('trendBadge').textContent = trendText + ' ' + (Math.abs(percentage) < 5 ? '(small change)' : '');
+            document.getElementById('trendBadge').className = 'trend-badge ' + trendClass;
+            document.getElementById('trendBadge').style.display = 'inline-block';
+            document.getElementById('chartContainer').style.display = 'block';
+            document.getElementById('notesContainer').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
             
-            document.getElementById('po-value').textContent = rounded + '%';
-            document.getElementById('po-formula').textContent = 
-                `${number} is what % of ${total} = (${number}/${total}) × 100 = ${rounded}%`;
-            document.getElementById('po-result').classList.add('show');
-        }
-
-        function calculatePercentChange() {
-            const from = parseFloat(document.getElementById('pc-from').value);
-            const to = parseFloat(document.getElementById('pc-to').value);
+            // Generate chart visualization
+            const minChange = Math.min(0, change, -value);
+            const maxChange = Math.max(0, change, -value);
+            const range = Math.abs(maxChange - minChange) || 1;
+            const height = 24;
             
-            if (isNaN(from) || isNaN(to) || from === 0) {
-                alert('Please enter valid numbers (original value cannot be 0)');
-                return;
-            }
+            document.getElementById('chartContainer').innerHTML = '';
+            document.createElement('div').className = 'chart-bar-container';
+            document.createElement('div').style.cssText = 'height: 20px; background: #ecf0f1; border-radius: 10px; margin: 3px 0;';
+            document.getElementById('chartContainer').appendChild(document.createElement('div'));
             
-            const result = ((to - from) / from) * 100;
-            const rounded = Math.round(result * 100) / 100;
-            const changeType = result >= 0 ? 'increase' : 'decrease';
+            const upChange = Math.max(0, change);
+            const pct = (upChange / range) * 100;
+            document.createElement('div').className = 'chart-bar';
+            document.documentElement.style.setProperty('--progress', pct + '%');
+            document.getElementById('chartContainer').appendChild(document.createElement('div'));
             
-            document.getElementById('pc-value').textContent = rounded + '%';
-            document.getElementById('pc-formula').textContent = 
-                `Change from ${from} to ${to} = ((${to} - ${from}) / ${from}) × 100 = ${rounded}% (${changeType})`;
-            document.getElementById('pc-result').classList.add('show');
-        }
-
-        // Allow Enter key to calculate
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const activeSection = document.querySelector('.calculator-section.active');
-                if (activeSection.id === 'what-percent') {
-                    calculateWhatPercent();
-                } else if (activeSection.id === 'percent-of') {
-                    calculatePercentOf();
-                } else if (activeSection.id === 'percent-change') {
-                    calculatePercentChange();
-                }
+            // Show notes
+            if (Math.abs(percentage) < 5) {
+                document.getElementById('notesContainer').style.display = 'block';
+                document.getElementById('notesContainer').innerHTML = '<strong>Small Change:</strong> ' + (isUp ? 'Growth' : 'Shrinkage') + ' of <strong>' + Math.abs(percentage).toFixed(2) + '</strong> from original value.';
             }
         });
     </script>
