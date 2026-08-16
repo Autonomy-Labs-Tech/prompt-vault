@@ -1,0 +1,158 @@
+'use strict';
+
+const assert = require('node:assert/strict');
+const EventEmitter = require('node:events');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const https = require('node:https');
+const test = require('node:test');
+
+const API_DIR = path.join(__dirname, '..', 'api');
+const FIXTURE = require(path.join(API_DIR, 'stripe_test_fixtures.json')).fixtures[0];
+
+function copyStandaloneApi(includeFixture) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'fulfill-standalone-'));
+  const apiDir = path.join(root, 'api');
+  fs.mkdirSync(apiDir, { recursive: true });
+  fs.copyFileSync(path.join(API_DIR, 'fulfill.js'), path.join(apiDir, 'fulfill.js'));
+  if (includeFixture) {
+    fs.copyFileSync(
+      path.join(API_DIR, 'stripe_test_fixtures.json'),
+      path.join(apiDir, 'stripe_test_fixtures.json'),
+    );
+  }
+  return { root, handlerPath: path.join(apiDir, 'fulfill.js') };
+}
+
+function mockStripeAndResend() {
+  const originalRequest = https.request;
+  const calls = [];
+  https.request = (options, callback) => {
+    calls.push(options);
+    const request = new EventEmitter();
+    request.write = () => {};
+    request.destroy = () => {};
+    request.end = () => {
+      let statusCode = 200;
+      let body = {};
+      if (options.host === 'api.stripe.com' && options.path.startsWith('/v1/events/')) {
+        body = {
+          id: FIXTURE.event_id,
+          livemode: false,
+          type: FIXTURE.event_type,
+          data: {
+            object: {
+              id: 'cs_standalone',
+              object: 'checkout.session',
+              livemode: false,
+              customer_details: { email: 'buyer@example.com' },
+              mode: FIXTURE.checkout_mode,
+              payment_status: 'paid',
+            },
+          },
+        };
+      } else if (options.host === 'api.stripe.com' && options.path.includes('/line_items')) {
+        body = { data: [{ price: { id: FIXTURE.price_id, product: FIXTURE.product_id } }] };
+      } else if (options.host === 'api.resend.com') {
+        body = { id: 'email_standalone' };
+      }
+      process.nextTick(() => {
+        const response = new EventEmitter();
+        response.statusCode = statusCode;
+        callback(response);
+        process.nextTick(() => {
+          response.emit('data', Buffer.from(JSON.stringify(body)));
+          response.emit('end');
+        });
+      });
+    };
+    return request;
+  };
+  return {
+    calls,
+    restore() {
+      https.request = originalRequest;
+    },
+  };
+}
+
+function invoke(handler, eventId = FIXTURE.event_id) {
+  let statusCode = 200;
+  let body;
+  const response = {
+    status(code) {
+      statusCode = code;
+      return response;
+    },
+    json(value) {
+      body = value;
+      return response;
+    },
+  };
+  return Promise.resolve(handler({
+    method: 'POST',
+    body: { type: FIXTURE.event_type, id: eventId },
+    headers: {
+      'stripe-signature': `t=${Math.floor(Date.now() / 1000)},v1=${'a'.repeat(64)}`,
+    },
+  }, response)).then(() => ({ statusCode, body }));
+}
+
+function withTestEnvironment(fn) {
+  const keys = ['STRIPE_SECRET_KEY', 'RESEND_API_KEY', 'STRIPE_TEST_MODE', 'STRIPE_TEST_PRODUCT_ID'];
+  const previous = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
+  Object.assign(process.env, {
+    STRIPE_SECRET_KEY: 'sk_test_standalone',
+    RESEND_API_KEY: 're_standalone',
+    STRIPE_TEST_MODE: '1',
+    STRIPE_TEST_PRODUCT_ID: FIXTURE.product_id,
+  });
+  return Promise.resolve(fn()).finally(() => {
+    for (const key of keys) {
+      if (previous[key] === undefined) delete process.env[key];
+      else process.env[key] = previous[key];
+    }
+  });
+}
+
+test('fulfill: packaged test metadata works from a standalone business2 bundle', async () => {
+  const standalone = copyStandaloneApi(true);
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: { ok: true, product: FIXTURE.product_id, email_sent: true },
+      });
+    });
+    assert.equal(
+      mock.calls.filter((call) => call.host === 'api.resend.com').length,
+      1,
+    );
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: missing packaged metadata fails closed without network calls', async () => {
+  const standalone = copyStandaloneApi(false);
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: { ok: false, reason: 'test fixture is not approved' },
+      });
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});

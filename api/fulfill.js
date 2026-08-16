@@ -1,11 +1,16 @@
 // Vercel serverless function: Stripe webhook → automated digital download delivery
-const fs = require('node:fs');
-const path = require('node:path');
 const https = require('https');
 
 const FULFILLABLE_EVENTS = ['checkout.session.completed', 'payment_intent.succeeded'];
 const SIGNATURE_TOLERANCE_SEC = 300;
-const TEST_FIXTURE_PATH = path.join(__dirname, '..', '..', 'mission', 'stripe_test_fixtures.json');
+// Keep the non-secret QA allowlist inside the deployed function bundle. The
+// local harness has its own copy under mission/, but production deployments
+// must never need to traverse outside business2/ to evaluate test metadata.
+let PACKAGED_TEST_FIXTURES = null;
+try {
+  // A static require makes Vercel include the JSON in the function bundle.
+  PACKAGED_TEST_FIXTURES = require('./stripe_test_fixtures.json');
+} catch {}
 
 // Stripe sends `t=<unix-seconds>,v1=<hex-hmac>` (repeated v1 during secret rotation).
 function parseStripeSignature(header) {
@@ -28,25 +33,21 @@ function parseStripeSignature(header) {
 }
 
 function readApprovedTestFixtures() {
-  try {
-    const parsed = JSON.parse(fs.readFileSync(TEST_FIXTURE_PATH, 'utf8'));
-    if (!parsed || !Array.isArray(parsed.fixtures)) return [];
-    return parsed.fixtures.filter((fixture) => (
-      fixture
-      && typeof fixture.product_id === 'string'
-      && /^prod_[A-Za-z0-9]+$/.test(fixture.product_id)
-      && typeof fixture.price_id === 'string'
-      && /^price_[A-Za-z0-9]+$/.test(fixture.price_id)
-      && typeof fixture.event_id === 'string'
-      && /^evt_[A-Za-z0-9]+$/.test(fixture.event_id)
-      && fixture.event_type === 'checkout.session.completed'
-      && fixture.checkout_mode === 'payment'
-      && fixture.price_type === 'one_time'
-      && fixture.livemode === false
-    ));
-  } catch (error) {
-    return [];
-  }
+  const parsed = PACKAGED_TEST_FIXTURES;
+  if (!parsed || !Array.isArray(parsed.fixtures)) return [];
+  return parsed.fixtures.filter((fixture) => (
+    fixture
+    && typeof fixture.product_id === 'string'
+    && /^prod_[A-Za-z0-9]+$/.test(fixture.product_id)
+    && typeof fixture.price_id === 'string'
+    && /^price_[A-Za-z0-9]+$/.test(fixture.price_id)
+    && typeof fixture.event_id === 'string'
+    && /^evt_[A-Za-z0-9]+$/.test(fixture.event_id)
+    && fixture.event_type === 'checkout.session.completed'
+    && fixture.checkout_mode === 'payment'
+    && fixture.price_type === 'one_time'
+    && fixture.livemode === false
+  ));
 }
 
 function approvedTestFixture(productId) {

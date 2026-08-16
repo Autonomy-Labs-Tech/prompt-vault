@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "fixtures": [
+    {
+      "name": "qa-paid-checkout",
+      "product_id": "prod_V5EqpHdkemk3Ba",
+      "price_id": "price_1U54MtCWpxuMJ9yOQvMQWbSB",
+      "event_id": "evt_1U54W0CWpxuMJ9yOfdcNdsiq",
+      "event_type": "checkout.session.completed",
+      "checkout_mode": "payment",
+      "price_type": "one_time",
+      "livemode": false
+    }
+  ]
+}
