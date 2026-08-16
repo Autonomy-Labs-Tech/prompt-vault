@@ -65,7 +65,18 @@ module.exports = async function (req, res) {
     });
   }
   function stripe(method, p) { return api('api.stripe.com', method, p, null, { Authorization: 'Bearer ' + STRIPE_KEY }); }
-  function resend(to, subject, html) { return api('api.resend.com', 'POST', '/emails', { from: FROM, to: [to], subject, html }, { Authorization: 'Bearer ' + RESEND_KEY }); }
+  function resend(to, subject, html, idempotencyKey) {
+    return api(
+      'api.resend.com',
+      'POST',
+      '/emails',
+      { from: FROM, to: [to], subject, html },
+      {
+        Authorization: 'Bearer ' + RESEND_KEY,
+        'Idempotency-Key': idempotencyKey,
+      },
+    );
+  }
 
   // Delivery config: product_id -> {subject, body}. Auto-fulfill any of these on purchase.
   const DELIVERY = {
@@ -219,6 +230,23 @@ module.exports = async function (req, res) {
     },
   };
 
+  // The QA Stripe fixture is deliberately available only to the local test
+  // harness. Production runs use live credentials and therefore never expose
+  // this mapping or accept a test-mode event.
+  const configuredTestProductId = String(env.STRIPE_TEST_PRODUCT_ID || '').trim();
+  const testModeProductId = env.STRIPE_TEST_MODE === '1'
+    && /^sk_test_/.test(STRIPE_KEY)
+    && configuredTestProductId === 'prod_V5EqpHdkemk3Ba'
+    ? configuredTestProductId
+    : '';
+  if (testModeProductId) {
+    DELIVERY[testModeProductId] = {
+      subject: 'Autonomy Labs QA Stripe test fulfillment is ready',
+      body: '<p>This is a Stripe test-mode fulfillment message for the local QA harness.</p>'
+        + '<p>The paid Checkout Session was verified in Stripe test mode and delivered through the same fulfillment handler used by production.</p>',
+    };
+  }
+
   // Vercel parses the JSON body before this handler runs, so the exact bytes Stripe
   // signed are gone and the v1 HMAC cannot be recomputed. Re-reading the event from
   // Stripe with our secret key is the authoritative substitute: a forged event id
@@ -240,6 +268,9 @@ module.exports = async function (req, res) {
       if (checkout.payment_status !== 'paid') {
         return res.status(200).json({ ok: false, reason: 'payment not settled', sid });
       }
+      if (checkout.mode !== 'payment') {
+        return res.status(200).json({ ok: false, reason: 'non-payment checkout mode', sid });
+      }
     } else if (data.object === 'payment_intent') {
       if (data.status !== 'succeeded') {
         return res.status(200).json({ ok: false, reason: 'payment not settled', sid });
@@ -254,6 +285,9 @@ module.exports = async function (req, res) {
       } catch (e) {}
       if (!checkout || checkout.payment_status !== 'paid') {
         return res.status(200).json({ ok: false, reason: 'payment session not settled', sid });
+      }
+      if (checkout.mode !== 'payment') {
+        return res.status(200).json({ ok: false, reason: 'non-payment checkout mode', sid });
       }
     }
 
@@ -288,7 +322,7 @@ module.exports = async function (req, res) {
           + '<p>Questions? Reply to this email.</p>';
       }
     }
-    const sendResult = await resend(email, subject, body);
+    const sendResult = await resend(email, subject, body, `stripe-event-${event.id}`);
     return res.status(200).json({ ok: true, product: productId, email_sent: sendResult.status === 200 });
   } catch (e) {
     return res.status(500).json({ error: e.message });
