@@ -1,8 +1,11 @@
 // Vercel serverless function: Stripe webhook → automated digital download delivery
+const fs = require('node:fs');
+const path = require('node:path');
 const https = require('https');
 
 const FULFILLABLE_EVENTS = ['checkout.session.completed', 'payment_intent.succeeded'];
 const SIGNATURE_TOLERANCE_SEC = 300;
+const TEST_FIXTURE_PATH = path.join(__dirname, '..', '..', 'mission', 'stripe_test_fixtures.json');
 
 // Stripe sends `t=<unix-seconds>,v1=<hex-hmac>` (repeated v1 during secret rotation).
 function parseStripeSignature(header) {
@@ -22,6 +25,33 @@ function parseStripeSignature(header) {
   const valid = t !== null && String(timestamp) === t && Number.isFinite(timestamp) &&
     v1.length > 0 && v1.every((s) => /^[a-f0-9]{64}$/i.test(s));
   return { present: true, valid, timestamp };
+}
+
+function readApprovedTestFixtures() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(TEST_FIXTURE_PATH, 'utf8'));
+    if (!parsed || !Array.isArray(parsed.fixtures)) return [];
+    return parsed.fixtures.filter((fixture) => (
+      fixture
+      && typeof fixture.product_id === 'string'
+      && /^prod_[A-Za-z0-9]+$/.test(fixture.product_id)
+      && typeof fixture.price_id === 'string'
+      && /^price_[A-Za-z0-9]+$/.test(fixture.price_id)
+      && typeof fixture.event_id === 'string'
+      && /^evt_[A-Za-z0-9]+$/.test(fixture.event_id)
+      && fixture.event_type === 'checkout.session.completed'
+      && fixture.checkout_mode === 'payment'
+      && fixture.price_type === 'one_time'
+      && fixture.livemode === false
+    ));
+  } catch (error) {
+    return [];
+  }
+}
+
+function approvedTestFixture(productId) {
+  const matches = readApprovedTestFixtures().filter((fixture) => fixture.product_id === productId);
+  return matches.length === 1 ? matches[0] : null;
 }
 
 module.exports = async function (req, res) {
@@ -52,7 +82,6 @@ module.exports = async function (req, res) {
   if (typeof event.id !== 'string' || !/^evt_[A-Za-z0-9]+$/.test(event.id)) {
     return res.status(401).json({ error: 'missing or malformed event id' });
   }
-
   function api(host, method, path_, body, headers) {
     return new Promise((resolve) => {
       const opts = { host, method, path: path_, headers: Object.assign({}, headers || {}) };
@@ -236,9 +265,11 @@ module.exports = async function (req, res) {
   const isTestKey = /^sk_test_/.test(STRIPE_KEY);
   const testMode = isTestKey && env.STRIPE_TEST_MODE === '1';
   let testModeProductId = '';
+  let testFixture = null;
   if (testMode) {
     const configuredTestProductId = String(env.STRIPE_TEST_PRODUCT_ID || '').trim();
-    if (/^prod_[A-Za-z0-9]+$/.test(configuredTestProductId)) {
+    testFixture = approvedTestFixture(configuredTestProductId);
+    if (testFixture) {
       testModeProductId = configuredTestProductId;
     }
   }
@@ -249,6 +280,12 @@ module.exports = async function (req, res) {
         + '<p>The paid Checkout Session was verified in Stripe test mode and delivered through the same fulfillment handler used by production.</p>',
     }
     : null;
+  if (testMode && !testFixture) {
+    return res.status(200).json({ ok: false, reason: 'test fixture is not approved' });
+  }
+  if (testMode && event.id !== testFixture.event_id) {
+    return res.status(200).json({ ok: false, reason: 'test event is not approved' });
+  }
 
   // Vercel parses the JSON body before this handler runs, so the exact bytes Stripe
   // signed are gone and the v1 HMAC cannot be recomputed. Re-reading the event from
@@ -261,6 +298,9 @@ module.exports = async function (req, res) {
   let verified;
   try { verified = JSON.parse(lookup.body); } catch (e) { return res.status(503).json({ error: 'unreadable stripe event' }); }
   if (!verified || verified.type !== etype) return res.status(401).json({ error: 'event type mismatch' });
+  if (testMode && verified.livemode !== false) {
+    return res.status(200).json({ ok: false, reason: 'live-mode event is not approved for test fulfillment' });
+  }
 
   try {
     const data = (verified.data || {}).object || {};
@@ -293,13 +333,37 @@ module.exports = async function (req, res) {
         return res.status(200).json({ ok: false, reason: 'non-payment checkout mode', sid });
       }
     }
+    if (testMode && checkout && checkout.livemode !== false) {
+      return res.status(200).json({ ok: false, reason: 'live-mode checkout is not approved for test fulfillment', sid });
+    }
 
     let productId = null;
+    let lineItems = [];
     if (checkout && checkout.id) {
       const li = await stripe('GET', '/v1/checkout/sessions/' + checkout.id + '/line_items?limit=10');
-      try { const items = JSON.parse(li.body); for (const it of items.data || []) { if (it.price && it.price.product) { productId = it.price.product; break; } } } catch (e) {}
+      try {
+        const items = JSON.parse(li.body);
+        lineItems = Array.isArray(items.data) ? items.data : [];
+        for (const it of lineItems) {
+          if (it.price && it.price.product) {
+            productId = it.price.product;
+            break;
+          }
+        }
+      } catch (e) {}
     }
     if (!productId) return res.status(200).json({ ok: false, reason: 'no product found', sid });
+    if (testMode) {
+      const approvedLineItems = lineItems.filter((item) => (
+        item
+        && item.price
+        && item.price.id === testFixture.price_id
+        && item.price.product === testFixture.product_id
+      ));
+      if (lineItems.length !== 1 || approvedLineItems.length !== 1) {
+        return res.status(200).json({ ok: false, reason: 'test price is not approved', sid });
+      }
+    }
     const deliv = isTestKey
       ? (productId === testModeProductId ? testDelivery : null)
       : DELIVERY[productId];
