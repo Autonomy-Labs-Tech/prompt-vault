@@ -2,7 +2,7 @@
   'use strict';
 
   function setStatus(form, message, state) {
-    var status = form.querySelector('[data-email-status]');
+    var status = form.parentElement && form.parentElement.querySelector('[data-email-status]');
     if (!status) return;
     status.textContent = message;
     status.dataset.state = state || '';

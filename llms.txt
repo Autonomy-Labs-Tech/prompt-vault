@@ -7,6 +7,11 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 2. Pay with card (no API key needed).
 3. The product is delivered automatically to the buyer's email by our fulfillment webhook.
 
+## Optional email updates
+- Visitors can opt in to occasional practical AI tips and free-tool updates with the landing-page or blog form.
+- Signup endpoint: POST https://business2-lasse-tfa.vercel.app/api/subscribe with JSON `{ "email": "you@example.com", "source": "/blog/" }`.
+- The endpoint stores opted-in email addresses in Resend Contacts. No subscription product or recurring billing is involved.
+
 ## Products
 - **40 Reusable Prompts** — €12.90 — https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T — landing: https://business2-lasse-tfa.vercel.app/prompts.html
 - **AI Agent Starter Kit** — €19.00 — https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S — landing: https://business2-lasse-tfa.vercel.app/starter-kit.html

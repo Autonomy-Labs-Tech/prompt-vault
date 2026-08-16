@@ -1,6 +1,6 @@
 'use strict';
 
-// Vercel serverless function: store an opted-in email in a Resend audience.
+// Vercel serverless function: store an opted-in email in Resend Contacts.
 // Resend Contacts is used as the durable subscriber store because serverless
 // function filesystems are ephemeral and must not be treated as a database.
 const https = require('https');
@@ -8,7 +8,6 @@ const https = require('https');
 const RESEND_HOST = 'api.resend.com';
 const REQUEST_TIMEOUT_MS = 10000;
 const MAX_RESPONSE_BYTES = 1000000;
-const DEFAULT_AUDIENCE_NAME = 'Autonomy Labs Updates';
 
 function sendJson(res, status, body) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -87,25 +86,6 @@ function normalizeEmail(value) {
   return email;
 }
 
-async function audienceId(apiKey) {
-  const configured = String(process.env.RESEND_AUDIENCE_ID || '').trim();
-  if (configured) return configured;
-
-  const listed = await requestResend('GET', '/audiences', apiKey);
-  if (listed.status !== 200) return '';
-  const audiences = Array.isArray(listed.data)
-    ? listed.data
-    : (listed.data && Array.isArray(listed.data.data) ? listed.data.data : []);
-  const named = audiences.find((audience) => audience && audience.name === DEFAULT_AUDIENCE_NAME);
-  if (named && named.id) return named.id;
-
-  const created = await requestResend('POST', '/audiences', apiKey, { name: DEFAULT_AUDIENCE_NAME });
-  if (created.status >= 200 && created.status < 300 && created.data && created.data.id) {
-    return created.data.id;
-  }
-  return '';
-}
-
 module.exports = async function subscribe(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -117,12 +97,11 @@ module.exports = async function subscribe(req, res) {
   if (req.method === 'GET') {
     return sendJson(res, 200, {
       ok: true,
-      subscriber_store: 'resend_audience',
+      subscriber_store: 'resend_contacts',
       configured: Boolean(apiKey),
     });
   }
   if (req.method !== 'POST') return sendJson(res, 405, { ok: false, error: 'method not allowed' });
-  if (!apiKey) return sendJson(res, 503, { ok: false, error: 'subscriber store not configured' });
 
   const body = bodyObject(req);
   // Quietly acknowledge honeypot submissions without storing them.
@@ -131,15 +110,16 @@ module.exports = async function subscribe(req, res) {
   }
   const email = normalizeEmail(body.email);
   if (!email) return sendJson(res, 400, { ok: false, error: 'valid email is required' });
-
-  const id = await audienceId(apiKey);
-  if (!id) return sendJson(res, 502, { ok: false, error: 'subscriber audience unavailable' });
+  if (!apiKey) return sendJson(res, 503, { ok: false, error: 'subscriber store not configured' });
 
   const contact = await requestResend(
     'POST',
-    '/audiences/' + encodeURIComponent(id) + '/contacts',
+    '/contacts',
     apiKey,
-    { email, unsubscribed: false },
+    {
+      email,
+      unsubscribed: false,
+    },
   );
   // Resend uses a conflict response for an existing contact. It is still a
   // successful signup from the form's perspective and remains recorded.
@@ -148,10 +128,16 @@ module.exports = async function subscribe(req, res) {
       ok: true,
       subscribed: true,
       already_subscribed: contact.status === 409,
-      subscriber_store: 'resend_audience',
+      subscriber_store: 'resend_contacts',
     });
   }
-  return sendJson(res, 502, { ok: false, error: 'could not save subscriber' });
+  const providerError = contact.data && (contact.data.message || contact.data.name);
+  return sendJson(res, 502, {
+    ok: false,
+    error: 'could not save subscriber',
+    provider_status: contact.status,
+    provider_error: providerError ? String(providerError).slice(0, 160) : undefined,
+  });
 };
 
 module.exports._private = { bodyObject, normalizeEmail };
