@@ -233,19 +233,22 @@ module.exports = async function (req, res) {
   // The QA Stripe fixture is deliberately available only to the local test
   // harness. Production runs use live credentials and therefore never expose
   // this mapping or accept a test-mode event.
-  const configuredTestProductId = String(env.STRIPE_TEST_PRODUCT_ID || '').trim();
-  const testModeProductId = env.STRIPE_TEST_MODE === '1'
-    && /^sk_test_/.test(STRIPE_KEY)
-    && configuredTestProductId === 'prod_V5EqpHdkemk3Ba'
-    ? configuredTestProductId
-    : '';
-  if (testModeProductId) {
-    DELIVERY[testModeProductId] = {
+  const isTestKey = /^sk_test_/.test(STRIPE_KEY);
+  const testMode = isTestKey && env.STRIPE_TEST_MODE === '1';
+  let testModeProductId = '';
+  if (testMode) {
+    const configuredTestProductId = String(env.STRIPE_TEST_PRODUCT_ID || '').trim();
+    if (/^prod_[A-Za-z0-9]+$/.test(configuredTestProductId)) {
+      testModeProductId = configuredTestProductId;
+    }
+  }
+  const testDelivery = testModeProductId
+    ? {
       subject: 'Autonomy Labs QA Stripe test fulfillment is ready',
       body: '<p>This is a Stripe test-mode fulfillment message for the local QA harness.</p>'
         + '<p>The paid Checkout Session was verified in Stripe test mode and delivered through the same fulfillment handler used by production.</p>',
-    };
-  }
+    }
+    : null;
 
   // Vercel parses the JSON body before this handler runs, so the exact bytes Stripe
   // signed are gone and the v1 HMAC cannot be recomputed. Re-reading the event from
@@ -297,7 +300,9 @@ module.exports = async function (req, res) {
       try { const items = JSON.parse(li.body); for (const it of items.data || []) { if (it.price && it.price.product) { productId = it.price.product; break; } } } catch (e) {}
     }
     if (!productId) return res.status(200).json({ ok: false, reason: 'no product found', sid });
-    const deliv = DELIVERY[productId];
+    const deliv = isTestKey
+      ? (productId === testModeProductId ? testDelivery : null)
+      : DELIVERY[productId];
     if (!deliv) return res.status(200).json({ ok: false, reason: 'no config for ' + productId });
     const email = (checkout.customer_details && checkout.customer_details.email) || checkout.customer_email;
     if (!email) return res.status(200).json({ ok: false, reason: 'no email', sid });
@@ -411,4 +416,3 @@ function promptHtml() {
   });
   return h;
 }
-
