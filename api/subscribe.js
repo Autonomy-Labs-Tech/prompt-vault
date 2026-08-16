@@ -121,13 +121,14 @@ module.exports = async function subscribe(req, res) {
       unsubscribed: false,
     },
   );
-  // Resend uses a conflict response for an existing contact. It is still a
-  // successful signup from the form's perspective and remains recorded.
+  // Resend Contacts is an idempotent upsert: new and existing contacts can
+  // both return 2xx, so the response does not tell us whether this email was
+  // already subscribed. Keep legacy 409 responses successful as well, but do
+  // not expose an inferred already_subscribed flag.
   if ((contact.status >= 200 && contact.status < 300) || contact.status === 409) {
     return sendJson(res, 200, {
       ok: true,
       subscribed: true,
-      already_subscribed: contact.status === 409,
       subscriber_store: 'resend_contacts',
     });
   }
