@@ -8,6 +8,7 @@
 // offline mode is signature+nonce gated until then.
 const crypto = require('crypto');
 const https = require('https');
+const walletWatch = require('./wallet_watch');
 
 const RECIPIENT = process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
 const CHAIN = { id: 8453, name: 'Base', shortName: 'base' };
@@ -174,6 +175,14 @@ module.exports = async function (req, res) {
   if (!order.signer || !order.nonce || signature.length < 60) return res.status(400).json({ error: 'bad order/signature' });
 
   const orderId = crypto.createHash('sha256').update(order.signer + order.nonce).digest('hex').slice(0, 32);
+
+  // Wallet Watch has its own delivery implementation (including the
+  // Blockscout payload schema). Keep x402 as the payment gate, then hand the
+  // already-validated request to that handler instead of returning a generic
+  // 422 for an advertised product.
+  if (product === 'watch' || product === 'watch-pro') {
+    return walletWatch(req, res);
+  }
 
   let data;
   if (product === 'audit' || product === 'audit-5') data = await deliverAudit(req.body || {});
