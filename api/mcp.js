@@ -41,7 +41,7 @@ const TOOLS = [
   },
   {
     name: 'wallet_watch_snapshot',
-    description: 'Pay-per-call (x402): wallet balance + last 10 transaction snapshot for one Base address. Price 1.00 USDC on Base.',
+    description: 'Pay-per-call (x402): Base wallet snapshot with up to 20 ERC-20 token balances and at most 10 recent transactions for one address. Native coin balances are not included. If the provider returns extra tokens or transaction pages/records, the response is partial and includes provider_limited, token_balances_complete or transactions_complete, and source/error metadata. Price 1.00 USDC on Base.',
     inputSchema: {
       type: 'object',
       properties: { address: { type: 'string', description: 'Base address to watch, e.g. 0x...' } },
@@ -50,7 +50,7 @@ const TOOLS = [
   },
   {
     name: 'wallet_watch_pro',
-    description: 'Pay-per-call (x402): wallet balance + last 100 transactions + full token list for one Base address. Price 5.00 USDC on Base.',
+    description: 'Pay-per-call (x402): Base wallet snapshot with up to 200 ERC-20 token balances and at most 100 recent transactions for one address. Native coin balances are not included. If the provider returns extra tokens or transaction pages/records, the response is partial and includes provider_limited, token_balances_complete or transactions_complete, and source/error metadata. Price 5.00 USDC on Base.',
     inputSchema: {
       type: 'object',
       properties: { address: { type: 'string', description: 'Base address to watch, e.g. 0x...' } },

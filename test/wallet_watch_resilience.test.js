@@ -1,5 +1,7 @@
 const http = require('node:http');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const test = require('node:test');
 
 const walletWatch = require('../api/wallet_watch');
@@ -53,6 +55,20 @@ function normalTransactions() {
   };
 }
 
+function fixtureTransactions(count, hasNextPage = false) {
+  return {
+    items: Array.from({ length: count }, (_, index) => ({
+      hash: `0xtransaction-${index + 1}`,
+      timestamp: `2026-08-16T00:${String(index % 60).padStart(2, '0')}:00Z`,
+      from: { hash: ADDRESS.toLowerCase() },
+      to: { hash: TOKEN },
+      value: String((index + 1) * 1000000000000000),
+      status: 'confirmed',
+    })),
+    next_page_params: hasNextPage ? { page: 2 } : null,
+  };
+}
+
 function normalTokens() {
   return {
     status: '1',
@@ -66,6 +82,20 @@ function normalTokens() {
         value: '42000000',
       },
     ],
+  };
+}
+
+function fixtureTokens(count) {
+  return {
+    status: '1',
+    message: 'OK',
+    result: Array.from({ length: count }, (_, index) => ({
+      contractAddress: `0x${String(index + 1).padStart(40, '0')}`,
+      symbol: `T${index + 1}`,
+      name: `Fixture Token ${index + 1}`,
+      decimals: '18',
+      value: String(index + 1),
+    })),
   };
 }
 
@@ -92,6 +122,20 @@ function startProvider(mode) {
       res.setHeader('Content-Type', 'application/json');
       res.write(v2 ? '{"items":[' : '{"result":[');
       return setTimeout(() => res.destroy(), 10);
+    }
+
+    if (mode === 'watch_overflow' || mode === 'watch_pro_overflow') {
+      const count = mode === 'watch_pro_overflow' ? 201 : 21;
+      const transactions = mode === 'watch_pro_overflow' ? 101 : 11;
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      return res.end(
+        JSON.stringify(
+          v2
+            ? fixtureTransactions(transactions, mode === 'watch_pro_overflow')
+            : fixtureTokens(count),
+        ),
+      );
     }
 
     if (mode === 'oversized' || (mode === 'partial' && !v2)) {
@@ -242,6 +286,88 @@ test('one limited provider source returns explicit partial metadata without fabr
     assert.equal(response.body.data.token_balances_complete, false);
     assert.equal(response.body.data.provider_limited, true);
   }, { maxBodyBytes: 512 });
+});
+
+test('valid token and transaction overflow is capped and marked incomplete for each product', async () => {
+  await withFixture('watch_overflow', walletWatch, async (port) => {
+    const response = await request(port, '/?product=watch&address=' + ADDRESS, paidBody());
+    assert.equal(response.status, 200);
+    assert.equal(response.body.ok, true);
+    assert.equal(response.body.partial, true);
+    assert.equal(response.body.data.partial, true);
+    assert.equal(response.body.data.complete, false);
+    assert.equal(response.body.data.transactions.length, 10);
+    assert.equal(response.body.data.transaction_count, 10);
+    assert.equal(response.body.data.token_balances.length, 20);
+    assert.equal(response.body.data.token_balances_count, 20);
+    assert.equal(response.body.data.transaction_limit, 10);
+    assert.equal(response.body.data.token_balances_limit, 20);
+    assert.equal(response.body.data.transactions_complete, false);
+    assert.equal(response.body.data.token_balances_complete, false);
+    assert.equal(response.body.data.provider_limited, true);
+    assert.equal(
+      response.body.data.sources.transactions.error,
+      'provider_transaction_limit',
+    );
+    assert.deepEqual(
+      response.body.data.sources.transactions.errors,
+      ['provider_transaction_limit'],
+    );
+    assert.equal(
+      response.body.data.sources.token_balances.error,
+      'provider_token_limit',
+    );
+  }, { maxBodyBytes: 1024 * 1024 });
+
+  await withFixture('watch_pro_overflow', walletWatch, async (port) => {
+    const response = await request(
+      port,
+      '/?product=watch-pro&address=' + ADDRESS,
+      paidBody('watch-pro'),
+    );
+    assert.equal(response.status, 200);
+    assert.equal(response.body.ok, true);
+    assert.equal(response.body.partial, true);
+    assert.equal(response.body.data.partial, true);
+    assert.equal(response.body.data.complete, false);
+    assert.equal(response.body.data.transactions.length, 100);
+    assert.equal(response.body.data.transaction_count, 100);
+    assert.equal(response.body.data.token_balances.length, 200);
+    assert.equal(response.body.data.token_balances_count, 200);
+    assert.equal(response.body.data.transaction_limit, 100);
+    assert.equal(response.body.data.token_balances_limit, 200);
+    assert.equal(response.body.data.transactions_complete, false);
+    assert.equal(response.body.data.token_balances_complete, false);
+    assert.equal(response.body.data.provider_limited, true);
+    assert.equal(
+      response.body.data.sources.transactions.error,
+      'provider_transaction_limit',
+    );
+    assert.deepEqual(
+      response.body.data.sources.transactions.errors,
+      ['provider_page_limited', 'provider_transaction_limit'],
+    );
+    assert.equal(
+      response.body.data.sources.token_balances.error,
+      'provider_token_limit',
+    );
+  }, { maxBodyBytes: 1024 * 1024 });
+});
+
+test('Wallet Watch product copy documents bounded fields without promising ETH', () => {
+  const page = fs.readFileSync(path.join(__dirname, '..', 'wallet-watch.html'), 'utf8');
+  const mcp = fs.readFileSync(path.join(__dirname, '..', 'api', 'mcp.js'), 'utf8');
+  const llms = fs.readFileSync(path.join(__dirname, '..', 'llms.txt'), 'utf8');
+  for (const copy of [page, mcp, llms]) {
+    assert.doesNotMatch(copy, /ETH balance/i);
+    assert.doesNotMatch(copy, /full token list/i);
+    assert.match(copy, /partial/i);
+    assert.match(copy, /provider.?limited/i);
+  }
+  assert.match(page, /20 ERC-20 token balances/);
+  assert.match(page, /100 recent transactions/);
+  assert.match(mcp, /up to 200 ERC-20 token balances/);
+  assert.match(llms, /token_balances_complete/);
 });
 
 test('oversized, truncated, malformed, rate-limited, and timed-out providers return bounded JSON', async () => {

@@ -108,6 +108,8 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - URL: https://www.autonomylabsweb.tech/wallet-watch.html
 - API: https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x...
 - MCP tool: wallet_watch_snapshot (1 USDC), wallet_watch_pro (5 USDC)
-- What: real-time Base wallet snapshot (ETH balance, ERC-20 tokens, last 10/100 transactions)
+- What: Base wallet snapshot with bounded ERC-20 token balances and recent transactions. `watch` returns up to 20 token balances and at most 10 transactions; `watch-pro` returns up to 200 token balances and at most 100 transactions. Native coin balances are not included.
+- Normal small responses expose `data.address`, `data.network`, `data.fetched_at_utc`, `data.transaction_count`, `data.transactions`, `data.token_balances_count`, and `data.token_balances`.
+- If the provider returns more token records, more transaction records, or another transaction page, the response is explicitly partial: `data.partial=true`, `data.complete=false`, `data.provider_limited=true` where applicable, plus `data.transaction_limit`/`data.token_balances_limit`, field-level `transactions_complete`/`token_balances_complete`, `data.sources`, and `data.provider_errors`.
 - Data source: Blockscout keyless API
 - Payment: x402 Base USDC to 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D
