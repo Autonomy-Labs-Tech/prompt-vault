@@ -243,3 +243,104 @@ test('fulfill: malformed packaged JSON fails closed without exposing loader deta
     fs.rmSync(standalone.root, { recursive: true, force: true });
   }
 });
+
+test('fulfill: array-shaped packaged metadata returns invalid_metadata_shape', async () => {
+  const standalone = copyStandaloneApi({
+    fixtureContents: JSON.stringify([{ fixture_marker: 'must-not-be-echoed' }]),
+  });
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: {
+          ok: false,
+          reason: 'test fixture is not approved',
+          diagnostic: {
+            source: 'bundled_stripe_test_fixtures',
+            status: 'invalid',
+            code: 'invalid_metadata_shape',
+          },
+        },
+      });
+      assert.doesNotMatch(JSON.stringify(response.body), /must-not-be-echoed/);
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: object-shaped fixture metadata returns invalid_metadata_shape', async () => {
+  const standalone = copyStandaloneApi({
+    fixtureContents: JSON.stringify({
+      fixtures: { fixture_marker: 'must-not-be-echoed' },
+    }),
+  });
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: {
+          ok: false,
+          reason: 'test fixture is not approved',
+          diagnostic: {
+            source: 'bundled_stripe_test_fixtures',
+            status: 'invalid',
+            code: 'invalid_metadata_shape',
+          },
+        },
+      });
+      assert.doesNotMatch(JSON.stringify(response.body), /must-not-be-echoed/);
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: duplicate packaged product IDs return duplicate_fixture_product', async () => {
+  const duplicateFixture = {
+    ...FIXTURE,
+    name: 'must-not-be-echoed',
+    price_id: 'price_standaloneDuplicate',
+    event_id: 'evt_standaloneDuplicate',
+  };
+  const standalone = copyStandaloneApi({
+    fixtureContents: JSON.stringify({
+      version: 1,
+      fixtures: [FIXTURE, duplicateFixture],
+    }),
+  });
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: {
+          ok: false,
+          reason: 'test fixture is not approved',
+          diagnostic: {
+            source: 'bundled_stripe_test_fixtures',
+            status: 'invalid',
+            code: 'duplicate_fixture_product',
+          },
+        },
+      });
+      assert.doesNotMatch(JSON.stringify(response.body), /must-not-be-echoed/);
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
