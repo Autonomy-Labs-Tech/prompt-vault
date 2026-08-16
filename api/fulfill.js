@@ -195,6 +195,14 @@ module.exports = async function (req, res) {
         + '<p>Setup: <code>npm i -g @lucid-agents/taskmarket</code> then run <code>node server.js</code> (MCP) or copy the skill into your Claude skills dir. Bounty/benchmark submissions are free on TaskMarket — the pack is the integration layer.</p>'
         + '<p>Questions? Reply to this email.</p>'
     },
+    'prod_V2sWYMmfYnyZiy': { // AI Agent API Integration Kit
+      subject: 'Your AI Agent API Integration Kit is ready',
+      body: '<p>Thanks for your purchase of the <strong>AI Agent API Integration Kit</strong>!</p><p>Your source and deploy guide covers Stripe, GitHub, Resend/SendGrid, and generic REST integrations, including authentication headers, retries, rate limits, timeouts, and webhook patterns. Questions? Reply to this email.</p>'
+    },
+    'prod_V2yPaaEwIm1vvE': { // Custom Browser Game Prototype
+      subject: 'Your Custom Browser Game Prototype project is confirmed',
+      body: '<p>Thanks for your purchase of the <strong>Custom Browser Game Prototype</strong>!</p><p>Your original single-file Three.js game prototype is confirmed. We will build it to your brief, include one revision round, and deliver the playable HTML source by email within 7–10 days. Reply to this email with any extra gameplay or visual details.</p>'
+    },
     'prod_V1U1Svayw5Gvd1': { // Three.js Scene Build Toolkit
       subject: 'Your Three.js Scene Build Toolkit is ready',
       body: '<p>Thanks for your purchase of the <strong>Three.js Scene Build Toolkit</strong>!</p>'
@@ -226,15 +234,38 @@ module.exports = async function (req, res) {
   try {
     const data = (verified.data || {}).object || {};
     const sid = data.id || '';
-    let productId = null;
+    let checkout = null;
     if (data.object === 'checkout.session') {
-      const li = await stripe('GET', '/v1/checkout/sessions/' + sid + '/line_items?limit=10');
+      checkout = data;
+      if (checkout.payment_status !== 'paid') {
+        return res.status(200).json({ ok: false, reason: 'payment not settled', sid });
+      }
+    } else if (data.object === 'payment_intent') {
+      if (data.status !== 'succeeded') {
+        return res.status(200).json({ ok: false, reason: 'payment not settled', sid });
+      }
+      const sessions = await stripe(
+        'GET',
+        '/v1/checkout/sessions?payment_intent=' + encodeURIComponent(sid) + '&limit=1',
+      );
+      try {
+        const parsed = JSON.parse(sessions.body);
+        checkout = (parsed.data || [])[0] || null;
+      } catch (e) {}
+      if (!checkout || checkout.payment_status !== 'paid') {
+        return res.status(200).json({ ok: false, reason: 'payment session not settled', sid });
+      }
+    }
+
+    let productId = null;
+    if (checkout && checkout.id) {
+      const li = await stripe('GET', '/v1/checkout/sessions/' + checkout.id + '/line_items?limit=10');
       try { const items = JSON.parse(li.body); for (const it of items.data || []) { if (it.price && it.price.product) { productId = it.price.product; break; } } } catch (e) {}
     }
     if (!productId) return res.status(200).json({ ok: false, reason: 'no product found', sid });
     const deliv = DELIVERY[productId];
     if (!deliv) return res.status(200).json({ ok: false, reason: 'no config for ' + productId });
-    const email = (data.customer_details && data.customer_details.email) || data.customer_email;
+    const email = (checkout.customer_details && checkout.customer_details.email) || checkout.customer_email;
     if (!email) return res.status(200).json({ ok: false, reason: 'no email', sid });
     let subject = deliv.subject, body = deliv.body;
     if (productId === 'prod_V1NvDTS0cNV4kK') {
