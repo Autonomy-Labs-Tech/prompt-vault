@@ -215,3 +215,31 @@ test('fulfill: invalid packaged metadata fails closed with safe diagnostics', as
     fs.rmSync(standalone.root, { recursive: true, force: true });
   }
 });
+
+test('fulfill: malformed packaged JSON fails closed without exposing loader details', async () => {
+  const standalone = copyStandaloneApi({ fixtureContents: '{"fixtures":[' });
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 200,
+        body: {
+          ok: false,
+          reason: 'test fixture is not approved',
+          diagnostic: {
+            source: 'bundled_stripe_test_fixtures',
+            status: 'invalid',
+            code: 'invalid_metadata_json',
+          },
+        },
+      });
+      assert.doesNotMatch(JSON.stringify(response.body), /SyntaxError|stripe_test_fixtures\.json/);
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});

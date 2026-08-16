@@ -6,11 +6,74 @@ const SIGNATURE_TOLERANCE_SEC = 300;
 // Keep the non-secret QA allowlist inside the deployed function bundle. The
 // local harness has its own copy under mission/, but production deployments
 // must never need to traverse outside business2/ to evaluate test metadata.
+const FIXTURE_METADATA_SOURCE = 'bundled_stripe_test_fixtures';
 let PACKAGED_TEST_FIXTURES = null;
+let PACKAGED_TEST_FIXTURE_DIAGNOSTIC = Object.freeze({
+  source: FIXTURE_METADATA_SOURCE,
+  status: 'unavailable',
+  code: 'metadata_unavailable',
+});
+
+function isApprovedFixtureShape(fixture) {
+  return (
+    fixture
+    && typeof fixture.product_id === 'string'
+    && /^prod_[A-Za-z0-9]+$/.test(fixture.product_id)
+    && typeof fixture.price_id === 'string'
+    && /^price_[A-Za-z0-9]+$/.test(fixture.price_id)
+    && typeof fixture.event_id === 'string'
+    && /^evt_[A-Za-z0-9]+$/.test(fixture.event_id)
+    && fixture.event_type === 'checkout.session.completed'
+    && fixture.checkout_mode === 'payment'
+    && fixture.price_type === 'one_time'
+    && fixture.livemode === false
+  );
+}
+
+function setFixtureMetadataDiagnostic(status, code) {
+  PACKAGED_TEST_FIXTURE_DIAGNOSTIC = Object.freeze({
+    source: FIXTURE_METADATA_SOURCE,
+    status,
+    code,
+  });
+}
+
 try {
   // A static require makes Vercel include the JSON in the function bundle.
-  PACKAGED_TEST_FIXTURES = require('./stripe_test_fixtures.json');
-} catch {}
+  const parsed = require('./stripe_test_fixtures.json');
+  if (!parsed || !Array.isArray(parsed.fixtures)) {
+    setFixtureMetadataDiagnostic('invalid', 'invalid_metadata_shape');
+  } else if (
+    parsed.fixtures.length === 0
+    || parsed.fixtures.some((fixture) => !isApprovedFixtureShape(fixture))
+  ) {
+    setFixtureMetadataDiagnostic('invalid', 'invalid_fixture_entry');
+  } else {
+    const productIds = parsed.fixtures.map((fixture) => fixture.product_id);
+    if (new Set(productIds).size !== productIds.length) {
+      setFixtureMetadataDiagnostic('invalid', 'duplicate_fixture_product');
+    } else {
+      PACKAGED_TEST_FIXTURES = parsed;
+      setFixtureMetadataDiagnostic('loaded', 'metadata_loaded');
+    }
+  }
+} catch (error) {
+  // Do not expose the loader error, path, or bundled contents in a response.
+  // A fixed code still makes missing and malformed bundles observable safely.
+  setFixtureMetadataDiagnostic(
+    error && error.name === 'SyntaxError' ? 'invalid' : 'unavailable',
+    error && error.name === 'SyntaxError' ? 'invalid_metadata_json' : 'metadata_unavailable',
+  );
+}
+
+function safeFixtureMetadataDiagnostic() {
+  if (PACKAGED_TEST_FIXTURE_DIAGNOSTIC.status === 'loaded') return null;
+  return {
+    source: PACKAGED_TEST_FIXTURE_DIAGNOSTIC.source,
+    status: PACKAGED_TEST_FIXTURE_DIAGNOSTIC.status,
+    code: PACKAGED_TEST_FIXTURE_DIAGNOSTIC.code,
+  };
+}
 
 // Stripe sends `t=<unix-seconds>,v1=<hex-hmac>` (repeated v1 during secret rotation).
 function parseStripeSignature(header) {
@@ -35,19 +98,7 @@ function parseStripeSignature(header) {
 function readApprovedTestFixtures() {
   const parsed = PACKAGED_TEST_FIXTURES;
   if (!parsed || !Array.isArray(parsed.fixtures)) return [];
-  return parsed.fixtures.filter((fixture) => (
-    fixture
-    && typeof fixture.product_id === 'string'
-    && /^prod_[A-Za-z0-9]+$/.test(fixture.product_id)
-    && typeof fixture.price_id === 'string'
-    && /^price_[A-Za-z0-9]+$/.test(fixture.price_id)
-    && typeof fixture.event_id === 'string'
-    && /^evt_[A-Za-z0-9]+$/.test(fixture.event_id)
-    && fixture.event_type === 'checkout.session.completed'
-    && fixture.checkout_mode === 'payment'
-    && fixture.price_type === 'one_time'
-    && fixture.livemode === false
-  ));
+  return parsed.fixtures.filter(isApprovedFixtureShape);
 }
 
 function approvedTestFixture(productId) {
@@ -282,7 +333,12 @@ module.exports = async function (req, res) {
     }
     : null;
   if (testMode && !testFixture) {
-    return res.status(200).json({ ok: false, reason: 'test fixture is not approved' });
+    const diagnostic = safeFixtureMetadataDiagnostic();
+    return res.status(200).json({
+      ok: false,
+      reason: 'test fixture is not approved',
+      ...(diagnostic ? { diagnostic } : {}),
+    });
   }
   if (testMode && event.id !== testFixture.event_id) {
     return res.status(200).json({ ok: false, reason: 'test event is not approved' });
