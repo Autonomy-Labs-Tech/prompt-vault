@@ -8,8 +8,16 @@
 <link rel="apple-touch-icon" href="/favicon.png">
 <title>Rebuilding Iconic Movie Scenes in Three.js (No Ripped Assets)</title>
 <meta name="description" content="How we rebuild iconic movie moments as self-contained offline Three.js scenes: geometric silhouettes, original synthesized scores, deterministic rendering, and full provenance. Includes the E.T. moon shot build.">
-<meta name="robots" content="index, follow">
+<meta property="og:title" content="Rebuilding Iconic Movie Scenes in Three.js (No Ripped Assets)">
+<meta property="og:description" content="How we rebuild iconic movie moments as self-contained offline Three.js scenes: geometric silhouettes, original synthesized scores, deterministic rendering, and full provenance. Includes the E.T. moon shot build.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/favicon.png">
+<meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html">
+
+<meta name="robots" content="index, follow">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:#1a1a2e; line-height:1.7; background:#faf8f5; }
@@ -28,7 +36,20 @@
   .cta .btn { display:inline-block; background:#ff7a00; color:#fff; font-weight:700; padding:13px 26px; border-radius:26px; text-decoration:none; }
   footer { background:#1a1a2e; color:#aaa; text-align:center; padding:24px; font-size:.85rem; }
   footer a { color:#ccc; }
+  .signup{background:#f0eafa;border:1px solid #dfd1f4;border-radius:16px;padding:24px;margin:34px 0;text-align:center}
+  .signup h2{color:#3b0f6d;margin:0 0 8px;font-size:1.25rem}
+  .signup p{color:#555}
+  .signup-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .signup-form input[type="email"]{flex:1 1 240px;min-width:0;border:1px solid #ccc;border-radius:24px;padding:11px 15px;font:inherit}
+  .signup-form button{border:0;cursor:pointer;background:#ff7a00;color:#fff;font-weight:700;padding:11px 20px;border-radius:22px}
+  .signup-form button:disabled{opacity:.65;cursor:wait}
+  .signup-form .honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+  .signup-status{min-height:1.4em;margin-top:10px;font-size:.9rem}
+  .signup-status[data-state="success"]{color:#287a46}
+  .signup-status[data-state="error"]{color:#a32929}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Rebuilding Iconic Movie Scenes in Three.js (No Ripped Assets)","description":"How we rebuild iconic movie moments as self-contained offline Three.js scenes: geometric silhouettes, original synthesized scores, deterministic rendering, and full provenance. Includes the E.T. moon shot build.","url":"https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://business2-lasse-tfa.vercel.app/blog/rebuilding-movie-scenes-threejs.html"},"publisher":{"@type":"Organization","name":"Autonomy Labs","url":"https://business2-lasse-tfa.vercel.app"}}</script>
 </head>
 <body>
 <header>
@@ -73,10 +94,22 @@
     <p><a href="index.html" style="color:#3b0f6d">← More from the Autonomy Labs blog</a></p>
   </div>
 </article>
+<section class="signup" aria-labelledby="article-signup-title">
+  <h2 id="article-signup-title">Get practical AI guides by email</h2>
+  <p>Join the free list for occasional prompts, automation ideas, and new tools. No spam.</p>
+  <form class="signup-form" data-email-capture action="../api/subscribe" method="post">
+    <label class="honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <label class="sr-only" for="article-email">Email address</label>
+    <input id="article-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+    <button type="submit">Join the free list</button>
+  </form>
+  <p class="signup-status" data-email-status role="status" aria-live="polite"></p>
+</section>
 <footer>
   <div class="container">
     <p><a href="../index.html">Store</a> · <a href="../audit.html">Free Agent Audit</a> · <a href="index.html">Blog</a> · <a href="../impressum.html">Impressum</a></p>
   </div>
 </footer>
+<script src="../email-capture.js" defer></script>
 </body>
 </html>

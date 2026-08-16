@@ -8,6 +8,16 @@
 <link rel="apple-touch-icon" href="/favicon.png">
 <title>Autonomy Labs Blog — AI Prompts &amp; AI Agents for Business</title>
 <meta name="description" content="Practical guides on AI prompts and AI agents for small business owners.">
+<meta property="og:title" content="Autonomy Labs Blog — AI Prompts &amp; AI Agents for Business">
+<meta property="og:description" content="Practical guides on AI prompts and AI agents for small business owners.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/blog/">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/favicon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://business2-lasse-tfa.vercel.app/blog/">
+
 <meta name="robots" content="index, follow">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -19,9 +29,22 @@
   .post h2 { font-size:1.3rem; margin-bottom:8px; }
   .post h2 a { color:#3b0f6d; text-decoration:none; }
   .post p { color:#555; font-size:.95rem; }
+  .signup { background:#f0eafa; border:1px solid #dfd1f4; border-radius:16px; padding:26px; margin:28px 0; text-align:center; }
+  .signup h2 { color:#3b0f6d; margin-bottom:8px; }
+  .signup p { color:#555; }
+  .signup-form { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  .signup-form input[type="email"] { flex:1 1 240px; min-width:0; border:1px solid #ccc; border-radius:24px; padding:12px 16px; font:inherit; }
+  .signup-form button { border:0; cursor:pointer; background:#ff7a00; color:#fff; font-weight:700; padding:12px 20px; border-radius:22px; }
+  .signup-form button:disabled { opacity:.65; cursor:wait; }
+  .signup-form .honeypot { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+  .signup-status { min-height:1.4em; margin-top:12px; font-size:.9rem; }
+  .signup-status[data-state="success"] { color:#287a46; }
+  .signup-status[data-state="error"] { color:#a32929; }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   footer { background:#1a1a2e; color:#aaa; text-align:center; padding:24px; font-size:.85rem; }
   footer a { color:#ccc; }
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Autonomy Labs Blog — AI Prompts & AI Agents for Business","description":"Practical guides on AI prompts and AI agents for small business owners.","url":"https://business2-lasse-tfa.vercel.app/blog/","mainEntityOfPage":{"@type":"WebPage","@id":"https://business2-lasse-tfa.vercel.app/blog/"},"publisher":{"@type":"Organization","name":"Autonomy Labs","url":"https://business2-lasse-tfa.vercel.app"}}</script>
 </head>
 <body>
 <header>
@@ -63,11 +86,23 @@
     <h2><a href="how-to-convert-currency.html">How to Convert Currency: Live Exchange Rates Explained</a></h2>
     <p>What exchange rates mean, the mid-market rate, and how to convert between 160+ currencies.</p>
   </div>
+  <section class="signup" aria-labelledby="blog-signup-title">
+    <h2 id="blog-signup-title">Get new AI guides by email</h2>
+    <p>Join the free list for practical prompts, automation ideas, and tool updates. No spam.</p>
+    <form class="signup-form" data-email-capture action="../api/subscribe" method="post">
+      <label class="sr-only" for="blog-email">Email address</label>
+      <input id="blog-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+      <label class="honeypot" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <button type="submit">Join the free list</button>
+    </form>
+    <p class="signup-status" data-email-status role="status" aria-live="polite"></p>
+  </section>
 </div>
 <footer>
   <div class="container">
     <p>© 2026 Autonomy Labs. <a href="../index.html">Home</a> · <a href="../impressum.html">Impressum</a> · <a href="../privacy.html">Privacy</a></p>
   </div>
 </footer>
+<script src="../email-capture.js" defer></script>
 </body>
 </html>
