@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3132,
-  "last_run": "2026-08-17T17:00:00.484322",
+  "cycles": 3133,
+  "last_run": "2026-08-17T18:00:00.663702",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -245,31 +245,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T15:30:00.500Z",
+  "generated_at": "2026-08-17T16:00:00.755Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Mon Aug 17 17:30:00 CEST 2026] executing top task 0x6b0d5bcabb9285de95a41575f3fed11b2fb76700dc036926272fd0ad89a8dbc8"
+      "line": "[Mon Aug 17 18:00:00 CEST 2026] executing top task 0x87e4aab27539cae656554b5f4e97fd4b9697c1dc295c3fdbe260c79a2d74be85"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:25:01.730Z quality queue written: 0x6b0d5bcabb9285"
+      "line": "2026-08-17T15:55:01.969Z quality queue written: 0x87e4aab27539ca"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:25:01.729Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 04: Whack Protocol. Build a complet"
+      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:25:01.729Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 08: Bumper Rush. Build a complete p"
+      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 03: Crane Breaker. Build a complete"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:25:01.729Z   [12.00] bounty $60 subs=4 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 06: Neon Range. Build a complete pl"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:25:01.728Z   [12.00] bounty $60 subs=4 CLASSIC ARCADE BENCHMARK 10: Dancefloor Panic. Build a compl"
+      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 10: Dancefloor Panic. Build a compl"
     },
     {
       "tag": "taskmarket",
@@ -281,19 +281,23 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T15:25:01.723Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T15:55:01.967Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T15:25:01.723Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T15:55:01.967Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0x5e7facd1016471 bounty reward=6000000 subs=4 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+      "line": "candidate: 0x5e7facd1016471 bounty reward=6000000 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+    },
+    {
+      "tag": "distribute",
+      "line": "--- run Mon Aug 17 18:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -301,7 +305,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T15:21:53.897Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -309,15 +313,11 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T15:06:53.830Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T15:51:54.028Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T14:51:53.764Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
