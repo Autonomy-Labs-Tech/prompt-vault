@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3124,
+    "cycles": 3125,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T08:00:00.625Z",
+  "generated_at": "2026-08-17T08:30:00.652Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T07:57:25.138Z task failure bookkeeping failed: quality done state invalid"
+      "line": "2026-08-17T08:29:17.234Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T07:52:06.521Z task failure bookkeeping failed: quality done state invalid"
+      "line": "2026-08-17T08:23:56.065Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T07:46:39.410Z task failure bookkeeping failed: quality done state invalid"
+      "line": "2026-08-17T08:18:37.053Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T07:41:13.407Z task failure bookkeeping failed: quality done state invalid"
+      "line": "2026-08-17T08:13:23.751Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T09:20:02.007Z quality queue written: none"
+      "line": "2026-08-17T08:08:05.436Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T09:20:02.007Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T08:02:46.113Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "taskmarket",
@@ -281,15 +281,15 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T07:55:02.080Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T08:25:01.806Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=2 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=3 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T07:55:02.079Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=2 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T08:25:01.806Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=3 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
@@ -297,23 +297,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T08:21:52.140Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T08:06:52.073Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Mon Aug 17 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T07:51:52.006Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
