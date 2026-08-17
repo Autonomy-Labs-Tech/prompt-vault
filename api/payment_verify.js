@@ -129,8 +129,8 @@ async function verifyPayment({ order, signature, txHash, recipient, requiredUsdc
   if (!order || String(order.currency || '').toUpperCase() !== 'USDC') {
     return { ok: false, status: 400, error: 'wrong currency' };
   }
-  if (!Number.isFinite(Number(order.amount)) || Number(order.amount) < Number(requiredUsdc)) {
-    return { ok: false, status: 402, error: 'underpaid' };
+  if (!Number.isFinite(Number(order.amount)) || Number(order.amount) !== Number(requiredUsdc)) {
+    return { ok: false, status: 402, error: 'wrong amount' };
   }
   if (!normalizedAddress(order.signer) || !order.nonce) {
     return { ok: false, status: 400, error: 'bad order/signature' };
@@ -209,7 +209,7 @@ function verifyUsdcTransfer(txHash, signer, recipient, requiredUsdc) {
                 return finish({ ok: false, error: 'transfer not to recipient' });
               }
               const amount = Number(BigInt(String(valueParam.value))) / 1e6;
-              return finish(amount >= required
+              return finish(Math.abs(amount - required) < 1e-9
                 ? { ok: true, amount_usdc: amount, method: decoded.method_call || 'USDC transfer' }
                 : { ok: false, error: 'underpaid' });
             }
@@ -221,7 +221,7 @@ function verifyUsdcTransfer(txHash, signer, recipient, requiredUsdc) {
               const token = normalizedAddress(transfer.token && transfer.token.address);
               if (transferFrom !== fromSigner || transferTo !== toRecipient || token !== USDC_BASE) continue;
               const amount = Number(BigInt(String(transfer.total && transfer.total.value))) / 1e6;
-              return finish(amount >= required
+              return finish(Math.abs(amount - required) < 1e-9
                 ? { ok: true, amount_usdc: amount, method: 'token_transfers' }
                 : { ok: false, error: 'underpaid' });
             }
@@ -233,7 +233,7 @@ function verifyUsdcTransfer(txHash, signer, recipient, requiredUsdc) {
               const logTo = normalizedAddress('0x' + String(topics[2]).slice(-40));
               if (logFrom !== fromSigner || logTo !== toRecipient) continue;
               const amount = Number(BigInt(String(log.data || '0x0'))) / 1e6;
-              return finish(amount >= required
+              return finish(Math.abs(amount - required) < 1e-9
                 ? { ok: true, amount_usdc: amount, method: 'ERC20 Transfer log' }
                 : { ok: false, error: 'underpaid' });
             }

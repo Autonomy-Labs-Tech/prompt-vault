@@ -94,3 +94,20 @@ test('production never enables the offline payment bypass', async () => {
     }
   }
 });
+
+test('rejects an order quoted for a different product amount', async () => {
+  const result = await verifyPayment({
+    order: {
+      nonce: 'amount-mismatch',
+      signer: '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D',
+      amount: '7.00',
+      currency: 'USDC',
+      chainId: 8453,
+    },
+    signature: 'not-a-signature',
+    txHash: '0x' + 'c'.repeat(64),
+    recipient: '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D',
+    requiredUsdc: 2,
+  });
+  assert.deepEqual(result, { ok: false, status: 402, error: 'wrong amount' });
+});

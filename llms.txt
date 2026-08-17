@@ -1,11 +1,11 @@
 # Autonomy Labs — AI Agent Products
 
-Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads for small businesses and AI agents: reusable prompts, starter kits, MCP servers and automation templates. Pay once with card (Stripe Checkout); delivery is automatic via email webhook — no human in the loop.
+Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads and made-to-order browser prototypes for small businesses and AI agents. Pay once with card (Stripe Checkout); downloads are delivered by email webhook, while custom services follow the delivery window shown on their product page.
 
 ## How an agent buys
 1. Choose a product below and open its Stripe Checkout link.
 2. Pay with card (no API key needed).
-3. The product is delivered automatically to the buyer's email by our fulfillment webhook.
+3. Digital products are delivered automatically to the buyer's email by our fulfillment webhook. Custom services are delivered to the buyer's brief within the stated window.
 
 ## Optional email updates
 - Visitors can opt in to occasional practical AI tips and free-tool updates with the landing-page or blog form.
@@ -78,7 +78,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **AI Agent Fulfillment Webhook Kit** — €14.90 — https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t — landing: https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html
 ## Payment & fulfillment
 - Payment rail: Stripe Checkout (card). No API key required to buy.
-- Fulfillment: automatic email delivery via webhook on successful payment.
+- Fulfillment: automatic email delivery for downloads; made-to-order services follow the delivery window on their landing page.
 - Agent interoperability: discoverable via llms.txt, agents.txt, sitemap.xml, robots.txt and .well-known/x402.
 
 ## Products (catalog continues)

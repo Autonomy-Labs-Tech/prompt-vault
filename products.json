@@ -3,7 +3,7 @@
  "@type": "ItemList",
  "name": "Autonomy Labs AI Agent Products",
  "baseUrl": "https://business2-lasse-tfa.vercel.app",
- "payment": "Stripe Checkout (card) \u2014 auto email fulfillment",
+ "payment": "Stripe Checkout (card): instant digital downloads are fulfilled by email; made-to-order services follow the delivery window shown on their product page",
  "itemListElement": [
   {
    "@type": "Product",
@@ -408,6 +408,7 @@
    "name": "Custom Three.js Scene Rebuild",
    "description": "An iconic movie or TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note and screenshots. No likenesses, no ripped assets, deterministic render. Proven on 6 TaskMarket scene bounties.",
    "category": "Services",
+   "delivery": "Made to order; typical delivery 5–7 days",
    "tagline": "Your iconic scene, rebuilt in Three.js \u2014 offline, deterministic, submission-ready",
    "features": [
     "Self-contained offline single HTML (Three.js r185)",
@@ -552,6 +553,7 @@
    "name": "Custom Browser Game Prototype",
    "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
    "category": "Services",
+   "delivery": "Made to order; typical delivery 7–10 days",
    "tagline": "Your game idea, playable in one HTML file",
    "features": [
     "Single-file Three.js game, opens straight off disk",
