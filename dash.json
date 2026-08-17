@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3128,
-  "last_run": "2026-08-17T13:00:01.135671",
+  "cycles": 3129,
+  "last_run": "2026-08-17T14:00:00.544960",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -245,31 +245,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T11:30:01.038Z",
+  "generated_at": "2026-08-17T12:00:00.621Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T11:25:01.639Z quality queue written: none"
+      "line": "2026-08-17T11:55:02.868Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T11:25:01.637Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T11:55:02.867Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T11:25:01.633Z QUALITY poll: 8 open"
+      "line": "2026-08-17T11:55:02.863Z QUALITY poll: 8 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T11:20:01.831Z quality queue written: none"
+      "line": "2026-08-17T11:50:03.763Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T11:20:01.830Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T11:50:03.762Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T11:20:01.826Z QUALITY poll: 8 open"
+      "line": "2026-08-17T11:50:03.758Z QUALITY poll: 8 open"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T11:25:01.146Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T11:55:02.183Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T11:25:01.145Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T11:55:02.183Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
@@ -297,11 +297,7 @@
     },
     {
       "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T11:21:52.897Z] prospects=34 fresh=0 sending=0"
+      "line": "--- run Mon Aug 17 14:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -309,7 +305,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T11:06:52.836Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -317,13 +313,17 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T10:51:52.773Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T11:51:53.031Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
