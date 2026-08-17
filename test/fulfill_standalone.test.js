@@ -181,6 +181,22 @@ test('fulfill: production rejects a valid-shaped but invalid Stripe signature', 
   }
 });
 
+test('fulfill: Stripe HMAC verification accepts matching raw bytes', () => {
+  const standalone = copyStandaloneApi({ includeFixture: true });
+  try {
+    const handler = require(standalone.handlerPath);
+    const rawBody = Buffer.from('{"id":"evt_standalone","type":"checkout.session.completed"}');
+    const timestamp = Math.floor(Date.now() / 1000);
+    const header = `t=${timestamp},v1=${crypto
+      .createHmac('sha256', 'whsec_standalone')
+      .update(`${timestamp}.${rawBody.toString()}`)
+      .digest('hex')}`;
+    assert.equal(handler._private.verifyStripeSignature(header, rawBody, 'whsec_standalone'), true);
+  } finally {
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
 test('fulfill: Resend failure returns retryable status', async () => {
   const standalone = copyStandaloneApi({ includeFixture: true });
   const mock = mockStripeAndResend();

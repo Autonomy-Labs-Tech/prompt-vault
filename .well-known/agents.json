@@ -21,7 +21,7 @@
       "path": "/api/audit",
       "method": "GET",
       "query": { "url": "https://example.com" },
-      "description": "Free AI-agent readiness audit for any website. Returns JSON: grade (A-D), score, per-surface checks (robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, .well-known/x402)."
+      "description": "Free AI-agent readiness audit for any website. Returns JSON: grade (A-D), score, per-surface checks across eight surfaces (robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, .well-known/x402, .well-known/agents.json, .well-known/security.txt)."
     }
   ],
   "workflows": [

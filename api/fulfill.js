@@ -97,11 +97,29 @@ function parseStripeSignature(header) {
   return { present: true, valid, timestamp, signatures: v1 };
 }
 
-function rawRequestBody(req) {
+async function rawRequestBody(req) {
   if (Buffer.isBuffer(req && req.rawBody)) return req.rawBody;
   if (typeof (req && req.rawBody) === 'string') return Buffer.from(req.rawBody);
   if (typeof (req && req.body) === 'string') return Buffer.from(req.body);
-  return null;
+  if (!req || typeof req.on !== 'function') return null;
+  return new Promise((resolve) => {
+    const chunks = [];
+    let size = 0;
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      resolve(value);
+    };
+    req.on('data', (chunk) => {
+      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk));
+      size += buffer.length;
+      if (size > 1000000) finish(null);
+      else chunks.push(buffer);
+    });
+    req.on('end', () => finish(Buffer.concat(chunks)));
+    req.on('error', () => finish(null));
+  });
 }
 
 function verifyStripeSignature(header, rawBody, secret, now = Date.now()) {
@@ -145,7 +163,14 @@ module.exports = async function (req, res) {
   const FROM = 'Prompt Vault <hello@autonomylabsweb.tech>';
   if (!STRIPE_KEY || !RESEND_KEY) return res.status(503).json({ error: 'fulfillment not configured' });
 
-  const event = req.body;
+  const rawBody = await rawRequestBody(req);
+  let event = req.body;
+  if (typeof event === 'string') {
+    try { event = JSON.parse(event); } catch (e) { event = null; }
+  }
+  if (event == null && rawBody) {
+    try { event = JSON.parse(rawBody.toString('utf8')); } catch (e) { event = null; }
+  }
   if (!event || typeof event !== 'object' || Array.isArray(event) || typeof event.type !== 'string') {
     return res.status(400).json({ error: 'malformed event body' });
   }
@@ -162,7 +187,6 @@ module.exports = async function (req, res) {
   if (Math.abs(Date.now() / 1000 - sig.timestamp) > SIGNATURE_TOLERANCE_SEC) {
     return res.status(400).json({ error: 'stripe-signature timestamp outside tolerance' });
   }
-  const rawBody = rawRequestBody(req);
   const isTestRequest = /^sk_test_/.test(STRIPE_KEY) && env.STRIPE_TEST_MODE === '1';
   if (!isTestRequest && !WEBHOOK_SECRET) {
     return res.status(503).json({ error: 'stripe webhook secret not configured' });
@@ -383,10 +407,9 @@ module.exports = async function (req, res) {
     return res.status(200).json({ ok: false, reason: 'test event is not approved' });
   }
 
-  // Vercel parses the JSON body before this handler runs, so the exact bytes Stripe
-  // signed are gone and the v1 HMAC cannot be recomputed. Re-reading the event from
-  // Stripe with our secret key is the authoritative substitute: a forged event id
-  // does not exist there, and the returned copy is the one we act on.
+  // The raw-body HMAC check above is authoritative for webhook authenticity.
+  // Re-reading the event with our secret key is defense-in-depth: the returned
+  // Stripe copy is the one we act on, and a forged event id does not exist there.
   const lookup = await stripe('GET', '/v1/events/' + encodeURIComponent(event.id));
   if (lookup.error) return res.status(503).json({ error: 'could not reach stripe to verify event' });
   if (lookup.status === 404) return res.status(401).json({ error: 'event not found at stripe' });
@@ -527,11 +550,17 @@ async function runAudit(base0) {
   await resolvePublic(base0);
   const base = new URL(base0).origin;
   const when = new Date().toISOString();
+  const deadline = Date.now() + 15000;
   const results = [];
   for (const p of AUDIT_SURFACES) {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) {
+      results.push({ path: p, status: 0, ct: '', err: 'audit deadline' });
+      continue;
+    }
     try {
       const r = await publicGet(base + p, {
-        timeoutMs: 8000,
+        timeoutMs: Math.min(4000, remaining),
         maxBytes: 200000,
       });
       results.push({ path: p, status: r.status, ct: r.ct || '' });
@@ -625,4 +654,11 @@ module.exports._private = {
   promptHtml,
   rawRequestBody,
   verifyStripeSignature,
+};
+
+module.exports.config = {
+  api: {
+    bodyParser: false,
+    sizeLimit: '1mb',
+  },
 };

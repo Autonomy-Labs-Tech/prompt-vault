@@ -9,7 +9,7 @@ const BASE = 'https://business2-lasse-tfa.vercel.app';
 const TOOLS = [
   {
     name: 'agent_site_audit',
-    description: 'Pay-per-call (x402): audit ONE public site for AI-agent readiness (robots.txt, sitemap, llms.txt, agents.txt, x402, security.txt) and get a grade A-D. Price 2.00 USDC on Base.',
+    description: 'Pay-per-call (x402): audit ONE public site across eight AI-agent readiness surfaces (robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, x402, agents.json, security.txt) and get a grade A-D. Price 2.00 USDC on Base.',
     inputSchema: {
       type: 'object',
       properties: { url: { type: 'string', description: 'absolute https URL of the site to audit' } },

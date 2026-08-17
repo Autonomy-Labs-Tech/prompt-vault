@@ -4,7 +4,7 @@ Autonomy Labs sells digital downloads and made-to-order browser prototypes for s
 
 ## What this site offers
 
-This is an AI-agent-discoverable product storefront. AI agents and humans can browse the catalog, click a Stripe payment link, pay by card, and receive downloads automatically by email. Made-to-order prototypes are built to the buyer's brief within the stated delivery window.
+This is an AI-agent-discoverable product storefront. AI agents and humans can browse the catalog, click a Stripe payment link, pay by card, and receive configured downloads by email after verified payment. Made-to-order prototypes are built to the buyer's brief within the stated delivery window.
 
 ## Products
 
@@ -134,10 +134,10 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 - **AI Agent x402 Paywall Setup Kit** — €14.90 — https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u — landing: https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html
 - **AI Agent Fulfillment Webhook Kit** — €14.90 — https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t — landing: https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html
-- **AI Website Audit Report** — €19.00 one-time. Deep, evidence-backed audit of a website's AI-agent discoverability (llms.txt, robots.txt, sitemap.xml, agents.txt, .well-known/x402): grade A-F, gaps ranked by impact, reproducible curl checks. Enter the URL at checkout; the webhook runs the audit and emails the report automatically.
+- **AI Website Audit Report** — €19.00 one-time. Deep, evidence-backed audit of eight AI-agent discovery surfaces (llms.txt, llms-full.txt, robots.txt, sitemap.xml, agents.txt, .well-known/x402, .well-known/agents.json, .well-known/security.txt): grade A-F, gaps ranked by impact, reproducible curl checks. Supply the URL in the hosted checkout field when available or reply to the confirmation email; after verified payment, the configured webhook runs the audit.
    - Buy: https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v
    - Landing: https://business2-lasse-tfa.vercel.app/audit-report.html
-- **Custom Three.js Scene Rebuild** — €49.00 one-time. An iconic movie/TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note, screenshots. Brief + delivery email at checkout.
+- **Custom Three.js Scene Rebuild** — €49.00 one-time. An iconic movie/TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note, screenshots. Reply to the confirmation email with the brief; the delivery window starts when the required brief is received.
    - Buy: https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U
    - Landing: https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html
 - **Three.js Scene Build Toolkit** — €19.00 one-time. The production pipeline behind our scene rebuilds: deterministic app.js template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, offline/determinism verification checklist. Pipeline code delivered by email.
