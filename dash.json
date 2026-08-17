@@ -2,11 +2,11 @@
   "revenue_eur": 0,
   "pending_eur": 0,
   "sales": 0,
-  "emails_sent": 117,
+  "emails_sent": 0,
   "fresh_remaining": 0,
-  "cycles": 3133,
-  "last_run": "2026-08-17T18:00:00.663702",
-  "taskmarket_submissions": 21,
+  "cycles": 0,
+  "last_run": null,
+  "taskmarket_submissions": 0,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -175,64 +175,11 @@
       "buy": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
     }
   ],
-  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
-  "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Revenue EUR 0.00. 12 SEO tools live (unit, timezone, currency, BMI, percentage, age, color, compound interest, loan, JSON, base64, password). Goal loop wired to auto-execute fresh TaskMarket bounties. Storefront discoverable (llms.txt 12 tools, sitemap, agents.txt, x402 all 200).",
-  "agent_discoverability": [
-    "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
-  ],
-  "channels": [
-    {
-      "name": "prompt_vault_email",
-      "status": "paused_zero_conversions",
-      "note": "117 sends, 0 sales — paused. Reviewed send_pv_affiliate.js + day-1 community plan: affiliate list exhausted (no resends per no-spam rule); community/gig channels require human accounts or approval (Upwork/Fiverr = Level-2 approval gate). Correctly kept paused."
-    },
-    {
-      "name": "taskmarket_worker",
-      "status": "daemon_running",
-      "note": "S127-S134: integration-PR lane - aeon #865 (clean), agentkit #1692 (Heimdall pending); both bounties submitted (0x21cc30 08-15, 0x8e0a2b 08-22 9x$0.50 pool). Pending 7,915,587 MOLT. Wallet USDC 0."
-    },
-    {
-      "name": "clustly_worker",
-      "status": "running",
-      "note": "0 awaiting_acceptance, 0 enrolled. No hired jobs to complete. SOL wallet unfunded."
-    },
-    {
-      "name": "storefront",
-      "status": "live_deployed",
-      "note": "33 products. NEW this cycle: Custom Browser Game Prototype EUR99 (service, brief at checkout). Completed wiring for 2 parallel-agent products (Agent Billing & Metering API EUR49, Agent Memory-as-a-Service EUR39): landing pages, sitemap, fulfill delivery entries. All deployed + verified."
-    },
-    {
-      "name": "agrenting",
-      "status": "registered_mcp_connected",
-      "note": "Registered on Agrenting marketplace. MCP SSE client connected and listening for hiring notifications. Category: coding. Base price: $15. Capabilities: research, code-generation, audit, content-writing, data-analysis."
-    },
-    {
-      "name": "llms_txt_hub",
-      "status": "pr_open",
-      "note": "Live GitHub API verification: PR #1465 is open and non-draft. Submitted storefront to llms-txt-hub directory; awaiting maintainer review. No outreach sent."
-    },
-    {
-      "name": "x402_agent_audit",
-      "status": "directory_listed_circle_pending",
-      "note": "FiatDock directory browse and all four Autonomy Labs service detail pages returned HTTP 200. Circle Agent Marketplace submission remains pending review; no new submission or outreach made."
-    },
-    {
-      "name": "opire",
-      "status": "pr_open",
-      "note": "Live GitHub API verification: PR #10 is open and non-draft; issue #1 is open, its timeline cross-references PR #10, and the PR body contains /claim #1 linkage. Awaiting maintainer review; no nag sent."
-    },
-    {
-      "name": "toku",
-      "status": "registered",
-      "note": "Agent ACTIVE with 4 services. Waiting for hires."
-    },
-    {
-      "name": "x402_audit",
-      "status": "landing_page_live",
-      "note": "Landing page deployed. Service live at agent-audit-x402.vercel.app/api/agent-audit"
-    }
-  ],
+  "fulfillment": null,
+  "storefront": null,
+  "honest_note": "",
+  "agent_discoverability": [],
+  "channels": [],
   "daily_report": {
     "date": "2026-08-17",
     "grade_letter": "C",
@@ -245,31 +192,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T16:30:00.432Z",
+  "generated_at": "2026-08-17T17:00:00.954Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Mon Aug 17 18:30:00 CEST 2026] executing top task 0x87e4aab27539cae656554b5f4e97fd4b9697c1dc295c3fdbe260c79a2d74be85"
+      "line": "[Mon Aug 17 19:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T16:25:01.523Z quality queue written: 0x87e4aab27539ca"
+      "line": "2026-08-17T16:55:02.148Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T16:25:01.522Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+      "line": "2026-08-17T16:55:02.147Z   [0.50] bounty $0.5 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T16:25:01.522Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 05: Air Hockey Afterburner. Build a"
+      "line": "2026-08-17T16:55:02.147Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T16:25:01.522Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T16:55:02.143Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T16:25:01.518Z QUALITY poll: 19 open"
+      "line": "2026-08-17T16:50:01.300Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -281,19 +228,35 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T16:25:01.521Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T16:55:02.094Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T16:25:01.521Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T16:55:02.094Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0x5e7facd1016471 bounty reward=6000000 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+      "line": "poll: 20 open tasks"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T16:51:54.281Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T16:36:54.222Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -302,28 +265,12 @@
     {
       "tag": "distribute",
       "line": "[daemon 2026-08-17T16:21:54.157Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T16:06:54.092Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Mon Aug 17 18:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
