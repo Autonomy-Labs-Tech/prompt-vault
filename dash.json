@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3122,
-  "last_run": "2026-08-17T11:00:01.401024",
+  "cycles": 3123,
+  "last_run": "2026-08-17T08:00:00.963885",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -245,7 +245,7 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T09:30:01.116Z",
+  "generated_at": "2026-08-17T06:00:00.987Z",
   "recent_activity": [
     {
       "tag": "quality",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T09:25:01.523Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T05:55:01.415Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T09:25:01.520Z poll: 7 open tasks"
+      "line": "2026-08-17T05:55:01.411Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -297,11 +297,7 @@
     },
     {
       "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T09:26:12.957Z] prospects=34 fresh=0 sending=0"
+      "line": "--- run Mon Aug 17 08:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -309,7 +305,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T09:11:12.987Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -317,13 +313,17 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T08:56:12.908Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T05:56:10.056Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
