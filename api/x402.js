@@ -1,14 +1,11 @@
 // Vercel serverless: x402 pay-per-call micro-payment gate (Base USDC).
-// Flow: agent GETs /api/x402?product=X → 200 with payment requirements
-// (invoice style). Agent then POSTs with `{order, signature}` where order is
-// an EIP-712 order (nonce, signer, amount, currency, chainId) signed by the
-// paying agent's wallet; server verifies signature locally (pure Node) and
-// records the paid nonce. Resource data is delivered on verify.
-// NOTE: full on-chain confirmation should set X402_VERIFY_RPC (Base RPC);
-// offline mode is signature+nonce gated until then.
+// Flow: agent GETs /api/x402?product=X → 402 with payment requirements.
+// Agent then POSTs `{order, signature, txHash}`. Production verifies the
+// EIP-712 order and matching Base USDC transfer before delivering data.
 const crypto = require('crypto');
-const https = require('https');
 const walletWatch = require('./wallet_watch');
+const { verifyPayment } = require('./payment_verify');
+const { publicGet } = require('./public_fetch');
 
 const RECIPIENT = process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
 const CHAIN = { id: 8453, name: 'Base', shortName: 'base' };
@@ -27,68 +24,42 @@ const PRODUCTS = {
 };
 
 function runProbe(target) {
-  return new Promise((resolve) => {
-    try {
-      const u = new URL(target);
-      if (u.protocol !== 'https:') return resolve({ status: 0 });
-      const mod = https;
-      const r = mod.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 4000 }, (res) => {
-        let b = ''; res.on('data', (c) => { b += c; if (b.length > 100000) { r.destroy(); resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }); } });
-        res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '' }));
-      });
-      r.on('error', () => resolve({ status: 0 }));
-      r.setTimeout(4000, () => { r.destroy(); resolve({ status: 0 }); });
-    } catch (e) { resolve({ status: 0 }); }
-  });
+  return publicGet(target, { timeoutMs: 4000, maxBytes: 100000 })
+    .catch(() => ({ status: 0, ct: '', bytes: 0 }));
 }
 
-function isPrivateHost(u) {
-  const host = u.hostname.toLowerCase();
-  return /(^|\.)(local|localhost)$/.test(host) ||
-    /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) ||
-    /^169\.254\./.test(host) || /^172\.(1[6-9]|2[0-9]|3[01])\./.test(host) ||
-    /^0\.0\.0\.0$/.test(host) || /^::1$/.test(host) || /[[](::1|fc|fd)/.test(host) ||
-    /\.internal$/.test(host) || /\.home$/.test(host);
-}
-
-async function deliverAudit(body) {
-  let target = (body.url || '').trim();
-  if (!target) return { ok: false, error: 'url required for product=audit' };
-  if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
-  let u;
-  try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
-  if (isPrivateHost(u)) return { ok: false, error: 'private/loopback targets not allowed' };
-  if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
-  const origin = u.origin;
-  const paths = ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/agents.txt', '/.well-known/x402', '/.well-known/agents.json', '/.well-known/security.txt'];
-  const res = await Promise.all(paths.map((p) => runProbe(origin + p)));
-  const checks = ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'agents.txt', 'x402', 'agents.json', 'security.txt'].map((n, i) => ({
-    name: n, ok: res[i].status >= 200 && res[i].status < 400,
-  }));
-  const passed = checks.filter((c) => c.ok).length;
-  return {
-    ok: true,
-    url: origin,
-    grade: passed >= 7 ? 'A' : passed >= 5 ? 'B' : passed >= 4 ? 'C' : 'D',
-    checks,
-  };
+async function deliverAudit(body, maxSites = 1) {
+  const requested = maxSites > 1
+    ? (Array.isArray(body.urls) ? body.urls : [body.url])
+    : [body.url];
+  const targets = requested.map((value) => String(value || '').trim()).filter(Boolean).slice(0, maxSites);
+  if (targets.length !== maxSites) return { ok: false, error: `exactly ${maxSites} url${maxSites === 1 ? '' : 's'} required` };
+  const audits = [];
+  for (let target of targets) {
+    if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
+    let u;
+    try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
+    if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
+    const origin = u.origin;
+    const paths = ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/agents.txt', '/.well-known/x402', '/.well-known/agents.json', '/.well-known/security.txt'];
+    const res = await Promise.all(paths.map((p) => runProbe(origin + p)));
+    const checks = ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'agents.txt', 'x402', 'agents.json', 'security.txt'].map((n, i) => ({
+      name: n, ok: res[i].status >= 200 && res[i].status < 400,
+    }));
+    const passed = checks.filter((c) => c.ok).length;
+    audits.push({
+      url: origin,
+      grade: passed >= 7 ? 'A' : passed >= 5 ? 'B' : passed >= 4 ? 'C' : 'D',
+      checks,
+    });
+  }
+  return { ok: true, audits, ...(maxSites === 1 ? audits[0] : { count: audits.length }) };
 }
 
 function runProbeFetch(target) {
   // Like runProbe but returns body text (for llms.txt/sitemap generation).
-  return new Promise((resolve) => {
-    try {
-      const u = new URL(target);
-      if (u.protocol !== 'https:') return resolve({ status: 0, body: '' });
-      const r = https.get(target, { headers: { 'User-Agent': 'autonomy-x402/1.0' }, timeout: 5000 }, (res) => {
-        let b = '';
-        res.on('data', (c) => { b += c; if (b.length > 300000) { r.destroy(); resolve({ status: res.statusCode, body: b }); } });
-        res.on('end', () => resolve({ status: res.statusCode, body: b }));
-      });
-      r.on('error', () => resolve({ status: 0, body: '' }));
-      r.setTimeout(5000, () => { r.destroy(); resolve({ status: 0, body: '' }); });
-    } catch (e) { resolve({ status: 0, body: '' }); }
-  });
+  return publicGet(target, { timeoutMs: 5000, maxBytes: 300000 })
+    .catch(() => ({ status: 0, body: '' }));
 }
 
 async function delivillms(body) {
@@ -97,7 +68,6 @@ async function delivillms(body) {
   if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
   let u;
   try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
-  if (isPrivateHost(u)) return { ok: false, error: 'private/loopback targets not allowed' };
   if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
   const origin = u.origin;
 
@@ -150,29 +120,46 @@ module.exports = async function (req, res) {
   if (!p) return res.status(400).json({ error: 'unknown product; use ' + Object.keys(PRODUCTS).join(', ') });
 
   if (req.method === 'GET') {
+    const requirement = {
+      amount: Number(p.priceUsdc),
+      currency: 'USDC',
+      network: 'base',
+      chainId: CHAIN.id,
+      recipient: RECIPIENT,
+      action: p.name,
+      product,
+    };
+    res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify(requirement)).toString('base64'));
     return res.status(402).json({
       error: 'Payment Required',
-      payment_details: {
-        amount: Number(p.priceUsdc),
-        currency: 'USDC',
-        network: 'base',
-        chainId: CHAIN.id,
-        recipient: RECIPIENT,
-        action: p.name,
-        product,
-      },
-      how: `POST /api/x402?product=${product} with { order, signature } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
+      payment_details: requirement,
+      how: `POST /api/x402?product=${product} with { order, signature, txHash } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
     });
   }
 
-  const order = req.body && req.body.order;
-  const signature = req.headers['x402-signature'] || (req.body && req.body.signature);
+  let paymentBody = req.body;
+  if ((!paymentBody || !paymentBody.order) && req.headers['x-payment']) {
+    try { paymentBody = JSON.parse(String(req.headers['x-payment'])); } catch {}
+  }
+  const order = paymentBody && paymentBody.order;
+  const signature = req.headers['x402-signature'] || (paymentBody && paymentBody.signature);
   if (!order || !signature) return res.status(402).json({ error: 'payment_required', invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product } });
 
-  // light verification: order fields coherent + signature present + amount matches
-  if (String(order.currency || '').toUpperCase() !== 'USDC') return res.status(400).json({ error: 'wrong currency' });
-  if (Number(order.amount) < Number(p.priceUsdc)) return res.status(402).json({ error: 'underpaid' });
-  if (!order.signer || !order.nonce || signature.length < 60) return res.status(400).json({ error: 'bad order/signature' });
+  const txHash = String((paymentBody && (paymentBody.txHash || paymentBody.tx_hash)) || '');
+  const payment = await verifyPayment({
+    order,
+    signature,
+    txHash,
+    recipient: RECIPIENT,
+    requiredUsdc: Number(p.priceUsdc),
+  });
+  if (!payment.ok) {
+    return res.status(payment.status || 402).json({
+      error: 'payment_not_verified_onchain',
+      detail: payment.error,
+      invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product },
+    });
+  }
 
   const orderId = crypto.createHash('sha256').update(order.signer + order.nonce).digest('hex').slice(0, 32);
 
@@ -185,7 +172,9 @@ module.exports = async function (req, res) {
   }
 
   let data;
-  if (product === 'audit' || product === 'audit-5') data = await deliverAudit(req.body || {});
+  if (product === 'audit' || product === 'audit-5') {
+    data = await deliverAudit(paymentBody || {}, product === 'audit-5' ? 5 : 1);
+  }
   else if (product === 'llms') data = await delivillms(req.body || {});
   else if (product === 'data') data = deliverData();
   if (!data || !data.ok) return res.status(422).json({ error: data && data.error ? data.error : 'delivery failed' });
@@ -201,3 +190,5 @@ module.exports = async function (req, res) {
     data,
   });
 };
+
+module.exports.deliverAudit = deliverAudit;

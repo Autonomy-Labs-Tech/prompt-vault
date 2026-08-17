@@ -3,9 +3,8 @@
 // Price: $0.01 USDC on Base. Payout to our wallet.
 // Listed on Circle Agent Marketplace.
 
-const https = require('https');
-const http = require('http');
-const crypto = require('crypto');
+const { verifyPayment } = require('./payment_verify');
+const { publicGet, resolvePublic } = require('./public_fetch');
 
 const SELLER_ADDRESS = '0xd580ed58342aa489BDD6DCA11e57E2FB9a00438E';
 const PRICE_USDC = '10000'; // $0.01 in 6-decimal USDC base units
@@ -20,26 +19,20 @@ function headerSafeJson(obj) {
   return JSON.stringify(obj).replace(/[\u007f-\uffff]/g, (c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'));
 }
 
-function fetchPath(base, p) {
-  return new Promise((resolve) => {
-    const mod = base.startsWith('https') ? https : http;
-    const req = mod.get(base + p, {
-      headers: { 'User-Agent': 'agent-readiness-audit/1.0' },
-      timeout: 8000,
-    }, (res) => {
-      let bytes = 0;
-      res.on('data', (d) => { bytes += d.length; });
-      res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '', bytes }));
-    });
-    req.on('error', (e) => resolve({ status: 0, ct: '', bytes: 0, err: e.message }));
-    req.setTimeout(8000, () => { req.destroy(); resolve({ status: 0, ct: '', bytes: 0, err: 'timeout' }); });
-  });
-}
-
 async function runAudit(targetUrl) {
   const base = targetUrl.replace(/\/$/, '');
   const results = [];
-  for (const p of SURFACES) results.push({ path: p, ...(await fetchPath(base, p)) });
+  const deadline = Date.now() + 15000;
+  for (const p of SURFACES) {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) {
+      results.push({ path: p, status: 0, ct: '', bytes: 0, err: 'audit deadline' });
+      continue;
+    }
+    const result = await publicGet(base + p, { timeoutMs: Math.min(4000, remaining), maxBytes: 100000 })
+      .catch((error) => ({ status: 0, ct: '', bytes: 0, err: error.message }));
+    results.push({ path: p, status: result.status, ct: result.ct, bytes: result.bytes, ...(result.err ? { err: result.err } : {}) });
+  }
   const present = results.filter((r) => r.status === 200).length;
   const grade = present >= 5 ? 'A' : present >= 4 ? 'B' : present >= 3 ? 'C' : present >= 2 ? 'D' : 'F';
   const now = new Date().toISOString();
@@ -83,9 +76,8 @@ module.exports = async function (req, res) {
 
     // Check for payment
     const paymentHeader = req.headers['x-payment'] || req.headers['payment'];
-    const paymentRequiredHeader = req.headers['payment-required'];
 
-    if (!paymentHeader && !paymentRequiredHeader) {
+    if (!paymentHeader) {
       // Return 402 with payment requirements
       res.status(402);
       res.setHeader('Content-Type', 'application/json');
@@ -115,11 +107,24 @@ module.exports = async function (req, res) {
       });
     }
 
-    // If payment is present, verify and serve
-    // For now, we accept any payment header (full verification requires Circle Gateway SDK)
-    // In production, use @circle-fin/x402-batching middleware for proper settlement
     if (!targetUrl) {
       return res.status(400).json({ error: 'Missing url parameter. Usage: /api/agent-audit?url=https://example.com' });
+    }
+    try { await resolvePublic(String(targetUrl)); }
+    catch (error) { return res.status(400).json({ error: error.message }); }
+    let payment;
+    try { payment = JSON.parse(String(paymentHeader)); } catch {
+      return res.status(402).json({ error: 'payment_not_verified_onchain', detail: 'X-PAYMENT must be JSON' });
+    }
+    const verified = await verifyPayment({
+      order: payment.order || payment,
+      signature: payment.signature,
+      txHash: payment.txHash || payment.tx_hash,
+      recipient: SELLER_ADDRESS,
+      requiredUsdc: Number(PRICE_USDC) / 1e6,
+    });
+    if (!verified.ok) {
+      return res.status(verified.status || 402).json({ error: 'payment_not_verified_onchain', detail: verified.error });
     }
 
     const result = await runAudit(targetUrl);

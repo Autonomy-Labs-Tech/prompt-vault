@@ -1,6 +1,6 @@
 {
   "name": "Autonomy Labs Storefront",
-  "description": "Instant digital downloads (AI agent prompt packs, MCP server kits, game source, setup guides) delivered automatically by email. Pay with card via Stripe Checkout.",
+  "description": "Card storefront downloads and Base USDC x402 APIs. Card purchases use Stripe Checkout; API purchases require an on-chain USDC transfer.",
   "payment": {
     "provider": "stripe",
     "checkout_links": {
@@ -57,8 +57,31 @@
       "description": "Storefront catalog payload + metrics (agent-consumable)",
       "price_usdc": "1.00",
       "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    },
+    {
+      "route": "POST /api/x402?product=llms",
+      "description": "Generate an agent-friendly llms.txt draft from a public HTTPS site",
+      "price_usdc": "3.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    },
+    {
+      "route": "POST /api/x402?product=watch",
+      "description": "Bounded Base wallet snapshot for one public address",
+      "price_usdc": "1.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+    },
+    {
+      "route": "POST /api/x402?product=watch-pro",
+      "description": "Extended bounded Base wallet snapshot for one public address",
+      "price_usdc": "5.00",
+      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
     }
   ],
+  "payment_protocol": {
+    "type": "x402",
+    "requires": ["order", "signature", "txHash"],
+    "verification": "Base USDC transfer is checked on-chain before delivery; offline fixtures are disabled in production."
+  },
   "facilitator_discovery": {
     "discovery_url": "https://x402bazaar.org",
     "documentation_url": "https://www.x402bazaar.org/docs",

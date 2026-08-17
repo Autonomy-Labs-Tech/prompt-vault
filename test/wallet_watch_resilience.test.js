@@ -11,6 +11,7 @@ const ADDRESS = '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
 const TOKEN = '0x0000000000000000000000000000000000000001';
 const ORIGINAL_ENV = {};
 const ENV_KEYS = [
+  'X402_OFFLINE',
   'WALLET_WATCH_BLOCKSCOUT_V2_URL',
   'WALLET_WATCH_BLOCKSCOUT_V1_URL',
   'WALLET_WATCH_PROVIDER_V2_URL',
@@ -394,7 +395,9 @@ test('oversized, truncated, malformed, rate-limited, and timed-out providers ret
 });
 
 test('x402 wallet-watch delivery keeps the payment gate and uses the hardened result path', async () => {
+  const originalOffline = process.env.X402_OFFLINE;
   await withFixture('normal', x402, async (port) => {
+    process.env.X402_OFFLINE = 'true';
     const response = await request(port, '/?product=watch-pro', paidBody('watch-pro'));
     assert.equal(response.status, 200);
     assert.equal(response.body.ok, true);
@@ -403,10 +406,32 @@ test('x402 wallet-watch delivery keeps the payment gate and uses the hardened re
   }, { maxBodyBytes: 4096 });
 
   await withFixture('rate_limited', x402, async (port) => {
+    process.env.X402_OFFLINE = 'true';
     const response = await request(port, '/?product=watch', paidBody());
     assert.equal(response.status, 503);
     assert.equal(response.body.code, 'rate_limited');
     assert.equal(response.body.retryable, true);
     assert.equal(response.body.unavailable, true);
   });
+  if (originalOffline === undefined) delete process.env.X402_OFFLINE;
+  else process.env.X402_OFFLINE = originalOffline;
+});
+
+test('x402 rejects paid-shaped requests without an on-chain transaction hash', async () => {
+  const originalOffline = process.env.X402_OFFLINE;
+  delete process.env.X402_OFFLINE;
+  const app = await startApp(x402);
+  const body = paidBody();
+  body.order.amount = '2.00';
+  const response = await request(
+    app.port,
+    '/?product=audit',
+    body,
+  );
+  await stopServer(app.server);
+  assert.equal(response.status, 402);
+  assert.equal(response.body.error, 'payment_not_verified_onchain');
+  assert.equal(response.body.detail, 'txHash required');
+  if (originalOffline === undefined) delete process.env.X402_OFFLINE;
+  else process.env.X402_OFFLINE = originalOffline;
 });
