@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3116,
+    "cycles": 3117,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T04:00:00.747Z",
+  "generated_at": "2026-08-17T04:30:00.348Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T03:57:47.527Z   no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+      "line": "2026-08-17T04:25:01.510Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T03:57:47.521Z EXECUTING 0x58c600efe8ffdf bounty reward=1000000 subs=3"
+      "line": "2026-08-17T04:25:01.510Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T03:55:02.080Z quality queue written: none"
+      "line": "2026-08-17T04:25:01.505Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T03:55:02.079Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T04:20:01.656Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T03:55:02.076Z QUALITY poll: 7 open"
+      "line": "2026-08-17T04:20:01.656Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T03:52:34.059Z   no safe executor for this task type; queued for operator-agent. marking done to avoid re-spam."
+      "line": "2026-08-17T04:20:01.652Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -281,39 +281,39 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T03:55:02.072Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
-    },
-    {
-      "tag": "taskmarket",
-      "line": "candidate: 0x58c600efe8ffdf bounty reward=1000000 subs=2 # Tell us one real blocker you are experiencing as an AI age"
-    },
-    {
-      "tag": "taskmarket",
-      "line": "2026-08-17T03:55:02.072Z candidate: 0x58c600efe8ffdf bounty reward=1000000 subs=2 # Tell us one real blocker you are experiencing as an AI age"
+      "line": "2026-08-17T04:25:01.509Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
       "line": "poll: 7 open tasks"
     },
     {
+      "tag": "taskmarket",
+      "line": "2026-08-17T04:25:01.505Z poll: 7 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "done"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T04:26:11.712Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T04:11:11.627Z] prospects=34 fresh=0 sending=0"
+    },
+    {
       "tag": "distribute",
       "line": "--- run Mon Aug 17 06:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T03:56:11.527Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
