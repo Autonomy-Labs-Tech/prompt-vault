@@ -13,7 +13,7 @@ const agentsJson = JSON.parse(fs.readFileSync(path.join(root, '.well-known', 'ag
 
 test('homepage distinguishes instant downloads from made-to-order services', () => {
   assert.match(index, /Instant downloads \+ made-to-order services/);
-  assert.match(index, /Digital products are delivered instantly/);
+  assert.match(index, /After verified Stripe payment, digital delivery is attempted by email/);
   const card = (href) => {
     const start = index.indexOf(`<h3><a href="${href}">`);
     const end = index.indexOf('<div class="offer">', start + 1);

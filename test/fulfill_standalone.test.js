@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const EventEmitter = require('node:events');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -16,6 +17,7 @@ function copyStandaloneApi({ includeFixture = false, fixtureContents } = {}) {
   const apiDir = path.join(root, 'api');
   fs.mkdirSync(apiDir, { recursive: true });
   fs.copyFileSync(path.join(API_DIR, 'fulfill.js'), path.join(apiDir, 'fulfill.js'));
+  fs.copyFileSync(path.join(API_DIR, 'public_fetch.js'), path.join(apiDir, 'public_fetch.js'));
   if (fixtureContents !== undefined) {
     fs.writeFileSync(path.join(apiDir, 'stripe_test_fixtures.json'), fixtureContents);
   } else if (includeFixture) {
@@ -30,6 +32,7 @@ function copyStandaloneApi({ includeFixture = false, fixtureContents } = {}) {
 function mockStripeAndResend() {
   const originalRequest = https.request;
   const calls = [];
+  let resendStatus = 200;
   https.request = (options, callback) => {
     calls.push(options);
     const request = new EventEmitter();
@@ -64,6 +67,7 @@ function mockStripeAndResend() {
       } else if (options.host === 'api.stripe.com' && options.path.includes('/line_items')) {
         body = { data: [{ price: { id: FIXTURE.price_id, product: FIXTURE.product_id } }] };
       } else if (options.host === 'api.resend.com') {
+        statusCode = resendStatus;
         body = { id: 'email_standalone' };
       }
       process.nextTick(() => {
@@ -80,15 +84,23 @@ function mockStripeAndResend() {
   };
   return {
     calls,
+    setResendStatus(status) { resendStatus = status; },
     restore() {
       https.request = originalRequest;
     },
   };
 }
 
-function invoke(handler, eventId = FIXTURE.event_id) {
+function invoke(handler, eventId = FIXTURE.event_id, signatureOverride) {
   let statusCode = 200;
   let body;
+  const event = { type: FIXTURE.event_type, id: eventId };
+  const rawBody = JSON.stringify(event);
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signature = signatureOverride || `t=${timestamp},v1=${crypto
+    .createHmac('sha256', 'whsec_standalone')
+    .update(`${timestamp}.${rawBody}`)
+    .digest('hex')}`;
   const response = {
     status(code) {
       statusCode = code;
@@ -101,19 +113,21 @@ function invoke(handler, eventId = FIXTURE.event_id) {
   };
   return Promise.resolve(handler({
     method: 'POST',
-    body: { type: FIXTURE.event_type, id: eventId },
+    body: event,
+    rawBody,
     headers: {
-      'stripe-signature': `t=${Math.floor(Date.now() / 1000)},v1=${'a'.repeat(64)}`,
+      'stripe-signature': signature,
     },
   }, response)).then(() => ({ statusCode, body }));
 }
 
 function withTestEnvironment(fn) {
-  const keys = ['STRIPE_SECRET_KEY', 'RESEND_API_KEY', 'STRIPE_TEST_MODE', 'STRIPE_TEST_PRODUCT_ID'];
+  const keys = ['STRIPE_SECRET_KEY', 'RESEND_API_KEY', 'STRIPE_WEBHOOK_SECRET', 'STRIPE_TEST_MODE', 'STRIPE_TEST_PRODUCT_ID'];
   const previous = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
   Object.assign(process.env, {
     STRIPE_SECRET_KEY: 'sk_test_standalone',
     RESEND_API_KEY: 're_standalone',
+    STRIPE_WEBHOOK_SECRET: 'whsec_standalone',
     STRIPE_TEST_MODE: '1',
     STRIPE_TEST_PRODUCT_ID: FIXTURE.product_id,
   });
@@ -143,6 +157,63 @@ test('fulfill: packaged test metadata works from a standalone business2 bundle',
     );
   } finally {
     mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: production rejects a valid-shaped but invalid Stripe signature', async () => {
+  const standalone = copyStandaloneApi({ includeFixture: true });
+  const mock = mockStripeAndResend();
+  try {
+    await withTestEnvironment(async () => {
+      process.env.STRIPE_TEST_MODE = '0';
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler, FIXTURE.event_id, `t=${Math.floor(Date.now() / 1000)},v1=${'a'.repeat(64)}`);
+      assert.deepEqual(response, {
+        statusCode: 401,
+        body: { error: 'invalid stripe-signature' },
+      });
+    });
+    assert.equal(mock.calls.length, 0);
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: Resend failure returns retryable status', async () => {
+  const standalone = copyStandaloneApi({ includeFixture: true });
+  const mock = mockStripeAndResend();
+  mock.setResendStatus(500);
+  try {
+    await withTestEnvironment(async () => {
+      const handler = require(standalone.handlerPath);
+      const response = await invoke(handler);
+      assert.deepEqual(response, {
+        statusCode: 503,
+        body: { ok: false, error: 'delivery failed', retryable: true, provider_status: 500 },
+      });
+    });
+  } finally {
+    mock.restore();
+    fs.rmSync(standalone.root, { recursive: true, force: true });
+  }
+});
+
+test('fulfill: audit and prompt catalog counts are explicit', () => {
+  const standalone = copyStandaloneApi({ includeFixture: true });
+  try {
+    const handler = require(standalone.handlerPath);
+    assert.equal(handler._private.AUDIT_SURFACES.length, 8);
+    assert.equal((handler._private.promptHtml().match(/<li/g) || []).length, 40);
+    assert.equal(
+      handler._private.customFieldValue(
+        [{ key: 'scene_brief', text: { value: '  build a moonlit scene  ' } }],
+        ['brief', 'scene_brief'],
+      ),
+      'build a moonlit scene',
+    );
+  } finally {
     fs.rmSync(standalone.root, { recursive: true, force: true });
   }
 });

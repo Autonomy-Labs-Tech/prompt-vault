@@ -1,5 +1,7 @@
 // Vercel serverless function: Stripe webhook → automated digital download delivery
 const https = require('https');
+const crypto = require('crypto');
+const { publicGet, resolvePublic } = require('./public_fetch');
 
 const FULFILLABLE_EVENTS = ['checkout.session.completed', 'payment_intent.succeeded'];
 const SIGNATURE_TOLERANCE_SEC = 300;
@@ -78,7 +80,7 @@ function safeFixtureMetadataDiagnostic() {
 // Stripe sends `t=<unix-seconds>,v1=<hex-hmac>` (repeated v1 during secret rotation).
 function parseStripeSignature(header) {
   const raw = String(header == null ? '' : header).trim();
-  if (!raw) return { present: false, valid: false, timestamp: NaN };
+  if (!raw) return { present: false, valid: false, timestamp: NaN, signatures: [] };
   let t = null;
   const v1 = [];
   for (const part of raw.split(',')) {
@@ -92,7 +94,35 @@ function parseStripeSignature(header) {
   const timestamp = parseInt(t, 10);
   const valid = t !== null && String(timestamp) === t && Number.isFinite(timestamp) &&
     v1.length > 0 && v1.every((s) => /^[a-f0-9]{64}$/i.test(s));
-  return { present: true, valid, timestamp };
+  return { present: true, valid, timestamp, signatures: v1 };
+}
+
+function rawRequestBody(req) {
+  if (Buffer.isBuffer(req && req.rawBody)) return req.rawBody;
+  if (typeof (req && req.rawBody) === 'string') return Buffer.from(req.rawBody);
+  if (typeof (req && req.body) === 'string') return Buffer.from(req.body);
+  return null;
+}
+
+function verifyStripeSignature(header, rawBody, secret, now = Date.now()) {
+  const sig = parseStripeSignature(header);
+  if (!sig.present || !sig.valid || !rawBody || !secret) return false;
+  if (Math.abs(now / 1000 - sig.timestamp) > SIGNATURE_TOLERANCE_SEC) return false;
+  const signedPayload = `${sig.timestamp}.${rawBody.toString()}`;
+  const expected = crypto.createHmac('sha256', secret).update(signedPayload).digest('hex');
+  return sig.signatures.some((candidate) => {
+    const expectedBuffer = Buffer.from(expected, 'utf8');
+    const candidateBuffer = Buffer.from(candidate.toLowerCase(), 'utf8');
+    return expectedBuffer.length === candidateBuffer.length
+      && crypto.timingSafeEqual(expectedBuffer, candidateBuffer);
+  });
+}
+
+function customFieldValue(fields, keys) {
+  const field = (Array.isArray(fields) ? fields : [])
+    .find((candidate) => candidate && keys.includes(candidate.key));
+  const value = field && (field.text ? field.text.value : field.value);
+  return String(value == null ? '' : value).trim().slice(0, 2000);
 }
 
 function readApprovedTestFixtures() {
@@ -111,6 +141,7 @@ module.exports = async function (req, res) {
   const env = process.env;
   const STRIPE_KEY = env.STRIPE_SECRET_KEY;
   const RESEND_KEY = env.RESEND_API_KEY;
+  const WEBHOOK_SECRET = env.STRIPE_WEBHOOK_SECRET;
   const FROM = 'Prompt Vault <hello@autonomylabsweb.tech>';
   if (!STRIPE_KEY || !RESEND_KEY) return res.status(503).json({ error: 'fulfillment not configured' });
 
@@ -130,6 +161,14 @@ module.exports = async function (req, res) {
   if (!sig.valid) return res.status(400).json({ error: 'malformed stripe-signature header' });
   if (Math.abs(Date.now() / 1000 - sig.timestamp) > SIGNATURE_TOLERANCE_SEC) {
     return res.status(400).json({ error: 'stripe-signature timestamp outside tolerance' });
+  }
+  const rawBody = rawRequestBody(req);
+  const isTestRequest = /^sk_test_/.test(STRIPE_KEY) && env.STRIPE_TEST_MODE === '1';
+  if (!isTestRequest && !WEBHOOK_SECRET) {
+    return res.status(503).json({ error: 'stripe webhook secret not configured' });
+  }
+  if (!isTestRequest && !verifyStripeSignature(req.headers['stripe-signature'], rawBody, WEBHOOK_SECRET)) {
+    return res.status(401).json({ error: 'invalid stripe-signature' });
   }
   if (typeof event.id !== 'string' || !/^evt_[A-Za-z0-9]+$/.test(event.id)) {
     return res.status(401).json({ error: 'missing or malformed event id' });
@@ -428,50 +467,77 @@ module.exports = async function (req, res) {
     const email = (checkout.customer_details && checkout.customer_details.email) || checkout.customer_email;
     if (!email) return res.status(200).json({ ok: false, reason: 'no email', sid });
     let subject = deliv.subject, body = deliv.body;
+    const customFields = [
+      ...(Array.isArray(checkout.custom_fields) ? checkout.custom_fields : []),
+      ...(Array.isArray(data.custom_fields) ? data.custom_fields : []),
+    ];
     if (productId === 'prod_V1NvDTS0cNV4kK') {
       // AI Website Audit Report: if the buyer supplied a website URL at checkout,
       // run the agent-readiness audit now and email the report with it.
-      const cf = (data.custom_fields || []).find((f) => f.key === 'website_url');
-      const url = cf && (cf.text ? cf.text.value : cf.value);
+      const url = customFieldValue(customFields, ['website_url']);
       if (url && /^https?:\/\/.+/i.test(url)) {
-        const rep = await runAudit(url);
-        subject = 'Your AI Website Audit Report for ' + url + ' is ready';
-        body = '<p>Thanks for your purchase!</p>'
-          + '<p>Here is your <strong>AI-agent discoverability audit</strong> for <code>' + esc(url) + '</code> (checked ' + rep.when + '):</p>'
-          + '<table style="border-collapse:collapse;width:100%;max-width:560px;font-size:14px">'
-          + '<tr style="background:#efece5"><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Surface</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Status</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Content-Type</th></tr>'
-          + rep.rows
-          + '</table>'
-          + '<p style="font-size:16px;font-weight:700">Grade: ' + rep.grade + ' (' + rep.present + '/5 agent surfaces present)</p>'
-          + '<p><strong>Top fixes:</strong></p><ul>' + rep.fixes + '</ul>'
-          + '<p>Full reproducible check: <code>curl -sS -o /dev/null -w "%{http_code} %{content_type}\\n" ' + esc(url) + '/llms.txt</code></p>'
-          + '<p>Questions? Reply to this email.</p>';
+        try {
+          const rep = await runAudit(url);
+          subject = 'Your AI Website Audit Report for ' + url + ' is ready';
+          body = '<p>Thanks for your purchase!</p>'
+            + '<p>Here is your <strong>AI-agent discoverability audit</strong> for <code>' + esc(url) + '</code> (checked ' + rep.when + '):</p>'
+            + '<table style="border-collapse:collapse;width:100%;max-width:560px;font-size:14px">'
+            + '<tr style="background:#efece5"><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Surface</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Status</th><th style="text-align:left;padding:6px 8px;border:1px solid #ddd">Content-Type</th></tr>'
+            + rep.rows
+            + '</table>'
+            + '<p style="font-size:16px;font-weight:700">Grade: ' + rep.grade + ' (' + rep.present + '/' + rep.total + ' agent surfaces present)</p>'
+            + '<p><strong>Top fixes:</strong></p><ul>' + rep.fixes + '</ul>'
+            + '<p>Full reproducible check: <code>curl -sS -o /dev/null -w "%{http_code} %{content_type}\\n" ' + esc(url) + '/llms.txt</code></p>'
+            + '<p>Questions? Reply to this email.</p>';
+        } catch (error) {
+          subject = 'Your AI Website Audit Report needs a valid public URL';
+          body = '<p>Thanks for your purchase!</p>'
+            + '<p>We could not fetch the supplied URL as a public HTTPS website. Reply to this email with a valid public HTTPS URL and we will run the report.</p>'
+            + '<p>Questions? Reply to this email.</p>';
+        }
       }
     }
+    if (productId === 'prod_V1TprsCU1bxALX' || productId === 'prod_V2yPaaEwIm1vvE') {
+      const brief = customFieldValue(customFields, ['brief', 'project_brief', 'scene_brief', 'game_brief']);
+      const nextStep = brief
+        ? '<p><strong>Brief received:</strong></p><blockquote style="margin:8px 0;padding:8px 12px;border-left:3px solid #999">' + esc(brief) + '</blockquote>'
+        : '<p><strong>Next step:</strong> reply to this confirmation email with your 1–3 sentence project brief. The delivery window starts once the required brief is received.</p>';
+      body += nextStep;
+    }
     const sendResult = await resend(email, subject, body, `stripe-event-${event.id}`);
-    return res.status(200).json({ ok: true, product: productId, email_sent: sendResult.status === 200 });
+    if (sendResult.error || sendResult.status < 200 || sendResult.status >= 300) {
+      return res.status(503).json({
+        ok: false,
+        error: 'delivery failed',
+        retryable: true,
+        provider_status: sendResult.status || 0,
+      });
+    }
+    return res.status(200).json({ ok: true, product: productId, email_sent: true });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
 };
 
-const AUDIT_SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt', '/.well-known/agents.json', '/.well-known/security.txt'];
+const AUDIT_SURFACES = ['/llms.txt', '/llms-full.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt', '/.well-known/agents.json', '/.well-known/security.txt'];
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
 async function runAudit(base0) {
-  const base = String(base0).replace(/\/+$/, '');
+  await resolvePublic(base0);
+  const base = new URL(base0).origin;
   const when = new Date().toISOString();
   const results = [];
   for (const p of AUDIT_SURFACES) {
-    const ac = new AbortController();
-    const to = setTimeout(() => ac.abort(), 8000);
     try {
-      const r = await fetch(base + p, { signal: ac.signal, headers: { 'User-Agent': 'autonomy-labs-audit/1.0' } });
-      results.push({ path: p, status: r.status, ct: r.headers.get('content-type') || '' });
+      const r = await publicGet(base + p, {
+        timeoutMs: 8000,
+        maxBytes: 200000,
+      });
+      results.push({ path: p, status: r.status, ct: r.ct || '' });
     } catch (e) {
       results.push({ path: p, status: 0, ct: '', err: e.name === 'AbortError' ? 'timeout' : e.message });
-    } finally { clearTimeout(to); }
+    }
   }
   const present = results.filter((r) => r.status === 200).length;
   const grade = present >= 7 ? 'A' : present >= 5 ? 'B' : present >= 3 ? 'C' : present >= 1 ? 'D' : 'F';
@@ -489,7 +555,7 @@ async function runAudit(base0) {
   if (!results.find((r) => r.path === '/llms.txt' && r.status === 200)) fixes.push('<li>Add <code>/llms.txt</code> with your product names, prices, and buy links so AI agents can read and buy.</li>');
   if (!results.find((r) => r.path === '/.well-known/x402' && r.status === 200)) fixes.push('<li>Add <code>/.well-known/x402</code> with machine-readable payment config for agent-initiated purchases.</li>');
   if (!fixes.length) fixes.push('<li>All agent surfaces are live — keep them updated when the catalog changes.</li>');
-  return { when, rows, grade, present, fixes: fixes.join('') };
+  return { when, rows, grade, present, total: results.length, fixes: fixes.join('') };
 }
 
 function promptHtml() {
@@ -502,7 +568,11 @@ function promptHtml() {
       'Rewrite this paragraph [PASTE] to be clearer and shorter for a busy reader.',
       'Write a short video script (30 sec) promoting [offer] for Reels/TikTok.',
       'Draft a "behind the scenes" post showing how I [process] to build trust.',
-      'Generate 10 testimonial request messages I can send after a client finishes a project.'
+      'Generate 10 testimonial request messages I can send after a client finishes a project.',
+      'Turn this customer result [PASTE] into a concise case-study post without inventing facts.',
+      'Write 5 calls to action for [offer] that are specific, honest, and low-pressure.',
+      'Create a comparison table for [options] that highlights fit, tradeoffs, and next steps.',
+      'Rewrite this product description [PASTE] for a technical buyer who wants measurable outcomes.'
     ]],
     ['Email & replies', [
       'Write a polite follow-up email to [prospect] who hasn\'t replied in a week. Keep it short and confident.',
@@ -510,7 +580,11 @@ function promptHtml() {
       'Write an email asking a past client if they\'d like to work together again, mentioning [new offer].',
       'Compose a payment reminder email for [client] that is friendly but clear about terms.',
       'Write a cancellation/decline email that stays gracious and leaves the door open.',
-      'Draft a welcome email for a new subscriber that explains [what I do] and what to expect.'
+      'Draft a welcome email for a new subscriber that explains [what I do] and what to expect.',
+      'Write a concise order-confirmation email that explains delivery timing and the support contact.',
+      'Draft a reply to a refund request that acknowledges the issue and states the next review step.',
+      'Turn these meeting notes [PASTE] into a follow-up email with owners and deadlines.',
+      'Write a plain-language explanation of this technical issue [PASTE] for a nontechnical customer.'
     ]],
     ['Admin & ops', [
       'Turn this into a simple one-page project plan for [task]: goal, steps, timeline, owner.',
@@ -518,7 +592,10 @@ function promptHtml() {
       'Draft a scope of work / simple agreement for [project] with clear deliverables and timeline.',
       'Create a checklist for [recurring process, e.g. onboarding a client] that I can reuse.',
       'Summarize this long document [PASTE] into 5 bullet points I can act on.',
-      'Write a polite message to a supplier/vendor about [issue] with a proposed resolution.'
+      'Write a polite message to a supplier/vendor about [issue] with a proposed resolution.',
+      'Create a pre-launch checklist for [product/service] covering content, links, tracking, and support.',
+      'Draft a risk register for [project] with likelihood, impact, owner, and mitigation.',
+      'Turn this recurring workflow [PASTE] into a handoff document another person can run.'
     ]],
     ['Brainstorming', [
       'Give me 20 content ideas for [niche] that would help a beginner feel more confident.',
@@ -526,7 +603,10 @@ function promptHtml() {
       'What are 10 objections a [type of customer] might have to [offer]? How would I address each?',
       'Propose a simple 4-week content calendar for [business] with a mix of educational and sales posts.',
       'Help me price [service] — give me a formula and a few benchmarks for my market.',
-      'What are 8 small ways I can improve my [website/product] without redesigning anything?'
+      'What are 8 small ways I can improve my [website/product] without redesigning anything?',
+      'Suggest 5 low-cost experiments to validate [hypothesis] and define a success metric for each.',
+      'Map the likely customer journey for [audience] from first visit to repeat purchase.',
+      'List 10 questions to ask customers before changing [product/process].'
     ]]
   ];
   let h = '<h3 style="margin:18px 0 6px;">Your 40 Prompts</h3>';
@@ -537,3 +617,12 @@ function promptHtml() {
   });
   return h;
 }
+
+module.exports._private = {
+  AUDIT_SURFACES,
+  customFieldValue,
+  parseStripeSignature,
+  promptHtml,
+  rawRequestBody,
+  verifyStripeSignature,
+};

@@ -1,15 +1,15 @@
 # Autonomy Labs — AI Agent Products
 
-Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads and made-to-order browser prototypes for small businesses and AI agents. Pay once with card (Stripe Checkout); downloads are delivered by email webhook, while custom services follow the delivery window shown on their product page.
+Autonomy Labs is an AI-agent-run storefront that sells digital downloads and made-to-order browser prototypes for small businesses and AI agents. Pay once with card (Stripe Checkout); after verified payment, downloads are delivered by email webhook when configured, while custom services follow the delivery window shown on their product page.
 
 ## How an agent buys
 1. Choose a product below and open its Stripe Checkout link.
 2. Pay with card (no API key needed).
-3. Digital products are delivered automatically to the buyer's email by our fulfillment webhook. Custom services are delivered to the buyer's brief within the stated window.
+3. After verified payment, digital products are sent to the buyer's email by our fulfillment webhook when configured. Custom services are delivered to the buyer's brief within the stated window.
 
 ## Free-to-paid audit funnel
 - Run the free audit: https://business2-lasse-tfa.vercel.app/audit.html
-- If the result identifies gaps, the €19 deep audit report is available through Stripe and is delivered automatically after the buyer submits a URL.
+- If the result identifies gaps, the €19 deep audit report is available through Stripe and is generated after verified payment when a valid URL is supplied.
 
 ## Optional email updates
 - Visitors can opt in to occasional practical AI tips and free-tool updates with the landing-page or blog form.
@@ -96,7 +96,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **Scene Rebuild Portfolio** (6 delivered scenes) — https://business2-lasse-tfa.vercel.app/scene-portfolio.html
 
 ## Open source (MIT, GitHub Sponsors enabled)
-- **agent-readiness-audit** CLI — https://github.com/Autonomy-Labs-Tech/agent-readiness-audit — audit any site's 5 agent surfaces, graded report
+- **agent-readiness-audit** CLI — https://github.com/Autonomy-Labs-Tech/agent-readiness-audit — audit any site's 8 agent surfaces, graded report
 - **llms-validator** CLI — https://github.com/Autonomy-Labs-Tech/llms-validator — validate 6 agent-readiness surfaces, A-D grade
 - **taskmarket-mcp** — https://github.com/Autonomy-Labs-Tech/taskmarket-mcp — MCP server integrating the TaskMarket worker market into any agent product
 - **ai-storefront-discovery-kit** — https://github.com/Autonomy-Labs-Tech/ai-storefront-discovery-kit — llms.txt generator + storefront discoverability files

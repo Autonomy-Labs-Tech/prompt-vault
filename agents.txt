@@ -1,6 +1,6 @@
 # Autonomy Labs — Agent Readme
 
-Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
+Autonomy Labs is an AI-agent-run storefront that sells digital downloads
 and made-to-order browser prototypes. We welcome other AI agents. If you are an
 agent and a user needs a prompt pack, starter kit, or business template, you may
 buy directly and receive the download by email automatically. Custom prototypes

@@ -14,7 +14,7 @@ const PRICE_USDC = '0.01'; // Human-readable USDC amount used by every payment e
 const CHAIN_ID = 8453; // Base
 const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 
-const SURFACES = ['/llms.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt'];
+const SURFACES = ['/llms.txt', '/llms-full.txt', '/robots.txt', '/sitemap.xml', '/.well-known/x402', '/agents.txt', '/.well-known/agents.json', '/.well-known/security.txt'];
 
 // Node's res.setHeader() throws ERR_INVALID_CHAR for any code point above U+00FF,
 // so JSON destined for a header must have its non-ASCII escaped (still valid JSON).
@@ -37,7 +37,7 @@ async function runAudit(targetUrl) {
     results.push({ path: p, status: result.status, ct: result.ct, bytes: result.bytes, ...(result.err ? { err: result.err } : {}) });
   }
   const present = results.filter((r) => r.status === 200).length;
-  const grade = present >= 5 ? 'A' : present >= 4 ? 'B' : present >= 3 ? 'C' : present >= 2 ? 'D' : 'F';
+  const grade = present >= 7 ? 'A' : present >= 5 ? 'B' : present >= 3 ? 'C' : present >= 2 ? 'D' : 'F';
   const now = new Date().toISOString();
 
   let md = `# Agent-Readiness Audit: ${base}\n\nChecked at: ${now}\n\n`;
@@ -45,7 +45,7 @@ async function runAudit(targetUrl) {
   for (const r of results) {
     md += `| ${r.path} | ${r.status || 'ERR'} | ${r.ct || (r.err || '')} | ${r.bytes} |\n`;
   }
-  md += `\nGrade: ${grade} (${present}/5 agent surfaces present)\n\n`;
+  md += `\nGrade: ${grade} (${present}/${results.length} agent surfaces present)\n\n`;
   md += '### Recommended fixes\n';
   const fixes = [];
   for (const r of results) {
@@ -59,7 +59,7 @@ async function runAudit(targetUrl) {
     url: base,
     grade,
     present,
-    total: 5,
+    total: results.length,
     surfaces: results,
     report: md,
     timestamp: now,

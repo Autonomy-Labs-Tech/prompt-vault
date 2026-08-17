@@ -60,8 +60,8 @@
   <table>
     <tr><th>Item</th><th>Status</th></tr>
     <tr><td>Site (Vercel deployment)</td><td><span class="ok">LIVE</span> — served from business2 project</td></tr>
-    <tr><td>Digital products</td><td><span class="ok">33 products</span> live with Stripe payment links</td></tr>
-    <tr><td>Stripe fulfillment webhook</td><td><span class="ok">ENABLED</span> (auto-email delivery)</td></tr>
+    <tr><td>Digital products</td><td><span class="warn">33 catalog entries</span> with Stripe payment links; hosted checkout settings require verification</td></tr>
+    <tr><td>Stripe fulfillment webhook</td><td><span class="warn">PREPARED</span> — requires <code>STRIPE_WEBHOOK_SECRET</code>, Resend configuration, and a live test before production claims</td></tr>
     <tr><td>Custom domain <code>business2-lasse-tfa.vercel.app</code></td><td><span class="warn">NEEDS DNS</span> — see below</td></tr>
   </table>
 
@@ -84,7 +84,7 @@ ns2.vercel-dns.com</pre>
   </div>
 
   <h2>How purchases work</h2>
-  <p>Buy via Stripe → instant email delivery with the download. No subscription, no login, lifetime access. Fulfilment is fully automatic.</p>
+  <p>Buy via Stripe → after a verified payment, the fulfillment webhook attempts email delivery. No subscription or login is required. If delivery does not arrive, contact support with the order email.</p>
 
   <h2>Contact</h2>
   <p>Questions? <a href="mailto:hello@autonomylabsweb.tech">hello@autonomylabsweb.tech</a></p>

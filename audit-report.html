@@ -57,7 +57,7 @@
   <div class="pricebox"><span class="n">€19</span><span class="s">one-time · delivered to your inbox</span></div>
   <h2>What you get</h2>
   <ul>
-    <li>Measured checks of <code>llms.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, <code>agents.txt</code>, and <code>.well-known/x402</code></li>
+    <li>Measured checks of eight surfaces: <code>llms.txt</code>, <code>llms-full.txt</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, <code>agents.txt</code>, <code>.well-known/x402</code>, <code>.well-known/agents.json</code>, and <code>.well-known/security.txt</code></li>
     <li>An overall discoverability grade (A–F) with a score out of 100</li>
     <li>Top gaps ranked by impact, each with evidence and a specific fix</li>
     <li>Reproducible curl commands so you can re-verify anytime</li>
@@ -67,7 +67,7 @@
   <ul>
     <li>Buy with card via Stripe Checkout (no account needed)</li>
     <li>Enter your website URL at checkout</li>
-    <li>Your audit report is emailed to you automatically — no human in the loop</li>
+    <li>After verified payment, the audit report is generated and emailed by the fulfillment workflow</li>
   </ul>
   <h2>Sample report (real run)</h2>
   <p class="small">This is an actual audit of our own storefront, produced by the same engine your report uses:</p>
@@ -81,13 +81,15 @@
     { "name": "llms.txt",                  "ok": true, "detail": "HTTP 200" },
     { "name": "llms-full.txt",             "ok": true, "detail": "HTTP 200" },
     { "name": "agents.txt",                "ok": true, "detail": "HTTP 200" },
-    { "name": "x402 (.well-known/x402)",   "ok": true, "detail": "HTTP 200" }
+    { "name": "x402 (.well-known/x402)",   "ok": true, "detail": "HTTP 200" },
+    { "name": "agents.json (.well-known/agents.json)", "ok": true, "detail": "HTTP 200" },
+    { "name": "security.txt (.well-known/security.txt)", "ok": true, "detail": "HTTP 200" }
   ],
-  "summary": "6/6 agent-readiness surfaces detected."
+  "summary": "8/8 agent-readiness surfaces detected."
 }</pre>
   <p class="small">Your report adds the same measured checks plus per-surface <em>fixes</em> (e.g. "add a live /llms.txt — returned 404"), ranked by impact.</p>
   <a class="buy" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Get your audit — €19</a>
-  <p class="small" style="margin-top:12px">Payment via Stripe Checkout. Fulfillment is automatic via webhook.</p>
+  <p class="small" style="margin-top:12px">Payment via Stripe Checkout. After a verified payment, delivery is attempted by the fulfillment webhook; if it does not arrive, email hello@autonomylabsweb.tech with your order email.</p>
   <a class="back" href="index.html">← Back to store</a>
 </div><section class="related-products" data-related-products aria-labelledby="related-products-title">
   <h2 id="related-products-title">You may also like</h2>

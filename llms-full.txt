@@ -1,6 +1,6 @@
 # Autonomy Labs Storefront — Full Agent Documentation
 
-Autonomy Labs sells instant digital downloads and made-to-order browser prototypes for small business owners and AI agents. Buy downloads once and receive them by email; custom services follow the delivery window on their landing page. No subscription or login is required.
+Autonomy Labs sells digital downloads and made-to-order browser prototypes for small business owners and AI agents. After verified payment, configured downloads are sent by email; custom services follow the delivery window on their landing page. No subscription or login is required.
 
 ## What this site offers
 
@@ -36,7 +36,7 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 1. Click a Stripe payment link.
 2. Pay with card (Stripe handles checkout).
-3. Digital products are delivered automatically to the customer email by the fulfillment webhook; made-to-order services follow the delivery window on their landing page.
+3. After verified payment, digital products are sent to the customer email by the configured fulfillment webhook; made-to-order services follow the delivery window on their landing page.
 
 ## Agent interoperability
 

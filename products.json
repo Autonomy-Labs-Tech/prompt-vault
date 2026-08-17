@@ -3,7 +3,7 @@
  "@type": "ItemList",
  "name": "Autonomy Labs AI Agent Products",
  "baseUrl": "https://business2-lasse-tfa.vercel.app",
- "payment": "Stripe Checkout (card): instant digital downloads are fulfilled by email; made-to-order services follow the delivery window shown on their product page",
+ "payment": "Stripe Checkout (card): after verified payment, digital delivery is attempted by email; made-to-order services follow the delivery window shown on their product page",
  "itemListElement": [
   {
    "@type": "Product",
@@ -340,7 +340,7 @@
    "category": "Services",
    "tagline": "Get an A-grade AI-agent discoverability audit with concrete fixes",
    "features": [
-    "Measured checks of 5 agent surfaces",
+    "Measured checks of 8 agent surfaces",
     "Discoverability grade (A-F) + score",
     "Top gaps ranked by impact",
     "Reproducible curl commands",
