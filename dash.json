@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3118,
-  "last_run": "2026-08-17T07:00:00.786855",
+  "cycles": 3119,
+  "last_run": "2026-08-17T08:00:00.498808",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3118,
+    "cycles": 3119,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T05:30:00.264Z",
+  "generated_at": "2026-08-17T06:30:00.266Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T05:25:01.800Z quality queue written: none"
+      "line": "2026-08-17T06:25:01.888Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T05:25:01.799Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T06:25:01.888Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T05:25:01.796Z QUALITY poll: 7 open"
+      "line": "2026-08-17T06:25:01.883Z QUALITY poll: 7 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T05:20:01.959Z quality queue written: none"
+      "line": "2026-08-17T06:20:01.353Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T05:20:01.958Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T06:20:01.353Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T05:20:01.954Z QUALITY poll: 7 open"
+      "line": "2026-08-17T06:20:01.349Z QUALITY poll: 7 open"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T05:25:01.792Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T06:25:01.887Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T05:25:01.789Z poll: 7 open tasks"
+      "line": "2026-08-17T06:25:01.883Z poll: 7 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -301,7 +301,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T05:26:11.920Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T06:26:12.244Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -309,15 +309,15 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T05:11:11.848Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T06:11:12.169Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "--- run Mon Aug 17 08:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
       "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T04:56:11.756Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
