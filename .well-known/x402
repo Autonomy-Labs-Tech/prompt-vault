@@ -80,7 +80,8 @@
   "payment_protocol": {
     "type": "x402",
     "requires": ["order", "signature", "txHash"],
-    "verification": "Base USDC transfer is checked on-chain before delivery; offline fixtures are disabled in production."
+    "headers": ["PAYMENT-REQUIRED", "X-402-Signature"],
+    "verification": "This endpoint uses an exact-transfer x402 extension: clients send an EIP-712 order, signature, and settled Base transaction hash. Base USDC transfer is checked on-chain before delivery; offline fixtures are test-only. Production also requires X402_REPLAY_STORE_URL for durable transaction replay protection."
   },
   "facilitator_discovery": {
     "discovery_url": "https://x402bazaar.org",

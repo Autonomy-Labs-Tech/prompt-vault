@@ -62,7 +62,7 @@
   <ol>
     <li>GET the invoice: <code>GET https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x...</code></li>
     <li>Send USDC on Base to <code>0x7e0190af0951485dFd08bE2FE19Fa638e94F426D</code></li>
-    <li>POST with your signed EIP-712 order: <code>POST /api/wallet_watch?product=watch&address=0x... { order, signature }</code></li>
+    <li>POST with your signed EIP-712 order and settled transaction hash: <code>POST /api/wallet_watch?product=watch&address=0x... { order, signature, txHash }</code></li>
   </ol>
 
   <h2>MCP tool</h2>

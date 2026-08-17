@@ -13,8 +13,16 @@ function normalizedAddress(value) {
 
 function offlinePaymentsAllowed() {
   return process.env.X402_OFFLINE === 'true'
-    && process.env.NODE_ENV !== 'production'
-    && process.env.VERCEL_ENV !== 'production';
+    && process.env.X402_TEST_MODE === 'true'
+    && process.env.NODE_ENV === 'test'
+    && !process.env.VERCEL
+    && !process.env.VERCEL_ENV;
+}
+
+function parsePaymentHeader(value) {
+  try { return JSON.parse(String(value)); } catch {}
+  try { return JSON.parse(Buffer.from(String(value), 'base64url').toString('utf8')); }
+  catch { return null; }
 }
 
 function verifyOrderSignature(order, signature, recipient) {
@@ -69,6 +77,54 @@ function reservePayment(txHash, signer, recipient) {
   return { ok: true };
 }
 
+function reserveDurablePayment(txHash, signer, recipient) {
+  const endpoint = String(process.env.X402_REPLAY_STORE_URL || '');
+  if (!/^https:\/\//i.test(endpoint)) {
+    return Promise.resolve({ ok: false, error: 'durable replay store not configured' });
+  }
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = (result) => {
+      if (settled) return;
+      settled = true;
+      resolve(result);
+    };
+    let parsed;
+    try { parsed = new URL(endpoint); } catch { return finish({ ok: false, error: 'invalid replay store URL' }); }
+    const payload = JSON.stringify({
+      txHash: String(txHash).toLowerCase(),
+      signer: normalizedAddress(signer),
+      recipient: normalizedAddress(recipient),
+    });
+    const request = https.request({
+      protocol: parsed.protocol,
+      hostname: parsed.hostname,
+      port: parsed.port || 443,
+      path: parsed.pathname + parsed.search,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        ...(process.env.X402_REPLAY_STORE_TOKEN
+          ? { Authorization: `Bearer ${process.env.X402_REPLAY_STORE_TOKEN}` }
+          : {}),
+      },
+      timeout: 5000,
+    }, (response) => {
+      response.resume();
+      response.on('end', () => {
+        if (response.statusCode === 409) return finish({ ok: false, error: 'payment already used' });
+        finish(response.statusCode >= 200 && response.statusCode < 300
+          ? { ok: true }
+          : { ok: false, error: 'durable replay store rejected payment' });
+      });
+    });
+    request.on('error', () => finish({ ok: false, error: 'durable replay store unavailable' }));
+    request.on('timeout', () => request.destroy(new Error('replay store timeout')));
+    request.end(payload);
+  });
+}
+
 async function verifyPayment({ order, signature, txHash, recipient, requiredUsdc }) {
   if (!order || String(order.currency || '').toUpperCase() !== 'USDC') {
     return { ok: false, status: 400, error: 'wrong currency' };
@@ -89,7 +145,9 @@ async function verifyPayment({ order, signature, txHash, recipient, requiredUsdc
     if (!signatureCheck.ok) return { ok: false, status: 402, error: signatureCheck.error };
     const payment = await verifyUsdcTransfer(txHash, order.signer, recipient, requiredUsdc);
     if (!payment.ok) return { ok: false, status: 402, error: payment.error };
-    const reservation = reservePayment(txHash, order.signer, recipient);
+    const reservation = offlinePaymentsAllowed()
+      ? reservePayment(txHash, order.signer, recipient)
+      : await reserveDurablePayment(txHash, order.signer, recipient);
     if (!reservation.ok) return { ok: false, status: 409, error: reservation.error };
     return { ok: true, amount_usdc: payment.amount_usdc, offline: false };
   }
@@ -195,7 +253,9 @@ function verifyUsdcTransfer(txHash, signer, recipient, requiredUsdc) {
 module.exports = {
   normalizedAddress,
   offlinePaymentsAllowed,
+  parsePaymentHeader,
   reservePayment,
+  reserveDurablePayment,
   verifyOrderSignature,
   verifyPayment,
   verifyUsdcTransfer,

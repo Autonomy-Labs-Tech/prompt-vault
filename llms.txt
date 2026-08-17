@@ -118,3 +118,4 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - If the provider returns more token records, more transaction records, or another transaction page, the response is explicitly partial: `data.partial=true`, `data.complete=false`, `data.provider_limited=true` where applicable, plus `data.transaction_limit`/`data.token_balances_limit`, field-level `transactions_complete`/`token_balances_complete`, `data.sources`, and `data.provider_errors`.
 - Data source: Blockscout keyless API
 - Payment: x402 Base USDC to 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D
+- Payment proof: send an EIP-712 order, signature, and settled Base transaction hash; payment is verified before delivery.

@@ -1,20 +1,6 @@
 // Vercel serverless function: free AI-agent-readiness audit tool.
 // Probes a site's agent-discoverability surfaces and returns a grade.
-const https = require('https');
-const http = require('http');
-
-function probe(url, timeoutMs = 9000) {
-  return new Promise((resolve) => {
-    const mod = url.startsWith('https') ? https : http;
-    const req = mod.get(url, { headers: { 'User-Agent': 'autonomy-audit-bot/1.0' }, timeout: timeoutMs }, (res) => {
-      let body = '';
-      res.on('data', (c) => { body += c; if (body.length > 200000) req.destroy(); });
-      res.on('end', () => resolve({ status: res.statusCode, ct: res.headers['content-type'] || '', body }));
-    });
-    req.on('error', () => resolve({ status: 0, ct: '', body: '' }));
-    req.on('timeout', () => { req.destroy(); resolve({ status: 0, ct: '', body: '' }); });
-  });
-}
+const { publicGet, resolvePublic } = require('./public_fetch');
 
 module.exports = async function (req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'method not allowed' });
@@ -24,8 +10,20 @@ module.exports = async function (req, res) {
   if (!target) return res.status(400).json({ error: 'url param required' });
   if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
   let origin;
-  try { origin = new URL(target).origin; } catch (e) { return res.status(400).json({ error: 'invalid url' }); }
+  try {
+    await resolvePublic(target);
+    origin = new URL(target).origin;
+  } catch (e) {
+    return res.status(400).json({ error: e.message });
+  }
 
+  const deadline = Date.now() + 15000;
+  const probe = async (url) => {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) return { status: 0, ct: '', body: '' };
+    return publicGet(url, { timeoutMs: Math.min(4000, remaining), maxBytes: 200000 })
+      .catch(() => ({ status: 0, ct: '', body: '' }));
+  };
   const probes = {
     robots:    await probe(origin + '/robots.txt'),
     sitemap:   await probe(origin + '/sitemap.xml'),

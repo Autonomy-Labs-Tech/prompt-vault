@@ -64,10 +64,12 @@ test('reserves a transaction proof against same-process replay', () => {
 test('production never enables the offline payment bypass', async () => {
   const previous = {
     X402_OFFLINE: process.env.X402_OFFLINE,
+    X402_TEST_MODE: process.env.X402_TEST_MODE,
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
   };
   process.env.X402_OFFLINE = 'true';
+  process.env.X402_TEST_MODE = 'true';
   process.env.NODE_ENV = 'production';
   delete process.env.VERCEL_ENV;
   try {

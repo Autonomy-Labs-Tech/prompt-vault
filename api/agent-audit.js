@@ -3,7 +3,10 @@
 // Price: $0.01 USDC on Base. Payout to our wallet.
 // Listed on Circle Agent Marketplace.
 
-const { verifyPayment } = require('./payment_verify');
+const {
+  parsePaymentHeader,
+  verifyPayment,
+} = require('./payment_verify');
 const { publicGet, resolvePublic } = require('./public_fetch');
 
 const SELLER_ADDRESS = '0xd580ed58342aa489BDD6DCA11e57E2FB9a00438E';
@@ -68,19 +71,27 @@ module.exports = async function (req, res) {
     // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-PAYMENT, PAYMENT-REQUIRED');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-PAYMENT, PAYMENT-REQUIRED, X-402-Signature');
     if (req.method === 'OPTIONS') return res.status(204).end();
 
     const query = req.query || Object.fromEntries(new URLSearchParams((req.url || '').split('?')[1] || ''));
     const targetUrl = query.url || query.target || (req.body && req.body.url);
 
     // Check for payment
-    const paymentHeader = req.headers['x-payment'] || req.headers['payment'];
+    const paymentHeader = req.headers['x-payment'] || req.headers.payment;
 
     if (!paymentHeader) {
       // Return 402 with payment requirements
       res.status(402);
       res.setHeader('Content-Type', 'application/json');
+      res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify({
+        protocol: 'x402-exact-transfer-v1',
+        network: 'eip155:8453',
+        asset: USDC_BASE,
+        amount: PRICE_USDC,
+        payTo: SELLER_ADDRESS,
+        requires: ['order', 'signature', 'txHash'],
+      })).toString('base64'));
       res.setHeader('X-PAYMENT', headerSafeJson({
         accepts: [{
           scheme: 'gateway',
@@ -112,8 +123,8 @@ module.exports = async function (req, res) {
     }
     try { await resolvePublic(String(targetUrl)); }
     catch (error) { return res.status(400).json({ error: error.message }); }
-    let payment;
-    try { payment = JSON.parse(String(paymentHeader)); } catch {
+    let payment = parsePaymentHeader(paymentHeader);
+    if (!payment) {
       return res.status(402).json({ error: 'payment_not_verified_onchain', detail: 'X-PAYMENT must be JSON' });
     }
     const verified = await verifyPayment({

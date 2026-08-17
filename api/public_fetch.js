@@ -12,14 +12,27 @@ function blockedIp(value) {
     const [a, b] = octets;
     return a === 0 || a === 10 || a === 127 || (a === 100 && b >= 64 && b <= 127)
       || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31)
-      || (a === 192 && (b === 0 || b === 168)) || (a === 198 && (b === 18 || b === 19))
+      || (a === 192 && (b === 0 || b === 2 || b === 168))
+      || (a === 198 && (b === 18 || b === 19 || b === 51))
       || (a === 203 && b === 0) || a >= 224;
   }
   if (!net.isIPv6(ip)) return true;
+  if (ip.startsWith('::ffff:')) {
+    const tail = ip.slice(7);
+    if (net.isIPv4(tail)) return blockedIp(tail);
+    const parts = tail.split(':');
+    if (parts.length === 2 && parts.every((part) => /^[0-9a-f]{1,4}$/.test(part))) {
+      const first = Number.parseInt(parts[0], 16);
+      const second = Number.parseInt(parts[1], 16);
+      return blockedIp([
+        first >> 8, first & 255, second >> 8, second & 255,
+      ].join('.'));
+    }
+    return true;
+  }
   if (ip === '::' || ip === '::1' || ip.startsWith('fc') || ip.startsWith('fd')
     || ip.startsWith('fe8') || ip.startsWith('fe9') || ip.startsWith('fea')
-    || ip.startsWith('feb') || ip.startsWith('ff')) return true;
-  if (ip.startsWith('::ffff:')) return blockedIp(ip.slice(7));
+    || ip.startsWith('feb') || /^fe[c-f]/.test(ip) || ip.startsWith('ff')) return true;
   return false;
 }
 

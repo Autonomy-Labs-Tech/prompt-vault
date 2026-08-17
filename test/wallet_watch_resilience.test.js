@@ -12,6 +12,8 @@ const TOKEN = '0x0000000000000000000000000000000000000001';
 const ORIGINAL_ENV = {};
 const ENV_KEYS = [
   'X402_OFFLINE',
+  'X402_TEST_MODE',
+  'NODE_ENV',
   'WALLET_WATCH_BLOCKSCOUT_V2_URL',
   'WALLET_WATCH_BLOCKSCOUT_V1_URL',
   'WALLET_WATCH_PROVIDER_V2_URL',
@@ -242,6 +244,9 @@ async function withFixture(mode, handler, fn, options) {
   const provider = await startProvider(mode);
   const app = await startApp(handler);
   setProviderEnv(provider.port, options);
+  process.env.NODE_ENV = 'test';
+  process.env.X402_OFFLINE = 'true';
+  process.env.X402_TEST_MODE = 'true';
   try {
     return await fn(app.port);
   } finally {
@@ -398,6 +403,8 @@ test('x402 wallet-watch delivery keeps the payment gate and uses the hardened re
   const originalOffline = process.env.X402_OFFLINE;
   await withFixture('normal', x402, async (port) => {
     process.env.X402_OFFLINE = 'true';
+    process.env.X402_TEST_MODE = 'true';
+    process.env.NODE_ENV = 'test';
     const response = await request(port, '/?product=watch-pro', paidBody('watch-pro'));
     assert.equal(response.status, 200);
     assert.equal(response.body.ok, true);
@@ -407,6 +414,8 @@ test('x402 wallet-watch delivery keeps the payment gate and uses the hardened re
 
   await withFixture('rate_limited', x402, async (port) => {
     process.env.X402_OFFLINE = 'true';
+    process.env.X402_TEST_MODE = 'true';
+    process.env.NODE_ENV = 'test';
     const response = await request(port, '/?product=watch', paidBody());
     assert.equal(response.status, 503);
     assert.equal(response.body.code, 'rate_limited');
@@ -434,4 +443,25 @@ test('x402 rejects paid-shaped requests without an on-chain transaction hash', a
   assert.equal(response.body.detail, 'txHash required');
   if (originalOffline === undefined) delete process.env.X402_OFFLINE;
   else process.env.X402_OFFLINE = originalOffline;
+});
+
+test('direct wallet-watch POSTs also require on-chain payment evidence', async () => {
+  const previous = {
+    X402_OFFLINE: process.env.X402_OFFLINE,
+    X402_TEST_MODE: process.env.X402_TEST_MODE,
+    NODE_ENV: process.env.NODE_ENV,
+  };
+  delete process.env.X402_OFFLINE;
+  delete process.env.X402_TEST_MODE;
+  process.env.NODE_ENV = 'production';
+  const app = await startApp(walletWatch);
+  const response = await request(app.port, '/?product=watch&address=' + ADDRESS, paidBody());
+  await stopServer(app.server);
+  assert.equal(response.status, 402);
+  assert.equal(response.body.error, 'payment_not_verified_onchain');
+  assert.equal(response.body.detail, 'txHash required');
+  for (const [key, value] of Object.entries(previous)) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
 });

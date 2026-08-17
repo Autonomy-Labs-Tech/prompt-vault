@@ -5,8 +5,13 @@
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
+const {
+  parsePaymentHeader,
+  verifyPayment,
+} = require('./payment_verify');
 
-const RECIPIENT = process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
+const RECIPIENT = '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
+const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 const CHAIN = { id: 8453, name: 'Base', shortName: 'base' };
 const BLOCKSCOUT = 'https://base.blockscout.com/api/v2';
 const BLOCKSCOUT_V1 = 'https://base.blockscout.com/api';
@@ -557,7 +562,7 @@ function sendProviderUnavailable(res, result) {
 
 async function walletWatchHandler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-402-Order, X-402-Signature');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-PAYMENT, PAYMENT-REQUIRED, X-402-Signature');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (!['GET', 'POST'].includes(req.method)) return res.status(405).json({ error: 'method not allowed' });
 
@@ -570,6 +575,15 @@ async function walletWatchHandler(req, res) {
   if (!isAddress(address)) return res.status(400).json({ error: 'address required; pass ?address=0x...' });
 
   if (req.method === 'GET') {
+    const requirement = {
+      protocol: 'x402-exact-transfer-v1',
+      network: 'eip155:8453',
+      asset: USDC_BASE,
+      payTo: RECIPIENT,
+      amount: String(Math.round(Number(p.priceUsdc) * 1e6)),
+      requires: ['order', 'signature', 'txHash'],
+    };
+    res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify(requirement)).toString('base64'));
     return res.status(402).json({
       error: 'Payment Required',
       payment_details: {
@@ -582,17 +596,40 @@ async function walletWatchHandler(req, res) {
         product,
         address_hint: address,
       },
-      how: `POST /api/wallet_watch?product=${product}&address=${address} with { order, signature } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
+      payment_protocol: requirement,
+      how: `POST /api/wallet_watch?product=${product}&address=${address} with { order, signature, txHash } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
     });
   }
 
-  const order = req.body && req.body.order;
-  const signature = req.headers['x402-signature'] || (req.body && req.body.signature);
+  let paymentBody = req.body;
+  if ((!paymentBody || !paymentBody.order) && (req.headers['x-payment'] || req.headers.payment)) {
+    const headerPayment = parsePaymentHeader(req.headers['x-payment'] || req.headers.payment);
+    paymentBody = headerPayment && typeof headerPayment === 'object'
+      ? { ...(req.body && typeof req.body === 'object' ? req.body : {}), ...headerPayment }
+      : req.body;
+  }
+  const order = paymentBody && paymentBody.order;
+  const signature = req.headers['x-402-signature']
+    || req.headers['x402-signature']
+    || (paymentBody && paymentBody.signature);
   if (!order || !signature) return res.status(402).json({ error: 'payment_required', invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product } });
 
-  if (String(order.currency || '').toUpperCase() !== 'USDC') return res.status(400).json({ error: 'wrong currency' });
-  if (Number(order.amount) < Number(p.priceUsdc)) return res.status(402).json({ error: 'underpaid' });
-  if (!order.signer || !order.nonce || signature.length < 60) return res.status(400).json({ error: 'bad order/signature' });
+  if (!req._x402PaymentVerified) {
+    const payment = await verifyPayment({
+      order,
+      signature,
+      txHash: paymentBody.txHash || paymentBody.tx_hash,
+      recipient: RECIPIENT,
+      requiredUsdc: Number(p.priceUsdc),
+    });
+    if (!payment.ok) {
+      return res.status(payment.status || 402).json({
+        error: 'payment_not_verified_onchain',
+        detail: payment.error,
+        invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product },
+      });
+    }
+  }
 
   let result;
   try {

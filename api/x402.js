@@ -4,11 +4,15 @@
 // EIP-712 order and matching Base USDC transfer before delivering data.
 const crypto = require('crypto');
 const walletWatch = require('./wallet_watch');
-const { verifyPayment } = require('./payment_verify');
+const {
+  parsePaymentHeader,
+  verifyPayment,
+} = require('./payment_verify');
 const { publicGet } = require('./public_fetch');
 
-const RECIPIENT = process.env.PAYOUT_ADDRESS || '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
+const RECIPIENT = '0x7e0190af0951485dFd08bE2FE19Fa638e94F426D';
 const CHAIN = { id: 8453, name: 'Base', shortName: 'base' };
+const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 
 const PRODUCTS = {
   audit: {
@@ -23,26 +27,30 @@ const PRODUCTS = {
   'watch-pro': { name: 'Wallet Watch Pro snapshot (1 Base address)', priceUsdc: '5.00' },
 };
 
-function runProbe(target) {
-  return publicGet(target, { timeoutMs: 4000, maxBytes: 100000 })
+function runProbe(target, timeoutMs = 4000) {
+  return publicGet(target, { timeoutMs: Math.max(1, Math.min(timeoutMs, 4000)), maxBytes: 100000 })
     .catch(() => ({ status: 0, ct: '', bytes: 0 }));
 }
 
 async function deliverAudit(body, maxSites = 1) {
-  const requested = maxSites > 1
-    ? (Array.isArray(body.urls) ? body.urls : [body.url])
-    : [body.url];
-  const targets = requested.map((value) => String(value || '').trim()).filter(Boolean).slice(0, maxSites);
+  const requested = maxSites > 1 ? body.urls : [body.url];
+  if (!Array.isArray(requested) || requested.length !== maxSites) {
+    return { ok: false, error: `exactly ${maxSites} url${maxSites === 1 ? '' : 's'} required` };
+  }
+  const targets = requested.map((value) => String(value || '').trim()).filter(Boolean);
   if (targets.length !== maxSites) return { ok: false, error: `exactly ${maxSites} url${maxSites === 1 ? '' : 's'} required` };
+  const deadline = Date.now() + 15000;
   const audits = [];
   for (let target of targets) {
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) return { ok: false, error: 'audit deadline exceeded' };
     if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
     let u;
     try { u = new URL(target); } catch (e) { return { ok: false, error: 'invalid url' }; }
     if (u.protocol !== 'https:') return { ok: false, error: 'https targets only' };
     const origin = u.origin;
     const paths = ['/robots.txt', '/sitemap.xml', '/llms.txt', '/llms-full.txt', '/agents.txt', '/.well-known/x402', '/.well-known/agents.json', '/.well-known/security.txt'];
-    const res = await Promise.all(paths.map((p) => runProbe(origin + p)));
+    const res = await Promise.all(paths.map((p) => runProbe(origin + p, deadline - Date.now())));
     const checks = ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'agents.txt', 'x402', 'agents.json', 'security.txt'].map((n, i) => ({
       name: n, ok: res[i].status >= 200 && res[i].status < 400,
     }));
@@ -110,7 +118,7 @@ const typeCurve = { audit: '2.0', 'audit-5': '7.0', data: '1.0', llms: '3.0' };
 
 module.exports = async function (req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-402-Order, X-402-Signature');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-PAYMENT, PAYMENT-REQUIRED, X-402-Signature');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (!['GET', 'POST'].includes(req.method)) return res.status(405).json({ error: 'method not allowed' });
 
@@ -121,28 +129,41 @@ module.exports = async function (req, res) {
 
   if (req.method === 'GET') {
     const requirement = {
-      amount: Number(p.priceUsdc),
-      currency: 'USDC',
-      network: 'base',
-      chainId: CHAIN.id,
-      recipient: RECIPIENT,
-      action: p.name,
-      product,
+      protocol: 'x402-exact-transfer-v1',
+      network: 'eip155:8453',
+      asset: USDC_BASE,
+      payTo: RECIPIENT,
+      amount: String(Math.round(Number(p.priceUsdc) * 1e6)),
+      requires: ['order', 'signature', 'txHash'],
     };
     res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify(requirement)).toString('base64'));
     return res.status(402).json({
       error: 'Payment Required',
-      payment_details: requirement,
+      payment_details: {
+        amount: Number(p.priceUsdc),
+        currency: 'USDC',
+        network: 'base',
+        chainId: CHAIN.id,
+        recipient: RECIPIENT,
+        action: p.name,
+        product,
+      },
+      payment_protocol: requirement,
       how: `POST /api/x402?product=${product} with { order, signature, txHash } (EIP-712 signed order: nonce, signer, amount, currency, chainId) after sending ${p.priceUsdc} USDC on Base to ${RECIPIENT}.`,
     });
   }
 
   let paymentBody = req.body;
-  if ((!paymentBody || !paymentBody.order) && req.headers['x-payment']) {
-    try { paymentBody = JSON.parse(String(req.headers['x-payment'])); } catch {}
+  if ((!paymentBody || !paymentBody.order) && (req.headers['x-payment'] || req.headers.payment)) {
+    const headerPayment = parsePaymentHeader(req.headers['x-payment'] || req.headers.payment);
+    paymentBody = headerPayment && typeof headerPayment === 'object'
+      ? { ...(req.body && typeof req.body === 'object' ? req.body : {}), ...headerPayment }
+      : req.body;
   }
   const order = paymentBody && paymentBody.order;
-  const signature = req.headers['x402-signature'] || (paymentBody && paymentBody.signature);
+  const signature = req.headers['x-402-signature']
+    || req.headers['x402-signature']
+    || (paymentBody && paymentBody.signature);
   if (!order || !signature) return res.status(402).json({ error: 'payment_required', invoice: { chainId: CHAIN.id, currency: 'USDC', amount: p.priceUsdc, recipient: RECIPIENT, product } });
 
   const txHash = String((paymentBody && (paymentBody.txHash || paymentBody.tx_hash)) || '');
@@ -168,6 +189,7 @@ module.exports = async function (req, res) {
   // already-validated request to that handler instead of returning a generic
   // 422 for an advertised product.
   if (product === 'watch' || product === 'watch-pro') {
+    req._x402PaymentVerified = true;
     return walletWatch(req, res);
   }
 

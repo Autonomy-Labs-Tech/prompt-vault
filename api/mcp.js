@@ -118,10 +118,11 @@ module.exports = async function (req, res) {
         content: [{
           type: 'text',
           text: `Tool "${p.name}" is pay-per-call via x402 (${tool.description.split('. Price')[0]}). ` +
-            `To purchase: POST ${BASE}/api/x402?product=${product} with body { order, signature } where order is an ` +
+            `To purchase: POST ${BASE}/api/x402?product=${product} with body { order, signature, txHash } where order is an ` +
             `EIP-712 order ({ nonce, signer, amount, currency:'USDC', chainId:8453 }) signed by your wallet and signature is ` +
-            `delivered via the request body or the X-402-Signature header; the invoice (amount, recipient wallet) comes from ` +
-            `GET ${BASE}/api/x402?product=${product}. On valid signature the API returns the deliverable data directly.`,
+            `delivered via the request body or the X-402-Signature header; txHash must identify the settled Base USDC ` +
+            `transfer. The invoice (amount, recipient wallet) comes from GET ${BASE}/api/x402?product=${product}. ` +
+            `On verified settled payment the API returns the deliverable data directly.`,
         }],
         isError: false,
       }});

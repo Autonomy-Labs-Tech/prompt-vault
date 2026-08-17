@@ -22,4 +22,6 @@ test('audit-5 rejects requests that do not provide exactly five sites', async ()
   const { deliverAudit } = require('../api/x402');
   const result = await deliverAudit({ urls: ['https://example.com'] }, 5);
   assert.deepEqual(result, { ok: false, error: 'exactly 5 urls required' });
+  const tooMany = await deliverAudit({ urls: Array.from({ length: 6 }, () => 'https://example.com') }, 5);
+  assert.deepEqual(tooMany, { ok: false, error: 'exactly 5 urls required' });
 });
