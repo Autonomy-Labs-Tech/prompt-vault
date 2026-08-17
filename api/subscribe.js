@@ -86,6 +86,10 @@ function normalizeEmail(value) {
   return email;
 }
 
+function hasAffirmativeConsent(value) {
+  return value === true || value === 'true' || value === 'on';
+}
+
 module.exports = async function subscribe(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
@@ -107,6 +111,9 @@ module.exports = async function subscribe(req, res) {
   // Quietly acknowledge honeypot submissions without storing them.
   if (String(body.website || '').trim()) {
     return sendJson(res, 200, { ok: true, subscribed: true });
+  }
+  if (!hasAffirmativeConsent(body.consent)) {
+    return sendJson(res, 400, { ok: false, error: 'affirmative email consent is required' });
   }
   const email = normalizeEmail(body.email);
   if (!email) return sendJson(res, 400, { ok: false, error: 'valid email is required' });
@@ -141,4 +148,4 @@ module.exports = async function subscribe(req, res) {
   });
 };
 
-module.exports._private = { bodyObject, normalizeEmail };
+module.exports._private = { bodyObject, hasAffirmativeConsent, normalizeEmail };

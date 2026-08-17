@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3125,
-  "last_run": "2026-08-17T10:00:00.549174",
+  "cycles": 3126,
+  "last_run": "2026-08-17T11:00:00.666487",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -245,31 +245,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T08:30:00.652Z",
+  "generated_at": "2026-08-17T09:00:00.744Z",
   "recent_activity": [
     {
       "tag": "quality",
+      "line": "2026-08-17T08:56:05.918Z task failure bookkeeping failed: quality done state invalid"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-17T08:50:39.280Z task failure bookkeeping failed: quality done state invalid"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-17T08:45:21.420Z task failure bookkeeping failed: quality done state invalid"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-17T08:39:56.047Z task failure bookkeeping failed: quality done state invalid"
+    },
+    {
+      "tag": "quality",
+      "line": "2026-08-17T08:34:35.245Z task failure bookkeeping failed: quality done state invalid"
+    },
+    {
+      "tag": "quality",
       "line": "2026-08-17T08:29:17.234Z task failure bookkeeping failed: quality done state invalid"
-    },
-    {
-      "tag": "quality",
-      "line": "2026-08-17T08:23:56.065Z task failure bookkeeping failed: quality done state invalid"
-    },
-    {
-      "tag": "quality",
-      "line": "2026-08-17T08:18:37.053Z task failure bookkeeping failed: quality done state invalid"
-    },
-    {
-      "tag": "quality",
-      "line": "2026-08-17T08:13:23.751Z task failure bookkeeping failed: quality done state invalid"
-    },
-    {
-      "tag": "quality",
-      "line": "2026-08-17T08:08:05.436Z task failure bookkeeping failed: quality done state invalid"
-    },
-    {
-      "tag": "quality",
-      "line": "2026-08-17T08:02:46.113Z task failure bookkeeping failed: quality done state invalid"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T08:25:01.806Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T08:55:01.990Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T08:25:01.806Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=3 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T08:55:01.990Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=3 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
@@ -301,23 +301,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-17T08:51:52.268Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T08:36:52.204Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-17T08:21:52.140Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T08:06:52.073Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Mon Aug 17 10:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {
