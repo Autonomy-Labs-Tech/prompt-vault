@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3134,
-  "last_run": "2026-08-17T19:00:00.937459",
+  "cycles": 3135,
+  "last_run": "2026-08-17T20:00:00.217479",
   "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
@@ -245,31 +245,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T17:30:00.526Z",
+  "generated_at": "2026-08-17T18:00:00.282Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Mon Aug 17 19:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Mon Aug 17 20:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T17:25:01.621Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-17T17:55:01.702Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T17:25:01.619Z   [0.50] bounty $0.5 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-17T17:55:01.700Z   [0.25] bounty $0.5 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T17:25:01.619Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T17:55:01.700Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T17:25:01.616Z QUALITY poll: 20 open"
+      "line": "2026-08-17T17:55:01.697Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T17:20:01.184Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-17T17:50:01.095Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -281,15 +281,15 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T17:25:01.691Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T17:55:01.703Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T17:25:01.690Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=0 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-17T17:55:01.703Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -297,11 +297,7 @@
     },
     {
       "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T17:21:54.410Z] prospects=34 fresh=0 sending=0"
+      "line": "--- run Mon Aug 17 20:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -309,7 +305,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T17:06:54.346Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -317,13 +313,17 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-17T16:51:54.281Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-17T17:51:54.537Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
     }
   ],
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }
