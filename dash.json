@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3130,
+    "cycles": 3131,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T14:00:01.260Z",
+  "generated_at": "2026-08-17T14:30:00.665Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T13:55:01.602Z quality queue written: none"
+      "line": "[Mon Aug 17 16:30:00 CEST 2026] executing top task 0x87e4aab27539cae656554b5f4e97fd4b9697c1dc295c3fdbe260c79a2d74be85"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T13:55:01.601Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T14:25:01.774Z quality queue written: 0x87e4aab27539ca"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T13:55:01.597Z QUALITY poll: 9 open"
+      "line": "2026-08-17T14:25:01.773Z   [20.00] bounty $60 subs=2 CLASSIC ARCADE BENCHMARK 09: Coinfall Crisis. Build a comple"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T13:50:01.842Z quality queue written: 0x4c887264d5ede3"
+      "line": "2026-08-17T14:25:01.773Z   [30.00] bounty $60 subs=1 CLASSIC ARCADE BENCHMARK 02: Skee Shock. Build a complete pl"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T13:50:01.840Z   [16.67] bounty $100 subs=5 # 10,000-Word Investment Thesis on the Global Robotics Suppl"
+      "line": "2026-08-17T14:25:01.773Z   [30.00] bounty $60 subs=1 CLASSIC ARCADE BENCHMARK 03: Crane Breaker. Build a complete"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T13:50:01.840Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T14:25:01.773Z   [30.00] bounty $60 subs=1 CLASSIC ARCADE BENCHMARK 04: Whack Protocol. Build a complet"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T13:55:01.569Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T14:25:01.534Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,31 +289,31 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T13:55:01.569Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T14:25:01.534Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
-      "line": "poll: 9 open tasks"
+      "line": "candidate: 0x5e7facd1016471 bounty reward=6000000 subs=0 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T14:21:53.654Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T14:06:53.588Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
       "line": "--- run Mon Aug 17 16:00:01 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T13:51:53.522Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -323,7 +323,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

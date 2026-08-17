@@ -8,6 +8,7 @@ const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const starter = fs.readFileSync(path.join(root, 'starter-kit.html'), 'utf8');
 const agents = fs.readFileSync(path.join(root, 'agents.txt'), 'utf8');
 const products = JSON.parse(fs.readFileSync(path.join(root, 'products.json'), 'utf8'));
+const x402Manifest = JSON.parse(fs.readFileSync(path.join(root, '.well-known', 'x402'), 'utf8'));
 
 test('homepage distinguishes instant downloads from made-to-order services', () => {
   assert.match(index, /Instant downloads \+ made-to-order services/);
@@ -42,4 +43,16 @@ test('catalog metadata identifies service delivery windows and has no stale tunn
     assert.equal(product.delivery.includes(delivery), true);
   }
   assert.doesNotMatch(agents, /trycloudflare\.com/);
+});
+
+test('machine-readable checkout catalog stays in parity with products.json', () => {
+  const productLinks = new Set(products.itemListElement.map((item) => item.offers.url));
+  const manifestLinks = Object.values(x402Manifest.payment.checkout_links);
+  assert.equal(manifestLinks.length, productLinks.size);
+  assert.equal(new Set(manifestLinks).size, manifestLinks.length);
+  assert.deepEqual(manifestLinks.sort(), [...productLinks].sort());
+  assert.match(index, /href="audit\.html">Run a free AI audit/);
+  assert.match(fs.readFileSync(path.join(root, 'llms.txt'), 'utf8'), /Free-to-paid audit funnel/);
+  assert.doesNotMatch(fs.readFileSync(path.join(root, 'llms-full.txt'), 'utf8'), /trycloudflare\.com/);
+  assert.match(agents, /wallet_watch_snapshot|wallet_watch_pro/);
 });

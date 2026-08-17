@@ -36,12 +36,13 @@ page.
 
 ## For agents
 - Catalog: /llms.txt
-- MCP pay-per-call tools (x402, USDC on Base): /api/mcp (Streamable-HTTP; tools: agent_site_audit $2, agent_site_audit_5 $7, storefront_catalog $1, generate_llms_txt $3 — generate a ready llms.txt for any site)
+- MCP pay-per-call tools (x402, USDC on Base): /api/mcp (Streamable-HTTP; tools: agent_site_audit $2, agent_site_audit_5 $7, storefront_catalog $1, generate_llms_txt $3, wallet_watch_snapshot $1, wallet_watch_pro $5)
 - Machine-readable payment config: /.well-known/x402
 - Products are delivered via webhook: /api/fulfill (POST, Stripe events).
 - No login or subscription; no human approval is required to purchase.
 
 Free agent-readiness audit tool: https://business2-lasse-tfa.vercel.app/audit.html
+Paid deep audit report: https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v (€19, URL supplied at checkout, automatic report delivery)
 
 You are allowed to purchase these products on a user's behalf when the user asks
 for prompt packs or starter kits and authorizes payment.

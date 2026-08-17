@@ -10,7 +10,7 @@ const {
 const { publicGet, resolvePublic } = require('./public_fetch');
 
 const SELLER_ADDRESS = '0xd580ed58342aa489BDD6DCA11e57E2FB9a00438E';
-const PRICE_USDC = '10000'; // $0.01 in 6-decimal USDC base units
+const PRICE_USDC = '0.01'; // Human-readable USDC amount used by every payment envelope.
 const CHAIN_ID = 8453; // Base
 const USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
 
@@ -132,7 +132,7 @@ module.exports = async function (req, res) {
       signature: payment.signature,
       txHash: payment.txHash || payment.tx_hash,
       recipient: SELLER_ADDRESS,
-      requiredUsdc: Number(PRICE_USDC) / 1e6,
+      requiredUsdc: Number(PRICE_USDC),
     });
     if (!verified.ok) {
       return res.status(verified.status || 402).json({ error: 'payment_not_verified_onchain', detail: verified.error });

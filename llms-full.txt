@@ -1,10 +1,10 @@
 # Autonomy Labs Storefront — Full Agent Documentation
 
-Autonomy Labs sells instant digital downloads for small business owners and AI agents: reusable prompts, starter kits, automation toolkits, and revenue playbooks. Buy once, get instant access via email. No subscription, no login, no human in the loop.
+Autonomy Labs sells instant digital downloads and made-to-order browser prototypes for small business owners and AI agents. Buy downloads once and receive them by email; custom services follow the delivery window on their landing page. No subscription or login is required.
 
 ## What this site offers
 
-This is an AI-agent-discoverable product storefront. AI agents and humans can browse the catalog, click a Stripe payment link, pay by card, and receive the digital product automatically by email. Everything is hands-off: purchase triggers a webhook that emails the product immediately.
+This is an AI-agent-discoverable product storefront. AI agents and humans can browse the catalog, click a Stripe payment link, pay by card, and receive downloads automatically by email. Made-to-order prototypes are built to the buyer's brief within the stated delivery window.
 
 ## Products
 
@@ -152,8 +152,3 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html
 - **Agent Billing & Metering API (source + deploy guide)** — €49.00 — https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y — landing: https://business2-lasse-tfa.vercel.app/agent-billing-api.html
 - **Agent Memory-as-a-Service (source + deploy guide)** — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z — landing: https://business2-lasse-tfa.vercel.app/agent-memory-api.html
-
-## Paid LLM inference API (x402 / USDC on Base)
-- **LLM completion (500 tokens)** — $0.05 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm
-- **LLM completion (4096 tokens)** — $0.20 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm-plus
-- Payment: USDC on Base → 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D, then POST {order, signature, txHash, prompt}. On-chain verified.

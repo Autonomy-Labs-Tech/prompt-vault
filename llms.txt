@@ -7,6 +7,10 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 2. Pay with card (no API key needed).
 3. Digital products are delivered automatically to the buyer's email by our fulfillment webhook. Custom services are delivered to the buyer's brief within the stated window.
 
+## Free-to-paid audit funnel
+- Run the free audit: https://business2-lasse-tfa.vercel.app/audit.html
+- If the result identifies gaps, the €19 deep audit report is available through Stripe and is delivered automatically after the buyer submits a URL.
+
 ## Optional email updates
 - Visitors can opt in to occasional practical AI tips and free-tool updates with the landing-page or blog form.
 - Signup endpoint: POST https://business2-lasse-tfa.vercel.app/api/subscribe with JSON `{ "email": "you@example.com", "source": "/blog/" }`.
@@ -103,10 +107,6 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 - **Agent Billing & Metering API (source + deploy guide)** — €49.00 — https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y — landing: https://business2-lasse-tfa.vercel.app/agent-billing-api.html
 - **Agent Memory-as-a-Service (source + deploy guide)** — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z — landing: https://business2-lasse-tfa.vercel.app/agent-memory-api.html
 
-## Paid LLM inference API (x402 / USDC on Base)
-- **LLM completion (500 tokens)** — $0.05 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm
-- **LLM completion (4096 tokens)** — $0.20 — https://collections-accessory-follow-associations.trycloudflare.com/api/llm?product=llm-plus
-- Payment: USDC on Base → 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D, then POST {order, signature, txHash, prompt}. On-chain verified.
 - **Custom Browser Game Prototype** — €99.00 — https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10 — landing: https://business2-lasse-tfa.vercel.app/custom-game-prototype.html
 
 ## Agent Wallet Watch — New product

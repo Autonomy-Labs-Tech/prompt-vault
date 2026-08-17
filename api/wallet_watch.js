@@ -580,7 +580,7 @@ async function walletWatchHandler(req, res) {
       network: 'eip155:8453',
       asset: USDC_BASE,
       payTo: RECIPIENT,
-      amount: String(Math.round(Number(p.priceUsdc) * 1e6)),
+      amount: p.priceUsdc,
       requires: ['order', 'signature', 'txHash'],
     };
     res.setHeader('PAYMENT-REQUIRED', Buffer.from(JSON.stringify(requirement)).toString('base64'));
