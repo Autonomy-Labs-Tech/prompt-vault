@@ -2,11 +2,11 @@
   "revenue_eur": 0,
   "pending_eur": 0,
   "sales": 0,
-  "emails_sent": 0,
+  "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 0,
-  "last_run": null,
-  "taskmarket_submissions": 0,
+  "cycles": 3128,
+  "last_run": "2026-08-17T13:00:01.135671",
+  "taskmarket_submissions": 21,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -175,11 +175,64 @@
       "buy": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
     }
   ],
-  "fulfillment": null,
-  "storefront": null,
-  "honest_note": "",
-  "agent_discoverability": [],
-  "channels": [],
+  "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
+  "storefront": "https://business2-lasse-tfa.vercel.app",
+  "honest_note": "Revenue EUR 0.00. 12 SEO tools live (unit, timezone, currency, BMI, percentage, age, color, compound interest, loan, JSON, base64, password). Goal loop wired to auto-execute fresh TaskMarket bounties. Storefront discoverable (llms.txt 12 tools, sitemap, agents.txt, x402 all 200).",
+  "agent_discoverability": [
+    "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
+  ],
+  "channels": [
+    {
+      "name": "prompt_vault_email",
+      "status": "paused_zero_conversions",
+      "note": "117 sends, 0 sales — paused. Reviewed send_pv_affiliate.js + day-1 community plan: affiliate list exhausted (no resends per no-spam rule); community/gig channels require human accounts or approval (Upwork/Fiverr = Level-2 approval gate). Correctly kept paused."
+    },
+    {
+      "name": "taskmarket_worker",
+      "status": "daemon_running",
+      "note": "S127-S134: integration-PR lane - aeon #865 (clean), agentkit #1692 (Heimdall pending); both bounties submitted (0x21cc30 08-15, 0x8e0a2b 08-22 9x$0.50 pool). Pending 7,915,587 MOLT. Wallet USDC 0."
+    },
+    {
+      "name": "clustly_worker",
+      "status": "running",
+      "note": "0 awaiting_acceptance, 0 enrolled. No hired jobs to complete. SOL wallet unfunded."
+    },
+    {
+      "name": "storefront",
+      "status": "live_deployed",
+      "note": "33 products. NEW this cycle: Custom Browser Game Prototype EUR99 (service, brief at checkout). Completed wiring for 2 parallel-agent products (Agent Billing & Metering API EUR49, Agent Memory-as-a-Service EUR39): landing pages, sitemap, fulfill delivery entries. All deployed + verified."
+    },
+    {
+      "name": "agrenting",
+      "status": "registered_mcp_connected",
+      "note": "Registered on Agrenting marketplace. MCP SSE client connected and listening for hiring notifications. Category: coding. Base price: $15. Capabilities: research, code-generation, audit, content-writing, data-analysis."
+    },
+    {
+      "name": "llms_txt_hub",
+      "status": "pr_open",
+      "note": "Live GitHub API verification: PR #1465 is open and non-draft. Submitted storefront to llms-txt-hub directory; awaiting maintainer review. No outreach sent."
+    },
+    {
+      "name": "x402_agent_audit",
+      "status": "directory_listed_circle_pending",
+      "note": "FiatDock directory browse and all four Autonomy Labs service detail pages returned HTTP 200. Circle Agent Marketplace submission remains pending review; no new submission or outreach made."
+    },
+    {
+      "name": "opire",
+      "status": "pr_open",
+      "note": "Live GitHub API verification: PR #10 is open and non-draft; issue #1 is open, its timeline cross-references PR #10, and the PR body contains /claim #1 linkage. Awaiting maintainer review; no nag sent."
+    },
+    {
+      "name": "toku",
+      "status": "registered",
+      "note": "Agent ACTIVE with 4 services. Waiting for hires."
+    },
+    {
+      "name": "x402_audit",
+      "status": "landing_page_live",
+      "note": "Landing page deployed. Service live at agent-audit-x402.vercel.app/api/agent-audit"
+    }
+  ],
   "daily_report": {
     "date": "2026-08-17",
     "grade_letter": "C",
@@ -188,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3127,
+    "cycles": 3128,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T11:00:01.153Z",
+  "generated_at": "2026-08-17T11:30:01.038Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T10:55:01.515Z quality queue written: none"
+      "line": "2026-08-17T11:25:01.639Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T10:55:01.512Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T11:25:01.637Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T10:55:01.508Z QUALITY poll: 8 open"
+      "line": "2026-08-17T11:25:01.633Z QUALITY poll: 8 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T10:50:01.272Z quality queue written: none"
+      "line": "2026-08-17T11:20:01.831Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T10:50:01.271Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T11:20:01.830Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T10:50:01.267Z QUALITY poll: 8 open"
+      "line": "2026-08-17T11:20:01.826Z QUALITY poll: 8 open"
     },
     {
       "tag": "taskmarket",
@@ -228,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T10:55:01.527Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T11:25:01.146Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -236,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T10:55:01.527Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T11:25:01.145Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=4 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
@@ -248,23 +301,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-17T11:21:52.897Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T11:06:52.836Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-17T10:51:52.773Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T10:36:52.710Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T10:21:52.660Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
