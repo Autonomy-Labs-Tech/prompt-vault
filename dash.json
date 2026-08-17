@@ -235,41 +235,41 @@
   ],
   "daily_report": {
     "date": "2026-08-17",
-    "grade_letter": "F",
-    "grade_total": 20,
+    "grade_letter": "C",
+    "grade_total": 75,
     "revenue_eur": 0,
-    "submissions": 0,
+    "submissions": 21,
     "awarded": 0,
-    "products": 0,
-    "cycles": 0,
-    "emails_sent": 0,
+    "products": 28,
+    "cycles": 3116,
+    "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T03:00:01.214Z",
+  "generated_at": "2026-08-17T03:30:00.491Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "2026-08-17T02:55:02.326Z quality queue written: none"
+      "line": "2026-08-17T03:25:01.645Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T02:55:02.326Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T03:25:01.644Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T02:55:02.322Z QUALITY poll: 6 open"
+      "line": "2026-08-17T03:25:01.641Z QUALITY poll: 6 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T02:50:01.580Z quality queue written: none"
+      "line": "2026-08-17T03:20:02.083Z quality queue written: none"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T02:50:01.580Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T03:20:02.083Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T02:50:01.577Z QUALITY poll: 6 open"
+      "line": "2026-08-17T03:20:02.079Z QUALITY poll: 6 open"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T02:55:02.325Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T03:25:01.643Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=4 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T02:55:02.322Z poll: 6 open tasks"
+      "line": "2026-08-17T03:25:01.641Z poll: 6 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -301,23 +301,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-17T03:26:11.280Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T03:11:11.231Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-17T02:56:11.187Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T02:41:11.156Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T02:26:11.099Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
