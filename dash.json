@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3132,
+    "cycles": 3133,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T16:00:00.755Z",
+  "generated_at": "2026-08-17T16:30:00.432Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Mon Aug 17 18:00:00 CEST 2026] executing top task 0x87e4aab27539cae656554b5f4e97fd4b9697c1dc295c3fdbe260c79a2d74be85"
+      "line": "[Mon Aug 17 18:30:00 CEST 2026] executing top task 0x87e4aab27539cae656554b5f4e97fd4b9697c1dc295c3fdbe260c79a2d74be85"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:55:01.969Z quality queue written: 0x87e4aab27539ca"
+      "line": "2026-08-17T16:25:01.523Z quality queue written: 0x87e4aab27539ca"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
+      "line": "2026-08-17T16:25:01.522Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 01: Pinball Overdrive. Build a comp"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 03: Crane Breaker. Build a complete"
+      "line": "2026-08-17T16:25:01.522Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 05: Air Hockey Afterburner. Build a"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 06: Neon Range. Build a complete pl"
+      "line": "2026-08-17T16:25:01.522Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T15:55:01.967Z   [10.00] bounty $60 subs=5 CLASSIC ARCADE BENCHMARK 10: Dancefloor Panic. Build a compl"
+      "line": "2026-08-17T16:25:01.518Z QUALITY poll: 19 open"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T15:55:01.967Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T16:25:01.521Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T15:55:01.967Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
+      "line": "2026-08-17T16:25:01.521Z candidate: 0xe0028cfe19ed2e bounty reward=1000000 subs=5 # Show us 3–5 real owner jobs that consumed hours and still "
     },
     {
       "tag": "taskmarket",
@@ -297,23 +297,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T16:21:54.157Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T16:06:54.092Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Mon Aug 17 18:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T15:51:54.028Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",

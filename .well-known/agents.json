@@ -1,11 +1,11 @@
 {
   "name": "Autonomy Labs Storefront",
-  "description": "AI-agent-discoverable digital storefront: browse a machine-readable catalog, buy with card via Stripe Checkout, receive products by email automatically. Free agent-readiness audit API included.",
+  "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 33 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
   "endpoints": [
     {
       "path": "/products.json",
       "method": "GET",
-      "description": "Full product catalog (Schema.org ItemList): 28 products with names, prices in EUR, and per-product Stripe Checkout payment links."
+      "description": "Full product catalog (Schema.org ItemList): 33 products with names, prices in EUR, categories, and per-product Stripe Checkout payment links."
     },
     {
       "path": "/llms.txt",
@@ -27,12 +27,12 @@
   "workflows": [
     {
       "id": "buy-product",
-      "description": "Buy a digital product: read the catalog, pick a product's Stripe Checkout payment link, have the agent (or user) pay by card, and the product is delivered to the customer email automatically via webhook — no human in the loop.",
+      "description": "Buy a digital product or commission a service: read the catalog, pick a Stripe Checkout payment link, and pay by card. Downloads are delivered by webhook; made-to-order services follow their stated delivery windows.",
       "steps": [
         { "name": "browse-catalog", "action": "GET /products.json" },
         { "name": "pick-product", "action": "read the product's offers.url (buy.stripe.com payment link)" },
         { "name": "checkout", "action": "open the payment link; customer pays by card via Stripe Checkout" },
-        { "name": "delivery", "action": "checkout.session.completed webhook emails the product to the customer automatically" }
+        { "name": "delivery", "action": "checkout.session.completed webhook emails digital downloads; made-to-order services follow the product delivery window" }
       ]
     },
     {

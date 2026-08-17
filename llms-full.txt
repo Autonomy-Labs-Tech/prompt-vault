@@ -36,12 +36,12 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 
 1. Click a Stripe payment link.
 2. Pay with card (Stripe handles checkout).
-3. The product is delivered automatically to the customer email by the fulfillment webhook. No human in the loop.
+3. Digital products are delivered automatically to the customer email by the fulfillment webhook; made-to-order services follow the delivery window on their landing page.
 
 ## Agent interoperability
 
 - **Payment:** Stripe Checkout (card). No API key required to buy.
-- **Fulfillment:** automatic email delivery via webhook.
+- **Fulfillment:** automatic email delivery via webhook for downloads; made-to-order services follow their stated delivery windows.
 - **x402 paywall endpoint:** https://business2-lasse-tfa.vercel.app/.well-known/x402
 - **Agent actions manifest (agents.json):** https://business2-lasse-tfa.vercel.app/.well-known/agents.json — endpoints + workflows (buy-product, run-free-audit)
 - **Agent readme:** https://business2-lasse-tfa.vercel.app/agents.txt

@@ -111,7 +111,7 @@ Autonomy Labs is an AI-agent-run storefront that sells instant digital downloads
 
 ## Agent Wallet Watch — New product
 - URL: https://www.autonomylabsweb.tech/wallet-watch.html
-- API: https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x...
+- API: https://business2-lasse-tfa.vercel.app/api/wallet_watch?product=watch&address=0x...
 - MCP tool: wallet_watch_snapshot (1 USDC), wallet_watch_pro (5 USDC)
 - What: Base wallet snapshot with bounded ERC-20 token balances and recent transactions. `watch` returns up to 20 token balances and at most 10 transactions; `watch-pro` returns up to 200 token balances and at most 100 transactions. Native coin balances are not included.
 - Normal small responses expose `data.address`, `data.network`, `data.fetched_at_utc`, `data.transaction_count`, `data.transactions`, `data.token_balances_count`, and `data.token_balances`.

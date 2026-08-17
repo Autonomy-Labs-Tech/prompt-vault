@@ -36,7 +36,7 @@ page.
 
 ## For agents
 - Catalog: /llms.txt
-- MCP pay-per-call tools (x402, USDC on Base): /api/mcp (Streamable-HTTP; tools: agent_site_audit $2, agent_site_audit_5 $7, storefront_catalog $1, generate_llms_txt $3, wallet_watch_snapshot $1, wallet_watch_pro $5)
+- MCP pay-per-call tools (x402, USDC on Base): /api/mcp (Streamable-HTTP; tools: agent_site_audit $2 USDC, agent_site_audit_5 $7 USDC, storefront_catalog $1 USDC, generate_llms_txt $3 USDC, wallet_watch_snapshot $1 USDC, wallet_watch_pro $5 USDC)
 - Machine-readable payment config: /.well-known/x402
 - Products are delivered via webhook: /api/fulfill (POST, Stripe events).
 - No login or subscription; no human approval is required to purchase.
@@ -85,4 +85,4 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 - Agent Memory-as-a-Service (source + deploy guide) — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z
 
 - Custom Browser Game Prototype: https://business2-lasse-tfa.vercel.app/custom-game-prototype.html
-- Wallet Watch API: https://www.autonomylabsweb.tech/api/wallet_watch?product=watch&address=0x... (settled-transfer x402 extension, 1 USDC)
+- Wallet Watch API: https://business2-lasse-tfa.vercel.app/api/wallet_watch?product=watch&address=0x... (settled-transfer x402 extension, 1 USDC)

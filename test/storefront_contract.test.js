@@ -9,6 +9,7 @@ const starter = fs.readFileSync(path.join(root, 'starter-kit.html'), 'utf8');
 const agents = fs.readFileSync(path.join(root, 'agents.txt'), 'utf8');
 const products = JSON.parse(fs.readFileSync(path.join(root, 'products.json'), 'utf8'));
 const x402Manifest = JSON.parse(fs.readFileSync(path.join(root, '.well-known', 'x402'), 'utf8'));
+const agentsJson = JSON.parse(fs.readFileSync(path.join(root, '.well-known', 'agents.json'), 'utf8'));
 
 test('homepage distinguishes instant downloads from made-to-order services', () => {
   assert.match(index, /Instant downloads \+ made-to-order services/);
@@ -55,4 +56,7 @@ test('machine-readable checkout catalog stays in parity with products.json', () 
   assert.match(fs.readFileSync(path.join(root, 'llms.txt'), 'utf8'), /Free-to-paid audit funnel/);
   assert.doesNotMatch(fs.readFileSync(path.join(root, 'llms-full.txt'), 'utf8'), /trycloudflare\.com/);
   assert.match(agents, /wallet_watch_snapshot|wallet_watch_pro/);
+  assert.match(agentsJson.description, /33 products/);
+  assert.match(agentsJson.endpoints[0].description, /33 products/);
+  assert.doesNotMatch(JSON.stringify(agentsJson), /no human in the loop|28 products/);
 });
