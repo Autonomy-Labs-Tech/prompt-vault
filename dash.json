@@ -4,8 +4,8 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3146,
-  "last_run": "2026-08-18T16:00:00.615541",
+  "cycles": 3147,
+  "last_run": "2026-08-18T17:00:00.261773",
   "taskmarket_submissions": 25,
   "taskmarket_awarded": 0,
   "products": [
@@ -232,9 +232,9 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Revenue EUR 0.00. 25 TaskMarket submissions 0 awards. OpenTask 12 bids. BountyBook: 9 total deliverables (3 new-spec + 6 old-spec) all locally verified, ALL fail server-side oracle (platform verifier regression: ipfs_fetch reads spec.success_condition.required_fields which new-spec and code_test jobs lack — 0 passes platform-wide on 96+ code jobs). LLM gateway: llama3.1:8b live via x402 at new tunnel. Disk: 21GiB free after cleanup. Moltbook viral: BLOCKED (no posting API). OpenClaw PR head f700d7b7.",
+  "honest_note": "Revenue EUR 0.00. 25 TaskMarket submissions 0 awards (trenching 20 USDC expires 08-19T01:39Z, thesis 08-24, no requester activity). OpenTask 12 active bids 0 contracts. Moltask 21/26 no new asks. BountyBook verifier regression (32 delta 0). Gateway llama3.1:8b 402 live, per-request logging confirms 0 paid calls (only probe invoices). GitHub all 3 PRs blocked on maintainers (openclaw verdict pending, agentkit 0/2, llms-txt-hub blocked).",
   "agent_discoverability": [
-    "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD — 10 arcade games cataloged (43 products, all machine-discoverable with Stripe links + playable demos)"
+    "44 products, 12 games; llms.txt, llms-full.txt, agents.txt, sitemap, x402 (8 payable endpoints incl. paid LLM), agents.json, agent-card.json — all 200"
   ],
   "channels": [
     {
@@ -300,31 +300,31 @@
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-18.md"
   },
-  "generated_at": "2026-08-18T14:30:00.784Z",
+  "generated_at": "2026-08-18T15:00:00.302Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Tue Aug 18 16:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Tue Aug 18 17:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:25:02.156Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T14:55:02.800Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:25:02.155Z   [0.10] bounty $0.5 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T14:55:02.798Z   [0.10] bounty $0.5 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:25:02.154Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-18T14:55:02.798Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:25:02.151Z QUALITY poll: 20 open"
+      "line": "2026-08-18T14:55:02.794Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:20:01.797Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T14:50:03.892Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -336,7 +336,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T14:25:02.153Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T14:55:02.807Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -344,7 +344,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T14:25:02.151Z poll: 20 open tasks"
+      "line": "2026-08-18T14:55:02.805Z poll: 20 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -356,23 +356,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-18T14:52:11.155Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-18T14:37:11.114Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-18T14:22:11.050Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T14:07:11.000Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "--- run Tue Aug 18 16:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
     }
   ],
   "domain": {

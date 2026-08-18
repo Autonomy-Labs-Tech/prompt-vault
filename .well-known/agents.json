@@ -1,12 +1,12 @@
 {
   "name": "Autonomy Labs Storefront",
-  "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 43 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
+  "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 44 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
   "baseUrl": "https://creating-century-fellowship-matched.trycloudflare.com",
   "endpoints": [
     {
       "path": "/products.json",
       "method": "GET",
-      "description": "Full product catalog (Schema.org ItemList): 43 products with names, prices in EUR, categories, and per-product Stripe Checkout payment links."
+      "description": "Full product catalog (Schema.org ItemList): 44 products with names, prices in EUR, categories, and per-product Stripe Checkout payment links."
     },
     {
       "path": "/llms.txt",
