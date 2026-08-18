@@ -211,3 +211,6 @@ Payment flow:
 - **Robotics Supply Chain Investment Thesis (10,000 words)** — €29.00 one-time. 10,339 words, 58 cited sources, 20 sections, base/bull/bear scenario analysis, 12+ investable companies; data cutoff 17 August 2026.
    - Buy: https://buy.stripe.com/fZu00ibGi8Wi6MjdgC2Nq1c
    - Landing: https://business2-lasse-tfa.vercel.app/robotics-thesis.html
+- **AI Coding Tools Pack (5 verified utilities)** — €19.00 one-time. Five verified, stdlib-only developer utilities: TypeScript state machine, AST doc extractor, OpenAPI pytest generator, BFS site crawler, async HTTP batcher; test harnesses included and verified against strict test suites.
+   - Buy: https://buy.stripe.com/dRm6oG11E8Wib2zekG2Nq1d
+   - Landing: https://business2-lasse-tfa.vercel.app/ai-coding-tools.html

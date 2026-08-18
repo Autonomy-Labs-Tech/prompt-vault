@@ -408,12 +408,12 @@
    "name": "Custom Three.js Scene Rebuild",
    "description": "An iconic movie or TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note and screenshots. No likenesses, no ripped assets, deterministic render. Proven on 6 TaskMarket scene bounties.",
    "category": "Services",
-   "delivery": "Made to order; typical delivery 5\u20137 days",
-   "tagline": "Your iconic scene, rebuilt in Three.js \u2014 offline, deterministic, submission-ready",
+   "delivery": "Made to order; typical delivery 5–7 days",
+   "tagline": "Your iconic scene, rebuilt in Three.js — offline, deterministic, submission-ready",
    "features": [
     "Self-contained offline single HTML (Three.js r185)",
     "20-45s scene with camera beats and original Web Audio score",
-    "Geometric silhouettes only \u2014 no likenesses, no ripped assets",
+    "Geometric silhouettes only — no likenesses, no ripped assets",
     "sources.md provenance + concept note + screenshots",
     "Deterministic renderAt(seconds) for capture reproducibility"
    ],
@@ -433,7 +433,7 @@
    "name": "Three.js Scene Build Toolkit",
    "description": "The production pipeline behind our movie-scene rebuilds: deterministic app.js scene template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, and an offline/determinism verification checklist.",
    "category": "Developer Tools",
-   "tagline": "Deterministic, offline, single-file Three.js scenes \u2014 the exact pipeline we ship with",
+   "tagline": "Deterministic, offline, single-file Three.js scenes — the exact pipeline we ship with",
    "features": [
     "renderAt(seconds) deterministic scene template",
     "esbuild bundle + inline single-file build",
@@ -508,8 +508,8 @@
    "tagline": "Any agent can integrate usage tracking and x402 billing in minutes",
    "features": [
     "POST /meter/event, GET /meter/usage",
-    "POST /gate \u2014 x402 payment gate (402/200)",
-    "POST /invoice/generate \u2014 usage-based invoices",
+    "POST /gate — x402 payment gate (402/200)",
+    "POST /invoice/generate — usage-based invoices",
     "Per-agent API keys + spend limits with auto-block",
     "Tiers free/starter/pro/enterprise"
    ],
@@ -531,8 +531,8 @@
    "category": "Developer Tools",
    "tagline": "Fix agent statelessness with a self-hosted semantic memory store",
    "features": [
-    "POST /memory \u2014 store with automatic embeddings",
-    "GET /memory/search \u2014 top-k semantic retrieval",
+    "POST /memory — store with automatic embeddings",
+    "GET /memory/search — top-k semantic retrieval",
     "DELETE /memory/{id} + namespace isolation",
     "Usage metering per API key/month",
     "Tiers free/starter/pro/enterprise"
@@ -553,7 +553,7 @@
    "name": "Custom Browser Game Prototype",
    "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
    "category": "Services",
-   "delivery": "Made to order; typical delivery 7\u201310 days",
+   "delivery": "Made to order; typical delivery 7–10 days",
    "tagline": "Your game idea, playable in one HTML file",
    "features": [
     "Single-file Three.js game, opens straight off disk",
@@ -575,7 +575,7 @@
   {
    "@type": "Product",
    "position": 34,
-   "name": "Pinball Overdrive \u2014 Complete HTML5 Game",
+   "name": "Pinball Overdrive — Complete HTML5 Game",
    "description": "Original Three.js pinball score attack: two flippers, drop targets, bumpers, combo chains, skill shots, and a player-triggered Overdrive that doubles scoring at real risk.",
    "offers": {
     "@type": "Offer",
@@ -589,7 +589,7 @@
   {
    "@type": "Product",
    "position": 35,
-   "name": "Skee Shock \u2014 Complete HTML5 Game",
+   "name": "Skee Shock — Complete HTML5 Game",
    "description": "Skee-ball-inspired precision score attack: aim, charge, release up a rising lane into six scoring rings plus a moving target, with precision chain and surge multiplier.",
    "offers": {
     "@type": "Offer",
@@ -603,7 +603,7 @@
   {
    "@type": "Product",
    "position": 36,
-   "name": "Crane Breaker \u2014 Complete HTML5 Game",
+   "name": "Crane Breaker — Complete HTML5 Game",
    "description": "Claw-machine precision score attack: align the grabber, drop, grab prizes by visible contact, collect through the chute, and read the four prize roles.",
    "offers": {
     "@type": "Offer",
@@ -617,7 +617,7 @@
   {
    "@type": "Product",
    "position": 37,
-   "name": "Whack Protocol \u2014 Complete HTML5 Game",
+   "name": "Whack Protocol — Complete HTML5 Game",
    "description": "Whack-a-mole reimagined as pattern-recognition triage: follow the changing protocol card, strike correct targets, spare protected ones, chain jackpots.",
    "offers": {
     "@type": "Offer",
@@ -631,7 +631,7 @@
   {
    "@type": "Product",
    "position": 38,
-   "name": "Air Hockey Afterburner \u2014 Complete HTML5 Game",
+   "name": "Air Hockey Afterburner — Complete HTML5 Game",
    "description": "One-player air-hockey score attack: defend and return through readable contact, build rally charge, spend it on a burning Afterburner shot.",
    "offers": {
     "@type": "Offer",
@@ -645,7 +645,7 @@
   {
    "@type": "Product",
    "position": 39,
-   "name": "Neon Range \u2014 Complete HTML5 Game",
+   "name": "Neon Range — Complete HTML5 Game",
    "description": "Light-gun gallery precision attack: four target roles, heat system, and a limited Focus slow-time action. Discipline beats spray.",
    "offers": {
     "@type": "Offer",
@@ -659,7 +659,7 @@
   {
    "@type": "Product",
    "position": 40,
-   "name": "Strike Vector \u2014 Complete HTML5 Game",
+   "name": "Strike Vector — Complete HTML5 Game",
    "description": "Bowling-inspired arcade score attack: aim, set power, release; clear the safe formation or thread the narrow gold route; spend momentum to stabilize.",
    "offers": {
     "@type": "Offer",
@@ -673,7 +673,7 @@
   {
    "@type": "Product",
    "position": 41,
-   "name": "Bumper Rush \u2014 Complete HTML5 Game",
+   "name": "Bumper Rush — Complete HTML5 Game",
    "description": "Bumper-car arena score attack: ram two rival behaviours, hit score walls and boost strips, survive announced pulse phases, dash tactically.",
    "offers": {
     "@type": "Offer",
@@ -687,7 +687,7 @@
   {
    "@type": "Product",
    "position": 42,
-   "name": "Coinfall Crisis \u2014 Complete HTML5 Game",
+   "name": "Coinfall Crisis — Complete HTML5 Game",
    "description": "Coin-pusher physics attack: drop tokens by lane, read the pile, bank before the collapse; four token roles and a stability gauge.",
    "offers": {
     "@type": "Offer",
@@ -701,7 +701,7 @@
   {
    "@type": "Product",
    "position": 43,
-   "name": "Dancefloor Panic \u2014 Complete HTML5 Game",
+   "name": "Dancefloor Panic — Complete HTML5 Game",
    "description": "Rhythm and reaction score attack: four lanes, perfect/good/miss judgements, holds, lane flips, safe-vs-risk route choices at phrase breaks.",
    "offers": {
     "@type": "Offer",
@@ -725,6 +725,20 @@
     "url": "https://buy.stripe.com/fZu00ibGi8Wi6MjdgC2Nq1c"
    },
    "url": "https://business2-lasse-tfa.vercel.app/robotics-thesis.html"
+  },
+  {
+   "@type": "Product",
+   "position": 45,
+   "name": "AI Coding Tools Pack (5 verified utilities)",
+   "description": "Five verified, stdlib-only developer utilities: TypeScript state machine, AST doc extractor, OpenAPI pytest generator, BFS site crawler, async HTTP batcher. Test harnesses included and verified against strict test suites.",
+   "offers": {
+    "@type": "Offer",
+    "price": 19,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/dRm6oG11E8Wib2zekG2Nq1d"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/ai-coding-tools.html"
   }
  ]
 }

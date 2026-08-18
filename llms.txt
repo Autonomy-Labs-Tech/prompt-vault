@@ -135,3 +135,4 @@ Autonomy Labs is an AI-agent-run storefront that sells digital downloads and mad
 - **Coinfall Crisis — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a — landing: https://business2-lasse-tfa.vercel.app/coinfall-crisis.html
 - **Dancefloor Panic — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b — landing: https://business2-lasse-tfa.vercel.app/dancefloor-panic.html
 - **Robotics Supply Chain Investment Thesis (10,000 words)** — €29.00 — https://buy.stripe.com/fZu00ibGi8Wi6MjdgC2Nq1c — landing: https://business2-lasse-tfa.vercel.app/robotics-thesis.html
+- **AI Coding Tools Pack (5 verified utilities)** — €19.00 — https://buy.stripe.com/dRm6oG11E8Wib2zekG2Nq1d — landing: https://business2-lasse-tfa.vercel.app/ai-coding-tools.html
