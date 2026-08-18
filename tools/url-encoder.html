@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+    <title>URL Encoder Decoder - Encode and Decode URLs Online</title>
+<meta name="description" content="Free online URL encoder and decoder. Encode URLs to percent-encoded format or decode encoded URLs back to readable text instantly.">
+<meta property="og:title" content="URL Encoder Decoder - Encode and Decode URLs Online">
+<meta property="og:description" content="Free online URL encoder and decoder. Encode URLs to percent-encoded format or decode encoded URLs back to readable text instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/tools/url-encoder.html">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/preview-etmoon.png">
+<meta property="og:image:alt" content="Autonomy Labs — URL Encoder Decoder social preview">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://business2-lasse-tfa.vercel.app/tools/url-encoder.html">
+<link rel="stylesheet" href="../tool-cta.css">
+    <meta name="keywords" content="url encoder, url decoder, percent encoding, uri encoder, uri decoder, encode url online, decode url online">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        label { display: block; color: #555; font-weight: 600; margin-bottom: 6px; }
+        textarea { width: 100%; height: 150px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: monospace; font-size: 14px; resize: vertical; transition: border-color 0.3s; margin-bottom: 15px; }
+        textarea:focus { outline: none; border-color: #667eea; }
+        .mode-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
+        .mode-btn { padding: 10px 24px; border: 2px solid #667eea; background: white; color: #667eea; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .mode-btn.active { background: #667eea; color: white; }
+        .status { padding: 12px; border-radius: 8px; margin-top: 10px; font-weight: 600; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder Decoder - Encode and Decode URLs Online","description":"Free online URL encoder and decoder. Encode URLs to percent-encoded format or decode encoded URLs back to readable text instantly.","url":"https://business2-lasse-tfa.vercel.app/tools/url-encoder.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Encoder / Decoder</h1>
+        <p class="subtitle">Encode and decode URLs with percent-encoding</p>
+        <div class="mode-toggle">
+            <button class="mode-btn active" id="encodeMode" onclick="setMode('encode')">Encode</button>
+            <button class="mode-btn" id="decodeMode" onclick="setMode('decode')">Decode</button>
+        </div>
+        <label for="input">Input</label>
+        <textarea id="input" placeholder="Enter text or URL to encode..." oninput="convert()">https://example.com/search?q=hello world&lang=en</textarea>
+        <label for="output">Output</label>
+        <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+        <div class="toolbar">
+            <button class="btn" onclick="convert()">Convert</button>
+            <button class="btn secondary" onclick="copyOutput()">Copy Result</button>
+            <button class="btn secondary" onclick="swap()">Swap Input/Output</button>
+            <button class="btn secondary" onclick="clearAll()">Clear</button>
+        </div>
+        <div class="status info" id="status">Type to encode automatically</div>
+    </div>
+    <section class="tool-upsell" aria-labelledby="url-upsell-title">
+        <p class="tool-upsell-kicker">Free tool companion</p>
+        <h2 id="url-upsell-title">Wire your agent to any API</h2>
+        <p>The AI Agent API Integration Kit covers auth headers, retry logic, rate limits, and webhook patterns for production agents.</p>
+        <a class="tool-upsell-link cta" href="../api-integration-kit.html">View the API Integration Kit — €14.90 one-time</a>
+    </section>
+    <script>
+        let mode='encode';const inputEl=document.getElementById('input'),outputEl=document.getElementById('output'),statusEl=document.getElementById('status');
+        function setMode(m){mode=m;document.getElementById('encodeMode').classList.toggle('active',m==='encode');document.getElementById('decodeMode').classList.toggle('active',m==='decode');inputEl.placeholder=m==='encode'?'Enter text or URL to encode...':'Enter percent-encoded URL to decode...';statusEl.textContent=m==='encode'?'Type to encode automatically':'Type to decode automatically';statusEl.className='status info';convert();}
+        function convert(){const input=inputEl.value;if(!input){outputEl.value='';return;}try{if(mode==='encode'){outputEl.value=encodeURIComponent(input);statusEl.textContent='Encoded successfully';statusEl.className='status info';}else{outputEl.value=decodeURIComponent(input);statusEl.textContent='Decoded successfully';statusEl.className='status info';}}catch(e){statusEl.textContent='Error: '+e.message;statusEl.className='status error';}}
+        function copyOutput(){if(outputEl.value){navigator.clipboard.writeText(outputEl.value).then(()=>{statusEl.textContent='Copied to clipboard';statusEl.className='status info';});}}
+        function swap(){const temp=inputEl.value;inputEl.value=outputEl.value;outputEl.value=temp;convert();}
+        function clearAll(){inputEl.value='';outputEl.value='';statusEl.textContent=mode==='encode'?'Type to encode automatically':'Type to decode automatically';statusEl.className='status info';}
+        convert();
+    </script>
+</body>
+</html>

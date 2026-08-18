@@ -70,6 +70,10 @@
   <url><loc>https://business2-lasse-tfa.vercel.app/tools/loan-calculator.html</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/tools/password-generator.html</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/tools/percentage-calculator.html</loc><priority>0.8</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/tools/regex-tester.html</loc><priority>0.8</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/tools/url-encoder.html</loc><priority>0.8</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/tools/uuid-generator.html</loc><priority>0.8</priority></url>
+  <url><loc>https://business2-lasse-tfa.vercel.app/tools/hash-generator.html</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/tools/timezone-converter.html</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/tools/unit-converter.html</loc><priority>0.8</priority></url>
   <url><loc>https://business2-lasse-tfa.vercel.app/wallet-watch.html</loc><priority>0.9</priority></url>

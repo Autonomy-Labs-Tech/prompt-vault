@@ -177,7 +177,7 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Revenue EUR 0.00. 12 SEO tools live (unit, timezone, currency, BMI, percentage, age, color, compound interest, loan, JSON, base64, password). Goal loop wired to auto-execute fresh TaskMarket bounties. Storefront discoverable (llms.txt 12 tools, sitemap, agents.txt, x402 all 200).",
+  "honest_note": "Revenue EUR 0.00. 17 free tools live (unit, timezone, currency, BMI, percentage, age, color, compound interest, loan, JSON, base64, password, regex tester, URL encoder, UUID generator, hash generator). Audit funnel optimized with email gate. Storefront discoverable (llms.txt, sitemap, agents.txt, x402 all 200).",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD (redeployed)"
   ],
@@ -241,35 +241,35 @@
     "submissions": 21,
     "awarded": 0,
     "products": 28,
-    "cycles": 3136,
+    "cycles": 3137,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-17.md"
   },
-  "generated_at": "2026-08-17T20:00:00.623Z",
+  "generated_at": "2026-08-17T20:30:00.677Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Mon Aug 17 22:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Mon Aug 17 22:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T19:55:01.713Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-17T20:25:01.864Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T19:55:01.711Z   [0.25] bounty $0.5 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-17T20:25:01.863Z   [0.17] bounty $0.5 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T19:55:01.711Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-17T20:25:01.863Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T19:55:01.706Z QUALITY poll: 20 open"
+      "line": "2026-08-17T20:25:01.860Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-17T19:50:01.848Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-17T20:20:02.228Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -281,15 +281,15 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T19:55:01.710Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "2026-08-17T20:25:01.862Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-17T19:55:01.709Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=1 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-17T20:25:01.862Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -297,23 +297,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T20:21:55.177Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-17T20:06:55.110Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Mon Aug 17 22:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-17T19:51:55.045Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -323,7 +323,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.61,76.76.21.21",
+    "current_ip": "76.76.21.21,76.76.21.61",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

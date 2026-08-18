@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+    <title>Hash Generator - SHA-256, SHA-1, MD5 Hash Calculator Online</title>
+<meta name="description" content="Free online hash generator. Calculate SHA-256, SHA-1, and MD5 hashes from any text input. Instant results with copy to clipboard.">
+<meta property="og:title" content="Hash Generator - SHA-256, SHA-1, MD5 Hash Calculator Online">
+<meta property="og:description" content="Free online hash generator. Calculate SHA-256, SHA-1, and MD5 hashes from any text input. Instant results with copy to clipboard.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/tools/hash-generator.html">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/preview-etmoon.png">
+<meta property="og:image:alt" content="Autonomy Labs — Hash Generator social preview">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://business2-lasse-tfa.vercel.app/tools/hash-generator.html">
+<link rel="stylesheet" href="../tool-cta.css">
+    <meta name="keywords" content="hash generator, sha256 hash, sha-1 hash, md5 hash, hash calculator, generate hash online, hash function">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        label { display: block; color: #555; font-weight: 600; margin-bottom: 6px; }
+        textarea { width: 100%; height: 120px; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: monospace; font-size: 14px; resize: vertical; transition: border-color 0.3s; margin-bottom: 20px; }
+        textarea:focus { outline: none; border-color: #667eea; }
+        .hash-result { margin-bottom: 15px; }
+        .hash-label { font-weight: 600; color: #555; margin-bottom: 4px; font-size: 0.9em; }
+        .hash-box { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: #f8f9fa; border: 2px solid #e0e0e0; border-radius: 10px; }
+        .hash-value { flex: 1; font-family: monospace; font-size: 14px; word-break: break-all; color: #333; }
+        .copy-btn { padding: 6px 12px; background: #667eea; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+        .copy-btn:hover { background: #5a6fd6; }
+        .copy-btn.copied { background: #28a745; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hash Generator - SHA-256, SHA-1, MD5 Hash Calculator Online","description":"Free online hash generator. Calculate SHA-256, SHA-1, and MD5 hashes from any text input. Instant results with copy to clipboard.","url":"https://business2-lasse-tfa.vercel.app/tools/hash-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hash Generator</h1>
+        <p class="subtitle">Calculate SHA-256, SHA-1, and MD5 hashes from any text</p>
+        <label for="input">Input Text</label>
+        <textarea id="input" placeholder="Enter text to hash..." oninput="generateHashes()">Hello, World!</textarea>
+        <div class="toolbar">
+            <button class="btn" onclick="generateHashes()">Generate Hashes</button>
+            <button class="btn secondary" onclick="document.getElementById('input').value='';generateHashes();">Clear</button>
+        </div>
+        <div class="hash-result">
+            <div class="hash-label">SHA-256</div>
+            <div class="hash-box">
+                <span class="hash-value" id="sha256">—</span>
+                <button class="copy-btn" onclick="copyHash('sha256',this)">Copy</button>
+            </div>
+        </div>
+        <div class="hash-result">
+            <div class="hash-label">SHA-1</div>
+            <div class="hash-box">
+                <span class="hash-value" id="sha1">—</span>
+                <button class="copy-btn" onclick="copyHash('sha1',this)">Copy</button>
+            </div>
+        </div>
+        <div class="hash-result">
+            <div class="hash-label">MD5</div>
+            <div class="hash-box">
+                <span class="hash-value" id="md5">—</span>
+                <button class="copy-btn" onclick="copyHash('md5',this)">Copy</button>
+            </div>
+        </div>
+    </div>
+    <section class="tool-upsell" aria-labelledby="hash-upsell-title">
+        <p class="tool-upsell-kicker">Free tool companion</p>
+        <h2 id="hash-upsell-title">Secure your agent against prompt injection</h2>
+        <p>The AI Agent Prompt Injection Defense &amp; Guardrails guide covers input filtering, tool permissions, and output sanitization patterns.</p>
+        <a class="tool-upsell-link cta" href="../prompt-injection-defense.html">View the Defense Guide — €14.90 one-time</a>
+    </section>
+    <script>
+        async function generateHashes(){
+            const input=document.getElementById('input').value;
+            if(!input){document.getElementById('sha256').textContent='—';document.getElementById('sha1').textContent='—';document.getElementById('md5').textContent='—';return;}
+            const encoder=new TextEncoder();const data=encoder.encode(input);
+            // SHA-256
+            const sha256Buf=await crypto.subtle.digest('SHA-256',data);
+            document.getElementById('sha256').textContent=bufToHex(sha256Buf);
+            // SHA-1
+            const sha1Buf=await crypto.subtle.digest('SHA-1',data);
+            document.getElementById('sha1').textContent=bufToHex(sha1Buf);
+            // MD5 (no native API, use JS implementation)
+            document.getElementById('md5').textContent=md5(input);
+        }
+        function bufToHex(buf){return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+        function copyHash(id,btn){const text=document.getElementById(id).textContent;if(text&&text!=='—'){navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},1500);});}}
+        // MD5 implementation (public domain, Joseph Myers)
+        function md5(str){
+            function rotateLeft(l,n){return(l<<n)|(l>>>(32-n));}
+            function addUnsigned(x,y){const lsw=(x&0xffff)+(y&0xffff);const msw=(x>>16)+(y>>16)+(lsw>>16);return(msw<<16)|(lsw&0xffff);}
+            function F(x,y,z){return(x&y)|((~x)&z);}
+            function G(x,y,z){return(x&z)|(y&(~z));}
+            function H(x,y,z){return x^y^z;}
+            function I(x,y,z){return y^(x|(~z));}
+            function FF(a,b,c,d,x,s,ac){a=addUnsigned(a,addUnsigned(addUnsigned(F(b,c,d),x),ac));return addUnsigned(rotateLeft(a,s),b);}
+            function GG(a,b,c,d,x,s,ac){a=addUnsigned(a,addUnsigned(addUnsigned(G(b,c,d),x),ac));return addUnsigned(rotateLeft(a,s),b);}
+            function HH(a,b,c,d,x,s,ac){a=addUnsigned(a,addUnsigned(addUnsigned(H(b,c,d),x),ac));return addUnsigned(rotateLeft(a,s),b);}
+            function II(a,b,c,d,x,s,ac){a=addUnsigned(a,addUnsigned(addUnsigned(I(b,c,d),x),ac));return addUnsigned(rotateLeft(a,s),b);}
+            function toUTF8(str){const utf8=[];for(let n=0;n<str.length;n++){const c=str.charCodeAt(n);if(c<128){utf8.push(c);}else if(c>127&&c<2048){utf8.push((c>>6)|192);utf8.push((c&63)|128);}else{utf8.push((c>>12)|224);utf8.push(((c>>6)&63)|128);utf8.push((c&63)|128);}}return utf8;}
+            const x=toUTF8(str);const len=x.length;x.push(0x80);while(x.length%64!==56)x.push(0);
+            x.push(len*8&0xff);x.push((len>>>8)&0xff);x.push((len>>>16)&0xff);x.push((len>>>24)&0xff);
+            x.push(0);x.push(0);x.push(0);x.push(0);
+            let a=1732584193,b=-271733879,c=-1732584194,d=271733878;
+            for(let i=0;i<x.length;i+=64){
+                const aa=a,bb=b,cc=c,dd=d;
+                const M=new Array(16);for(let j=0;j<16;j++)M[j]=(x[i+j*4])|(x[i+j*4+1]<<8)|(x[i+j*4+2]<<16)|(x[i+j*4+3]<<24);
+                a=FF(a,b,c,d,M[0],7,-680876936);d=FF(d,a,b,c,M[1],12,-389564586);c=FF(c,d,a,b,M[2],17,606105819);b=FF(b,c,d,a,M[3],22,-1044525330);
+                a=FF(a,b,c,d,M[4],7,-176418897);d=FF(d,a,b,c,M[5],12,1200080426);c=FF(c,d,a,b,M[6],17,-1473231341);b=FF(b,c,d,a,M[7],22,-45705983);
+                a=FF(a,b,c,d,M[8],7,1770035416);d=FF(d,a,b,c,M[9],12,-1958414417);c=FF(c,d,a,b,M[10],17,-42063);b=FF(b,c,d,a,M[11],22,-1990404162);
+                a=FF(a,b,c,d,M[12],7,1804603682);d=FF(d,a,b,c,M[13],12,-40341101);c=FF(c,d,a,b,M[14],17,-1502002290);b=FF(b,c,d,a,M[15],22,1236535329);
+                a=GG(a,b,c,d,M[1],5,-165796510);d=GG(d,a,b,c,M[6],9,-1069501632);c=GG(c,d,a,b,M[11],14,643717713);b=GG(b,c,d,a,M[0],20,-373897723);
+                a=GG(a,b,c,d,M[5],5,-701558691);d=GG(d,a,b,c,M[10],9,38016083);c=GG(c,d,a,b,M[15],14,-660478335);b=GG(b,c,d,a,M[4],20,-405537848);
+                a=GG(a,b,c,d,M[9],5,568446438);d=GG(d,a,b,c,M[14],9,-1019803794);c=GG(c,d,a,b,M[3],14,-187363961);b=GG(b,c,d,a,M[8],20,1163531501);
+                a=GG(a,b,c,d,M[13],5,-1444681467);d=GG(d,a,b,c,M[2],9,-51403784);c=GG(c,d,a,b,M[7],14,1735328473);b=GG(b,c,d,a,M[12],20,-1926607734);
+                a=HH(a,b,c,d,M[5],4,-378558);d=HH(d,a,b,c,M[8],11,-2022574463);c=HH(c,d,a,b,M[11],16,1839030562);b=HH(b,c,d,a,M[14],23,-35309556);
+                a=HH(a,b,c,d,M[1],4,-1530992060);d=HH(d,a,b,c,M[4],11,1272893353);c=HH(c,d,a,b,M[7],16,-155497632);b=HH(b,c,d,a,M[10],23,-1094730640);
+                a=HH(a,b,c,d,M[13],4,681279174);d=HH(d,a,b,c,M[0],11,-358537222);c=HH(c,d,a,b,M[3],16,-722521979);b=HH(b,c,d,a,M[6],23,76029189);
+                a=HH(a,b,c,d,M[9],4,-640364487);d=HH(d,a,b,c,M[12],11,-421815835);c=HH(c,d,a,b,M[15],16,530742520);b=HH(b,c,d,a,M[2],23,-995338651);
+                a=II(a,b,c,d,M[0],6,-198630844);d=II(d,a,b,c,M[7],10,1126891415);c=II(c,d,a,b,M[14],15,-1416354905);b=II(b,c,d,a,M[5],21,-57434055);
+                a=II(a,b,c,d,M[12],6,1700485571);d=II(d,a,b,c,M[3],10,-1894986606);c=II(c,d,a,b,M[10],15,-1051523);b=II(b,c,d,a,M[1],21,-2054922799);
+                a=II(a,b,c,d,M[8],6,1873313359);d=II(d,a,b,c,M[15],10,-30611744);c=II(c,d,a,b,M[6],15,-1560198380);b=II(b,c,d,a,M[13],21,1309151649);
+                a=II(a,b,c,d,M[4],6,-145523070);d=II(d,a,b,c,M[11],10,-1120210379);c=II(c,d,a,b,M[2],15,718787259);b=II(b,c,d,a,M[9],21,-343485551);
+                a=addUnsigned(a,aa);b=addUnsigned(b,bb);c=addUnsigned(c,cc);d=addUnsigned(d,dd);
+            }
+            const r=[a,b,c,d];let hex='';for(let i=0;i<4;i++){for(let j=0;j<4;j++){hex+=((r[i]>>>(j*8))&0xff).toString(16).padStart(2,'0');}}
+            return hex;
+        }
+        generateHashes();
+    </script>
+</body>
+</html>

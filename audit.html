@@ -59,6 +59,13 @@
   .cta h3{font-size:1.15rem;margin-bottom:8px}
   .cta a.btn{background:var(--green);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;display:inline-block;font-weight:700;margin-top:6px}
   .cta a.btn:hover{filter:brightness(1.08)}
+  .email-gate{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0;text-align:center}
+  .email-gate p{margin-bottom:10px;color:var(--text);font-weight:600}
+  .email-gate input[type=email]{padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:1rem;width:60%;max-width:300px;margin-right:8px}
+  .email-gate button{background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer}
+  .email-gate button:hover{background:var(--accent2)}
+  .email-gate .skip{display:block;margin-top:8px;font-size:.85rem;color:var(--muted);text-decoration:underline;cursor:pointer}
+  .checks-locked{filter:blur(4px);pointer-events:none;user-select:none;opacity:.5}
   footer{border-top:1px solid var(--border);color:var(--muted);text-align:center;padding:20px;font-size:.82rem;margin-top:32px}
   footer a{color:var(--muted)}
 </style>
@@ -77,12 +84,16 @@
     <div id="loading">Checking… this can take a few seconds.</div>
   </div>
   <div class="card" id="result"></div>
-  <div class="cta">
-    <h3>Want your site to get an A?</h3>
-    <p>Our <strong>AI Agent Storefront Kit</strong> gives you llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook, and a Vercel deploy guide — everything to make your site agent-discoverable and sellable in minutes.</p>
-    <p><strong>€15.90</strong> · email delivery attempted after verified payment</p>
-    <p><a class="btn" href="https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O">Buy the Storefront Kit →</a></p>
-    <p style="font-size:.85rem">Free tool by <a href="/">Autonomy Labs</a>.</p>
+  <div class="cta" id="reportCta">
+    <h3>Get your deep audit report — €19</h3>
+    <p>Our <strong>AI Website Audit Report</strong> runs a deeper evidence-backed audit of all eight agent surfaces with concrete fixes ranked by impact, reproducible curl commands, and the single highest-impact change to make first. Delivered to your inbox after verified payment.</p>
+    <p><a class="btn" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Get the full audit report →</a></p>
+    <p style="font-size:.85rem">Enter the URL at checkout when the hosted checkout field is available; otherwise reply to the confirmation email with the URL.</p>
+  </div>
+  <div class="cta" style="margin-top:12px">
+    <h3 style="font-size:1rem">Want to build the whole stack?</h3>
+    <p style="font-size:.9rem">The <strong>AI Agent Storefront Kit</strong> (€15.90) gives you llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402, Stripe checkout + auto-fulfillment webhook, and a Vercel deploy guide.</p>
+    <p style="font-size:.9rem"><a class="btn" href="https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O" style="font-size:.9rem;padding:8px 16px">Buy the Storefront Kit →</a></p>
   </div>
 </div>
 <footer><a href="/impressum.html">Impressum</a> · <a href="/privacy.html">Privacy</a> · <a href="mailto:hello@business2-lasse-tfa.vercel.app">Contact</a></footer>
@@ -98,13 +109,30 @@ async function run(){
     const j=await r.json();
     loading.style.display='none';
     if(j.error){res.style.display='block';res.innerHTML='<p class="bad">Error: '+esc(j.error)+'</p>';return;}
-    let checks=j.checks.map(c=>'<div class="check"><span class="name">'+esc(c.name)+'</span><span class="state '+(c.ok?'ok':'bad')+'">'+(c.ok?'✓ present':'✗ missing — '+esc(c.detail))+'</span></div>').join('');
-    res.innerHTML='<div class="gradebox"><div class="grade">'+esc(j.grade)+'</div><div class="score">'+esc(j.score)+'/100<span class="sub"><br>'+esc(j.summary)+'</span></div></div>'+checks
-      +'<div class="cta"><h3>'+(j.grade==='A'?'Keep it that way':'Get from '+esc(j.grade)+' to A')+' — deep audit report</h3>'
-      +'<p>Our <strong>AI Website Audit Report (€19)</strong> runs a deeper evidence-backed audit of all eight agent surfaces with concrete fixes ranked by impact, delivered to your inbox automatically. Enter the URL at checkout when the hosted checkout field is available; otherwise reply to the confirmation email with the URL.</p>'
+    let checksHtml=j.checks.map(c=>'<div class="check"><span class="name">'+esc(c.name)+'</span><span class="state '+(c.ok?'ok':'bad')+'">'+(c.ok?'✓ present':'✗ missing — '+esc(c.detail))+'</span></div>').join('');
+    let gradeHtml='<div class="gradebox"><div class="grade">'+esc(j.grade)+'</div><div class="score">'+esc(j.score)+'/100<span class="sub"><br>'+esc(j.summary)+'</span></div></div>';
+    let reportCta='<div class="cta"><h3>'+(j.grade==='A'?'Keep it that way':'Get from '+esc(j.grade)+' to A')+' — deep audit report</h3>'
+      +'<p>Our <strong>AI Website Audit Report (€19)</strong> runs a deeper evidence-backed audit of all eight agent surfaces with concrete fixes ranked by impact, delivered to your inbox after verified payment.</p>'
       +'<p><a class="btn" href="https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v">Get the full audit report →</a></p></div>';
+    let emailGate='<div class="email-gate" id="emailGate"><p>Enter your email to see the full breakdown</p>'
+      +'<input type="email" id="gateEmail" placeholder="you@example.com">'
+      +'<button onclick="revealChecks()">Reveal Details</button>'
+      +'<span class="skip" onclick="revealChecksNoEmail()">Skip — just show me</span></div>';
+    res.innerHTML=gradeHtml+'<div id="checksWrapper" class="checks-locked">'+checksHtml+'</div>'+emailGate+reportCta;
     res.style.display='block';
   }catch(e){loading.style.display='none';res.style.display='block';res.innerHTML='<p class="bad">Could not reach audit service. Please try again.</p>';}
+}
+function revealChecks(){
+  const email=document.getElementById('gateEmail').value.trim();
+  if(email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,consent:true})}).catch(()=>{});
+  }
+  document.getElementById('checksWrapper').classList.remove('checks-locked');
+  document.getElementById('emailGate').style.display='none';
+}
+function revealChecksNoEmail(){
+  document.getElementById('checksWrapper').classList.remove('checks-locked');
+  document.getElementById('emailGate').style.display='none';
 }
 go.addEventListener('click',run);
 url.addEventListener('keydown',e=>{if(e.key==='Enter')run();});

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+    <title>UUID Generator - Generate Random UUIDs Online (v4)</title>
+<meta name="description" content="Free online UUID generator. Generate random UUIDs (universally unique identifiers) version 4 with one click. Bulk generation supported.">
+<meta property="og:title" content="UUID Generator - Generate Random UUIDs Online (v4)">
+<meta property="og:description" content="Free online UUID generator. Generate random UUIDs (universally unique identifiers) version 4 with one click. Bulk generation supported.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/tools/uuid-generator.html">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/preview-etmoon.png">
+<meta property="og:image:alt" content="Autonomy Labs — UUID Generator social preview">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://business2-lasse-tfa.vercel.app/tools/uuid-generator.html">
+<link rel="stylesheet" href="../tool-cta.css">
+    <meta name="keywords" content="uuid generator, uuid v4, guid generator, random uuid, universally unique identifier, uuid online, generate uuid">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .controls { display: flex; gap: 15px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .control-group { display: flex; align-items: center; gap: 8px; }
+        label { color: #555; font-weight: 600; }
+        input[type="number"] { width: 80px; padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; }
+        input[type="number"]:focus { outline: none; border-color: #667eea; }
+        select { padding: 8px 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; }
+        .btn { padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        .uuid-list { margin-top: 20px; }
+        .uuid-item { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px; font-family: monospace; font-size: 15px; }
+        .uuid-item .uuid-text { flex: 1; word-break: break-all; color: #333; }
+        .uuid-item .copy-uuid { padding: 4px 10px; background: #667eea; color: white; border: none; border-radius: 5px; font-size: 12px; cursor: pointer; }
+        .uuid-item .copy-uuid:hover { background: #5a6fd6; }
+        @media (max-width: 600px) { .container { padding: 20px; } }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"UUID Generator - Generate Random UUIDs Online (v4)","description":"Free online UUID generator. Generate random UUIDs (universally unique identifiers) version 4 with one click. Bulk generation supported.","url":"https://business2-lasse-tfa.vercel.app/tools/uuid-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+</head>
+<body>
+    <div class="container">
+        <h1>UUID Generator</h1>
+        <p class="subtitle">Generate random UUIDs (version 4) with bulk support</p>
+        <div class="controls">
+            <div class="control-group">
+                <label>Count:</label>
+                <input type="number" id="count" value="1" min="1" max="100">
+            </div>
+            <div class="control-group">
+                <label>Format:</label>
+                <select id="format" onchange="regenerate()">
+                    <option value="standard">Standard (with hyphens)</option>
+                    <option value="nodash">No hyphens</option>
+                    <option value="upper">Uppercase</option>
+                    <option value="braces">Braces</option>
+                </select>
+            </div>
+            <button class="btn" onclick="generate()">Generate UUIDs</button>
+            <button class="btn secondary" onclick="copyAll()">Copy All</button>
+        </div>
+        <div class="uuid-list" id="uuidList"></div>
+    </div>
+    <section class="tool-upsell" aria-labelledby="uuid-upsell-title">
+        <p class="tool-upsell-kicker">Free tool companion</p>
+        <h2 id="uuid-upsell-title">Give your agent a persistent memory layer</h2>
+        <p>Agent Memory-as-a-Service includes a namespaced key-value memory API with TTL and semantic recall. MIT-licensed source, deploy on Vercel.</p>
+        <a class="tool-upsell-link cta" href="../agent-memory-api.html">View Agent Memory-as-a-Service — €39 one-time</a>
+    </section>
+    <script>
+        function uuidv4(){if(crypto&&crypto.randomUUID)return crypto.randomUUID();return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){const r=Math.random()*16|0;const v=c==='x'?r:(r&0x3|0x8);return v.toString(16);});}
+        function formatUuid(uuid){const format=document.getElementById('format').value;switch(format){case 'nodash':return uuid.replace(/-/g,'');case 'upper':return uuid.toUpperCase();case 'braces':return '{'+uuid.toUpperCase()+'}';default:return uuid;}}
+        function generate(){const count=Math.max(1,Math.min(100,parseInt(document.getElementById('count').value)||1));const list=document.getElementById('uuidList');list.innerHTML='';for(let i=0;i<count;i++){const uuid=formatUuid(uuidv4());const item=document.createElement('div');item.className='uuid-item';item.innerHTML='<span class="uuid-text">'+uuid+'</span><button class="copy-uuid" onclick="copyUuid(this,\''+uuid+'\')">Copy</button>';list.appendChild(item);}}
+        function regenerate(){generate();}
+        function copyUuid(btn,uuid){navigator.clipboard.writeText(uuid).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent='Copy';},1500);});}
+        function copyAll(){const items=document.querySelectorAll('.uuid-text');if(items.length===0)return;const text=Array.from(items).map(el=>el.textContent).join('\n');navigator.clipboard.writeText(text).then(()=>{const btn=document.querySelector('.btn.secondary');const orig=btn.textContent;btn.textContent='Copied All';setTimeout(()=>{btn.textContent=orig;},1500);});}
+        generate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+    <title>Regex Tester - Test Regular Expressions Online with Live Matching</title>
+<meta name="description" content="Free online regex tester. Test regular expressions with live matching, flags, capture groups, and highlighted results. Supports JavaScript regex syntax.">
+<meta property="og:title" content="Regex Tester - Test Regular Expressions Online with Live Matching">
+<meta property="og:description" content="Free online regex tester. Test regular expressions with live matching, flags, capture groups, and highlighted results. Supports JavaScript regex syntax.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://business2-lasse-tfa.vercel.app/tools/regex-tester.html">
+<meta property="og:site_name" content="Autonomy Labs">
+<meta property="og:image" content="https://business2-lasse-tfa.vercel.app/preview-etmoon.png">
+<meta property="og:image:alt" content="Autonomy Labs — Regex Tester social preview">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://business2-lasse-tfa.vercel.app/tools/regex-tester.html">
+<link rel="stylesheet" href="../tool-cta.css">
+    <meta name="keywords" content="regex tester, regex tester online, regular expression tester, regex checker, regex validator, test regex online, regex matcher">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        h1 { text-align: center; color: #333; margin-bottom: 10px; font-size: 2.5em; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .field-group { margin-bottom: 20px; }
+        label { display: block; color: #555; font-weight: 600; margin-bottom: 6px; }
+        input[type="text"], textarea { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: monospace; font-size: 14px; transition: border-color 0.3s; }
+        input[type="text"]:focus, textarea:focus { outline: none; border-color: #667eea; }
+        textarea { resize: vertical; }
+        .regex-row { display: flex; gap: 10px; align-items: center; }
+        .regex-row input[type="text"] { flex: 1; }
+        .flags-input { width: 80px; }
+        .flags-label { font-size: 0.85em; color: #888; margin-top: 4px; }
+        .status { padding: 12px; border-radius: 8px; margin-top: 15px; font-weight: 600; }
+        .status.valid { background: #d4edda; color: #155724; }
+        .status.invalid { background: #f8d7da; color: #721c24; }
+        .status.info { background: #d1ecf1; color: #0c5460; }
+        .match-info { margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px; color: #555; }
+        .match-info strong { color: #333; }
+        .result-area { margin-top: 15px; padding: 15px; background: #f8f9fa; border: 2px solid #e0e0e0; border-radius: 10px; min-height: 100px; font-family: monospace; font-size: 14px; line-height: 1.8; word-break: break-all; white-space: pre-wrap; }
+        .highlight { background: #fff3cd; border-radius: 3px; padding: 1px 2px; }
+        .group-list { margin-top: 15px; }
+        .group-item { padding: 8px 12px; background: #f0f0f0; border-radius: 6px; margin-bottom: 6px; font-family: monospace; font-size: 13px; }
+        .group-item strong { color: #667eea; }
+        .btn { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background: #5a6fd6; }
+        .btn.secondary { background: #f0f0f0; color: #333; }
+        .btn.secondary:hover { background: #e0e0e0; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        @media (max-width: 600px) { .container { padding: 20px; } .regex-row { flex-direction: column; } .flags-input { width: 100%; } }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Tester - Test Regular Expressions Online with Live Matching","description":"Free online regex tester. Test regular expressions with live matching, flags, capture groups, and highlighted results. Supports JavaScript regex syntax.","url":"https://business2-lasse-tfa.vercel.app/tools/regex-tester.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+</head>
+<body>
+    <div class="container">
+        <h1>Regex Tester</h1>
+        <p class="subtitle">Test regular expressions with live matching, flags, and capture groups</p>
+        <div class="field-group">
+            <label for="pattern">Regular Expression</label>
+            <div class="regex-row">
+                <input type="text" id="pattern" placeholder="\b[A-Z][a-z]+\b" value="\b[A-Z][a-z]+\b" oninput="testRegex()">
+                <input type="text" id="flags" class="flags-input" placeholder="gim" value="g" oninput="testRegex()">
+            </div>
+            <p class="flags-label">Flags: g (global), i (case-insensitive), m (multiline), s (dotall), u (unicode)</p>
+        </div>
+        <div class="field-group">
+            <label for="testText">Test String</label>
+            <textarea id="testText" rows="6" placeholder="Enter text to test against..." oninput="testRegex()">The Quick Brown Fox Jumps Over The Lazy Dog. Alice and Bob went to Paris last Tuesday.</textarea>
+        </div>
+        <div class="status info" id="status">Enter a pattern to test</div>
+        <div class="match-info" id="matchInfo" style="display:none"></div>
+        <label>Highlighted Matches</label>
+        <div class="result-area" id="result"></div>
+        <div class="group-list" id="groupList"></div>
+    </div>
+    <section class="tool-upsell" aria-labelledby="regex-upsell-title">
+        <p class="tool-upsell-kicker">Free tool companion</p>
+        <h2 id="regex-upsell-title">Build production-grade agent integrations</h2>
+        <p>The AI Agent API Integration Kit includes copy-paste REST, auth, retry, and webhook patterns for connecting agents to any API.</p>
+        <a class="tool-upsell-link cta" href="../api-integration-kit.html">View the API Integration Kit — €14.90 one-time</a>
+    </section>
+    <script>
+        const patternEl=document.getElementById('pattern'),flagsEl=document.getElementById('flags'),textEl=document.getElementById('testText'),statusEl=document.getElementById('status'),matchInfoEl=document.getElementById('matchInfo'),resultEl=document.getElementById('result'),groupListEl=document.getElementById('groupList');
+        function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+        function testRegex(){
+            const pattern=patternEl.value,flags=flagsEl.value||'g',text=textEl.value;
+            if(!pattern){statusEl.className='status info';statusEl.textContent='Enter a pattern to test';matchInfoEl.style.display='none';resultEl.innerHTML=esc(text);groupListEl.innerHTML='';return;}
+            let regex;try{regex=new RegExp(pattern,flags);}catch(e){statusEl.className='status invalid';statusEl.textContent='Invalid regex: '+e.message;matchInfoEl.style.display='none';resultEl.innerHTML=esc(text);groupListEl.innerHTML='';return;}
+            const global=flags.includes('g');const matches=[];let match;
+            if(global){while((match=regex.exec(text))!==null){matches.push(match);if(match.index===regex.lastIndex)regex.lastIndex++;}}
+            else{match=regex.exec(text);if(match)matches.push(match);}
+            if(matches.length===0){statusEl.className='status valid';statusEl.textContent='No matches found';matchInfoEl.style.display='none';resultEl.innerHTML=esc(text);groupListEl.innerHTML='';return;}
+            statusEl.className='status valid';statusEl.textContent='Valid regex — '+matches.length+' match'+(matches.length===1?'':'es')+' found';
+            matchInfoEl.style.display='block';matchInfoEl.innerHTML='<strong>'+matches.length+'</strong> match'+(matches.length===1?'':'es')+' | Total matched length: <strong>'+matches.reduce((a,m)=>a+m[0].length,0)+'</strong> chars';
+            const ranges=[];for(const m of matches){ranges.push({start:m.index,end:m.index+m[0].length});}
+            ranges.sort((a,b)=>a.start-b.start);
+            let html='',last=0;for(const r of ranges){html+=esc(text.slice(last,r.start));html+='<span class="highlight">'+esc(text.slice(r.start,r.end))+'</span>';last=r.end;}
+            html+=esc(text.slice(last));resultEl.innerHTML=html;
+            if(matches[0].length>1){let gh='<label>Capture Groups</label>';matches.forEach((m,i)=>{gh+='<div class="group-item"><strong>Match '+(i+1)+':</strong> ';for(let g=1;g<m.length;g++){gh+='Group '+g+' = <code>'+(m[g]!==undefined?esc(m[g]):'')+'</code>  ';}gh+='</div>';});groupListEl.innerHTML=gh;}else{groupListEl.innerHTML='';}
+        }
+        testRegex();
+    </script>
+</body>
+</html>

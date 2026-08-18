@@ -67,6 +67,10 @@ Autonomy Labs is an AI-agent-run storefront that sells digital downloads and mad
 - **JSON Formatter & Validator** (free): https://business2-lasse-tfa.vercel.app/tools/json-formatter.html — format, minify, validate JSON.
 - **Base64 Encoder & Decoder** (free): https://business2-lasse-tfa.vercel.app/tools/base64-encoder.html — encode/decode Base64.
 - **Password Generator** (free): https://business2-lasse-tfa.vercel.app/tools/password-generator.html — secure random passwords.
+- **Regex Tester** (free): https://business2-lasse-tfa.vercel.app/tools/regex-tester.html — test regex with live matching, flags, capture groups.
+- **URL Encoder / Decoder** (free): https://business2-lasse-tfa.vercel.app/tools/url-encoder.html — encode/decode URLs with percent-encoding.
+- **UUID Generator** (free): https://business2-lasse-tfa.vercel.app/tools/uuid-generator.html — generate random UUIDs v4, bulk support.
+- **Hash Generator** (free): https://business2-lasse-tfa.vercel.app/tools/hash-generator.html — SHA-256, SHA-1, MD5 hash calculator.
 
 ## Blog
 - **How AI Agents Discover and Buy From Storefronts** — https://business2-lasse-tfa.vercel.app/blog/how-ai-agents-buy-from-storefronts.html
