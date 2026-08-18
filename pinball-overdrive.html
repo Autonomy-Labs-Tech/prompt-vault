@@ -34,9 +34,14 @@
   #touch .zone.right{right:0;}
   #touch .zone::after{content:'';position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:70px;height:70px;border-radius:50%;border:2px solid rgba(0,212,255,.35);}
   #touch .zone.right::after{border-color:rgba(255,61,129,.35);}
+  #od-btn{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffb300,#ff5e00);border:3px solid #ffd23e;color:#1a0d00;font-weight:900;font-size:13px;letter-spacing:1px;display:none;z-index:7;pointer-events:auto;text-align:center;line-height:1.2;box-shadow:0 0 24px rgba(255,176,0,.7);}
+  #od-btn:active{transform:scale(.92);}
   #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
   #serve-hint{position:fixed;bottom:16%;left:50%;transform:translateX(-50%);color:#7fb8e8;font-size:13px;letter-spacing:1px;z-index:5;pointer-events:none;text-shadow:0 0 8px rgba(0,0,0,.8);}
   @media (pointer:coarse){ #touch{display:block;} #serve-hint{bottom:38%;} }
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:22px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
 </style>
 </head>
 <body>
@@ -58,9 +63,11 @@
   </div>
 </div>
 <div id="combo"></div>
+<div id="popups"></div>
 <div id="serve-hint">HOLD SPACE / TAP TO LAUNCH</div>
 <button id="mute">SOUND ON</button>
 <div id="touch"><div class="zone left"></div><div class="zone right"></div></div>
+<button id="od-btn">OVER<br>DRIVE</button>
 <div id="overlay">
   <h1>PINBALL OVERDRIVE</h1>
   <h2>Neon score attack — aim the lanes, chain the targets, ride the Overdrive</h2>
@@ -302,6 +309,9 @@ function renderBalls() {
 function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
 muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('po_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
 setMuteUI();
+const odBtn = $('od-btn');
+odBtn.addEventListener('touchstart', (e) => { e.preventDefault(); e.stopPropagation(); activateOverdrive(); }, { passive: false });
+odBtn.addEventListener('click', (e) => { e.stopPropagation(); activateOverdrive(); });
 
 // ---------- audio (synthesized, no assets) ----------
 let AC = null;
@@ -363,7 +373,8 @@ function addParts(x, y, color, n) {
   }
 }
 function scoreAdd(base, x, y, label) {
-  const pts = Math.round(base * combo);
+  const odMul = odActive ? 2 : 1;
+  const pts = Math.round(base * combo * odMul);
   score += pts;
   addPopup(x, y, '+' + pts, label || '#ffd23e');
   if (score > high) { high = score; try { localStorage.setItem('po_high', String(high)); } catch (e) {} }
@@ -397,7 +408,9 @@ function endOverdrive() {
 
 // ---------- game flow ----------
 function serveBall() {
-  ball.x = 0; ball.y = 500; ball.vx = 0; ball.vy = 0;
+  ball.x = (Math.random() - 0.5) * 240;
+  ball.y = 500;
+  ball.vx = 0; ball.vy = 0;
   ball.onTable = true;
   state = 'serve';
   serveT = 0;
@@ -409,6 +422,7 @@ function launchBall() {
   if (state !== 'serve') return;
   const power = 620 + launchCharge * 900;
   ball.vy = power;
+  ball.vx = (Math.random() - 0.5) * 60;
   state = 'play';
   serveT = 0;
   skillShot = true;
@@ -751,13 +765,28 @@ function render(dt, t) {
     p.vy -= 500 * dt;
     if (p.t > p.life) { parts.splice(i, 1); i--; }
   }
-  // popups
-  for (let i = 0; i < popups.length; i++) {
-    const p = popups[i];
-    p.t += dt;
-    if (p.t > p.life) { popups.splice(i, 1); i--; }
+  // popups (DOM rendering)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
   }
-  // camera shake
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; continue; }
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 12) + '%';
+      el.style.top = (50 - p.y / 12) + '%';
+      popWrap.appendChild(el);
+    }
+  }  // camera shake
   if (shake > 0) {
     shake -= dt;
     camera.position.x = (Math.random() - 0.5) * shake * 30;
@@ -773,6 +802,7 @@ function render(dt, t) {
   scoreEl.textContent = score;
   highEl.textContent = high;
   odFill.style.width = odActive ? '100%' : overdrive + '%';
+  odBtn.style.display = (!odActive && overdrive >= 100 && state === 'play' && window.matchMedia('(pointer:coarse)').matches) ? 'block' : 'none';
   if (odActive) {
     odT -= dt;
     odTimer.style.display = 'block';
