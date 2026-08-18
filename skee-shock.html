@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>SKEE SHOCK — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #chain-wrap{width:150px;height:10px;border:1px solid #00d4ff;border-radius:5px;overflow:hidden;background:rgba(0,0,0,.5);}
+  #chain-fill{height:100%;width:0%;background:linear-gradient(90deg,#00d4ff,#7b5cff);transition:width .2s;}
+  #chain-label{font-size:9px;letter-spacing:2px;color:#00d4ff;text-transform:uppercase;}
+  #surge-btn{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:30px;background:radial-gradient(circle at 35% 35%,#ff5e00,#ff3d81);border:2px solid #ffb300;color:#fff;font-weight:900;font-size:13px;letter-spacing:2px;display:none;z-index:7;pointer-events:auto;box-shadow:0 0 20px rgba(255,94,0,.6);}
+  #surge-btn:active{transform:translateX(-50%) scale(.94);}
+  #combo{position:fixed;left:50%;top:64px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#00d4ff,#7b5cff,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#00d4ff,#7b5cff);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+  #aim-zone{position:fixed;bottom:0;left:0;right:0;height:30%;display:none;z-index:4;pointer-events:none;}
+  @media (pointer:coarse){ #aim-zone{display:block;} }
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="chain-label">Precision Chain</div>
+    <div id="chain-wrap"><div id="chain-fill"></div></div>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="combo"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<button id="surge-btn">SURGE! x3</button>
+<div id="aim-zone"></div>
+<div id="overlay">
+  <h1>SKEE SHOCK</h1>
+  <h2>Aim, charge, release — nail the safe rings, thread the moving target, chase the jackpot</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">MOUSE — aim &nbsp;·&nbsp; HOLD SPACE / CLICK — charge &nbsp;·&nbsp; RELEASE — throw<br>R — restart &nbsp;·&nbsp; S — Surge (when lit)</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   SKEE SHOCK — original Three.js skee-ball score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- geometry ----------
+const LW = 420, LH = 1050;                // lane half-width/height
+const BALL_R = 16;
+const LAUNCH_Y = -LH + 90;
+const TARGET_Y = LH - 190;                // target board center height
+const GRAV = 2100;
+
+// ---------- target rings (4 destinations + moving + jackpot) ----------
+const RINGS = [
+  { id: 'safe', x: 0, y: TARGET_Y - 40, r: 96, value: 50, color: 0x00d4ff, kind: 'safe' },
+  { id: 'mid', x: -130, y: TARGET_Y + 130, r: 74, value: 150, color: 0x7b5cff, kind: 'strength' },
+  { id: 'mid2', x: 130, y: TARGET_Y + 130, r: 74, value: 150, color: 0x7b5cff, kind: 'strength' },
+  { id: 'hard', x: -130, y: TARGET_Y - 190, r: 58, value: 300, color: 0xff3d81, kind: 'strength' },
+  { id: 'hard2', x: 130, y: TARGET_Y - 190, r: 58, value: 300, color: 0xff3d81, kind: 'strength' },
+  { id: 'jackpot', x: 0, y: TARGET_Y - 220, r: 40, value: 1000, color: 0xffb300, kind: 'jackpot' },
+];
+const MOVING = { x: 0, y: TARGET_Y + 20, r: 50, value: 500, color: 0xffd23e, kind: 'moving', dir: 1, speed: 260, range: 260 };
+
+// ---------- state ----------
+let score = 0, high = 0, ballsLeft = 10, chain = 0, chainT = 0;
+let surge = false, surgeT = 0, surgeCd = 0;
+let state = 'title';                       // title | play | over
+let aimX = 0, power = 0, charging = false;
+let ball = { x: 0, y: LAUNCH_Y, vx: 0, vy: 0, r: BALL_R, active: false };
+let parts = [], popups = [], trails = [];
+let shake = 0, flashT = 0, boardShift = 0, boardShiftT = 0, laneLevel = 0;
+let muted = false;
+try { muted = localStorage.getItem('ss_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('ss_high') || '0', 10) || 0; } catch (e) {}
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 0, 1450);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+const rim = new THREE.PointLight(0x00d4ff, 900, 2000);
+rim.position.set(0, 0, 500);
+scene.add(rim);
+
+// lane base
+const base = new THREE.Mesh(
+  new THREE.BoxGeometry(LW * 2 + 50, 34, LH * 2 + 50),
+  new THREE.MeshStandardMaterial({ color: 0x0a0f22, roughness: 0.9, metalness: 0.2 })
+);
+base.position.y = -17;
+scene.add(base);
+const lane = new THREE.Mesh(
+  new THREE.PlaneGeometry(LW * 2, LH * 2),
+  new THREE.MeshStandardMaterial({ color: 0x0e1738, roughness: 0.35, metalness: 0.55 })
+);
+scene.add(lane);
+
+// rising lane look: side rails angled up
+function railMesh(pts, color) {
+  const shape = new THREE.Shape();
+  shape.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
+  const m = new THREE.Mesh(
+    new THREE.ShapeGeometry(shape),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.55, side: THREE.DoubleSide })
+  );
+  m.position.z = 2;
+  scene.add(m);
+  return m;
+}
+railMesh([[-LW, -LH + 160], [-LW, LH - 120], [-LW + 60, LH - 240], [-LW + 60, -LH + 160]], 0x00d4ff);
+railMesh([[LW, -LH + 160], [LW, LH - 120], [LW - 60, LH - 240], [LW - 60, -LH + 160]], 0x00d4ff);
+railMesh([[-LW, -LH + 160], [LW, -LH + 160], [LW, -LH + 200], [-LW, -LH + 200]], 0x7b5cff);
+
+// target board back wall
+const board = new THREE.Mesh(
+  new THREE.PlaneGeometry(LW * 2, LH * 0.55),
+  new THREE.MeshStandardMaterial({ color: 0x101a38, roughness: 0.6, metalness: 0.3 })
+);
+board.position.set(0, TARGET_Y + 80, -10);
+scene.add(board);
+
+// rings
+const ringMeshes = RINGS.map(rg => {
+  const m = new THREE.Mesh(
+    new THREE.TorusGeometry(rg.r, 9, 8, 40),
+    new THREE.MeshStandardMaterial({ color: rg.color, emissive: rg.color, emissiveIntensity: 0.6 })
+  );
+  m.rotation.x = Math.PI / 2;
+  m.position.set(rg.x, rg.y, 2);
+  scene.add(m);
+  const fill = new THREE.Mesh(
+    new THREE.CircleGeometry(rg.r - 9, 32),
+    new THREE.MeshStandardMaterial({ color: rg.color, emissive: rg.color, emissiveIntensity: 0.15, transparent: true, opacity: 0.25 })
+  );
+  fill.rotation.x = -Math.PI / 2;
+  fill.position.set(rg.x, rg.y, 1);
+  scene.add(fill);
+  return { torus: m, fill, base: rg };
+});
+const movingMesh = new THREE.Mesh(
+  new THREE.TorusGeometry(MOVING.r, 9, 8, 40),
+  new THREE.MeshStandardMaterial({ color: MOVING.color, emissive: MOVING.color, emissiveIntensity: 0.7 })
+);
+movingMesh.rotation.x = Math.PI / 2;
+movingMesh.position.set(MOVING.x, MOVING.y, 2);
+scene.add(movingMesh);
+
+// ring value labels via canvas sprites
+function label(text, x, y, color) {
+  const c = document.createElement('canvas');
+  c.width = 128; c.height = 64;
+  const g = c.getContext('2d');
+  g.font = 'bold 34px sans-serif';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = color;
+  g.fillText(text, 64, 36);
+  const tex = new THREE.CanvasTexture(c);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+  sp.position.set(x, y, 6);
+  sp.scale.set(90, 45, 1);
+  scene.add(sp);
+  return sp;
+}
+label('50', 0, TARGET_Y - 40, '#00d4ff');
+label('150', -130, TARGET_Y + 130, '#7b5cff');
+label('150', 130, TARGET_Y + 130, '#7b5cff');
+label('300', -130, TARGET_Y - 190, '#ff3d81');
+label('300', 130, TARGET_Y - 190, '#ff3d81');
+label('1000', 0, TARGET_Y - 220, '#ffb300');
+label('500', 0, TARGET_Y + 20, '#ffd23e');
+
+// ball
+const ballMesh = new THREE.Mesh(
+  new THREE.SphereGeometry(BALL_R, 20, 20),
+  new THREE.MeshStandardMaterial({ color: 0xdfe8ff, emissive: 0x88ccff, emissiveIntensity: 0.4, roughness: 0.15, metalness: 0.85 })
+);
+scene.add(ballMesh);
+
+// aim reticle
+const reticle = new THREE.Mesh(
+  new THREE.RingGeometry(14, 20, 24),
+  new THREE.MeshBasicMaterial({ color: 0x00ffd4, transparent: true, opacity: 0.9, side: THREE.DoubleSide })
+);
+reticle.rotation.x = -Math.PI / 2;
+reticle.position.set(0, LAUNCH_Y + 40, 3);
+scene.add(reticle);
+const reticleLine = new THREE.Line(
+  new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, LAUNCH_Y + 10, 3),
+    new THREE.Vector3(0, TARGET_Y + 300, 3),
+  ]),
+  new THREE.LineBasicMaterial({ color: 0x00ffd4, transparent: true, opacity: 0.35 })
+);
+scene.add(reticleLine);
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), chainFill = $('chain-fill'),
+  comboEl = $('combo'), overlay = $('overlay'), finalScore = $('final-score'),
+  finalHigh = $('final-high'), finalNew = $('final-new'), startBtn = $('start'),
+  muteBtn = $('mute'), surgeBtn = $('surge-btn'), aimZone = $('aim-zone');
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('ss_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  throw: () => noise(0.1, 0.2),
+  hit: () => tone(660, 0.12, 'sine', 0.2, 990),
+  safe: () => tone(440, 0.1, 'sine', 0.15, 660),
+  jackpot: () => { tone(880, 0.1, 'sine', 0.22); setTimeout(() => tone(1175, 0.12, 'sine', 0.22), 90); setTimeout(() => tone(1568, 0.2, 'sine', 0.22), 180); },
+  miss: () => tone(200, 0.15, 'sawtooth', 0.1, 120),
+  surge: () => { tone(110, 0.4, 'sawtooth', 0.14, 440); noise(0.3, 0.1); },
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 120 + Math.random() * 320;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const chainMul = 1 + chain * 0.1;
+  const surgeMul = surge ? 3 : 1;
+  const pts = Math.round(base * chainMul * surgeMul);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('ss_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function addChain(v) {
+  chain = clamp(chain + v, 0, 20);
+  chainT = performance.now() / 1000 + 4;
+}
+function breakChain(reason) {
+  if (chain > 0) addPopup(0, -500, reason || 'CHAIN BROKEN', '#ff3d81');
+  chain = 0;
+}
+function canSurge() { return !surge && surgeCd <= 0 && state === 'play'; }
+function activateSurge() {
+  if (!canSurge()) return;
+  surge = true; surgeT = 6; surgeCd = 14;
+  sfx.surge();
+  addPopup(0, 0, 'SURGE x3!', '#ff5e00');
+  flashT = 0.3;
+  surgeBtn.style.display = 'none';
+}
+
+// ---------- game flow ----------
+function newBall() {
+  ball.x = 0; ball.y = LAUNCH_Y; ball.vx = 0; ball.vy = 0;
+  ball.active = true;
+  ball._settled = false;
+  power = 0; charging = false;
+}
+function throwBall() {
+  if (!ball.active || ball.vy !== 0 || state !== 'play') return;
+  const angle = (aimX / LW) * 0.8;             // -0.8..0.8 rad
+  // speed curve tuned to the lane: rings sit 1600-1820 units above launch,
+  // so even a 60% charge must clear the board; full power arcs through everything
+  const speed = 2600 + power * 1200;
+  ball.vx = Math.sin(angle) * speed;
+  ball.vy = Math.cos(angle) * speed;
+  sfx.throw();
+  addParts(ball.x, ball.y, 0x00d4ff, 6);
+}
+function ballSettled() {
+  // called once per ball: from ring hits (already inactive) or fall-back (still active)
+  ball.vx = 0; ball.vy = 0;
+  if (ball._settled) return;
+  ball._settled = true;
+  ball.active = false;
+  ballsLeft--;
+  if (ballsLeft <= 0) {
+    setTimeout(gameOver, 400);
+  } else {
+    setTimeout(newBall, 600);
+  }
+}
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+function startGame() {
+  score = 0; ballsLeft = 10; chain = 0; surge = false; surgeT = 0; surgeCd = 0;
+  boardShift = 0; boardShiftT = 0; laneLevel = 0;
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  overlay.style.display = 'none';
+  surgeBtn.style.display = 'none';
+  newBall();
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k === ' ') {
+    if (state === 'title' || state === 'over') startGame();
+    else { charging = true; }
+    e.preventDefault();
+  }
+  if (k === 's' || k === 'S') activateSurge();
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'm' || k === 'M') { muted = !muted; try { localStorage.setItem('ss_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); }
+});
+window.addEventListener('keyup', (e) => {
+  if (e.key === ' ') {
+    charging = false;
+    if (power > 0.08) throwBall();
+  }
+});
+// mouse aim + click-throw
+sceneEl.addEventListener('mousemove', (e) => {
+  if (state !== 'play' || charging) return;
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  aimX = nx * LW * 0.9;
+});
+sceneEl.addEventListener('mousedown', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  charging = true;
+});
+window.addEventListener('mouseup', (e) => {
+  if (charging) {
+    charging = false;
+    if (power > 0.08) throwBall();
+  }
+});
+// touch
+sceneEl.addEventListener('touchmove', (e) => {
+  if (state !== 'play') return;
+  const t = e.touches[0];
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((t.clientX - rect.left) / rect.width) * 2 - 1;
+  aimX = nx * LW * 0.9;
+  e.preventDefault();
+}, { passive: false });
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  charging = true;
+}, { passive: true });
+sceneEl.addEventListener('touchend', (e) => {
+  if (charging) {
+    charging = false;
+    if (power > 0.08) throwBall();
+  }
+}, { passive: true });
+surgeBtn.addEventListener('click', activateSurge);
+
+// ---------- physics ----------
+function ringHit(rg) {
+  const dx = ball.x - rg.x, dy = ball.y - rg.y;
+  const d2 = dx * dx + dy * dy;
+  if (d2 > rg.r * rg.r) return false;
+  // ball must be traveling toward the board (vy > 0 at target height)
+  if (ball.vy <= 0) return false;
+  ball.active = false;
+  ball.vx = 0; ball.vy = 0;
+  if (rg.kind === 'safe') {
+    scoreAdd(rg.value, rg.x, rg.y, '#00d4ff');
+    addChain(1);
+    sfx.safe();
+  } else if (rg.kind === 'jackpot') {
+    scoreAdd(rg.value, rg.x, rg.y, '#ffb300');
+    addChain(2);
+    sfx.jackpot();
+    addParts(ball.x, ball.y, 0xffb300, 16);
+  } else {
+    scoreAdd(rg.value, rg.x, rg.y, '#ffd23e');
+    addChain(1);
+    sfx.hit();
+  }
+  addParts(ball.x, ball.y, rg.color, 10);
+  return true;
+}
+function physics(dt) {
+  if (state !== 'play') return;
+  // surge countdown
+  if (surge) {
+    surgeT -= dt;
+    if (surgeT <= 0) {
+      surge = false;
+      addPopup(0, 0, 'SURGE END', '#7fb8e8');
+    }
+  }
+  if (surgeCd > 0) {
+    surgeCd -= dt;
+    if (surgeCd <= 0 && state === 'play') surgeBtn.style.display = 'block';
+  }
+  // chain decay
+  if (chain > 0 && performance.now() / 1000 > chainT) chain = 0;
+  // board escalation: every 2000 points the board shifts slightly
+  const targetShift = Math.min(60, Math.floor(score / 2000) * 15);
+  boardShift += (targetShift - boardShift) * Math.min(1, dt * 2);
+  // charging
+  if (charging && ball.active && ball.vy === 0) {
+    power = Math.min(1, power + dt * 1.4);
+  }
+  // ball physics (3 substeps prevent tunneling through thin rings at high speed)
+  if (ball.active && ball.vy !== 0) {
+    const sub = 3;
+    for (let s = 0; s < sub && ball.active && ball.vy !== 0; s++) {
+      const sdt = dt / sub;
+      ball.vy -= GRAV * sdt;
+      ball.x += ball.vx * sdt;
+      ball.y += ball.vy * sdt;
+      // lane walls
+      if (ball.x > LW - BALL_R) { ball.x = LW - BALL_R; ball.vx = -Math.abs(ball.vx) * 0.5; }
+      if (ball.x < -LW + BALL_R) { ball.x = -LW + BALL_R; ball.vx = Math.abs(ball.vx) * 0.5; }
+      // ring collisions (board coords shift with escalation)
+      const sx = boardShift;
+      for (const rg of RINGS) {
+        const shifted = { ...rg, x: rg.x + (rg.id === 'safe' ? sx : rg.x > 0 ? -sx : sx), y: rg.y };
+        if (ringHit(shifted)) {
+          ballSettled();
+          s = sub; break;
+        }
+      }
+      if (!ball.active) break;
+      // moving target
+      const mx = MOVING.x + MOVING.dir * (MOVING.range * Math.sin(performance.now() / 900));
+      const dx = ball.x - mx, dy = ball.y - MOVING.y;
+      if (dx * dx + dy * dy < MOVING.r * MOVING.r && ball.vy > 0) {
+        ball.active = false;
+        ball.vx = 0; ball.vy = 0;
+        scoreAdd(MOVING.value, mx, MOVING.y, '#ffd23e');
+        addChain(2);
+        sfx.jackpot();
+        addParts(ball.x, ball.y, 0xffd23e, 12);
+        ballSettled();
+        break;
+      }
+      // fell back down (missed everything)
+      if (ball.y < LAUNCH_Y - 40) {
+        if (power < 0.35 && chain > 0) breakChain('WEAK THROW');
+        ballSettled();
+        break;
+      }
+      // hit board but missed all rings -> ball drops back
+      if (ball.y > TARGET_Y + 280) {
+        if (chain > 0) breakChain('MISS');
+        ballSettled();
+        break;
+      }
+    }
+    // trail
+    if (ball.active) {
+      trails.push({ x: ball.x, y: ball.y, t: 0 });
+      if (trails.length > 20) trails.shift();
+    }
+  }
+}
+
+// ---------- render ----------
+function render(dt, t) {
+  // ball
+  if (ball.active) {
+    ballMesh.visible = true;
+    ballMesh.position.set(ball.x, ball.y, BALL_R);
+    const sp = Math.hypot(ball.vx, ball.vy);
+    ballMesh.material.emissiveIntensity = surge ? 1.2 : 0.4 + sp / 4000;
+  } else {
+    ballMesh.visible = false;
+  }
+  // trails
+  for (let i = 0; i < trails.length; i++) {
+    const p = trails[i];
+    p.t += dt;
+    if (p.t > 0.3) { trails.splice(i, 1); i--; }
+  }
+  // reticle + power
+  const ret = reticle.position;
+  const baseY = LAUNCH_Y + 40;
+  ret.x = aimX * 0.3;
+  ret.y = baseY + power * 160;
+  const scale = 1 + power * 1.6;
+  reticle.scale.set(scale, scale, 1);
+  // aim line from ball to target board
+  const linePos = reticleLine.geometry.attributes.position;
+  linePos.setXYZ(0, aimX * 0.3, LAUNCH_Y + 10, 3);
+  linePos.setXYZ(1, aimX, TARGET_Y + 300, 3);
+  linePos.needsUpdate = true;
+  // moving target (same formula as physics: sin(now/900))
+  movingMesh.position.x = MOVING.dir * (MOVING.range * Math.sin(performance.now() / 900));
+  // surge pulse
+  if (surge) {
+    const p = 1 + Math.sin(t * 10) * 0.06;
+    ballMesh.scale.set(p, p, p);
+    rim.intensity = 1500 + Math.sin(t * 10) * 500;
+  } else {
+    ballMesh.scale.set(1, 1, 1);
+    rim.intensity = 900;
+  }
+  // ring pulse on surge + board shift sync
+  for (let i = 0; i < ringMeshes.length; i++) {
+    const rm = ringMeshes[i];
+    const rg = rm.base;
+    const sx = boardShift;
+    const shiftX = (rg.id === 'safe' ? sx : rg.x > 0 ? -sx : sx);
+    rm.torus.position.x = rg.x + shiftX;
+    rm.fill.position.x = rg.x + shiftX;
+    rm.torus.material.emissiveIntensity = surge ? 1.4 : 0.6;
+    rm.fill.material.opacity = surge ? 0.4 : 0.25;
+  }
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    p.vy -= 500 * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; continue; }
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 15) + '%';
+      el.style.top = (50 - p.y / 15) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  // camera shake
+  if (shake > 0) {
+    shake -= dt;
+    camera.position.x = (Math.random() - 0.5) * shake * 30;
+    camera.position.y = (Math.random() - 0.5) * shake * 30;
+  } else {
+    camera.position.x = 0; camera.position.y = 0;
+  }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+  chainFill.style.width = (chain / 20) * 100 + '%';
+  if (chain > 0 && performance.now() / 1000 > chainT) chain = 0;
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    physics(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks (only with ?test=1) ----------
+if (TEST) {
+  window.__skeeshock = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get ballsLeft() { return ballsLeft; },
+    get chain() { return chain; },
+    get surge() { return surge; },
+    get surgeCd() { return surgeCd; },
+    get power() { return power; },
+    get aimX() { return aimX; },
+    get ball() { return { x: ball.x, y: ball.y, vx: ball.vx, vy: ball.vy, active: ball.active }; },
+    start: startGame,
+    setAim: (x) => { aimX = x; },
+    setPower: (v) => { power = clamp(v, 0, 1); },
+    throwBall: throwBall,
+    setBall: (x, y, vx, vy) => { ball.x = x; ball.y = y; ball.vx = vx || 0; ball.vy = vy || 0; ball.active = true; },
+    activateSurge: activateSurge,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) physics(1 / 60); },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>
