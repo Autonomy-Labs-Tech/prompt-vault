@@ -562,15 +562,24 @@ function oppAI(dt) {
 
 function physics(dt) {
   if (state !== 'play') return;
-  // player movement
+  // player movement: keyboard sets the target directly (always live),
+  // mouse/touch override while moving
   const kp = 1 - Math.pow(0.001, dt / 0.08);
-  if (player.tx !== undefined) {
+  let keyX = 0, keyY = 0;
+  if (keys['ArrowLeft'] || keys['a'] || keys['A']) keyX -= 1;
+  if (keys['ArrowRight'] || keys['d'] || keys['D']) keyX += 1;
+  if (keys['ArrowUp'] || keys['w'] || keys['W']) keyY += 1;
+  else if (keys['ArrowDown'] || keys['s'] || keys['S']) keyY -= 1;
+  if (keyX !== 0 || keyY !== 0) {
+    // keyboard steers the paddle directly at 700 px/s
+    player.x += keyX * 700 * dt;
+    player.y += keyY * 700 * dt;
+    player.tx = player.x;
+    player.ty = player.y;
+  } else if (player.tx !== undefined) {
     player.x += (player.tx - player.x) * kp;
     player.y += (player.ty - player.y) * kp;
-  } else if (keys['ArrowLeft'] || keys['a'] || keys['A']) player.x -= 700 * dt;
-  else if (keys['ArrowRight'] || keys['d'] || keys['D']) player.x += 700 * dt;
-  if (keys['ArrowUp'] || keys['w'] || keys['W']) player.y += 700 * dt;
-  else if (keys['ArrowDown'] || keys['s'] || keys['S']) player.y -= 700 * dt;
+  }
   player.x = clamp(player.x, -RW + PADDLE_R + 20, RW - PADDLE_R - 20);
   player.y = clamp(player.y, -RH + PADDLE_R + 30, -40);
   player.vx = (player.x - (player.px || player.x)) / Math.max(dt, 0.001);

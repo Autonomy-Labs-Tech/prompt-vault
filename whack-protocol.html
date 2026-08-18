@@ -295,6 +295,9 @@ function announceProtocol(p) {
 
 // ---------- wave generation ----------
 function spawnWave() {
+  // announce the protocol BEFORE assigning kinds so the card matches the field
+  const nextProtocol = pickProtocol(wave);
+  announceProtocol(nextProtocol);
   const n = Math.min(4 + Math.floor(wave / 2), 7);
   const available = [...cells];
   const chosen = [];
@@ -329,7 +332,6 @@ function spawnWave() {
   // chain: 3+ greens in a row = jackpot opportunity
   chainCells = chosen.filter(c => c.kind === 'green' || c.kind === 'gold').slice(0, 3);
   jackpotArmed = false;
-  announceProtocol(pickProtocol(wave));
 }
 
 // ---------- game flow ----------
@@ -444,7 +446,7 @@ function strikeCell(cell) {
   checkWave();
 }
 function checkWave() {
-  const remaining = cells.some(c => c.up && !c.done);
+  const remaining = cells.some(c => c.up && !c.done) || spawnQueue.length > 0;
   if (!remaining) {
     wave++;
     waveLabel.textContent = 'Wave ' + wave;

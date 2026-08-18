@@ -460,7 +460,8 @@ function ringHit(rg) {
 }
 function physics(dt) {
   if (state !== 'play') return;
-  // surge countdown
+  // surge countdown + button visibility (button shows whenever surge is ready,
+  // even before the first use — surgeCd starts at 0)
   if (surge) {
     surgeT -= dt;
     if (surgeT <= 0) {
@@ -468,10 +469,8 @@ function physics(dt) {
       addPopup(0, 0, 'SURGE END', '#7fb8e8');
     }
   }
-  if (surgeCd > 0) {
-    surgeCd -= dt;
-    if (surgeCd <= 0 && state === 'play') surgeBtn.style.display = 'block';
-  }
+  if (surgeCd > 0) surgeCd -= dt;
+  surgeBtn.style.display = (!surge && surgeCd <= 0 && state === 'play' && window.matchMedia('(pointer:coarse)').matches) ? 'block' : 'none';
   // chain decay
   if (chain > 0 && performance.now() / 1000 > chainT) chain = 0;
   // board escalation: every 2000 points the board shifts slightly

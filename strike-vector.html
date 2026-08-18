@@ -432,6 +432,11 @@ function frameComplete() {
   }
 }
 function nextFrame() {
+  if (frame >= 10) {
+    // run end: 10 frames complete
+    gameOver();
+    return;
+  }
   frame++;
   ballsThisFrame = 0;
   frameEnded = false;
@@ -759,6 +764,8 @@ if (TEST) {
     roll: rollBall,
     setBall: (x, y, vx, vy) => { ball.x = x; ball.y = y; ball.vx = vx || 0; ball.vy = vy || 0; ball.active = true; },
     setMomentum: (v) => { momentum = clamp(v, 0, 100); },
+    setFrame: (f) => { frame = f; frameEl.textContent = 'Frame ' + f; },
+    advanceFrame: nextFrame,
     spend: spendMomentum,
     step: (n) => { for (let i = 0; i < (n || 1); i++) physics(1 / 60); },
     pause: () => { paused = true; },
