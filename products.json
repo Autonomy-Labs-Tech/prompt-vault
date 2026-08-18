@@ -739,6 +739,20 @@
     "url": "https://buy.stripe.com/dRm6oG11E8Wib2zekG2Nq1d"
    },
    "url": "https://business2-lasse-tfa.vercel.app/ai-coding-tools.html"
+  },
+  {
+   "@type": "Product",
+   "position": 46,
+   "name": "AI Infra Tools Pack (4 verified utilities)",
+   "description": "Four verified infrastructure utilities: raw-socket HTTP/1.1 server, self-balancing AVL tree, prefix Trie, and FastAPI RSS news aggregator. Stdlib-only (FastAPI requirement noted for the aggregator); test harnesses included and verified against strict test suites.",
+   "offers": {
+    "@type": "Offer",
+    "price": 14.9,
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/3cI7sK5hU6Oa9Yv6Se2Nq1e"
+   },
+   "url": "https://business2-lasse-tfa.vercel.app/ai-infra-tools.html"
   }
  ]
 }

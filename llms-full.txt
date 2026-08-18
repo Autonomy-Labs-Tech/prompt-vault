@@ -214,3 +214,6 @@ Payment flow:
 - **AI Coding Tools Pack (5 verified utilities)** — €19.00 one-time. Five verified, stdlib-only developer utilities: TypeScript state machine, AST doc extractor, OpenAPI pytest generator, BFS site crawler, async HTTP batcher; test harnesses included and verified against strict test suites.
    - Buy: https://buy.stripe.com/dRm6oG11E8Wib2zekG2Nq1d
    - Landing: https://business2-lasse-tfa.vercel.app/ai-coding-tools.html
+- **AI Infra Tools Pack (4 verified utilities)** — €14.90 one-time. Four verified infrastructure utilities: raw-socket HTTP/1.1 server, self-balancing AVL tree, prefix Trie, and FastAPI RSS news aggregator; stdlib-only (FastAPI requirement noted for the aggregator), test harnesses included and verified against strict test suites.
+   - Buy: https://buy.stripe.com/3cI7sK5hU6Oa9Yv6Se2Nq1e
+   - Landing: https://business2-lasse-tfa.vercel.app/ai-infra-tools.html
