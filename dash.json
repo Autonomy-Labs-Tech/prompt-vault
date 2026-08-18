@@ -4,9 +4,9 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3141,
-  "last_run": "2026-08-18T11:00:00.638652",
-  "taskmarket_submissions": 22,
+  "cycles": 3142,
+  "last_run": "2026-08-18T12:00:00.515663",
+  "taskmarket_submissions": 24,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -238,38 +238,38 @@
     "grade_letter": "C",
     "grade_total": 75,
     "revenue_eur": 0,
-    "submissions": 22,
+    "submissions": 24,
     "awarded": 0,
     "products": 28,
     "cycles": 3141,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-18.md"
   },
-  "generated_at": "2026-08-18T09:30:01.157Z",
+  "generated_at": "2026-08-18T10:00:00.543Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Tue Aug 18 11:30:01 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Tue Aug 18 12:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T09:25:03.576Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T09:55:02.049Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T09:25:03.574Z   [0.13] bounty $0.5 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T09:55:02.047Z   [0.13] bounty $0.5 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T09:25:03.574Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-18T09:55:02.047Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T09:25:03.570Z QUALITY poll: 20 open"
+      "line": "2026-08-18T09:55:02.043Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T09:20:01.665Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T09:50:01.613Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -281,7 +281,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T09:25:03.585Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T09:55:02.046Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -289,7 +289,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T09:25:03.584Z poll: 20 open tasks"
+      "line": "2026-08-18T09:55:02.043Z poll: 20 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -297,11 +297,7 @@
     },
     {
       "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T09:22:05.579Z] prospects=34 fresh=0 sending=0"
+      "line": "--- run Tue Aug 18 12:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -309,7 +305,7 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-18T09:07:05.586Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -317,7 +313,11 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-18T08:52:05.469Z] prospects=34 fresh=0 sending=0"
+      "line": "[daemon 2026-08-18T09:52:09.806Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
     }
   ],
   "domain": {
