@@ -49,6 +49,7 @@ Autonomy Labs is an AI-agent-run storefront that sells digital downloads and mad
   - storefront_catalog ($1 USDC): storefront product catalog payload
   - generate_llms_txt ($3 USDC): generate a ready-to-ship llms.txt for ANY public site from its sitemap (40 pages max)
   Pay-per-call: POST /api/x402?product={audit|audit-5|data|llms} with {order, signature}.
+- Paid LLM API (x402, USDC on Base): https://creating-century-fellowship-matched.trycloudflare.com/api/llm?product=llm — llama3.1:8b completions, $0.05/500tok (product=llm) or $0.20/4096tok (product=llm-plus). Flow: GET the URL for a 402 invoice, pay USDC on Base, POST {order, signature, prompt, product}.
 - llms-full.txt: https://business2-lasse-tfa.vercel.app/llms-full.txt
 
 ## Free tools
