@@ -36,7 +36,17 @@
       "api-integration-kit": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X",
       "agent-billing-api": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y",
       "agent-memory-api": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z",
-      "custom-game-prototype": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
+      "custom-game-prototype": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10",
+      "pinball-overdrive": "https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12",
+      "skee-shock": "https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13",
+      "crane-breaker": "https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14",
+      "whack-protocol": "https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15",
+      "air-hockey-afterburner": "https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16",
+      "neon-range": "https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17",
+      "strike-vector": "https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18",
+      "bumper-rush": "https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19",
+      "coinfall-crisis": "https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a",
+      "dancefloor-panic": "https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b"
     }
   },
   "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
@@ -84,8 +94,15 @@
   ],
   "payment_protocol": {
     "type": "x402",
-    "requires": ["order", "signature", "txHash"],
-    "headers": ["PAYMENT-REQUIRED", "X-402-Signature"],
+    "requires": [
+      "order",
+      "signature",
+      "txHash"
+    ],
+    "headers": [
+      "PAYMENT-REQUIRED",
+      "X-402-Signature"
+    ],
     "verification": "This endpoint uses an exact-transfer x402 extension: clients send an EIP-712 order, signature, and settled Base transaction hash. Base USDC transfer is checked on-chain before delivery; offline fixtures are test-only. Production also requires X402_REPLAY_STORE_URL for durable transaction replay protection."
   },
   "facilitator_discovery": {

@@ -86,3 +86,14 @@ Full product catalog (JSON, Schema.org): https://business2-lasse-tfa.vercel.app/
 
 - Custom Browser Game Prototype: https://business2-lasse-tfa.vercel.app/custom-game-prototype.html
 - Wallet Watch API: https://business2-lasse-tfa.vercel.app/api/wallet_watch?product=watch&address=0x... (settled-transfer x402 extension, 1 USDC)
+
+- Pinball Overdrive — Complete HTML5 Game — €12.90 — https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12 — demo: https://business2-lasse-tfa.vercel.app/pinball-overdrive/play.html
+- Skee Shock — Complete HTML5 Game — €12.90 — https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13 — demo: https://business2-lasse-tfa.vercel.app/skee-shock/play.html
+- Crane Breaker — Complete HTML5 Game — €12.90 — https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14 — demo: https://business2-lasse-tfa.vercel.app/crane-breaker/play.html
+- Whack Protocol — Complete HTML5 Game — €12.90 — https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15 — demo: https://business2-lasse-tfa.vercel.app/whack-protocol/play.html
+- Air Hockey Afterburner — Complete HTML5 Game — €12.90 — https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16 — demo: https://business2-lasse-tfa.vercel.app/air-hockey-afterburner/play.html
+- Neon Range — Complete HTML5 Game — €12.90 — https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17 — demo: https://business2-lasse-tfa.vercel.app/neon-range/play.html
+- Strike Vector — Complete HTML5 Game — €12.90 — https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18 — demo: https://business2-lasse-tfa.vercel.app/strike-vector/play.html
+- Bumper Rush — Complete HTML5 Game — €12.90 — https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19 — demo: https://business2-lasse-tfa.vercel.app/bumper-rush/play.html
+- Coinfall Crisis — Complete HTML5 Game — €12.90 — https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a — demo: https://business2-lasse-tfa.vercel.app/coinfall-crisis/play.html
+- Dancefloor Panic — Complete HTML5 Game — €12.90 — https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b — demo: https://business2-lasse-tfa.vercel.app/dancefloor-panic/play.html
