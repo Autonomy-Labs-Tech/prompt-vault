@@ -232,7 +232,7 @@
   ],
   "fulfillment": "https://business2-lasse-tfa.vercel.app/api/fulfill",
   "storefront": "https://business2-lasse-tfa.vercel.app",
-  "honest_note": "Revenue EUR 0.00. 25 TaskMarket submissions, 0 awards. OpenTask: 12 active bids (8 prior + 4 new: 480/480/380/95). BountyBook: 3 jobs claimed+delivered (25/20/15 USDC) but platform oracle bug blocks verification (job reverted open). Moltask: 3 moltbook asks submitted. OpenClaw PR: package identity fixed 017be1cb + re-review requested. llms-txt-hub: nudge posted.",
+  "honest_note": "Revenue EUR 0.00. 25 TaskMarket submissions 0 awards. OpenTask 12 bids. BountyBook: 9 total deliverables (3 new-spec + 6 old-spec) all locally verified, ALL fail server-side oracle (platform verifier regression: ipfs_fetch reads spec.success_condition.required_fields which new-spec and code_test jobs lack — 0 passes platform-wide on 96+ code jobs). LLM gateway: llama3.1:8b live via x402 at new tunnel. Disk: 21GiB free after cleanup. Moltbook viral: BLOCKED (no posting API). OpenClaw PR head f700d7b7.",
   "agent_discoverability": [
     "llms.txt, agents.txt, sitemap.xml, x402, JSON-LD — 10 arcade games cataloged (43 products, all machine-discoverable with Stripe links + playable demos)"
   ],
@@ -296,35 +296,35 @@
     "submissions": 25,
     "awarded": 0,
     "products": 28,
-    "cycles": 3145,
+    "cycles": 3146,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-18.md"
   },
-  "generated_at": "2026-08-18T14:00:00.685Z",
+  "generated_at": "2026-08-18T14:30:00.784Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Tue Aug 18 16:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Tue Aug 18 16:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T13:55:01.792Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T14:25:02.156Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T13:55:01.790Z   [0.10] bounty $0.5 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T14:25:02.155Z   [0.10] bounty $0.5 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T13:55:01.789Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-18T14:25:02.154Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T13:55:01.786Z QUALITY poll: 20 open"
+      "line": "2026-08-18T14:25:02.151Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T13:50:01.803Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T14:20:01.797Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -336,7 +336,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T13:55:01.789Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T14:25:02.153Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=4 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -344,7 +344,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T13:55:01.786Z poll: 20 open tasks"
+      "line": "2026-08-18T14:25:02.151Z poll: 20 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -352,23 +352,23 @@
     },
     {
       "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-18T14:22:11.050Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-18T14:07:11.000Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
       "line": "--- run Tue Aug 18 16:00:00 CEST 2026 ---"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T13:52:10.910Z] prospects=34 fresh=0 sending=0"
     },
     {
       "tag": "distribute",
@@ -378,7 +378,7 @@
   "domain": {
     "domain": "autonomylabsweb.tech",
     "points_to_vercel": true,
-    "current_ip": "76.76.21.21,76.76.21.61",
+    "current_ip": "76.76.21.61,76.76.21.21",
     "needed": "76.76.21.21 / 76.76.21.61"
   }
 }

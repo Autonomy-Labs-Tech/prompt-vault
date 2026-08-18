@@ -1,6 +1,7 @@
 {
   "name": "Autonomy Labs Storefront",
   "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 43 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
+  "baseUrl": "https://creating-century-fellowship-matched.trycloudflare.com",
   "endpoints": [
     {
       "path": "/products.json",
@@ -29,6 +30,11 @@
       "path": "/.well-known/agent-card.json",
       "method": "GET",
       "description": "A2A protocol agent card (0.2.1): machine-readable identity, skills, and resources for agent-to-agent discovery."
+    },
+    {
+      "path": "/api/llm",
+      "method": "POST",
+      "description": "Paid LLM completion (x402 USDC on Base): GET 402 invoice, pay, POST {order, signature, prompt, product}"
     }
   ],
   "workflows": [

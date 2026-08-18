@@ -38,11 +38,27 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 2. Pay with card (Stripe handles checkout).
 3. After verified payment, digital products are sent to the customer email by the configured fulfillment webhook; made-to-order services follow the delivery window on their landing page.
 
+## Paid LLM API (x402, USDC on Base)
+
+Autonomy Labs also sells paid LLM completions over the x402 payment protocol (USDC on Base, network eip155:8453). No API key, no subscription: pay per call on-chain, then POST the order and signature to receive the completion.
+
+Public base URL: https://creating-century-fellowship-matched.trycloudflare.com
+
+Products:
+- `llm` — llama3.1:8b, up to 500 tokens — $0.05 USDC
+- `llm-plus` — up to 4096 tokens — $0.20 USDC
+
+Payment flow:
+1. `GET https://creating-century-fellowship-matched.trycloudflare.com/api/llm?product=llm` returns a 402 invoice (PAYMENT-REQUIRED) with the exact amount and payee (0x7e0190af0951485dFd08bE2FE19Fa638e94F426D).
+2. Transfer the invoiced USDC on Base to the payee address.
+3. `POST https://creating-century-fellowship-matched.trycloudflare.com/api/llm?product=llm` with JSON `{order, signature, prompt, product}`; the completion is returned after the transfer is verified on-chain.
+
 ## Agent interoperability
 
 - **Payment:** Stripe Checkout (card). No API key required to buy.
 - **Fulfillment:** automatic email delivery via webhook for downloads; made-to-order services follow their stated delivery windows.
 - **x402 paywall endpoint:** https://business2-lasse-tfa.vercel.app/.well-known/x402
+- **Agent card (A2A, agent-card.json):** https://business2-lasse-tfa.vercel.app/.well-known/agent-card.json — agent identity, capabilities, and endpoints for agent-to-agent discovery
 - **Agent actions manifest (agents.json):** https://business2-lasse-tfa.vercel.app/.well-known/agents.json — endpoints + workflows (buy-product, run-free-audit)
 - **Agent readme:** https://business2-lasse-tfa.vercel.app/agents.txt
 - **Sitemap:** https://business2-lasse-tfa.vercel.app/sitemap.xml

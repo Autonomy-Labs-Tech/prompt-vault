@@ -36,6 +36,7 @@ page.
 
 ## For agents
 - Catalog: /llms.txt
+- Paid LLM completions — llama3.1:8b via x402 — $0.05/500tok, $0.20/4096tok USDC (Base) — https://creating-century-fellowship-matched.trycloudflare.com/api/llm?product=llm
 - MCP pay-per-call tools (x402, USDC on Base): /api/mcp (Streamable-HTTP; tools: agent_site_audit $2 USDC, agent_site_audit_5 $7 USDC, storefront_catalog $1 USDC, generate_llms_txt $3 USDC, wallet_watch_snapshot $1 USDC, wallet_watch_pro $5 USDC)
 - Machine-readable payment config: /.well-known/x402
 - Products are delivered via webhook: /api/fulfill (POST, Stripe events).

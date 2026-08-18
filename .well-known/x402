@@ -53,6 +53,7 @@
  "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
  "fulfillment": "automatic email delivery via webhook for digital downloads; made-to-order services follow their stated delivery windows",
  "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt",
+ "public_base_url": "https://creating-century-fellowship-matched.trycloudflare.com",
  "currency": "USDC",
  "network": "eip155:8453",
  "payable_endpoints": [
@@ -90,6 +91,18 @@
    "route": "POST /api/x402?product=watch-pro",
    "description": "Extended bounded Base wallet snapshot for one public address",
    "price_usdc": "5.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/llm?product=llm",
+   "description": "Paid LLM completion via x402 — llama3.1:8b, 500 tokens, $0.05 USDC on Base; send {order, signature, prompt, product} after on-chain USDC to 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D",
+   "price_usdc": "0.05",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/llm?product=llm-plus",
+   "description": "Paid LLM completion up to 4096 tokens, $0.20 USDC on Base",
+   "price_usdc": "0.20",
    "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
   }
  ],
