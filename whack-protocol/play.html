@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>WHACK PROTOCOL — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #lives{display:flex;gap:6px;}
+  .life{width:14px;height:14px;border-radius:50%;background:#00ff88;box-shadow:0 0 8px #00ff88;}
+  .life.off{background:#223;box-shadow:none;}
+  #protocol{position:fixed;left:50%;top:56px;transform:translateX(-50%);background:rgba(10,16,40,.9);border:1px solid #ffb300;border-radius:10px;padding:8px 18px;color:#ffd23e;font-weight:800;font-size:15px;letter-spacing:1px;z-index:5;text-align:center;pointer-events:none;box-shadow:0 0 16px rgba(255,176,0,.35);}
+  #combo{position:fixed;left:50%;top:110px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#00ff88,#ffb300,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#00ff88,#ffb300);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="lives"></div>
+    <span class="hud-label" id="wave-label">Wave 1</span>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="protocol">PROTOCOL: STRIKE GREEN</div>
+<div id="combo"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<div id="overlay">
+  <h1>WHACK PROTOCOL</h1>
+  <h2>Read the rule card. Strike the correct targets. Spare the protected ones.</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">CLICK / TAP — strike target &nbsp;·&nbsp; 1-9 — strike numbered cell &nbsp;·&nbsp; R — restart</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   WHACK PROTOCOL — pattern-recognition triage score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- field geometry ----------
+const COLS = 3, ROWS = 3;
+const CELL = 190, GAP = 24;
+const FW = COLS * (CELL + GAP) - GAP;
+const FH = ROWS * (CELL + GAP) - GAP;
+
+// ---------- state ----------
+let score = 0, high = 0, lives = 3, combo = 1, comboT = 0;
+let wave = 1, state = 'title';             // title | play | over
+let protocol = 'green', protocolT = 0, protocolAnnounced = false;
+let focusReady = false, focusT = 0, focusCd = 0;
+let spawnQueue = [], spawnT = 0;
+let cells = [];                            // {x,y,kind,up,upT,delay,done,flash}
+let chainCells = [], jackpotArmed = false, jackpotT = 0;
+let parts = [], popups = [];
+let muted = false;
+try { muted = localStorage.getItem('wp_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('wp_high') || '0', 10) || 0; } catch (e) {}
+
+// target kinds: green=strike, red=protected, gold=jackpot, blue=delayed
+const KINDS = {
+  green: { color: 0x00ff88, label: 'STRIKE', pts: 100 },
+  red: { color: 0xff3d81, label: 'SPARE', pts: 0 },
+  gold: { color: 0xffb300, label: 'JACKPOT', pts: 500 },
+  blue: { color: 0x00d4ff, label: 'DELAYED', pts: 200 },
+};
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 0, 1400);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+const rim = new THREE.PointLight(0x00ff88, 800, 2000);
+rim.position.set(0, 0, 500);
+scene.add(rim);
+
+// base plate
+const base = new THREE.Mesh(
+  new THREE.BoxGeometry(FW + 80, 30, FH + 80),
+  new THREE.MeshStandardMaterial({ color: 0x0a0f22, roughness: 0.9, metalness: 0.2 })
+);
+base.position.y = -15;
+scene.add(base);
+
+// cell meshes
+const cellMeshes = [];
+for (let r = 0; r < ROWS; r++) {
+  for (let c = 0; c < COLS; c++) {
+    const x = (c - 1) * (CELL + GAP);
+    const y = (1 - r) * (CELL + GAP);
+    const baseMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(CELL, 26, CELL),
+      new THREE.MeshStandardMaterial({ color: 0x101a38, roughness: 0.6, metalness: 0.3 })
+    );
+    baseMesh.position.set(x, y - 6, 0);
+    scene.add(baseMesh);
+    // target (mole) head
+    const head = new THREE.Mesh(
+      new THREE.SphereGeometry(62, 24, 18),
+      new THREE.MeshStandardMaterial({ color: 0x334466, emissive: 0x223344, emissiveIntensity: 0.3 })
+    );
+    head.scale.y = 0.9;
+    head.position.set(x, y, 8);
+    head.visible = false;
+    scene.add(head);
+    // hat (kind indicator)
+    const hat = new THREE.Mesh(
+      new THREE.CylinderGeometry(34, 30, 26, 20),
+      new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.4 })
+    );
+    hat.position.set(x, y + 46, 8);
+    hat.visible = false;
+    scene.add(hat);
+    // cell number label
+    const num = r * COLS + c + 1;
+    const cv = document.createElement('canvas');
+    cv.width = 64; cv.height = 64;
+    const cg = cv.getContext('2d');
+    cg.font = 'bold 40px sans-serif';
+    cg.textAlign = 'center'; cg.textBaseline = 'middle';
+    cg.fillStyle = '#3a5a7a';
+    cg.fillText(String(num), 32, 36);
+    const tex = new THREE.CanvasTexture(cv);
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, opacity: 0.7 }));
+    sp.position.set(x, y - 70, 12);
+    sp.scale.set(60, 60, 1);
+    scene.add(sp);
+    cells.push({ x, y, kind: null, up: false, upT: 0, delay: 0, done: false, flash: 0, meshes: { head, hat }, num });
+  }
+}
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), livesEl = $('lives'), comboEl = $('combo'),
+  overlay = $('overlay'), finalScore = $('final-score'), finalHigh = $('final-high'),
+  finalNew = $('final-new'), startBtn = $('start'), muteBtn = $('mute'),
+  protocolEl = $('protocol'), waveLabel = $('wave-label');
+function renderLives() {
+  livesEl.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const d = document.createElement('div');
+    d.className = 'life' + (i < lives ? '' : ' off');
+    livesEl.appendChild(d);
+  }
+}
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('wp_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  strike: () => tone(880, 0.1, 'square', 0.15, 1320),
+  spare: () => tone(220, 0.18, 'sawtooth', 0.12, 140),
+  jackpot: () => { tone(880, 0.1, 'sine', 0.22); setTimeout(() => tone(1175, 0.12, 'sine', 0.22), 90); setTimeout(() => tone(1568, 0.2, 'sine', 0.22), 180); },
+  delayed: () => tone(520, 0.14, 'sine', 0.15, 780),
+  error: () => tone(160, 0.25, 'sawtooth', 0.14, 80),
+  protocol: () => tone(440, 0.12, 'sine', 0.16, 660),
+  focus: () => tone(330, 0.2, 'sine', 0.15, 660),
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 100 + Math.random() * 260;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const pts = Math.round(base * combo);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('wp_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function bumpCombo() {
+  const now = performance.now() / 1000;
+  if (now - comboT < 3) combo = Math.min(5, combo + 1);
+  else combo = 1;
+  comboT = now;
+  if (combo > 1) {
+    comboEl.style.display = 'block';
+    comboEl.textContent = 'COMBO x' + combo;
+  }
+}
+function loseLife(reason) {
+  lives--;
+  renderLives();
+  addPopup(0, -300, reason || 'ERROR', '#ff3d81');
+  shake = 0.3;
+  sfx.error();
+  combo = 1; comboEl.style.display = 'none';
+  if (lives <= 0) gameOver();
+}
+
+// ---------- protocols (changing rule cards) ----------
+function pickProtocol(w) {
+  const pool = ['green', 'red', 'blue', 'gold', 'mixed'];
+  // escalate: later waves allow more complex protocols
+  const idx = (w - 1) % pool.length;
+  return pool[idx];
+}
+function announceProtocol(p) {
+  protocol = p;
+  protocolAnnounced = true;
+  protocolT = 5;
+  const names = {
+    green: 'PROTOCOL: STRIKE GREEN TARGETS',
+    red: 'PROTOCOL: SPARE RED — GREEN IS TRAP',
+    blue: 'PROTOCOL: STRIKE BLUE AFTER 1.2s',
+    gold: 'PROTOCOL: ONLY GOLD COUNTS',
+    mixed: 'PROTOCOL: GREEN=+100 RED=-LIFE BLUE=200',
+  };
+  protocolEl.textContent = names[p];
+  protocolEl.style.display = 'block';
+  sfx.protocol();
+}
+
+// ---------- wave generation ----------
+function spawnWave() {
+  // announce the protocol BEFORE assigning kinds so the card matches the field
+  const nextProtocol = pickProtocol(wave);
+  announceProtocol(nextProtocol);
+  const n = Math.min(4 + Math.floor(wave / 2), 7);
+  const available = [...cells];
+  const chosen = [];
+  for (let i = 0; i < n && available.length; i++) {
+    const idx = Math.floor(Math.random() * available.length);
+    chosen.push(available.splice(idx, 1)[0]);
+  }
+  // assign kinds per protocol
+  for (let i = 0; i < chosen.length; i++) {
+    const cell = chosen[i];
+    let kind;
+    if (protocol === 'green') kind = 'green';
+    else if (protocol === 'red') kind = (i % 3 === 0) ? 'red' : 'green';  // mix: most green
+    else if (protocol === 'blue') kind = 'blue';
+    else if (protocol === 'gold') kind = 'gold';
+    else {
+      // mixed: every 3rd is red (spare), rest green
+      kind = (i % 3 === 2) ? 'red' : 'green';
+      if (Math.random() < 0.15) kind = 'blue';
+    }
+    cell.kind = kind;
+    cell.done = false;
+    cell.up = false;
+    cell.delay = kind === 'blue' ? 1.2 : 0;
+    cell.upT = 0.5 + i * 0.15;
+    spawnQueue.push(cell);
+  }
+  // jackpot every 3rd wave
+  if (wave % 3 === 0 && chosen.length > 0) {
+    chosen[0].kind = 'gold';
+  }
+  // chain: 3+ greens in a row = jackpot opportunity
+  chainCells = chosen.filter(c => c.kind === 'green' || c.kind === 'gold').slice(0, 3);
+  jackpotArmed = false;
+}
+
+// ---------- game flow ----------
+function startGame() {
+  score = 0; lives = 3; combo = 1; wave = 1;
+  focusReady = true; focusCd = 0; focusT = 0;
+  spawnQueue = []; spawnT = 0;
+  for (const c of cells) { c.kind = null; c.up = false; c.done = false; c.flash = 0; c.upT = 0; }
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  waveLabel.textContent = 'Wave 1';
+  renderLives();
+  overlay.style.display = 'none';
+  protocolEl.style.display = 'block';
+  spawnWave();
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k >= '1' && k <= '9') {
+    const idx = Number(k) - 1;
+    if (idx < cells.length) strikeCell(cells[idx]);
+    return;
+  }
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'm' || k === 'M') { muted = !muted; try { localStorage.setItem('wp_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); }
+  if (k === 'f' || k === 'F') useFocus();
+});
+// click/tap: raycast onto the cell plane
+function pickCell(clientX, clientY) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  const ndcX = ((clientX - rect.left) / rect.width) * 2 - 1;
+  const ndcY = -((clientY - rect.top) / rect.height) * 2 + 1;
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(new THREE.Vector2(ndcX, ndcY), camera);
+  // test against cell base planes
+  let best = null, bestDist = Infinity;
+  for (const c of cells) {
+    const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -0);
+    const hit = new THREE.Vector3();
+    if (raycaster.ray.intersectPlane(plane, hit)) {
+      const dx = hit.x - c.x, dy = hit.y - c.y;
+      const d = Math.hypot(dx, dy);
+      if (d < CELL / 2 && d < bestDist) { best = c; bestDist = d; }
+    }
+  }
+  return best;
+}
+sceneEl.addEventListener('click', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  const cell = pickCell(e.clientX, e.clientY);
+  if (cell) strikeCell(cell);
+});
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  const t = e.touches[0];
+  const cell = pickCell(t.clientX, t.clientY);
+  if (cell) strikeCell(cell);
+}, { passive: true });
+
+// ---------- striking ----------
+function strikeCell(cell) {
+  if (state !== 'play') return;
+  if (!cell.up) return;                    // nothing to strike
+  const kind = cell.kind;
+  cell.up = false;
+  cell.flash = 0.25;
+  if (kind === 'green') {
+    bumpCombo();
+    scoreAdd(100, cell.x, cell.y + 40, '#00ff88');
+    sfx.strike();
+    cell.done = true;
+    chainCells = chainCells.filter(c => c !== cell);
+    if (chainCells.length === 0 && wave % 3 === 0) {
+      // chain complete -> jackpot opportunity spawns
+      if (!jackpotArmed) {
+        jackpotArmed = true;
+        jackpotT = 4;
+        const jc = cells.find(c => !c.up && !c.done && !c.kind);
+        if (jc) {
+          jc.kind = 'gold'; jc.up = true; jc.upT = 0.2;
+          addPopup(0, 200, 'JACKPOT SPAWNED!', '#ffb300');
+          sfx.jackpot();
+        }
+      }
+    }
+  } else if (kind === 'red') {
+    loseLife('SPARE FAILED!');
+    cell.done = true;
+  } else if (kind === 'blue') {
+    if (cell.delay > 0) {
+      // struck too early
+      loseLife('TOO EARLY!');
+      cell.done = true;
+    } else {
+      bumpCombo();
+      scoreAdd(200, cell.x, cell.y + 40, '#00d4ff');
+      sfx.delayed();
+      cell.done = true;
+    }
+  } else if (kind === 'gold') {
+    bumpCombo();
+    scoreAdd(500, cell.x, cell.y + 40, '#ffb300');
+    sfx.jackpot();
+    addParts(cell.x, cell.y, 0xffb300, 14);
+    cell.done = true;
+    jackpotArmed = false;
+  }
+  addParts(cell.x, cell.y, KINDS[kind] ? KINDS[kind].color : 0xffffff, 8);
+  checkWave();
+}
+function checkWave() {
+  const remaining = cells.some(c => c.up && !c.done) || spawnQueue.length > 0;
+  if (!remaining) {
+    wave++;
+    waveLabel.textContent = 'Wave ' + wave;
+    addPopup(0, 250, 'WAVE ' + wave + '!', '#00d4ff');
+    setTimeout(spawnWave, 900);
+  }
+}
+
+// focus tool: clears all up-targets of the current protocol kind (recovery)
+function useFocus() {
+  if (!focusReady || state !== 'play') return;
+  focusReady = false;
+  focusCd = 18;
+  sfx.focus();
+  let cleared = 0;
+  for (const c of cells) {
+    if (c.up && c.kind === protocol && !c.done) {
+      c.up = false;
+      if (protocol === 'green') { scoreAdd(100, c.x, c.y + 40, '#00ff88'); }
+      else if (protocol === 'blue') { scoreAdd(200, c.x, c.y + 40, '#00d4ff'); }
+      else if (protocol === 'gold') { scoreAdd(500, c.x, c.y + 40, '#ffb300'); }
+      c.done = true;
+      cleared++;
+    }
+  }
+  if (cleared > 0) addPopup(0, 200, 'FOCUS: +' + cleared + ' CLEARED', '#7b5cff');
+  checkWave();
+}
+
+// ---------- update ----------
+function update(dt) {
+  if (state !== 'play') return;
+  // protocol timer: announce refresh
+  if (protocolAnnounced) {
+    protocolT -= dt;
+    if (protocolT <= 0) {
+      protocolEl.style.opacity = '0.35';
+      protocolAnnounced = false;
+    } else {
+      protocolEl.style.opacity = '1';
+    }
+  }
+  // focus cooldown
+  if (focusCd > 0) {
+    focusCd -= dt;
+    if (focusCd <= 0) focusReady = true;
+  } else if (!focusReady) {
+    focusReady = true;
+  }
+  // jackpot timer
+  if (jackpotArmed) {
+    jackpotT -= dt;
+    if (jackpotT <= 0) { jackpotArmed = false; }
+  }
+  // spawn queue
+  if (spawnQueue.length > 0) {
+    spawnT -= dt;
+    if (spawnT <= 0) {
+      const cell = spawnQueue.shift();
+      cell.up = true;
+      spawnT = 0.35 + Math.random() * 0.4;
+    }
+  }
+  // cell timers: up time limit (miss = error)
+  for (const c of cells) {
+    if (c.up && !c.done) {
+      c.upT += dt;
+      if (c.kind === 'blue' && c.delay > 0) {
+        c.delay -= dt;
+        if (c.delay <= 0) {
+          c.delay = 0;
+          addPopup(c.x, c.y + 30, 'NOW!', '#00d4ff');
+          sfx.protocol();
+        }
+      }
+      const limit = c.kind === 'gold' ? 3 : c.kind === 'blue' ? 4 : 2.5;
+      if (c.upT > limit) {
+        // missed -> error for green/gold, no penalty for red/blue expiry? red expiry is GOOD
+        if (c.kind === 'red') {
+          c.done = true;
+          c.up = false;
+          addPopup(c.x, c.y + 30, 'SPARED!', '#ff3d81');
+        } else if (c.kind !== 'blue' || c.delay <= 0) {
+          loseLife('MISSED!');
+          c.done = true;
+          c.up = false;
+        } else {
+          c.done = true;
+          c.up = false;
+        }
+      }
+    }
+    if (c.flash > 0) c.flash -= dt;
+  }
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    p.vy -= 500 * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; }
+  }
+}
+
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+
+// ---------- render ----------
+let shake = 0;
+function render(dt, t) {
+  // cells
+  for (const c of cells) {
+    const h = c.meshes.head;
+    const hat = c.meshes.hat;
+    if (c.up && !c.done) {
+      h.visible = true;
+      hat.visible = true;
+      const pop = Math.max(0, Math.sin(Math.min(1, c.upT * 3) * Math.PI));
+      const s = 1 + pop * 0.15;
+      h.scale.set(s, s * 0.9, s);
+      const kind = KINDS[c.kind] || KINDS.green;
+      h.material.color.setHex(kind.color);
+      h.material.emissive.setHex(kind.color);
+      h.material.emissiveIntensity = 0.55 + (c.flash > 0 ? c.flash * 2 : 0);
+      hat.material.color.setHex(kind.color);
+      hat.material.emissiveIntensity = 0.4;
+      // blue delay progress ring via hat scale
+      if (c.kind === 'blue' && c.delay > 0) {
+        hat.scale.set(0.5 + (1 - c.delay / 1.2) * 0.5, 0.5 + (1 - c.delay / 1.2) * 0.5, 1);
+      } else {
+        hat.scale.set(1, 1, 1);
+      }
+    } else {
+      h.visible = false;
+      hat.visible = false;
+    }
+  }
+  // particles (mesh-less; skip 3D particles, DOM popups carry feedback)
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 18) + '%';
+      el.style.top = (50 - p.y / 18) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  // camera shake
+  if (shake > 0) {
+    shake -= dt;
+    camera.position.x = (Math.random() - 0.5) * shake * 30;
+    camera.position.y = (Math.random() - 0.5) * shake * 30;
+  } else {
+    camera.position.x = 0; camera.position.y = 0;
+  }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+  if (combo > 1 && performance.now() / 1000 - comboT > 3) {
+    combo = 1;
+    comboEl.style.display = 'none';
+  }
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    update(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks ----------
+if (TEST) {
+  window.__whack = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get lives() { return lives; },
+    get combo() { return combo; },
+    get wave() { return wave; },
+    get protocol() { return protocol; },
+    get focusReady() { return focusReady; },
+    get cells() { return cells.map(c => ({ num: c.num, kind: c.kind, up: c.up, done: c.done, delay: c.delay })); },
+    start: startGame,
+    spawnWave,
+    strike: (num) => strikeCell(cells[num - 1]),
+    setCell: (num, kind, up) => { const c = cells[num - 1]; c.kind = kind; c.up = up; c.done = false; c.upT = 0; c.delay = kind === 'blue' ? 1.2 : 0; },
+    useFocus,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) update(1 / 60); },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>

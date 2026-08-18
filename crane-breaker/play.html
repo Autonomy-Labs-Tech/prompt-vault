@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>CRANE BREAKER — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #drops{font-size:13px;color:#9fd4ff;font-weight:700;letter-spacing:1px;}
+  #press-wrap{width:160px;height:10px;border:1px solid #ff3d81;border-radius:5px;overflow:hidden;background:rgba(0,0,0,.5);}
+  #press-fill{height:100%;width:0%;background:linear-gradient(90deg,#00ff88,#ff3d81);transition:width .2s;}
+  #announce{position:fixed;left:50%;top:110px;transform:translateX(-50%);background:rgba(10,16,40,.92);border:1px solid #ffb300;border-radius:10px;padding:8px 20px;color:#ffd23e;font-weight:800;font-size:15px;letter-spacing:1px;z-index:5;display:none;pointer-events:none;}
+  #combo{position:fixed;left:50%;top:64px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#00d4ff,#ffb300,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#00d4ff,#ffb300);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+  #grip-btn{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:30px;background:radial-gradient(circle at 35% 35%,#00d4ff,#7b5cff);border:2px solid #9fd4ff;color:#04101a;font-weight:900;font-size:13px;letter-spacing:2px;display:none;z-index:7;pointer-events:auto;box-shadow:0 0 20px rgba(0,212,255,.5);}
+  #grip-btn:active{transform:translateX(-50%) scale(.94);}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="drops">Drops: 8</div>
+    <div id="press-wrap"><div id="press-fill"></div></div>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="combo"></div>
+<div id="announce"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<button id="grip-btn">PRECISION GRIP</button>
+<div id="overlay">
+  <h1>CRANE BREAKER</h1>
+  <h2>Align, drop, grab, collect — read the prizes, beat the pressure</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">← → / A D — move grabber &nbsp;·&nbsp; SPACE — drop &nbsp;·&nbsp; G — precision grip (when ready) &nbsp;·&nbsp; R — restart</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   CRANE BREAKER — claw-machine precision score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- machine geometry ----------
+const FIELD_W = 720, FIELD_H = 480;        // prize field half-extents
+const CHUTE_X = 0, CHUTE_W = 110;          // collection chute at back center
+const GRAB_R = 40;
+
+// ---------- state ----------
+let score = 0, high = 0, combo = 1, comboT = 0;
+let dropsLeft = 8, pressure = 0;
+let state = 'title';                       // title | play | over
+let phase = 'move';                        // move | descend | grab | ascend | collect
+let phaseT = 0;
+let grabX = 0, grabY = 0, grabDepth = 0;
+let grabbed = null;
+let prizes = [];
+let gripReady = false, gripCd = 0, gripActive = false;
+let parts = [], popups = [];
+let muted = false;
+try { muted = localStorage.getItem('cb_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('cb_high') || '0', 10) || 0; } catch (e) {}
+
+// prize roles: common (reliable low), wobbly (unstable medium), rare (high-value), bomb (state change)
+const ROLES = {
+  common: { color: 0x00d4ff, pts: 100, w: 56, h: 56, hold: 0.5 },
+  wobbly: { color: 0x7b5cff, pts: 250, w: 56, h: 56, hold: 0.25, wobble: true },
+  rare: { color: 0xffb300, pts: 600, w: 48, h: 48, hold: 0.45 },
+  bomb: { color: 0xff3d81, pts: 0, w: 50, h: 50, hold: 0.4 },
+};
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 0, 1500);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+
+// machine housing
+const housing = new THREE.Mesh(
+  new THREE.BoxGeometry(FIELD_W * 2 + 80, 120, FIELD_H * 2 + 80),
+  new THREE.MeshStandardMaterial({ color: 0x0a0f22, roughness: 0.7, metalness: 0.3, transparent: true, opacity: 0.35 })
+);
+housing.position.y = -30;
+scene.add(housing);
+// prize field floor
+const field = new THREE.Mesh(
+  new THREE.PlaneGeometry(FIELD_W * 2, FIELD_H * 2),
+  new THREE.MeshStandardMaterial({ color: 0x14204a, roughness: 0.6, metalness: 0.3 })
+);
+scene.add(field);
+// chute
+const chute = new THREE.Mesh(
+  new THREE.BoxGeometry(CHUTE_W, 30, 40),
+  new THREE.MeshStandardMaterial({ color: 0xffb300, emissive: 0xffb300, emissiveIntensity: 0.5 })
+);
+chute.position.set(CHUTE_X, FIELD_H - 20, 0);
+scene.add(chute);
+// rail (top)
+const rail = new THREE.Mesh(
+  new THREE.BoxGeometry(FIELD_W * 2 + 40, 16, 16),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.6 })
+);
+rail.position.set(0, FIELD_H + 90, 0);
+scene.add(rail);
+
+// grabber
+const grabber = new THREE.Group();
+const arm = new THREE.Mesh(
+  new THREE.CylinderGeometry(6, 6, 160, 8),
+  new THREE.MeshStandardMaterial({ color: 0x88ccff, emissive: 0x88ccff, emissiveIntensity: 0.4, metalness: 0.7 })
+);
+arm.position.y = -80;
+grabber.add(arm);
+const head = new THREE.Mesh(
+  new THREE.SphereGeometry(16, 12, 12),
+  new THREE.MeshStandardMaterial({ color: 0xdfe8ff, emissive: 0x88ccff, emissiveIntensity: 0.5, metalness: 0.8 })
+);
+head.position.y = -160;
+grabber.add(head);
+const jawL = new THREE.Mesh(
+  new THREE.BoxGeometry(12, 26, 12),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.5 })
+);
+jawL.position.set(-14, -180, 0);
+grabber.add(jawL);
+const jawR = new THREE.Mesh(
+  new THREE.BoxGeometry(12, 26, 12),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.5 })
+);
+jawR.position.set(14, -180, 0);
+grabber.add(jawR);
+scene.add(grabber);
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), dropsEl = $('drops'), pressFill = $('press-fill'),
+  comboEl = $('combo'), overlay = $('overlay'), finalScore = $('final-score'),
+  finalHigh = $('final-high'), finalNew = $('final-new'), startBtn = $('start'),
+  muteBtn = $('mute'), announceEl = $('announce'), gripBtn = $('grip-btn');
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('cb_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  move: () => tone(600, 0.04, 'sine', 0.06, 700),
+  drop: () => noise(0.15, 0.2),
+  grab: () => tone(440, 0.1, 'sine', 0.15, 660),
+  score: () => { tone(880, 0.1, 'sine', 0.2); setTimeout(() => tone(1175, 0.12, 'sine', 0.2), 90); },
+  bomb: () => tone(160, 0.3, 'sawtooth', 0.18, 80),
+  miss: () => tone(200, 0.15, 'sawtooth', 0.1, 120),
+  grip: () => tone(520, 0.15, 'sine', 0.15, 780),
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 100 + Math.random() * 260;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const pts = Math.round(base * combo);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('cb_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function bumpCombo() {
+  const now = performance.now() / 1000;
+  if (now - comboT < 5) combo = Math.min(5, combo + 1);
+  else combo = 1;
+  comboT = now;
+  if (combo > 1) {
+    comboEl.style.display = 'block';
+    comboEl.textContent = 'COMBO x' + combo;
+  }
+}
+function addPressure(v) {
+  pressure = clamp(pressure + v, 0, 100);
+  if (pressure >= 100) {
+    // pressure event: shake + a wobbly becomes extra wobbly
+    announce('PRESSURE SURGE!');
+  }
+}
+
+// ---------- prizes ----------
+function spawnPrize(role, x, y) {
+  const r = ROLES[role];
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(r.w, r.h, r.h),
+    new THREE.MeshStandardMaterial({ color: r.color, emissive: r.color, emissiveIntensity: 0.5, roughness: 0.4, metalness: 0.4 })
+  );
+  g.add(body);
+  g.position.set(x, y, 0);
+  scene.add(g);
+  const p = { x, y, role, mesh: g, grabbed: false, wobbleT: Math.random() * 10, wobbleSeed: Math.random() * 10 };
+  prizes.push(p);
+  return p;
+}
+function setupBoard() {
+  for (const p of prizes) scene.remove(p.mesh);
+  prizes = [];
+  // grid of prizes: commons scattered, wobblies, one rare, one bomb
+  const spots = [
+    [-260, -140], [-130, -140], [0, -140], [130, -140], [260, -140],
+    [-260, 0], [-130, 0], [0, 0], [130, 0], [260, 0],
+    [-260, 140], [-130, 140], [0, 140], [130, 140], [260, 140],
+  ];
+  const roles = ['common', 'common', 'wobbly', 'common', 'common', 'wobbly', 'common', 'rare', 'common', 'wobbly', 'common', 'bomb', 'common', 'common', 'wobbly'];
+  for (let i = 0; i < spots.length; i++) {
+    spawnPrize(roles[i], spots[i][0], spots[i][1]);
+  }
+}
+
+// ---------- flow ----------
+function startGame() {
+  score = 0; combo = 1; dropsLeft = 8; pressure = 0;
+  gripReady = false; gripCd = 0; gripActive = false;
+  phase = 'move'; grabbed = null;
+  grabX = 0; grabY = FIELD_H + 30; grabDepth = 0;
+  setupBoard();
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  dropsEl.textContent = 'Drops: 8';
+  pressFill.style.width = '0%';
+  overlay.style.display = 'none';
+  announceEl.style.display = 'none';
+  gripBtn.style.display = 'none';
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+
+function announce(text) {
+  announceEl.textContent = text;
+  announceEl.style.display = 'block';
+  setTimeout(() => { announceEl.style.display = 'none'; }, 1800);
+}
+
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+
+function useGrip() {
+  if (!gripReady || gripCd > 0 || state !== 'play') return;
+  gripActive = true;
+  gripReady = false;
+  gripCd = 12;
+  gripBtn.style.display = 'none';
+  sfx.grip();
+  addPopup(grabX, FIELD_H + 40, 'PRECISION GRIP', '#00d4ff');
+}
+
+// ---------- input ----------
+const keys = {};
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k === ' ') {
+    if (state === 'title' || state === 'over') { startGame(); return; }
+    if (phase === 'move') {
+      phase = 'descend';
+      phaseT = 1.5;
+      sfx.drop();
+    }
+    e.preventDefault();
+  }
+  if (k === 'g' || k === 'G') useGrip();
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'm' || k === 'M') { muted = !muted; try { localStorage.setItem('cb_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); }
+  keys[k] = true;
+});
+window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  if (phase === 'move') {
+    phase = 'descend';
+    phaseT = 1.5;
+    sfx.drop();
+  }
+}, { passive: true });
+sceneEl.addEventListener('touchmove', (e) => {
+  if (state !== 'play' || phase !== 'move') return;
+  const t = e.touches[0];
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((t.clientX - rect.left) / rect.width) * 2 - 1;
+  grabX = nx * (FIELD_W - 60);
+  e.preventDefault();
+}, { passive: false });
+gripBtn.addEventListener('click', useGrip);
+
+// ---------- update ----------
+function update(dt) {
+  if (state !== 'play') return;
+  // movement
+  if (phase === 'move') {
+    let dir = 0;
+    if (keys['ArrowLeft'] || keys['a'] || keys['A']) dir -= 1;
+    if (keys['ArrowRight'] || keys['d'] || keys['D']) dir += 1;
+    if (dir !== 0) {
+      grabX = clamp(grabX + dir * 340 * dt, -FIELD_W + 40, FIELD_W - 40);
+      if (Math.random() < dt * 6) sfx.move();
+    }
+  }
+  // descend (grab the first prize the claw physically contacts — visible, deterministic)
+  if (phase === 'descend') {
+    phaseT -= dt;
+    grabDepth += 520 * dt;
+    // contact check every frame while descending
+    const clawY = FIELD_H + 30 - grabDepth;
+    let best = null, bestD = Infinity;
+    for (const p of prizes) {
+      if (p.grabbed) continue;
+      const dx = p.x - grabX, dy = p.y - clawY;
+      const d = Math.hypot(dx, dy);
+      if (d < GRAB_R + 24 && d < bestD) { best = p; bestD = d; }
+    }
+    if (best) {
+      grabbed = best;
+      sfx.grab();
+      addParts(grabbed.x, grabbed.y, 0xffffff, 6);
+      phase = 'grab';
+      phaseT = 0.5;
+    } else if (phaseT <= 0 || grabDepth >= 760) {
+      phase = 'grab';
+      sfx.miss();
+      phaseT = 0.5;
+    }
+  }
+  // grab
+  if (phase === 'grab') {
+    phaseT -= dt;
+    if (grabbed) {
+      grabbed.grabbed = true;
+      // wobbly prizes drop more easily
+      const holdTime = ROLES[grabbed.role].hold;
+      const wobble = ROLES[grabbed.role].wobble ? 0.4 : 0;
+      const gripBonus = gripActive ? 0.5 : 0;
+      const effective = holdTime + gripBonus;
+      // grip check every frame: wobbly may slip
+      if (grabbed.role === 'wobbly' && Math.random() < dt * 1.6) {
+        // slipped
+        grabbed.grabbed = false;
+        grabbed = null;
+        addPopup(grabX, grabDepth > 0 ? FIELD_H + 30 - grabDepth : 0, 'SLIPPED!', '#7fb8e8');
+        sfx.miss();
+        addPressure(15);
+        gripActive = false;
+      }
+    }
+    if (phaseT <= 0) {
+      phase = 'ascend';
+      phaseT = 0.8;
+    }
+  }
+  // ascend
+  if (phase === 'ascend') {
+    phaseT -= dt;
+    grabDepth = Math.max(0, grabDepth - 300 * dt);
+    if (grabbed) {
+      grabbed.x = grabX;
+      grabbed.y = FIELD_H + 30 - grabDepth + 20;
+      grabbed.mesh.position.set(grabbed.x, grabbed.y, 0);
+    }
+    if (phaseT <= 0) {
+      phase = 'collect';
+      phaseT = 0.6;
+    }
+  }
+  // collect: at chute?
+  if (phase === 'collect') {
+    phaseT -= dt;
+    if (grabbed) {
+      // move toward chute at fixed speed (visible, predictable)
+      const dx = CHUTE_X - grabbed.x, dy = FIELD_H - grabbed.y;
+      const d = Math.hypot(dx, dy);
+      const step = Math.min(d, 900 * dt);
+      if (d > 0) {
+        grabbed.x += (dx / d) * step;
+        grabbed.y += (dy / d) * step;
+      }
+      grabbed.mesh.position.set(grabbed.x, grabbed.y, 0);
+      if (d < 30) {
+        // collected!
+        const role = grabbed.role;
+        scene.remove(grabbed.mesh);
+        prizes = prizes.filter(p => p !== grabbed);
+        grabbed = null;
+        gripActive = false;
+        if (role === 'bomb') {
+          // bomb: clears pressure but costs 1 drop + no score
+          pressure = Math.max(0, pressure - 40);
+          dropsLeft = Math.max(0, dropsLeft - 1);
+          dropsEl.textContent = 'Drops: ' + dropsLeft;
+          addPopup(CHUTE_X, FIELD_H - 60, 'BOMB! -1 DROP', '#ff3d81');
+          sfx.bomb();
+          shake = 0.3;
+        } else {
+          bumpCombo();
+          const mult = role === 'rare' ? 3 : 1;
+          scoreAdd(ROLES[role].pts * mult, CHUTE_X, FIELD_H - 60, ROLES[role].color === 0xffb300 ? '#ffb300' : '#ffd23e');
+          addParts(CHUTE_X, FIELD_H - 40, ROLES[role].color, 8);
+          sfx.score();
+        }
+        // drops consumed
+        dropsLeft--;
+        dropsEl.textContent = 'Drops: ' + dropsLeft;
+        // pressure: greedy failed drops raise complications
+        if (Math.random() < 0.15) addPressure(10);
+        if (dropsLeft <= 0) {
+          gameOver();
+          return;
+        }
+        phase = 'move';
+        grabX = 0; grabY = FIELD_H + 30; grabDepth = 0;
+        // grip recharge
+        if (gripCd > 0) gripCd -= 0;
+        gripReady = gripCd <= 0;
+        gripBtn.style.display = gripReady ? 'block' : 'none';
+        // refill board if too empty
+        if (prizes.length < 4) setupBoard();
+        return;
+      }
+    }
+    if (phaseT <= 0) {
+      // missed (no grab) or dropped prize
+      if (!grabbed) {
+        addPressure(8);
+        // rare missed = big pressure
+      }
+      phase = 'move';
+      grabX = 0; grabY = FIELD_H + 30; grabDepth = 0;
+      gripActive = false;
+      dropsLeft--;
+      dropsEl.textContent = 'Drops: ' + dropsLeft;
+      if (dropsLeft <= 0) { gameOver(); return; }
+      gripReady = gripCd <= 0;
+      gripBtn.style.display = gripReady ? 'block' : 'none';
+    }
+  }
+  // grip cooldown
+  if (gripCd > 0) {
+    gripCd -= dt;
+    if (gripCd <= 0) {
+      gripReady = true;
+      gripBtn.style.display = 'block';
+    }
+  }
+  // wobbly prizes animate
+  for (const p of prizes) {
+    if (p.grabbed) continue;
+    if (ROLES[p.role].wobble) {
+      p.wobbleT += dt;
+      const wob = Math.sin(p.wobbleT * 6 + p.wobbleSeed) * 0.15;
+      p.mesh.rotation.z = wob;
+      p.mesh.rotation.x = wob * 0.5;
+    }
+  }
+  // pressure decay (slow)
+  pressure = Math.max(0, pressure - dt * 0.4);
+  pressFill.style.width = pressure + '%';
+  pressFill.style.background = pressure > 70 ? 'linear-gradient(90deg,#ff3d81,#ffb300)' : 'linear-gradient(90deg,#00ff88,#ff3d81)';
+  // combo decay
+  if (combo > 1 && performance.now() / 1000 - comboT > 5) {
+    combo = 1;
+    comboEl.style.display = 'none';
+  }
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; }
+  }
+}
+
+// ---------- render ----------
+let shake = 0;
+function render(dt, t) {
+  // grabber
+  const depthY = FIELD_H + 30 - grabDepth;
+  grabber.position.set(grabX, depthY, 0);
+  // grabbed prize rides the grabber
+  if (grabbed) {
+    grabbed.mesh.position.set(grabX, depthY - 40, 0);
+  }
+  // grabber jaw animation
+  const jawOpen = phase === 'grab' ? 0 : 10;
+  grabber.children[2].position.x = -14 - jawOpen * 0.3;
+  grabber.children[3].position.x = 14 + jawOpen * 0.3;
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 18) + '%';
+      el.style.top = (50 - p.y / 18) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  // camera shake
+  if (shake > 0) {
+    shake -= dt;
+    camera.position.x = (Math.random() - 0.5) * shake * 30;
+    camera.position.y = (Math.random() - 0.5) * shake * 30;
+  } else {
+    camera.position.x = 0; camera.position.y = 0;
+  }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    update(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks ----------
+if (TEST) {
+  window.__crane = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get combo() { return combo; },
+    get dropsLeft() { return dropsLeft; },
+    get pressure() { return pressure; },
+    get phase() { return phase; },
+    get grabX() { return grabX; },
+    get grabbed() { return grabbed ? grabbed.role : null; },
+    get gripReady() { return gripReady; },
+    get prizes() { return prizes.map(p => ({ x: p.x, y: p.y, role: p.role, grabbed: p.grabbed })); },
+    start: startGame,
+    moveGrabber: (x) => { grabX = clamp(x, -FIELD_W + 40, FIELD_W - 40); },
+    drop: () => { if (phase === 'move') { phase = 'descend'; phaseT = 0.9; sfx.drop(); } },
+    useGrip,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) update(1 / 60); },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>

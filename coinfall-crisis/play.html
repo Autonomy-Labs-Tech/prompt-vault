@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>COINFALL CRISIS — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #tokens{font-size:13px;color:#9fd4ff;font-weight:700;letter-spacing:1px;}
+  #stab-wrap{width:160px;height:10px;border:1px solid #ffb300;border-radius:5px;overflow:hidden;background:rgba(0,0,0,.5);}
+  #stab-fill{height:100%;width:0%;background:linear-gradient(90deg,#00ff88,#ffb300);transition:width .2s;}
+  #nudge-btn{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:30px;background:radial-gradient(circle at 35% 35%,#ffb300,#ff5e00);border:2px solid #ffd23e;color:#1a0d00;font-weight:900;font-size:13px;letter-spacing:2px;display:none;z-index:7;pointer-events:auto;box-shadow:0 0 20px rgba(255,176,0,.6);}
+  #nudge-btn:active{transform:translateX(-50%) scale(.94);}
+  #announce{position:fixed;left:50%;top:110px;transform:translateX(-50%);background:rgba(10,16,40,.92);border:1px solid #ff3d81;border-radius:10px;padding:8px 20px;color:#ff3d81;font-weight:800;font-size:15px;letter-spacing:1px;z-index:5;display:none;pointer-events:none;}
+  #combo{position:fixed;left:50%;top:64px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#ffb300,#00d4ff,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#ffb300,#00d4ff);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="tokens">Tokens: 12</div>
+    <div id="stab-wrap"><div id="stab-fill"></div></div>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="combo"></div>
+<div id="announce"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<button id="nudge-btn">NUDGE</button>
+<div id="overlay">
+  <h1>COINFALL CRISIS</h1>
+  <h2>Drop tokens, read the pile, bank before the collapse</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">← → / A D — select lane &nbsp;·&nbsp; SPACE — drop token &nbsp;·&nbsp; N — nudge (when ready) &nbsp;·&nbsp; R — restart</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   COINFALL CRISIS — coin-pusher physics score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- machine geometry (x across, z depth toward player) ----------
+const PLAT_W = 560, PLAT_D = 460;          // platform half-extents
+const TOKEN_R = 26;
+const PUSHER_MIN = -PLAT_D + 140, PUSHER_MAX = PLAT_D - 60;
+const LANES = 4;
+const DROP_Y = 420;
+
+// ---------- state ----------
+let score = 0, high = 0, combo = 1, comboT = 0;
+let tokensLeft = 12, stability = 50;
+let state = 'title';                       // title | play | over
+let lane = 1;
+let pusherZ = 0, pusherDir = 1, pusherPhase = 0;
+let tokens = [];                           // on-platform tokens
+let drops = [];                            // falling tokens
+let banked = 0, nudgeReady = false, nudgeCd = 0;
+let collapse = false, collapseT = 0, collapseCountdown = 0;
+let parts = [], popups = [];
+let muted = false;
+try { muted = localStorage.getItem('cf_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('cf_high') || '0', 10) || 0; } catch (e) {}
+
+// token roles
+const ROLES = {
+  common: { color: 0x00d4ff, pts: 50, w: 1.0 },
+  high: { color: 0xffb300, pts: 200, w: 1.4, awkward: true },
+  modifier: { color: 0x7b5cff, pts: 100, w: 1.2, mod: true },
+  hazard: { color: 0xff3d81, pts: 0, w: 0.9, frag: true },
+};
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 300, 1300);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+const rim = new THREE.PointLight(0xffb300, 800, 2000);
+rim.position.set(0, 0, 500);
+scene.add(rim);
+
+// machine base
+const base = new THREE.Mesh(
+  new THREE.BoxGeometry(PLAT_W * 2 + 100, 40, PLAT_D * 2 + 100),
+  new THREE.MeshStandardMaterial({ color: 0x0a0f22, roughness: 0.8, metalness: 0.3 })
+);
+base.position.y = -20;
+scene.add(base);
+// platform
+const platform = new THREE.Mesh(
+  new THREE.PlaneGeometry(PLAT_W * 2, PLAT_D * 2),
+  new THREE.MeshStandardMaterial({ color: 0x1a2440, roughness: 0.5, metalness: 0.5 })
+);
+scene.add(platform);
+// payout edge (front, toward camera at +z)
+const edge = new THREE.Mesh(
+  new THREE.BoxGeometry(PLAT_W * 2, 20, 20),
+  new THREE.MeshStandardMaterial({ color: 0xffb300, emissive: 0xffb300, emissiveIntensity: 0.6 })
+);
+edge.position.set(0, -8, PLAT_D);
+scene.add(edge);
+// hazard channel (left side, dark)
+const hazard = new THREE.Mesh(
+  new THREE.PlaneGeometry(90, PLAT_D * 2),
+  new THREE.MeshStandardMaterial({ color: 0x3a0f1a, emissive: 0xff3d81, emissiveIntensity: 0.3, side: THREE.DoubleSide })
+);
+hazard.position.set(-(PLAT_W + 45), 1, 0);
+scene.add(hazard);
+// side walls
+function wall(w, h, d, x, y, z, color) {
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(w, h, d),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.45 })
+  );
+  m.position.set(x, y, z);
+  scene.add(m);
+  return m;
+}
+wall(30, 60, PLAT_D * 2, PLAT_W + 15, 0, 0, 0x00d4ff);
+wall(30, 60, PLAT_D * 2, -PLAT_W - 15, 0, 0, 0x00d4ff);
+wall(PLAT_W * 2, 60, 30, 0, 0, -PLAT_D - 15, 0x7b5cff);
+// pusher shelf
+const pusher = new THREE.Mesh(
+  new THREE.BoxGeometry(PLAT_W * 2 - 10, 40, 26),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.7 })
+);
+scene.add(pusher);
+// lane markers (drop zone at top)
+const laneMarkers = [];
+for (let i = 0; i < LANES; i++) {
+  const x = (i - 1.5) * (PLAT_W * 2 / LANES);
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(PLAT_W * 2 / LANES - 16, 10, 16),
+    new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.4 })
+  );
+  m.position.set(x, 0, -PLAT_D + 20);
+  scene.add(m);
+  laneMarkers.push(m);
+}
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), tokensEl = $('tokens'), stabFill = $('stab-fill'),
+  comboEl = $('combo'), overlay = $('overlay'), finalScore = $('final-score'),
+  finalHigh = $('final-high'), finalNew = $('final-new'), startBtn = $('start'),
+  muteBtn = $('mute'), announceEl = $('announce'), nudgeBtn = $('nudge-btn');
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('cf_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  drop: () => tone(300, 0.08, 'sine', 0.12, 200),
+  land: () => noise(0.06, 0.15),
+  push: () => tone(220, 0.1, 'sine', 0.1, 160),
+  bank: () => { tone(880, 0.1, 'sine', 0.2); setTimeout(() => tone(1175, 0.12, 'sine', 0.2), 90); },
+  hazard: () => tone(160, 0.3, 'sawtooth', 0.16, 80),
+  mod: () => tone(520, 0.14, 'sine', 0.16, 780),
+  nudge: () => noise(0.2, 0.2),
+  collapse: () => { tone(220, 0.5, 'sawtooth', 0.2, 60); noise(0.5, 0.25); },
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 100 + Math.random() * 260;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const stabMul = 1 + stability / 100;      // higher stability = higher payout
+  const pts = Math.round(base * combo * stabMul);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('cf_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function bumpCombo() {
+  const now = performance.now() / 1000;
+  if (now - comboT < 5) combo = Math.min(5, combo + 1);
+  else combo = 1;
+  comboT = now;
+  if (combo > 1) {
+    comboEl.style.display = 'block';
+    comboEl.textContent = 'COMBO x' + combo;
+  }
+}
+function addStability(v) {
+  stability = clamp(stability + v, 0, 100);
+  // danger: high stability makes collapse more dangerous
+  if (stability >= 80 && Math.random() < 0.02) {
+    announce('UNSTABLE PILE!');
+  }
+}
+function useNudge() {
+  if (!nudgeReady || nudgeCd > 0 || state !== 'play') return;
+  nudgeReady = false;
+  nudgeCd = 10;
+  nudgeBtn.style.display = 'none';
+  sfx.nudge();
+  // nudge: shift all tokens toward the payout edge
+  for (const t of tokens) t.z += 60;
+  addPopup(0, 0, 'NUDGE!', '#ffb300');
+}
+
+// ---------- tokens ----------
+const tokenMeshes = [];
+function spawnToken(role, x, z) {
+  const r = ROLES[role];
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(TOKEN_R, TOKEN_R, 10, 20),
+    new THREE.MeshStandardMaterial({ color: r.color, emissive: r.color, emissiveIntensity: 0.6, roughness: 0.3, metalness: 0.6 })
+  );
+  g.add(body);
+  // role glyph
+  const cv = document.createElement('canvas');
+  cv.width = 64; cv.height = 64;
+  const cg = cv.getContext('2d');
+  cg.font = 'bold 34px sans-serif';
+  cg.textAlign = 'center'; cg.textBaseline = 'middle';
+  cg.fillStyle = '#ffffff';
+  if (role === 'high') cg.fillText('H', 32, 36);
+  else if (role === 'modifier') cg.fillText('M', 32, 36);
+  else if (role === 'hazard') cg.fillText('!', 32, 36);
+  const tex = new THREE.CanvasTexture(cv);
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+  sp.position.y = 8;
+  sp.scale.set(34, 34, 1);
+  g.add(sp);
+  g.position.set(x, 4, z);
+  scene.add(g);
+  tokenMeshes.push(g);
+  const t = { x, z, role, mesh: g, landed: false, falling: true, vy: 0 };
+  drops.push(t);
+  return t;
+}
+function dropToken() {
+  if (state !== 'play' || tokensLeft <= 0) return;
+  if (collapse) return;
+  tokensLeft--;
+  tokensEl.textContent = 'Tokens: ' + tokensLeft;
+  // random role weighted: common most, then high, modifier, hazard
+  const roll = Math.random();
+  let role;
+  if (roll < 0.55) role = 'common';
+  else if (roll < 0.75) role = 'high';
+  else if (roll < 0.9) role = 'modifier';
+  else role = 'hazard';
+  const laneX = (lane - 1.5) * (PLAT_W * 2 / LANES);
+  spawnToken(role, laneX + (Math.random() - 0.5) * 30, -PLAT_D + 60);
+  sfx.drop();
+  if (tokensLeft <= 0 && drops.length === 0 && tokens.length === 0) {
+    setTimeout(gameOver, 500);
+  }
+}
+
+// ---------- flow ----------
+function startGame() {
+  score = 0; combo = 1; tokensLeft = 12; stability = 50;
+  banked = 0; nudgeReady = false; nudgeCd = 0;
+  collapse = false; collapseT = 0;
+  lane = 1;
+  for (const t of [...tokens, ...drops]) scene.remove(t.mesh);
+  tokens = []; drops = [];
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  tokensEl.textContent = 'Tokens: 12';
+  stabFill.style.width = '50%';
+  overlay.style.display = 'none';
+  announceEl.style.display = 'none';
+  nudgeBtn.style.display = 'none';
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+
+function announce(text) {
+  announceEl.textContent = text;
+  announceEl.style.display = 'block';
+  setTimeout(() => { announceEl.style.display = 'none'; }, 1800);
+}
+
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+
+function collapseBoard() {
+  if (collapse) return;
+  collapse = true;
+  collapseT = 1.5;
+  sfx.collapse();
+  announce('COLLAPSE!');
+  // cascade: everything banks at half value
+  for (const t of tokens) {
+    scoreAdd(Math.round(ROLES[t.role].pts / 2), t.x, t.z, '#ffd23e');
+    scene.remove(t.mesh);
+  }
+  tokens = [];
+  addParts(0, 0, 0xffffff, 20);
+  stability = 20;
+}
+
+// ---------- input ----------
+const keys = {};
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k === ' ') {
+    if (state === 'title' || state === 'over') { startGame(); return; }
+    dropToken();
+    e.preventDefault();
+  }
+  if (k === 'ArrowLeft' || k === 'a' || k === 'A') { lane = Math.max(0, lane - 1); sfx.move && sfx.move(); }
+  if (k === 'ArrowRight' || k === 'd' || k === 'D') { lane = Math.min(LANES - 1, lane + 1); }
+  if (k === 'n' || k === 'N') useNudge();
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'm' || k === 'M') { muted = !muted; try { localStorage.setItem('cf_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); }
+  keys[k] = true;
+});
+window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  const t = e.touches[0];
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((t.clientX - rect.left) / rect.width) * 2 - 1;
+  lane = Math.round((nx + 1) / 2 * (LANES - 1));
+  lane = clamp(lane, 0, LANES - 1);
+  dropToken();
+}, { passive: true });
+sceneEl.addEventListener('touchmove', (e) => {
+  if (state !== 'play') return;
+  const t = e.touches[0];
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((t.clientX - rect.left) / rect.width) * 2 - 1;
+  lane = clamp(Math.round((nx + 1) / 2 * (LANES - 1)), 0, LANES - 1);
+  e.preventDefault();
+}, { passive: false });
+nudgeBtn.addEventListener('click', useNudge);
+
+// ---------- physics ----------
+function physics(dt) {
+  if (state !== 'play') return;
+  // pusher oscillation
+  pusherPhase += dt * 1.6;
+  pusherZ = PUSHER_MIN + (Math.sin(pusherPhase) * 0.5 + 0.5) * (PUSHER_MAX - PUSHER_MIN);
+  pusher.position.z = pusherZ;
+  // collapse timer
+  if (collapse) {
+    collapseT -= dt;
+    if (collapseT <= 0) collapse = false;
+    return;
+  }
+  // falling tokens
+  for (let i = drops.length - 1; i >= 0; i--) {
+    const t = drops[i];
+    t.vy -= 1500 * dt;
+    t.mesh.position.y += t.vy * dt;
+    if (t.mesh.position.y <= 4) {
+      t.mesh.position.y = 4;
+      t.landed = true;
+      tokens.push(t);
+      drops.splice(i, 1);
+      sfx.land();
+      // landing impact pushes neighbors slightly (visible cascade)
+      for (const o of tokens) {
+        if (o === t) continue;
+        const dx = t.x - o.x, dz = t.z - o.z;
+        const d = Math.hypot(dx, dz);
+        if (d < TOKEN_R * 2.2 && d > 0) {
+          o.z += (dz / d) * 6;
+        }
+      }
+    }
+  }
+  // pusher pushes tokens toward payout edge (+z) — ratchet only, never pulls back
+  for (let i = tokens.length - 1; i >= 0; i--) {
+    const t = tokens[i];
+    const pushTo = pusherZ + 20;
+    if (t.z < pushTo) {
+      t.z = Math.min(pushTo, t.z + 90 * dt);
+      if (Math.random() < dt * 2) sfx.push();
+    }
+    // hazard channel: token in left lane falls out
+    if (t.x < -PLAT_W + 10) {
+      scene.remove(t.mesh);
+      tokens.splice(i, 1);
+      if (t.role === 'hazard') {
+        addStability(-20);
+        announce('HAZARD LOST!');
+      }
+      sfx.hazard();
+      addParts(t.x, 0, 0xff3d81, 8);
+      continue;
+    }
+    // payout edge: token crosses front edge -> bank
+    if (t.z > PLAT_D - 45) {
+      scene.remove(t.mesh);
+      tokens.splice(i, 1);
+      banked++;
+      if (t.role === 'hazard') {
+        // hazard at payout: loses stability, no points
+        addStability(-25);
+        addPopup(t.x, t.z, 'HAZARD!', '#ff3d81');
+        sfx.hazard();
+      } else if (t.role === 'modifier') {
+        // modifier: boosts stability + speeds pusher next cycle
+        addStability(15);
+        bumpCombo();
+        scoreAdd(ROLES.modifier.pts, t.x, t.z, '#7b5cff');
+        sfx.mod();
+        addParts(t.x, t.z, 0x7b5cff, 8);
+        if (Math.random() < 0.5) {
+          announce('PUSHER SURGE!');
+          pusherPhase += 1.2;
+        }
+      } else {
+        bumpCombo();
+        scoreAdd(ROLES[t.role].pts, t.x, t.z, t.role === 'high' ? '#ffb300' : '#ffd23e');
+        addParts(t.x, t.z, ROLES[t.role].color, 8);
+        sfx.bank();
+      }
+      // banked cascades charge nudge
+      if (banked % 4 === 0) {
+        nudgeReady = true;
+        nudgeBtn.style.display = 'block';
+      }
+      // stability: more tokens banked -> higher payout but more collapse risk
+      addStability(2);
+    }
+  }
+  // high stability + many tokens = announced collapse countdown (deterministic)
+  if (!collapse && collapseCountdown <= 0 && stability > 75 && tokens.length >= 8) {
+    collapseCountdown = 2.5;
+    announce('COLLAPSE INCOMING!');
+  }
+  if (collapseCountdown > 0) {
+    collapseCountdown -= dt;
+    if (collapseCountdown <= 0 && stability > 75 && tokens.length >= 8) {
+      collapseBoard();
+      return;
+    }
+  }
+  // combo decay
+  if (combo > 1 && performance.now() / 1000 - comboT > 5) {
+    combo = 1;
+    comboEl.style.display = 'none';
+  }
+  // nudge cooldown
+  if (nudgeCd > 0) {
+    nudgeCd -= dt;
+    if (nudgeCd <= 0) {
+      nudgeReady = true;
+      nudgeBtn.style.display = 'block';
+    }
+  }
+  // game over when tokens exhausted and board empty
+  if (tokensLeft <= 0 && drops.length === 0 && tokens.length === 0) {
+    gameOver();
+    return;
+  }
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; }
+  }
+}
+
+// ---------- render ----------
+function render(dt, t) {
+  // lane marker highlight
+  for (let i = 0; i < LANES; i++) {
+    laneMarkers[i].material.emissiveIntensity = i === lane ? 1.2 + Math.sin(t * 8) * 0.3 : 0.4;
+  }
+  // token wobble on awkward (high-value) tokens
+  for (const tok of tokens) {
+    if (tok.role === 'high') {
+      tok.mesh.rotation.z = Math.sin(t * 5 + tok.z) * 0.08;
+    } else {
+      tok.mesh.rotation.z = 0;
+    }
+  }
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 18) + '%';
+      el.style.top = (50 - p.y / 18) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+  stabFill.style.width = stability + '%';
+  stabFill.style.background = stability > 70 ? 'linear-gradient(90deg,#ff3d81,#ffb300)' : 'linear-gradient(90deg,#00ff88,#ffb300)';
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    physics(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks ----------
+if (TEST) {
+  window.__coin = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get combo() { return combo; },
+    get tokensLeft() { return tokensLeft; },
+    get stability() { return stability; },
+    get lane() { return lane; },
+    get banked() { return banked; },
+    get nudgeReady() { return nudgeReady; },
+    get collapse() { return collapse; },
+    get pusherZ() { return pusherZ; },
+    get tokenCount() { return tokens.length + drops.length; },
+    get tokens() { return tokens.map(t => ({ x: t.x, z: t.z, role: t.role })); },
+    start: startGame,
+    setLane: (l) => { lane = clamp(l, 0, LANES - 1); },
+    drop: dropToken,
+    setStability: (v) => { stability = clamp(v, 0, 100); },
+    setToken: (x, z, role) => {
+      // place a landed token directly on the board
+      const r = ROLES[role];
+      const g = new THREE.Group();
+      const body = new THREE.Mesh(
+        new THREE.CylinderGeometry(TOKEN_R, TOKEN_R, 10, 20),
+        new THREE.MeshStandardMaterial({ color: r.color, emissive: r.color, emissiveIntensity: 0.6, roughness: 0.3, metalness: 0.6 })
+      );
+      g.add(body);
+      g.position.set(x, 4, z);
+      scene.add(g);
+      tokenMeshes.push(g);
+      tokens.push({ x, z, role, mesh: g, landed: true });
+    },
+    nudge: useNudge,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) physics(1 / 60); },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>
