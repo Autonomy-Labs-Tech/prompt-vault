@@ -67,6 +67,12 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, note: 'no sender, skipped' });
   }
 
+  // Loop guard: never auto-reply to our own domain (would re-enter inbound → webhook → reply).
+  const senderDomain = String(sender).split('@')[1] || '';
+  if (senderDomain === 'autonomylabsweb.tech') {
+    return res.status(200).json({ ok: true, note: 'same-domain sender, skipped' });
+  }
+
   const reply = await resend(
     sender,
     'Re: ' + String(subject || 'your message').slice(0, 120),
