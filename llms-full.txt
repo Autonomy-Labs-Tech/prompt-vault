@@ -192,3 +192,6 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
    - Buy: https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b
    - Demo: https://business2-lasse-tfa.vercel.app/dancefloor-panic/play.html
    - Landing: https://business2-lasse-tfa.vercel.app/dancefloor-panic.html
+- **Robotics Supply Chain Investment Thesis (10,000 words)** — €29.00 one-time. 10,339 words, 58 cited sources, 20 sections, base/bull/bear scenario analysis, 12+ investable companies; data cutoff 17 August 2026.
+   - Buy: https://buy.stripe.com/fZu00ibGi8Wi6MjdgC2Nq1c
+   - Landing: https://business2-lasse-tfa.vercel.app/robotics-thesis.html

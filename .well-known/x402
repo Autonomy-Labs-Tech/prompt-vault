@@ -1,113 +1,114 @@
 {
-  "name": "Autonomy Labs Storefront",
-  "description": "Card storefront downloads and Base USDC x402 APIs. Card purchases use Stripe Checkout; API purchases require an on-chain USDC transfer.",
-  "payment": {
-    "provider": "stripe",
-    "checkout_links": {
-      "x402-paywall-kit": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u",
-      "fulfillment-webhook-kit": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t",
-      "40-reusable-prompts": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T",
-      "ai-agent-starter-kit": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S",
-      "automated-outreach-toolkit": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R",
-      "ai-business-automator-prompt-pack": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q",
-      "ai-agent-revenue-playbook": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P",
-      "ai-agent-storefront-kit": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O",
-      "ai-agent-mcp-server-kit": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N",
-      "taskmarket-mcp-server-kit": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K",
-      "zombie-slasher-game": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J",
-      "ai-agent-skill-pack": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I",
-      "ai-website-audit-report": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v",
-      "threejs-build-toolkit": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V",
-      "ai-agent-contract-and-payment-templates": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M",
-      "ai-automation-sop-master-bundle": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L",
-      "ai-agent-x402-and-discovery-setup-guide": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H",
-      "autonomous-agent-business-os": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G",
-      "taskmarket-bounty-winning-playbook": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F",
-      "ai-agent-outbound-sales-kit": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D",
-      "taskmarket-autopilot-worker": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C",
-      "ai-agent-website-launch-kit": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B",
-      "ai-business-plan-pitch-deck-kit": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A",
-      "security-compliance-checklist": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z",
-      "monetization-starter-kit": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y",
-      "qa-test-playbook": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x",
-      "ai-agent-prompt-injection-defense": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w",
-      "threejs-scene-rebuild": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U",
-      "taskmarket-integration-pack": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W",
-      "api-integration-kit": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X",
-      "agent-billing-api": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y",
-      "agent-memory-api": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z",
-      "custom-game-prototype": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10",
-      "pinball-overdrive": "https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12",
-      "skee-shock": "https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13",
-      "crane-breaker": "https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14",
-      "whack-protocol": "https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15",
-      "air-hockey-afterburner": "https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16",
-      "neon-range": "https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17",
-      "strike-vector": "https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18",
-      "bumper-rush": "https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19",
-      "coinfall-crisis": "https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a",
-      "dancefloor-panic": "https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b"
-    }
-  },
-  "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
-  "fulfillment": "automatic email delivery via webhook for digital downloads; made-to-order services follow their stated delivery windows",
-  "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt",
-  "currency": "USDC",
-  "network": "eip155:8453",
-  "payable_endpoints": [
-    {
-      "route": "POST /api/x402?product=audit",
-      "description": "Agent-readiness audit of any public URL: probes robots/sitemap/llms.txt/agents.txt/x402 + returns grade",
-      "price_usdc": "2.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    },
-    {
-      "route": "POST /api/x402?product=audit-5",
-      "description": "Audit 5 sites, returns per-site grade + summary",
-      "price_usdc": "7.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    },
-    {
-      "route": "POST /api/x402?product=data",
-      "description": "Storefront catalog payload + metrics (agent-consumable)",
-      "price_usdc": "1.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    },
-    {
-      "route": "POST /api/x402?product=llms",
-      "description": "Generate an agent-friendly llms.txt draft from a public HTTPS site",
-      "price_usdc": "3.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    },
-    {
-      "route": "POST /api/x402?product=watch",
-      "description": "Bounded Base wallet snapshot for one public address",
-      "price_usdc": "1.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    },
-    {
-      "route": "POST /api/x402?product=watch-pro",
-      "description": "Extended bounded Base wallet snapshot for one public address",
-      "price_usdc": "5.00",
-      "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
-    }
-  ],
-  "payment_protocol": {
-    "type": "x402",
-    "requires": [
-      "order",
-      "signature",
-      "txHash"
-    ],
-    "headers": [
-      "PAYMENT-REQUIRED",
-      "X-402-Signature"
-    ],
-    "verification": "This endpoint uses an exact-transfer x402 extension: clients send an EIP-712 order, signature, and settled Base transaction hash. Base USDC transfer is checked on-chain before delivery; offline fixtures are test-only. Production also requires X402_REPLAY_STORE_URL for durable transaction replay protection."
-  },
-  "facilitator_discovery": {
-    "discovery_url": "https://x402bazaar.org",
-    "documentation_url": "https://www.x402bazaar.org/docs",
-    "declared_via": "well-known/x402 + spec extension"
+ "name": "Autonomy Labs Storefront",
+ "description": "Card storefront downloads and Base USDC x402 APIs. Card purchases use Stripe Checkout; API purchases require an on-chain USDC transfer.",
+ "payment": {
+  "provider": "stripe",
+  "checkout_links": {
+   "x402-paywall-kit": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u",
+   "fulfillment-webhook-kit": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t",
+   "40-reusable-prompts": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T",
+   "ai-agent-starter-kit": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S",
+   "automated-outreach-toolkit": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R",
+   "ai-business-automator-prompt-pack": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q",
+   "ai-agent-revenue-playbook": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P",
+   "ai-agent-storefront-kit": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O",
+   "ai-agent-mcp-server-kit": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N",
+   "taskmarket-mcp-server-kit": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K",
+   "zombie-slasher-game": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J",
+   "ai-agent-skill-pack": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I",
+   "ai-website-audit-report": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v",
+   "threejs-build-toolkit": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V",
+   "ai-agent-contract-and-payment-templates": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M",
+   "ai-automation-sop-master-bundle": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L",
+   "ai-agent-x402-and-discovery-setup-guide": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H",
+   "autonomous-agent-business-os": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G",
+   "taskmarket-bounty-winning-playbook": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F",
+   "ai-agent-outbound-sales-kit": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D",
+   "taskmarket-autopilot-worker": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C",
+   "ai-agent-website-launch-kit": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B",
+   "ai-business-plan-pitch-deck-kit": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A",
+   "security-compliance-checklist": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z",
+   "monetization-starter-kit": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y",
+   "qa-test-playbook": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x",
+   "ai-agent-prompt-injection-defense": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w",
+   "threejs-scene-rebuild": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U",
+   "taskmarket-integration-pack": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W",
+   "api-integration-kit": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X",
+   "agent-billing-api": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y",
+   "agent-memory-api": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z",
+   "custom-game-prototype": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10",
+   "pinball-overdrive": "https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12",
+   "skee-shock": "https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13",
+   "crane-breaker": "https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14",
+   "whack-protocol": "https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15",
+   "air-hockey-afterburner": "https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16",
+   "neon-range": "https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17",
+   "strike-vector": "https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18",
+   "bumper-rush": "https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19",
+   "coinfall-crisis": "https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a",
+   "dancefloor-panic": "https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b",
+   "robotics-supply-chain-thesis": "https://buy.stripe.com/fZu00ibGi8Wi6MjdgC2Nq1c"
   }
+ },
+ "catalog": "https://business2-lasse-tfa.vercel.app/products.json",
+ "fulfillment": "automatic email delivery via webhook for digital downloads; made-to-order services follow their stated delivery windows",
+ "llms": "https://business2-lasse-tfa.vercel.app/llms-full.txt",
+ "currency": "USDC",
+ "network": "eip155:8453",
+ "payable_endpoints": [
+  {
+   "route": "POST /api/x402?product=audit",
+   "description": "Agent-readiness audit of any public URL: probes robots/sitemap/llms.txt/agents.txt/x402 + returns grade",
+   "price_usdc": "2.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/x402?product=audit-5",
+   "description": "Audit 5 sites, returns per-site grade + summary",
+   "price_usdc": "7.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/x402?product=data",
+   "description": "Storefront catalog payload + metrics (agent-consumable)",
+   "price_usdc": "1.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/x402?product=llms",
+   "description": "Generate an agent-friendly llms.txt draft from a public HTTPS site",
+   "price_usdc": "3.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/x402?product=watch",
+   "description": "Bounded Base wallet snapshot for one public address",
+   "price_usdc": "1.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  },
+  {
+   "route": "POST /api/x402?product=watch-pro",
+   "description": "Extended bounded Base wallet snapshot for one public address",
+   "price_usdc": "5.00",
+   "pay_to": "0x7e0190af0951485dFd08bE2FE19Fa638e94F426D"
+  }
+ ],
+ "payment_protocol": {
+  "type": "x402",
+  "requires": [
+   "order",
+   "signature",
+   "txHash"
+  ],
+  "headers": [
+   "PAYMENT-REQUIRED",
+   "X-402-Signature"
+  ],
+  "verification": "This endpoint uses an exact-transfer x402 extension: clients send an EIP-712 order, signature, and settled Base transaction hash. Base USDC transfer is checked on-chain before delivery; offline fixtures are test-only. Production also requires X402_REPLAY_STORE_URL for durable transaction replay protection."
+ },
+ "facilitator_discovery": {
+  "discovery_url": "https://x402bazaar.org",
+  "documentation_url": "https://www.x402bazaar.org/docs",
+  "declared_via": "well-known/x402 + spec extension"
+ }
 }
