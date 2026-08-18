@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>STRIKE VECTOR — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #frame{font-size:13px;color:#9fd4ff;font-weight:700;letter-spacing:1px;}
+  #mom-wrap{width:150px;height:10px;border:1px solid #ffb300;border-radius:5px;overflow:hidden;background:rgba(0,0,0,.5);}
+  #mom-fill{height:100%;width:0%;background:linear-gradient(90deg,#ffb300,#ff5e00);transition:width .2s;}
+  #mom-label{font-size:9px;letter-spacing:2px;color:#ffb300;text-transform:uppercase;}
+  #condition{position:fixed;left:50%;top:56px;transform:translateX(-50%);background:rgba(10,16,40,.9);border:1px solid #00d4ff;border-radius:10px;padding:8px 18px;color:#00d4ff;font-weight:800;font-size:14px;letter-spacing:1px;z-index:5;pointer-events:none;}
+  #combo{position:fixed;left:50%;top:100px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #spend-btn{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);padding:12px 26px;border-radius:30px;background:radial-gradient(circle at 35% 35%,#ffb300,#ff5e00);border:2px solid #ffd23e;color:#1a0d00;font-weight:900;font-size:13px;letter-spacing:2px;display:none;z-index:7;pointer-events:auto;box-shadow:0 0 20px rgba(255,176,0,.6);}
+  #spend-btn:active{transform:translateX(-50%) scale(.94);}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#ffb300,#00d4ff,#ff3d81);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#ffb300,#00d4ff);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="frame">Frame 1</div>
+    <div id="mom-label">Momentum</div>
+    <div id="mom-wrap"><div id="mom-fill"></div></div>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="condition">LANE: OIL</div>
+<div id="combo"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<button id="spend-btn">STABILIZE</button>
+<div id="overlay">
+  <h1>STRIKE VECTOR</h1>
+  <h2>Aim, charge, release — clear the center, thread the narrow route, ride the momentum</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">MOUSE — aim &nbsp;·&nbsp; HOLD SPACE / CLICK — charge &nbsp;·&nbsp; RELEASE — roll<br>M — spend momentum (when full) &nbsp;·&nbsp; R — restart</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   STRIKE VECTOR — bowling-inspired arcade score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- lane geometry (x across, y up the lane) ----------
+const LW = 330, LH = 1150;                 // lane half-width/height
+const BALL_R = 24;
+const LAUNCH_Y = -LH + 110;
+const PIN_ROW_Y = LH - 260;
+const GUTTER_W = 90;
+
+// ---------- state ----------
+let score = 0, high = 0, combo = 1, comboT = 0;
+let frame = 1, ballsThisFrame = 0, pinsUp = 0, momentum = 0;
+let state = 'title';                       // title | play | over
+let condition = 'oil', conditionT = 0;
+let aimX = 0, power = 0, charging = false;
+let ball = { x: 0, y: LAUNCH_Y, vx: 0, vy: 0, r: BALL_R, active: false, stabil: false };
+let pins = [];
+let spinner = { x: 0, y: LH - 620, r: 46, hit: false, cooldown: 0 };
+let parts = [], popups = [], trails = [];
+let shake = 0, flashT = 0, frameOverT = 0, frameEnded = false;
+let hiddenRoute = false, routeRevealed = false, bonusFormation = false;
+let muted = false;
+try { muted = localStorage.getItem('sv_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('sv_high') || '0', 10) || 0; } catch (e) {}
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 0, 1500);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+const rim = new THREE.PointLight(0xffb300, 800, 2000);
+rim.position.set(0, 0, 500);
+scene.add(rim);
+
+// base
+const base = new THREE.Mesh(
+  new THREE.BoxGeometry(LW * 2 + GUTTER_W * 2 + 60, 30, LH * 2 + 60),
+  new THREE.MeshStandardMaterial({ color: 0x0a0f22, roughness: 0.9, metalness: 0.2 })
+);
+base.position.y = -15;
+scene.add(base);
+const laneMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(LW * 2, LH * 2),
+  new THREE.MeshStandardMaterial({ color: 0xb8863b, roughness: 0.7, metalness: 0.1 })
+);
+scene.add(laneMesh);
+// gutters (darker side channels)
+const gutterL = new THREE.Mesh(
+  new THREE.PlaneGeometry(GUTTER_W, LH * 2),
+  new THREE.MeshStandardMaterial({ color: 0x1a1526, roughness: 0.4 })
+);
+gutterL.position.x = -(LW + GUTTER_W / 2);
+scene.add(gutterL);
+const gutterR = gutterL.clone();
+gutterR.position.x = LW + GUTTER_W / 2;
+scene.add(gutterR);
+// lane walls
+function wall(w, h, x, y, color) {
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(w, h, 16),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.45 })
+  );
+  m.position.set(x, y, 0);
+  scene.add(m);
+  return m;
+}
+wall(LW * 2 + GUTTER_W * 2, 22, 0, LH, 0x00d4ff);
+wall(LW * 2 + GUTTER_W * 2, 22, 0, -LH, 0x00d4ff);
+wall(22, LH * 2, -(LW + GUTTER_W), 0, 0x7b5cff);
+wall(22, LH * 2, LW + GUTTER_W, 0, 0x7b5cff);
+// oil streaks (condition visuals)
+const oilStreaks = [];
+for (let i = 0; i < 6; i++) {
+  const m = new THREE.Mesh(
+    new THREE.PlaneGeometry(40, 500 + Math.random() * 300),
+    new THREE.MeshStandardMaterial({ color: 0x88ccff, transparent: true, opacity: 0.12, side: THREE.DoubleSide })
+  );
+  m.position.set(-LW + 60 + Math.random() * (LW * 2 - 120), -300 + Math.random() * 900, 1);
+  scene.add(m);
+  oilStreaks.push(m);
+}
+const dryPatch = new THREE.Mesh(
+  new THREE.PlaneGeometry(160, 260),
+  new THREE.MeshStandardMaterial({ color: 0xd4a055, transparent: true, opacity: 0.3, side: THREE.DoubleSide })
+);
+dryPatch.position.set(0, LH - 700, 1);
+scene.add(dryPatch);
+
+// launch area
+const launchPad = new THREE.Mesh(
+  new THREE.PlaneGeometry(200, 140),
+  new THREE.MeshStandardMaterial({ color: 0x1a2440, emissive: 0x00d4ff, emissiveIntensity: 0.2, side: THREE.DoubleSide })
+);
+launchPad.position.set(0, LAUNCH_Y - 40, 1);
+scene.add(launchPad);
+
+// ball
+const ballMesh = new THREE.Mesh(
+  new THREE.SphereGeometry(BALL_R, 22, 22),
+  new THREE.MeshStandardMaterial({ color: 0xdfe8ff, emissive: 0x88ccff, emissiveIntensity: 0.4, roughness: 0.2, metalness: 0.7 })
+);
+scene.add(ballMesh);
+const ballGlow = new THREE.Mesh(
+  new THREE.SphereGeometry(BALL_R * 1.6, 14, 14),
+  new THREE.MeshBasicMaterial({ color: 0xffb300, transparent: true, opacity: 0 })
+);
+scene.add(ballGlow);
+
+// spinner (condition-changing target)
+const spinnerMesh = new THREE.Mesh(
+  new THREE.TorusGeometry(46, 10, 8, 32),
+  new THREE.MeshStandardMaterial({ color: 0xff3d81, emissive: 0xff3d81, emissiveIntensity: 0.6 })
+);
+spinnerMesh.rotation.x = Math.PI / 2;
+spinnerMesh.position.set(0, LH - 620, 2);
+scene.add(spinnerMesh);
+const spinnerCore = new THREE.Mesh(
+  new THREE.SphereGeometry(30, 16, 16),
+  new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xff3d81, emissiveIntensity: 0.5 })
+);
+spinnerCore.position.set(0, LH - 620, 2);
+scene.add(spinnerCore);
+
+// aim reticle
+const reticle = new THREE.Mesh(
+  new THREE.RingGeometry(14, 20, 24),
+  new THREE.MeshBasicMaterial({ color: 0xffb300, transparent: true, opacity: 0.9, side: THREE.DoubleSide })
+);
+reticle.rotation.x = -Math.PI / 2;
+reticle.position.set(0, LAUNCH_Y + 40, 3);
+scene.add(reticle);
+const reticleLine = new THREE.Line(
+  new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, LAUNCH_Y + 10, 3),
+    new THREE.Vector3(0, PIN_ROW_Y, 3),
+  ]),
+  new THREE.LineBasicMaterial({ color: 0xffb300, transparent: true, opacity: 0.3 })
+);
+scene.add(reticleLine);
+
+// ---------- pin formations ----------
+function makePin(x, y, kind) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(10, 16, 44, 12),
+    new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: kind === 'gold' ? 0xffb300 : 0xffffff, emissiveIntensity: kind === 'gold' ? 0.6 : 0.2 })
+  );
+  body.position.y = 22;
+  g.add(body);
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(12, 12, 12),
+    new THREE.MeshStandardMaterial({ color: kind === 'gold' ? 0xffb300 : 0xff3d81, emissive: kind === 'gold' ? 0xffb300 : 0xff3d81, emissiveIntensity: 0.5 })
+  );
+  head.position.y = 46;
+  g.add(head);
+  g.position.set(x, y, 0);
+  scene.add(g);
+  return { x, y, kind: kind || 'normal', up: true, mesh: g, fall: 0, fallDir: 0 };
+}
+function clearPins() {
+  for (const p of pins) scene.remove(p.mesh);
+  pins = [];
+}
+function formationSafe() {
+  // central diamond: 4 normal pins
+  const spacing = 70;
+  const px = [0, -spacing, spacing, 0];
+  const py = [0, spacing * 0.6, spacing * 0.6, spacing * 1.2];
+  for (let i = 0; i < 4; i++) pins.push(makePin(px[i], PIN_ROW_Y - 160 + py[i], 'normal'));
+}
+function formationRoute() {
+  // narrow high-value route: 2 gold pins close together at center
+  pins.push(makePin(-34, PIN_ROW_Y, 'gold'));
+  pins.push(makePin(34, PIN_ROW_Y, 'gold'));
+  // flanked by normal pins (miss risk)
+  pins.push(makePin(-170, PIN_ROW_Y - 60, 'normal'));
+  pins.push(makePin(170, PIN_ROW_Y - 60, 'normal'));
+}
+function formationBonus() {
+  // bonus formation (momentum unlock): 6 pins, wide spread
+  const xs = [-210, -120, -40, 40, 120, 210];
+  for (let i = 0; i < 6; i++) pins.push(makePin(xs[i], PIN_ROW_Y - 80 + (i % 2) * 70, i % 3 === 0 ? 'gold' : 'normal'));
+}
+function setupFormation() {
+  clearPins();
+  hiddenRoute = false; routeRevealed = false;
+  const roll = Math.random();
+  if (frame >= 3 && roll < 0.4) {
+    formationRoute();
+    hiddenRoute = true;
+  } else if (frame >= 5 && bonusFormation) {
+    formationBonus();
+    bonusFormation = false;
+  } else {
+    formationSafe();
+  }
+  pinsUp = pins.length;
+}
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), momFill = $('mom-fill'), comboEl = $('combo'),
+  overlay = $('overlay'), finalScore = $('final-score'), finalHigh = $('final-high'),
+  finalNew = $('final-new'), startBtn = $('start'), muteBtn = $('mute'),
+  conditionEl = $('condition'), frameEl = $('frame'), spendBtn = $('spend-btn');
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('sv_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  roll: () => noise(0.15, 0.2),
+  pin: () => tone(700, 0.08, 'triangle', 0.18, 500),
+  gold: () => { tone(880, 0.1, 'sine', 0.22); setTimeout(() => tone(1175, 0.12, 'sine', 0.22), 90); },
+  gutter: () => tone(180, 0.3, 'sawtooth', 0.1, 100),
+  spinner: () => tone(330, 0.2, 'sine', 0.18, 660),
+  momentum: () => { tone(110, 0.4, 'sawtooth', 0.14, 330); noise(0.3, 0.1); },
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 100 + Math.random() * 260;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const pts = Math.round(base * combo);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('sv_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function bumpCombo() {
+  const now = performance.now() / 1000;
+  if (now - comboT < 4) combo = Math.min(5, combo + 1);
+  else combo = 1;
+  comboT = now;
+  if (combo > 1) {
+    comboEl.style.display = 'block';
+    comboEl.textContent = 'COMBO x' + combo;
+  }
+}
+function addMomentum(v) {
+  momentum = clamp(momentum + v, 0, 100);
+  spendBtn.style.display = momentum >= 100 && state === 'play' ? 'block' : 'none';
+}
+function spendMomentum() {
+  if (momentum < 100 || state !== 'play') return;
+  momentum = 0;
+  spendBtn.style.display = 'none';
+  sfx.momentum();
+  if (ball.active && ball.vy > 0) {
+    // stabilize: steer the ball back into the lane if it's in a gutter
+    ball.stabil = true;
+    addPopup(ball.x, ball.y + 40, 'STABILIZED!', '#ffb300');
+    flashT = 0.3;
+  } else if (hiddenRoute && !routeRevealed) {
+    routeRevealed = true;
+    addPopup(0, PIN_ROW_Y, 'ROUTE REVEALED!', '#ffb300');
+  } else if (!bonusFormation && frame >= 3) {
+    bonusFormation = true;
+    addPopup(0, 200, 'BONUS FORMATION UNLOCKED', '#ffb300');
+  } else {
+    // no target: still grant a small score bonus
+    scoreAdd(150, 0, 0, '#ffb300');
+  }
+}
+
+// ---------- game flow ----------
+function newBall() {
+  ball.x = 0; ball.y = LAUNCH_Y; ball.vx = 0; ball.vy = 0;
+  ball.active = true; ball.stabil = false;
+  power = 0; charging = false;
+}
+function rollBall() {
+  if (!ball.active || ball.vy !== 0 || state !== 'play') return;
+  const angle = (aimX / (LW - 40)) * 0.55;   // -0.55..0.55 rad
+  const speed = 1100 + power * 1300;
+  ball.vx = Math.sin(angle) * speed;
+  ball.vy = Math.cos(angle) * speed;
+  sfx.roll();
+  addParts(ball.x, ball.y, 0xffb300, 6);
+}
+function pinHit(p) {
+  p.up = false;
+  p.fall = 1;
+  p.fallDir = (Math.random() - 0.5) * 2;
+  pinsUp--;
+  bumpCombo();
+  if (p.kind === 'gold') {
+    scoreAdd(300, p.x, p.y + 40, '#ffb300');
+    addMomentum(18);
+    sfx.gold();
+  } else {
+    scoreAdd(100, p.x, p.y + 40, '#ffd23e');
+    addMomentum(8);
+    sfx.pin();
+  }
+  addParts(p.x, p.y, 0xffffff, 8);
+}
+function frameComplete() {
+  if (frameEnded) return;
+  frameEnded = true;
+  frameOverT = 1.2;
+  // clear bonus
+  if (pinsUp === 0) {
+    scoreAdd(500, 0, PIN_ROW_Y + 80, '#00d4ff');
+    addMomentum(30);
+    addPopup(0, PIN_ROW_Y + 120, 'CLEAR! +500', '#00d4ff');
+  }
+}
+function nextFrame() {
+  frame++;
+  ballsThisFrame = 0;
+  frameEnded = false;
+  frameEl.textContent = 'Frame ' + frame;
+  setupFormation();
+  newBall();
+}
+function ballSettled() {
+  if (!ball.active) return;
+  ball.active = false;
+  ball.vx = 0; ball.vy = 0;
+  ballsThisFrame++;
+  // first ball may already have cleared everything via pinsUp === 0
+  const alreadyCleared = pinsUp === 0;
+  if (alreadyCleared || ballsThisFrame >= 2) {
+    frameComplete();
+    setTimeout(nextFrame, frameOverT * 1000 + 400);
+  } else {
+    frameComplete();
+    setTimeout(() => { if (pinsUp > 0) newBall(); }, 800);
+  }
+}
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+function startGame() {
+  score = 0; frame = 1; combo = 1; momentum = 0;
+  ballsThisFrame = 0; frameEnded = false;
+  bonusFormation = false;
+  condition = 'oil'; conditionT = 0;
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  frameEl.textContent = 'Frame 1';
+  overlay.style.display = 'none';
+  spendBtn.style.display = 'none';
+  conditionEl.style.display = 'block';
+  conditionEl.textContent = 'LANE: OIL';
+  setupFormation();
+  newBall();
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k === ' ') {
+    if (state === 'title' || state === 'over') startGame();
+    else charging = true;
+    e.preventDefault();
+  }
+  if (k === 'm' || k === 'M') spendMomentum();
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'n' || k === 'N') muteBtn.click();
+});
+window.addEventListener('keyup', (e) => {
+  if (e.key === ' ') {
+    charging = false;
+    if (power > 0.08) rollBall();
+  }
+});
+sceneEl.addEventListener('mousemove', (e) => {
+  if (state !== 'play' || charging) return;
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  aimX = nx * (LW - 40);
+});
+sceneEl.addEventListener('mousedown', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  charging = true;
+});
+window.addEventListener('mouseup', (e) => {
+  if (charging) {
+    charging = false;
+    if (power > 0.08) rollBall();
+  }
+});
+sceneEl.addEventListener('touchmove', (e) => {
+  if (state !== 'play') return;
+  const t = e.touches[0];
+  const rect = renderer.domElement.getBoundingClientRect();
+  const nx = ((t.clientX - rect.left) / rect.width) * 2 - 1;
+  aimX = nx * (LW - 40);
+  e.preventDefault();
+}, { passive: false });
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') { startGame(); return; }
+  charging = true;
+}, { passive: true });
+sceneEl.addEventListener('touchend', (e) => {
+  if (charging) {
+    charging = false;
+    if (power > 0.08) rollBall();
+  }
+}, { passive: true });
+spendBtn.addEventListener('click', spendMomentum);
+
+// ---------- physics ----------
+function physics(dt) {
+  if (state !== 'play') return;
+  // condition timer (oil alternates with dry every 6s)
+  conditionT -= dt;
+  if (conditionT <= 0) {
+    condition = condition === 'oil' ? 'dry' : 'oil';
+    conditionT = 6;
+    conditionEl.textContent = 'LANE: ' + condition.toUpperCase();
+    addPopup(0, 0, condition.toUpperCase() + ' LANE!', '#00d4ff');
+    // dry lane reveals the narrow route if hidden
+    if (condition === 'dry' && hiddenRoute) {
+      routeRevealed = true;
+      addPopup(0, PIN_ROW_Y, 'ROUTE REVEALED!', '#ffb300');
+    }
+  }
+  // charging
+  if (charging && ball.active && ball.vy === 0) {
+    power = Math.min(1, power + dt * 1.5);
+  }
+  // ball physics
+  if (ball.active && ball.vy !== 0) {
+    // friction: oil = less friction (slower decay), dry = more
+    const f = condition === 'oil' ? 0.994 : 0.988;
+    // spinner: if hit recently, ball gets a speed boost (condition-changing)
+    ball.vx *= Math.pow(f, dt * 60);
+    ball.vy *= Math.pow(f, dt * 60);
+    ball.x += ball.vx * dt;
+    ball.y += ball.vy * dt;
+    // stabilize: steer toward lane center if in gutter
+    if (ball.stabil) {
+      const target = 0;
+      ball.x += (target - ball.x) * Math.min(1, dt * 4);
+      if (Math.abs(ball.x) < 10) ball.stabil = false;
+    }
+    // gutter walls
+    const gutterEdge = LW + GUTTER_W - BALL_R;
+    if (ball.x > gutterEdge) { ball.x = gutterEdge; ball.vx = -Math.abs(ball.vx) * 0.4; sfx.gutter(); }
+    if (ball.x < -gutterEdge) { ball.x = -gutterEdge; ball.vx = Math.abs(ball.vx) * 0.4; sfx.gutter(); }
+    // lane walls (top/bottom)
+    if (ball.y > LH - BALL_R) { ball.y = LH - BALL_R; ball.vy = -Math.abs(ball.vy) * 0.5; }
+    if (ball.y < -LH + BALL_R && ball.vy < 0) { ballSettled(); return; }
+    // ball rolling too slowly to reach anything -> settle (real bowling balls stop)
+    if (Math.abs(ball.vx) < 40 && Math.abs(ball.vy) < 40) {
+      ballSettled();
+      return;
+    }
+    // pin collisions
+    for (const p of pins) {
+      if (!p.up) continue;
+      const dx = ball.x - p.x, dy = ball.y - p.y;
+      const d2 = dx * dx + dy * dy;
+      if (d2 < (BALL_R + 14) * (BALL_R + 14)) {
+        pinHit(p);
+        // slight ball deflection
+        const d = Math.sqrt(d2) || 1;
+        ball.vx += (dx / d) * 60;
+        ball.vy += (dy / d) * 60;
+      }
+    }
+    // spinner (condition-changing target)
+    if (!spinner.hit && spinner.cooldown <= 0) {
+      const dx = ball.x - spinner.x, dy = ball.y - spinner.y;
+      if (dx * dx + dy * dy < (BALL_R + spinner.r) * (BALL_R + spinner.r)) {
+        spinner.hit = true;
+        spinner.cooldown = 4;
+        condition = condition === 'oil' ? 'dry' : 'oil';
+        conditionT = 6;
+        conditionEl.textContent = 'LANE: ' + condition.toUpperCase();
+        scoreAdd(200, spinner.x, spinner.y + 40, '#ff3d81');
+        addMomentum(25);
+        sfx.spinner();
+        addParts(ball.x, ball.y, 0xff3d81, 12);
+        if (condition === 'dry' && hiddenRoute) {
+          routeRevealed = true;
+          addPopup(0, PIN_ROW_Y, 'ROUTE REVEALED!', '#ffb300');
+        }
+        // spinner boosts ball
+        const sp = Math.hypot(ball.vx, ball.vy);
+        ball.vx *= 1.25; ball.vy *= 1.25;
+        if (Math.hypot(ball.vx, ball.vy) < sp) { /* keep boost */ }
+      }
+    }
+    if (spinner.cooldown > 0) spinner.cooldown -= dt;
+    if (spinner.hit) spinner.hit = false;
+    // trail
+    trails.push({ x: ball.x, y: ball.y, t: 0 });
+    if (trails.length > 25) trails.shift();
+  }
+}
+
+// ---------- render ----------
+function render(dt, t) {
+  // ball
+  if (ball.active) {
+    ballMesh.visible = true;
+    ballMesh.position.set(ball.x, ball.y, BALL_R);
+    ballGlow.position.set(ball.x, ball.y, BALL_R - 2);
+    ballGlow.material.opacity = ball.stabil ? 0.4 : (charging ? 0.2 + power * 0.3 : 0);
+    ballGlow.scale.set(1 + power * 0.5, 1 + power * 0.5, 1);
+  } else {
+    ballMesh.visible = false;
+    ballGlow.material.opacity = 0;
+  }
+  // pins: fall animation
+  for (const p of pins) {
+    if (!p.up && p.fall > 0) {
+      p.fall -= dt * 2.5;
+      p.mesh.rotation.z = p.fallDir * Math.max(0, p.fall) * 1.2;
+      p.mesh.position.y = -Math.max(0, p.fall) * 30;
+      if (p.fall <= 0) p.mesh.visible = false;
+    }
+  }
+  // trails
+  for (let i = 0; i < trails.length; i++) {
+    const p = trails[i];
+    p.t += dt;
+    if (p.t > 0.35) { trails.splice(i, 1); i--; }
+  }
+  // reticle
+  const baseY = LAUNCH_Y + 40;
+  reticle.position.x = aimX * 0.3;
+  reticle.position.y = baseY + power * 120;
+  const rs = 1 + power * 1.5;
+  reticle.scale.set(rs, rs, 1);
+  const lp = reticleLine.geometry.attributes.position;
+  lp.setXYZ(0, aimX * 0.3, LAUNCH_Y + 10, 3);
+  lp.setXYZ(1, aimX, PIN_ROW_Y, 3);
+  lp.needsUpdate = true;
+  // condition visuals
+  for (const s of oilStreaks) s.visible = condition === 'oil';
+  dryPatch.visible = condition === 'dry';
+  // spinner spin
+  spinnerMesh.rotation.z = t * 3;
+  spinnerMesh.material.emissiveIntensity = spinner.cooldown > 0 ? 0.3 : 0.6 + Math.sin(t * 6) * 0.2;
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; continue; }
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 16) + '%';
+      el.style.top = (50 - p.y / 16) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  // camera shake
+  if (shake > 0) {
+    shake -= dt;
+    camera.position.x = (Math.random() - 0.5) * shake * 30;
+    camera.position.y = (Math.random() - 0.5) * shake * 30;
+  } else {
+    camera.position.x = 0; camera.position.y = 0;
+  }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+  momFill.style.width = momentum + '%';
+  if (combo > 1 && performance.now() / 1000 - comboT > 4) {
+    combo = 1;
+    comboEl.style.display = 'none';
+  }
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    physics(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks ----------
+if (TEST) {
+  window.__strike = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get frame() { return frame; },
+    get momentum() { return momentum; },
+    get combo() { return combo; },
+    get condition() { return condition; },
+    get ball() { return { x: ball.x, y: ball.y, vx: ball.vx, vy: ball.vy, active: ball.active }; },
+    get pins() { return pins.map(p => ({ x: p.x, y: p.y, kind: p.kind, up: p.up })); },
+    get pinsUp() { return pinsUp; },
+    get hiddenRoute() { return hiddenRoute; },
+    get routeRevealed() { return routeRevealed; },
+    start: startGame,
+    setAim: (x) => { aimX = x; },
+    setPower: (v) => { power = clamp(v, 0, 1); },
+    roll: rollBall,
+    setBall: (x, y, vx, vy) => { ball.x = x; ball.y = y; ball.vx = vx || 0; ball.vy = vy || 0; ball.active = true; },
+    setMomentum: (v) => { momentum = clamp(v, 0, 100); },
+    spend: spendMomentum,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) physics(1 / 60); },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>
