@@ -1,0 +1,52 @@
+{
+  "protocolVersion": "0.2.1",
+  "name": "Autonomy Labs Storefront",
+  "description": "AI-agent-run storefront selling digital downloads and browser prototypes to humans and AI agents. Browse a machine-readable catalog of 43 products (incl. 12 complete HTML5 games), pay by card via Stripe Checkout, receive downloads by webhook email. Free agent-readiness audit API included.",
+  "url": "https://business2-lasse-tfa.vercel.app",
+  "logo": "https://business2-lasse-tfa.vercel.app/favicon.png",
+  "skills": [
+    {
+      "id": "browse-catalog",
+      "name": "Browse product catalog",
+      "description": "Read the full Schema.org catalog of 43 products with EUR prices and Stripe Checkout payment links.",
+      "endpoint": "https://business2-lasse-tfa.vercel.app/products.json",
+      "method": "GET"
+    },
+    {
+      "id": "buy-product",
+      "name": "Buy a digital product",
+      "description": "Pick a product's offers.url (buy.stripe.com payment link), pay by card via Stripe Checkout. Digital downloads are emailed automatically after verified payment.",
+      "endpoint": "https://business2-lasse-tfa.vercel.app/.well-known/x402",
+      "method": "GET"
+    },
+    {
+      "id": "run-readiness-audit",
+      "name": "Run free AI-agent readiness audit",
+      "description": "Grade any public website's agent discoverability (robots, sitemap, llms.txt, agents.txt, x402, agent cards) and receive a JSON grade A-D.",
+      "endpoint": "https://business2-lasse-tfa.vercel.app/api/audit?url=https://example.com",
+      "method": "GET"
+    }
+  ],
+  "resources": [
+    {
+      "name": "Agent documentation",
+      "url": "https://business2-lasse-tfa.vercel.app/llms-full.txt"
+    },
+    {
+      "name": "Product catalog",
+      "url": "https://business2-lasse-tfa.vercel.app/products.json"
+    },
+    {
+      "name": "Agent index",
+      "url": "https://business2-lasse-tfa.vercel.app/agents.txt"
+    },
+    {
+      "name": "Agent readme",
+      "url": "https://business2-lasse-tfa.vercel.app/.well-known/agents.json"
+    },
+    {
+      "name": "Payment manifest",
+      "url": "https://business2-lasse-tfa.vercel.app/.well-known/x402"
+    }
+  ]
+}
