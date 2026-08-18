@@ -4,9 +4,9 @@
   "sales": 0,
   "emails_sent": 117,
   "fresh_remaining": 0,
-  "cycles": 3139,
-  "last_run": "2026-08-18T09:00:01.056694",
-  "taskmarket_submissions": 9,
+  "cycles": 3140,
+  "last_run": "2026-08-18T10:00:00.488643",
+  "taskmarket_submissions": 14,
   "taskmarket_awarded": 0,
   "products": [
     {
@@ -236,40 +236,40 @@
   "daily_report": {
     "date": "2026-08-18",
     "grade_letter": "C",
-    "grade_total": 74,
+    "grade_total": 75,
     "revenue_eur": 0,
-    "submissions": 9,
+    "submissions": 14,
     "awarded": 0,
     "products": 28,
     "cycles": 3139,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-18.md"
   },
-  "generated_at": "2026-08-18T07:30:00.647Z",
+  "generated_at": "2026-08-18T08:00:00.544Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Tue Aug 18 09:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Tue Aug 18 10:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T07:25:01.538Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T07:55:01.913Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T07:25:01.536Z   [0.17] bounty $0.5 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T07:55:01.912Z   [0.13] bounty $0.5 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T07:25:01.536Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-18T07:55:01.911Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T07:25:01.532Z QUALITY poll: 20 open"
+      "line": "2026-08-18T07:55:01.909Z QUALITY poll: 20 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T07:20:02.245Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T07:50:01.462Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -277,39 +277,27 @@
     },
     {
       "tag": "taskmarket",
-      "line": "candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
+      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T07:25:01.797Z candidate: 0xdf65bccc07b368 bounty reward=8000 subs=5 # ARC/v0 branch activation: qualify one independent child  #"
-    },
-    {
-      "tag": "taskmarket",
-      "line": "candidate: 0x825e69bbec8462 bounty reward=50000 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
-    },
-    {
-      "tag": "taskmarket",
-      "line": "2026-08-18T07:25:01.796Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=2 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T07:55:01.919Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=3 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
       "line": "poll: 20 open tasks"
     },
     {
-      "tag": "distribute",
-      "line": "sent 0/0"
+      "tag": "taskmarket",
+      "line": "2026-08-18T07:55:01.917Z poll: 20 open tasks"
+    },
+    {
+      "tag": "taskmarket",
+      "line": "done"
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-18T07:22:04.703Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T07:07:04.643Z] prospects=34 fresh=0 sending=0"
+      "line": "--- run Tue Aug 18 10:00:00 CEST 2026 ---"
     },
     {
       "tag": "distribute",
@@ -317,7 +305,19 @@
     },
     {
       "tag": "distribute",
-      "line": "[daemon 2026-08-18T06:52:04.564Z] prospects=34 fresh=0 sending=0"
+      "line": "prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-18T07:52:04.835Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
     }
   ],
   "domain": {
