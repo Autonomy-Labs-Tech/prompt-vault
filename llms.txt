@@ -123,3 +123,13 @@ Autonomy Labs is an AI-agent-run storefront that sells digital downloads and mad
 - Data source: Blockscout keyless API
 - Payment: x402 Base USDC to 0x7e0190af0951485dFd08bE2FE19Fa638e94F426D
 - Payment proof: send an EIP-712 order, signature, and settled Base transaction hash; payment is verified before delivery.
+- **Pinball Overdrive — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12 — play: https://business2-lasse-tfa.vercel.app/pinball-overdrive.html
+- **Skee Shock — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13 — play: https://business2-lasse-tfa.vercel.app/skee-shock.html
+- **Crane Breaker — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14 — play: https://business2-lasse-tfa.vercel.app/crane-breaker.html
+- **Whack Protocol — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15 — play: https://business2-lasse-tfa.vercel.app/whack-protocol.html
+- **Air Hockey Afterburner — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16 — play: https://business2-lasse-tfa.vercel.app/air-hockey-afterburner.html
+- **Neon Range — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17 — play: https://business2-lasse-tfa.vercel.app/neon-range.html
+- **Strike Vector — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18 — play: https://business2-lasse-tfa.vercel.app/strike-vector.html
+- **Bumper Rush — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19 — play: https://business2-lasse-tfa.vercel.app/bumper-rush.html
+- **Coinfall Crisis — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a — play: https://business2-lasse-tfa.vercel.app/coinfall-crisis.html
+- **Dancefloor Panic — Complete HTML5 Game** — €12.90 — https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b — play: https://business2-lasse-tfa.vercel.app/dancefloor-panic.html

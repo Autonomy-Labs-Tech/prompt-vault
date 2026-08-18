@@ -1,576 +1,716 @@
 {
- "@context": "https://schema.org/",
- "@type": "ItemList",
- "name": "Autonomy Labs AI Agent Products",
- "baseUrl": "https://business2-lasse-tfa.vercel.app",
- "payment": "Stripe Checkout (card): after verified payment, digital delivery is attempted by email; made-to-order services follow the delivery window shown on their product page",
- "itemListElement": [
-  {
-   "@type": "Product",
-   "position": 1,
-   "name": "40 Reusable Prompts",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/prompts.html",
-   "identifier": "40-reusable-prompts"
-  },
-  {
-   "@type": "Product",
-   "position": 2,
-   "name": "AI Agent Starter Kit",
-   "offers": {
-    "@type": "Offer",
-    "price": 19,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/starter-kit.html",
-   "identifier": "ai-agent-starter-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 3,
-   "name": "Automated Outreach Toolkit",
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/outreach-toolkit.html",
-   "identifier": "automated-outreach-toolkit"
-  },
-  {
-   "@type": "Product",
-   "position": 4,
-   "name": "AI Business Automator Prompt Pack",
-   "offers": {
-    "@type": "Offer",
-    "price": 16.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/automator.html",
-   "identifier": "ai-business-automator-prompt-pack"
-  },
-  {
-   "@type": "Product",
-   "position": 5,
-   "name": "AI Agent Revenue Playbook",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/revenue-playbook.html",
-   "identifier": "ai-agent-revenue-playbook"
-  },
-  {
-   "@type": "Product",
-   "position": 6,
-   "name": "AI Agent Storefront Kit",
-   "offers": {
-    "@type": "Offer",
-    "price": 15.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/storefront-kit.html",
-   "identifier": "ai-agent-storefront-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 7,
-   "name": "AI Agent MCP Server Kit",
-   "offers": {
-    "@type": "Offer",
-    "price": 19.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/mcp-server-kit.html",
-   "identifier": "ai-agent-mcp-server-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 8,
-   "name": "AI Agent Contract & Payment Templates",
-   "offers": {
-    "@type": "Offer",
-    "price": 9.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/contract-templates.html",
-   "identifier": "ai-agent-contract-and-payment-templates"
-  },
-  {
-   "@type": "Product",
-   "position": 9,
-   "name": "AI Automation SOP Master Bundle",
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/sop-bundle.html",
-   "identifier": "ai-automation-sop-master-bundle"
-  },
-  {
-   "@type": "Product",
-   "position": 10,
-   "name": "TaskMarket MCP Server Kit",
-   "offers": {
-    "@type": "Offer",
-    "price": 19.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/taskmarket-mcp.html",
-   "identifier": "taskmarket-mcp-server-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 11,
-   "name": "Zombie Slasher Game",
-   "offers": {
-    "@type": "Offer",
-    "price": 24.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/zombie-game.html",
-   "identifier": "zombie-slasher-game"
-  },
-  {
-   "@type": "Product",
-   "position": 12,
-   "name": "AI Agent Skill Pack",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/agent-skill-pack.html",
-   "identifier": "ai-agent-skill-pack"
-  },
-  {
-   "@type": "Product",
-   "position": 13,
-   "name": "AI Agent x402 & Discovery Setup Guide",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/x402-guide.html",
-   "identifier": "ai-agent-x402-and-discovery-setup-guide"
-  },
-  {
-   "@type": "Product",
-   "position": 14,
-   "name": "Autonomous Agent Business OS",
-   "description": "Complete hands-off AI-agent business system: storefront, taskmarket, cold-email, fulfillment, dashboard. 60+ templates and setup guides.",
-   "offers": {
-    "@type": "Offer",
-    "price": 24.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/autonomous-agent-business-os.html"
-  },
-  {
-   "@type": "Product",
-   "position": 15,
-   "name": "TaskMarket Bounty Winning Playbook",
-   "description": "25 concrete strategies to win TaskMarket bounties: audit templates, submission checklists, requester psychology, quality benchmarks.",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/taskmarket-bounty-playbook.html"
-  },
-  {
-   "@type": "Product",
-   "position": 16,
-   "name": "AI Agent Outbound Sales Kit",
-   "description": "Copy-paste outbound sales system for AI agents: cold-email sequences, LinkedIn scripts, follow-up logic, and a CAN-SPAM/GDPR compliance checklist to run compliant agent outreach.",
-   "offers": {
-    "@type": "Offer",
-    "price": 19.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/outbound-sales-kit.html"
-  },
-  {
-   "@type": "Product",
-   "position": 17,
-   "name": "TaskMarket Autopilot Worker",
-   "description": "Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology and a local agent harness so you can earn on bounties on autopilot.",
-   "offers": {
-    "@type": "Offer",
-    "price": 29.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/taskmarket-autopilot-worker.html"
-  },
-  {
-   "@type": "Product",
-   "position": 18,
-   "name": "AI Agent Website Launch Kit",
-   "description": "A complete, deployable AI-agent-discoverable website: HTML landing page, llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402 and Stripe webhook fulfillment template.",
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/website-launch-kit.html"
-  },
-  {
-   "@type": "Product",
-   "position": 19,
-   "name": "AI Business Plan & Pitch Deck Kit",
-   "description": "Editable business plan and investor pitch deck templates (narrative + slide outlines) for AI-service businesses, with pricing and funding sections.",
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "url": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/business-plan-pitch-deck-kit.html"
-  },
-  {
-   "@type": "Product",
-   "position": 20,
-   "name": "AI Agent Security & Compliance Checklist",
-   "description": "A practical checklist and templates for building AI agents that are lawful, safe and compliant (CAN-SPAM, GDPR, data handling, disclosure).",
-   "offers": {
-    "@type": "Offer",
-    "price": 9.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/security-compliance-checklist.html",
-   "identifier": "security-compliance-checklist"
-  },
-  {
-   "@type": "Product",
-   "position": 21,
-   "name": "AI Agent Monetization Starter Kit",
-   "description": "Step-by-step playbook to monetize an AI agent via Stripe, TaskMarket, Clustly and affiliate with zero starting capital.",
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/monetization-starter-kit.html",
-   "identifier": "monetization-starter-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 22,
-   "name": "AI Agent QA & Test Playbook",
-   "description": "How to test AI deliverables from multiple angles before shipping, with reusable checklists for gameplay, audits, scripts and web.",
-   "offers": {
-    "@type": "Offer",
-    "price": 9.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/qa-test-playbook.html",
-   "identifier": "qa-test-playbook"
-  },
-  {
-   "@type": "Product",
-   "position": 23,
-   "name": "AI Agent Prompt Injection Defense & Guardrails",
-   "description": "Practical guide to harden AI agents against prompt injection: input filtering, tool-permission policies, output sanitization, and safety guardrails with copy-paste templates.",
-   "category": "Security",
-   "tagline": "Harden agents against prompt injection with copy-paste guardrails",
-   "features": [
-    "Input-filtering patterns",
-    "Tool-permission policies",
-    "Output sanitization",
-    "Copy-paste policy templates"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 12.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/prompt-injection-defense.html"
-  },
-  {
-   "@type": "Product",
-   "position": 24,
-   "name": "AI Website Audit Report",
-   "description": "Deep, evidence-backed audit of your website's AI-agent discoverability: llms.txt, robots.txt, sitemap.xml, agents.txt, and x402, with concrete fixes.",
-   "category": "Services",
-   "tagline": "Get an A-grade AI-agent discoverability audit with concrete fixes",
-   "features": [
-    "Measured checks of 8 agent surfaces",
-    "Discoverability grade (A-F) + score",
-    "Top gaps ranked by impact",
-    "Reproducible curl commands",
-    "One highest-impact fix to do first"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 19,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/audit-report.html",
-   "identifier": "ai-website-audit-report"
-  },
-  {
-   "@type": "Product",
-   "position": 25,
-   "name": "AI Agent x402 Paywall Setup Kit",
-   "description": "Step-by-step guide to set up an x402 paywall for AI agents: manifest, checkout, and automated fulfillment.",
-   "category": "Setup",
-   "tagline": "Turn any digital product into an agent-payable x402 endpoint",
-   "features": [
-    "x402 manifest setup",
-    "Stripe Checkout integration",
-    "Automated fulfillment webhook",
-    "llms.txt + agents.txt files"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html",
-   "identifier": "x402-paywall-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 26,
-   "name": "AI Agent Fulfillment Webhook Kit",
-   "description": "Copy-paste webhook code to auto-deliver digital products by email the moment a Stripe payment succeeds.",
-   "category": "Automation",
-   "tagline": "Auto-deliver digital products by email the moment payment succeeds",
-   "features": [
-    "Stripe webhook handler",
-    "Email delivery via Resend/SendGrid",
-    "Purchase logging",
-    "Zero-human fulfillment"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html",
-   "identifier": "fulfillment-webhook-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 27,
-   "name": "Custom Three.js Scene Rebuild",
-   "description": "An iconic movie or TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note and screenshots. No likenesses, no ripped assets, deterministic render. Proven on 6 TaskMarket scene bounties.",
-   "category": "Services",
-   "delivery": "Made to order; typical delivery 5–7 days",
-   "tagline": "Your iconic scene, rebuilt in Three.js \u2014 offline, deterministic, submission-ready",
-   "features": [
-    "Self-contained offline single HTML (Three.js r185)",
-    "20-45s scene with camera beats and original Web Audio score",
-    "Geometric silhouettes only \u2014 no likenesses, no ripped assets",
-    "sources.md provenance + concept note + screenshots",
-    "Deterministic renderAt(seconds) for capture reproducibility"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 49,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html",
-   "identifier": "threejs-scene-rebuild"
-  },
-  {
-   "@type": "Product",
-   "position": 28,
-   "name": "Three.js Scene Build Toolkit",
-   "description": "The production pipeline behind our movie-scene rebuilds: deterministic app.js scene template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, and an offline/determinism verification checklist.",
-   "category": "Developer Tools",
-   "tagline": "Deterministic, offline, single-file Three.js scenes \u2014 the exact pipeline we ship with",
-   "features": [
-    "renderAt(seconds) deterministic scene template",
-    "esbuild bundle + inline single-file build",
-    "Headless capture scripts + renderer.info stats",
-    "Offline and determinism verification checklist",
-    "Proven on 6 shipped scene rebuilds"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 19,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html",
-   "identifier": "threejs-build-toolkit"
-  },
-  {
-   "@type": "Product",
-   "position": 29,
-   "name": "TaskMarket Agent Integration Pack",
-   "description": "Two production TaskMarket integrations: a zero-dependency MCP server (5 tools) and a Claude Code SKILL.md skill. Both wrap the official CLI, open-source MIT, demo-verified against the live API.",
-   "category": "Developer Tools",
-   "tagline": "Make the TaskMarket worker market actionable inside any agent product",
-   "features": [
-    "MCP server with 5 tools (list/get/wallet/submissions/submit)",
-    "Claude Code SKILL.md skill (tm list/get/wallet/mine/submit)",
-    "Zero dependencies, wraps the official taskmarket CLI",
-    "Live demo logs verified against the real API",
-    "MIT licensed, production-used"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 19,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html",
-   "identifier": "taskmarket-integration-pack"
-  },
-  {
-   "@type": "Product",
-   "position": 30,
-   "name": "AI Agent API Integration Kit",
-   "description": "Copy-paste integrations for Stripe, GitHub, Resend/SendGrid and generic REST APIs: auth headers, retry logic, rate-limit handling, webhook patterns for production agents.",
-   "category": "Developer Tools",
-   "tagline": "Connect your agent to any REST API without the boilerplate",
-   "features": [
-    "Stripe API patterns: payment links, webhooks, balance checks",
-    "GitHub API: token auth, PR comments, rate-limit handling",
-    "Email templates: Resend/SendGrid with attachments + bounces",
-    "Generic REST GET/POST/PUT with retry + timeout logic",
-    "Node.js, Python and curl examples"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 14.9,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/api-integration-kit.html",
-   "identifier": "api-integration-kit"
-  },
-  {
-   "@type": "Product",
-   "position": 31,
-   "name": "Agent Billing & Metering API (source + deploy guide)",
-   "description": "Drop-in monetization layer for AI agents: usage metering, spend limits, x402 payment gates, auto-invoices. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
-   "category": "Developer Tools",
-   "tagline": "Any agent can integrate usage tracking and x402 billing in minutes",
-   "features": [
-    "POST /meter/event, GET /meter/usage",
-    "POST /gate \u2014 x402 payment gate (402/200)",
-    "POST /invoice/generate \u2014 usage-based invoices",
-    "Per-agent API keys + spend limits with auto-block",
-    "Tiers free/starter/pro/enterprise"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 49,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/agent-billing-api.html",
-   "identifier": "agent-billing-api"
-  },
-  {
-   "@type": "Product",
-   "position": 32,
-   "name": "Agent Memory-as-a-Service (source + deploy guide)",
-   "description": "Managed vector database + semantic retrieval API for AI agents: store memories with automatic embeddings, retrieve by semantic similarity. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
-   "category": "Developer Tools",
-   "tagline": "Fix agent statelessness with a self-hosted semantic memory store",
-   "features": [
-    "POST /memory \u2014 store with automatic embeddings",
-    "GET /memory/search \u2014 top-k semantic retrieval",
-    "DELETE /memory/{id} + namespace isolation",
-    "Usage metering per API key/month",
-    "Tiers free/starter/pro/enterprise"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 39,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/agent-memory-api.html",
-   "identifier": "agent-memory-api"
-  },
-  {
-   "@type": "Product",
-   "position": 33,
-   "name": "Custom Browser Game Prototype",
-   "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
-   "category": "Services",
-   "delivery": "Made to order; typical delivery 7–10 days",
-   "tagline": "Your game idea, playable in one HTML file",
-   "features": [
-    "Single-file Three.js game, opens straight off disk",
-    "Your genre + core mechanic (FPS, top-down, platformer, arcade, mission)",
-    "Low-poly art + synthesized audio, no external assets",
-    "HUD, win/lose states, restart, one revision round",
-    "MIT-licensed original code + build note"
-   ],
-   "offers": {
-    "@type": "Offer",
-    "price": 99,
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
-   },
-   "url": "https://business2-lasse-tfa.vercel.app/custom-game-prototype.html",
-   "identifier": "custom-game-prototype"
-  }
- ]
+  "@context": "https://schema.org/",
+  "@type": "ItemList",
+  "name": "Autonomy Labs AI Agent Products",
+  "baseUrl": "https://business2-lasse-tfa.vercel.app",
+  "payment": "Stripe Checkout (card): after verified payment, digital delivery is attempted by email; made-to-order services follow the delivery window shown on their product page",
+  "itemListElement": [
+    {
+      "@type": "Product",
+      "position": 1,
+      "name": "40 Reusable Prompts",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/6oUbJ09ya5K6gmT6Se2Nq0T"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/prompts.html",
+      "identifier": "40-reusable-prompts"
+    },
+    {
+      "@type": "Product",
+      "position": 2,
+      "name": "AI Agent Starter Kit",
+      "offers": {
+        "@type": "Offer",
+        "price": 19,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00w6oGbGi7Seb2z90m2Nq0S"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/starter-kit.html",
+      "identifier": "ai-agent-starter-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 3,
+      "name": "Automated Outreach Toolkit",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00w7sK6lY0pMeeLekG2Nq0R"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/outreach-toolkit.html",
+      "identifier": "automated-outreach-toolkit"
+    },
+    {
+      "@type": "Product",
+      "position": 4,
+      "name": "AI Business Automator Prompt Pack",
+      "offers": {
+        "@type": "Offer",
+        "price": 16.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/3cI00ifWydcy9Yv7Wi2Nq0Q"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/automator.html",
+      "identifier": "ai-business-automator-prompt-pack"
+    },
+    {
+      "@type": "Product",
+      "position": 5,
+      "name": "AI Agent Revenue Playbook",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/9B6eVc5hU4G2eeLccy2Nq0P"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/revenue-playbook.html",
+      "identifier": "ai-agent-revenue-playbook"
+    },
+    {
+      "@type": "Product",
+      "position": 6,
+      "name": "AI Agent Storefront Kit",
+      "offers": {
+        "@type": "Offer",
+        "price": 15.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/6oU14mfWyfkGgmT3G22Nq0O"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/storefront-kit.html",
+      "identifier": "ai-agent-storefront-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 7,
+      "name": "AI Agent MCP Server Kit",
+      "offers": {
+        "@type": "Offer",
+        "price": 19.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/8x2fZgaCe3BY7Qnb8u2Nq0N"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/mcp-server-kit.html",
+      "identifier": "ai-agent-mcp-server-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 8,
+      "name": "AI Agent Contract & Payment Templates",
+      "offers": {
+        "@type": "Offer",
+        "price": 9.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/fZu14mcKm1tQdaH3G22Nq0M"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/contract-templates.html",
+      "identifier": "ai-agent-contract-and-payment-templates"
+    },
+    {
+      "@type": "Product",
+      "position": 9,
+      "name": "AI Automation SOP Master Bundle",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/8x2bJ07q2a0m7Qn2BY2Nq0L"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/sop-bundle.html",
+      "identifier": "ai-automation-sop-master-bundle"
+    },
+    {
+      "@type": "Product",
+      "position": 10,
+      "name": "TaskMarket MCP Server Kit",
+      "offers": {
+        "@type": "Offer",
+        "price": 19.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/4gM00icKmfkG5If0tQ2Nq0K"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-mcp.html",
+      "identifier": "taskmarket-mcp-server-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 11,
+      "name": "Zombie Slasher Game",
+      "offers": {
+        "@type": "Offer",
+        "price": 24.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/28E9AS9ya3BY6Mj5Oa2Nq0J"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/zombie-game.html",
+      "identifier": "zombie-slasher-game"
+    },
+    {
+      "@type": "Product",
+      "position": 12,
+      "name": "AI Agent Skill Pack",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00waEWh0Cc8u3A7a4q2Nq0I"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/agent-skill-pack.html",
+      "identifier": "ai-agent-skill-pack"
+    },
+    {
+      "@type": "Product",
+      "position": 13,
+      "name": "AI Agent x402 & Discovery Setup Guide",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/fZu00i9yagoK3A72BY2Nq0H"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/x402-guide.html",
+      "identifier": "ai-agent-x402-and-discovery-setup-guide"
+    },
+    {
+      "@type": "Product",
+      "position": 14,
+      "name": "Autonomous Agent Business OS",
+      "description": "Complete hands-off AI-agent business system: storefront, taskmarket, cold-email, fulfillment, dashboard. 60+ templates and setup guides.",
+      "offers": {
+        "@type": "Offer",
+        "price": 24.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/3cI5kC6lY8Wi2w3foK2Nq0G"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/autonomous-agent-business-os.html"
+    },
+    {
+      "@type": "Product",
+      "position": 15,
+      "name": "TaskMarket Bounty Winning Playbook",
+      "description": "25 concrete strategies to win TaskMarket bounties: audit templates, submission checklists, requester psychology, quality benchmarks.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/7sY6oG39MgoKdaH3G22Nq0F"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-bounty-playbook.html"
+    },
+    {
+      "@type": "Product",
+      "position": 16,
+      "name": "AI Agent Outbound Sales Kit",
+      "description": "Copy-paste outbound sales system for AI agents: cold-email sequences, LinkedIn scripts, follow-up logic, and a CAN-SPAM/GDPR compliance checklist to run compliant agent outreach.",
+      "offers": {
+        "@type": "Offer",
+        "price": 19.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/7sY00i39M7SedaHgsO2Nq0D"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/outbound-sales-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 17,
+      "name": "TaskMarket Autopilot Worker",
+      "description": "Deployable TaskMarket worker config: task-scanning loops, submission quality gates, requester psychology and a local agent harness so you can earn on bounties on autopilot.",
+      "offers": {
+        "@type": "Offer",
+        "price": 29.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/aFa00i9ya1tQ8Ur0tQ2Nq0C"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-autopilot-worker.html"
+    },
+    {
+      "@type": "Product",
+      "position": 18,
+      "name": "AI Agent Website Launch Kit",
+      "description": "A complete, deployable AI-agent-discoverable website: HTML landing page, llms.txt, agents.txt, sitemap.xml, robots.txt, .well-known/x402 and Stripe webhook fulfillment template.",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/9B63cuh0CegC7Qn4K62Nq0B"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/website-launch-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 19,
+      "name": "AI Business Plan & Pitch Deck Kit",
+      "description": "Editable business plan and investor pitch deck templates (narrative + slide outlines) for AI-service businesses, with pricing and funding sections.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "url": "https://buy.stripe.com/5kQ8wOh0C7Sec6Dccy2Nq0A"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/business-plan-pitch-deck-kit.html"
+    },
+    {
+      "@type": "Product",
+      "position": 20,
+      "name": "AI Agent Security & Compliance Checklist",
+      "description": "A practical checklist and templates for building AI agents that are lawful, safe and compliant (CAN-SPAM, GDPR, data handling, disclosure).",
+      "offers": {
+        "@type": "Offer",
+        "price": 9.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/4gM4gy11EegCfiPfoK2Nq0z"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/security-compliance-checklist.html",
+      "identifier": "security-compliance-checklist"
+    },
+    {
+      "@type": "Product",
+      "position": 21,
+      "name": "AI Agent Monetization Starter Kit",
+      "description": "Step-by-step playbook to monetize an AI agent via Stripe, TaskMarket, Clustly and affiliate with zero starting capital.",
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/dRm9ASbGi8Wi3A7ccy2Nq0y"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/monetization-starter-kit.html",
+      "identifier": "monetization-starter-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 22,
+      "name": "AI Agent QA & Test Playbook",
+      "description": "How to test AI deliverables from multiple angles before shipping, with reusable checklists for gameplay, audits, scripts and web.",
+      "offers": {
+        "@type": "Offer",
+        "price": 9.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00wbJ0h0Cb4q3A7ekG2Nq0x"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/qa-test-playbook.html",
+      "identifier": "qa-test-playbook"
+    },
+    {
+      "@type": "Product",
+      "position": 23,
+      "name": "AI Agent Prompt Injection Defense & Guardrails",
+      "description": "Practical guide to harden AI agents against prompt injection: input filtering, tool-permission policies, output sanitization, and safety guardrails with copy-paste templates.",
+      "category": "Security",
+      "tagline": "Harden agents against prompt injection with copy-paste guardrails",
+      "features": [
+        "Input-filtering patterns",
+        "Tool-permission policies",
+        "Output sanitization",
+        "Copy-paste policy templates"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/3cI5kCeSu1tQ2w35Oa2Nq0w"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/prompt-injection-defense.html"
+    },
+    {
+      "@type": "Product",
+      "position": 24,
+      "name": "AI Website Audit Report",
+      "description": "Deep, evidence-backed audit of your website's AI-agent discoverability: llms.txt, robots.txt, sitemap.xml, agents.txt, and x402, with concrete fixes.",
+      "category": "Services",
+      "tagline": "Get an A-grade AI-agent discoverability audit with concrete fixes",
+      "features": [
+        "Measured checks of 8 agent surfaces",
+        "Discoverability grade (A-F) + score",
+        "Top gaps ranked by impact",
+        "Reproducible curl commands",
+        "One highest-impact fix to do first"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 19,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/fZu00ieSuc8u5If90m2Nq0v"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/audit-report.html",
+      "identifier": "ai-website-audit-report"
+    },
+    {
+      "@type": "Product",
+      "position": 25,
+      "name": "AI Agent x402 Paywall Setup Kit",
+      "description": "Step-by-step guide to set up an x402 paywall for AI agents: manifest, checkout, and automated fulfillment.",
+      "category": "Setup",
+      "tagline": "Turn any digital product into an agent-payable x402 endpoint",
+      "features": [
+        "x402 manifest setup",
+        "Stripe Checkout integration",
+        "Automated fulfillment webhook",
+        "llms.txt + agents.txt files"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/aFa7sKfWydcy1rZ7Wi2Nq0u"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/x402-paywall-kit.html",
+      "identifier": "x402-paywall-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 26,
+      "name": "AI Agent Fulfillment Webhook Kit",
+      "description": "Copy-paste webhook code to auto-deliver digital products by email the moment a Stripe payment succeeds.",
+      "category": "Automation",
+      "tagline": "Auto-deliver digital products by email the moment payment succeeds",
+      "features": [
+        "Stripe webhook handler",
+        "Email delivery via Resend/SendGrid",
+        "Purchase logging",
+        "Zero-human fulfillment"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/eVq6oGaCe6Oa7Qn90m2Nq0t"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/fulfillment-webhook-kit.html",
+      "identifier": "fulfillment-webhook-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 27,
+      "name": "Custom Three.js Scene Rebuild",
+      "description": "An iconic movie or TV moment rebuilt as a self-contained offline Three.js r185 web scene (20-45s): geometric silhouettes, original Web Audio score, sources.md provenance, concept note and screenshots. No likenesses, no ripped assets, deterministic render. Proven on 6 TaskMarket scene bounties.",
+      "category": "Services",
+      "delivery": "Made to order; typical delivery 5\u20137 days",
+      "tagline": "Your iconic scene, rebuilt in Three.js \u2014 offline, deterministic, submission-ready",
+      "features": [
+        "Self-contained offline single HTML (Three.js r185)",
+        "20-45s scene with camera beats and original Web Audio score",
+        "Geometric silhouettes only \u2014 no likenesses, no ripped assets",
+        "sources.md provenance + concept note + screenshots",
+        "Deterministic renderAt(seconds) for capture reproducibility"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 49,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/7sYcN4h0Cdcy9Yv4K62Nq0U"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/threejs-scene-rebuild.html",
+      "identifier": "threejs-scene-rebuild"
+    },
+    {
+      "@type": "Product",
+      "position": 28,
+      "name": "Three.js Scene Build Toolkit",
+      "description": "The production pipeline behind our movie-scene rebuilds: deterministic app.js scene template (renderAt(seconds), seeded randomness), esbuild single-file inline build, headless capture scripts, and an offline/determinism verification checklist.",
+      "category": "Developer Tools",
+      "tagline": "Deterministic, offline, single-file Three.js scenes \u2014 the exact pipeline we ship with",
+      "features": [
+        "renderAt(seconds) deterministic scene template",
+        "esbuild bundle + inline single-file build",
+        "Headless capture scripts + renderer.info stats",
+        "Offline and determinism verification checklist",
+        "Proven on 6 shipped scene rebuilds"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 19,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/3cI6oGcKmfkGfiPb8u2Nq0V"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/threejs-build-toolkit.html",
+      "identifier": "threejs-build-toolkit"
+    },
+    {
+      "@type": "Product",
+      "position": 29,
+      "name": "TaskMarket Agent Integration Pack",
+      "description": "Two production TaskMarket integrations: a zero-dependency MCP server (5 tools) and a Claude Code SKILL.md skill. Both wrap the official CLI, open-source MIT, demo-verified against the live API.",
+      "category": "Developer Tools",
+      "tagline": "Make the TaskMarket worker market actionable inside any agent product",
+      "features": [
+        "MCP server with 5 tools (list/get/wallet/submissions/submit)",
+        "Claude Code SKILL.md skill (tm list/get/wallet/mine/submit)",
+        "Zero dependencies, wraps the official taskmarket CLI",
+        "Live demo logs verified against the real API",
+        "MIT licensed, production-used"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 19,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/fZu7sKcKmc8u4EbekG2Nq0W"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/taskmarket-integration-pack.html",
+      "identifier": "taskmarket-integration-pack"
+    },
+    {
+      "@type": "Product",
+      "position": 30,
+      "name": "AI Agent API Integration Kit",
+      "description": "Copy-paste integrations for Stripe, GitHub, Resend/SendGrid and generic REST APIs: auth headers, retry logic, rate-limit handling, webhook patterns for production agents.",
+      "category": "Developer Tools",
+      "tagline": "Connect your agent to any REST API without the boilerplate",
+      "features": [
+        "Stripe API patterns: payment links, webhooks, balance checks",
+        "GitHub API: token auth, PR comments, rate-limit handling",
+        "Email templates: Resend/SendGrid with attachments + bounces",
+        "Generic REST GET/POST/PUT with retry + timeout logic",
+        "Node.js, Python and curl examples"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 14.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/api-integration-kit.html",
+      "identifier": "api-integration-kit"
+    },
+    {
+      "@type": "Product",
+      "position": 31,
+      "name": "Agent Billing & Metering API (source + deploy guide)",
+      "description": "Drop-in monetization layer for AI agents: usage metering, spend limits, x402 payment gates, auto-invoices. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
+      "category": "Developer Tools",
+      "tagline": "Any agent can integrate usage tracking and x402 billing in minutes",
+      "features": [
+        "POST /meter/event, GET /meter/usage",
+        "POST /gate \u2014 x402 payment gate (402/200)",
+        "POST /invoice/generate \u2014 usage-based invoices",
+        "Per-agent API keys + spend limits with auto-block",
+        "Tiers free/starter/pro/enterprise"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 49,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/agent-billing-api.html",
+      "identifier": "agent-billing-api"
+    },
+    {
+      "@type": "Product",
+      "position": 32,
+      "name": "Agent Memory-as-a-Service (source + deploy guide)",
+      "description": "Managed vector database + semantic retrieval API for AI agents: store memories with automatic embeddings, retrieve by semantic similarity. Zero-dependency Node source + deploy guide, verified 2026-08-10.",
+      "category": "Developer Tools",
+      "tagline": "Fix agent statelessness with a self-hosted semantic memory store",
+      "features": [
+        "POST /memory \u2014 store with automatic embeddings",
+        "GET /memory/search \u2014 top-k semantic retrieval",
+        "DELETE /memory/{id} + namespace isolation",
+        "Usage metering per API key/month",
+        "Tiers free/starter/pro/enterprise"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 39,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/agent-memory-api.html",
+      "identifier": "agent-memory-api"
+    },
+    {
+      "@type": "Product",
+      "position": 33,
+      "name": "Custom Browser Game Prototype",
+      "description": "An original single-file Three.js browser game prototype built to your brief: playable in one HTML file, no build step, no external assets. Proven on two shipped games (zombie slasher + full N64-style mission recreation).",
+      "category": "Services",
+      "delivery": "Made to order; typical delivery 7\u201310 days",
+      "tagline": "Your game idea, playable in one HTML file",
+      "features": [
+        "Single-file Three.js game, opens straight off disk",
+        "Your genre + core mechanic (FPS, top-down, platformer, arcade, mission)",
+        "Low-poly art + synthesized audio, no external assets",
+        "HUD, win/lose states, restart, one revision round",
+        "MIT-licensed original code + build note"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": 99,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/5kQ6oGeSu5K6fiPdgC2Nq10"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/custom-game-prototype.html",
+      "identifier": "custom-game-prototype"
+    },
+    {
+      "@type": "Product",
+      "position": 34,
+      "name": "Pinball Overdrive \u2014 Complete HTML5 Game",
+      "description": "Original Three.js pinball score attack: two flippers, drop targets, bumpers, combo chains, skill shots, and a player-triggered Overdrive that doubles scoring at real risk.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/pinball-overdrive.html"
+    },
+    {
+      "@type": "Product",
+      "position": 35,
+      "name": "Skee Shock \u2014 Complete HTML5 Game",
+      "description": "Skee-ball-inspired precision score attack: aim, charge, release up a rising lane into six scoring rings plus a moving target, with precision chain and surge multiplier.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/skee-shock.html"
+    },
+    {
+      "@type": "Product",
+      "position": 36,
+      "name": "Crane Breaker \u2014 Complete HTML5 Game",
+      "description": "Claw-machine precision score attack: align the grabber, drop, grab prizes by visible contact, collect through the chute, and read the four prize roles.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/crane-breaker.html"
+    },
+    {
+      "@type": "Product",
+      "position": 37,
+      "name": "Whack Protocol \u2014 Complete HTML5 Game",
+      "description": "Whack-a-mole reimagined as pattern-recognition triage: follow the changing protocol card, strike correct targets, spare protected ones, chain jackpots.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/whack-protocol.html"
+    },
+    {
+      "@type": "Product",
+      "position": 38,
+      "name": "Air Hockey Afterburner \u2014 Complete HTML5 Game",
+      "description": "One-player air-hockey score attack: defend and return through readable contact, build rally charge, spend it on a burning Afterburner shot.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/air-hockey-afterburner.html"
+    },
+    {
+      "@type": "Product",
+      "position": 39,
+      "name": "Neon Range \u2014 Complete HTML5 Game",
+      "description": "Light-gun gallery precision attack: four target roles, heat system, and a limited Focus slow-time action. Discipline beats spray.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/neon-range.html"
+    },
+    {
+      "@type": "Product",
+      "position": 40,
+      "name": "Strike Vector \u2014 Complete HTML5 Game",
+      "description": "Bowling-inspired arcade score attack: aim, set power, release; clear the safe formation or thread the narrow gold route; spend momentum to stabilize.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/strike-vector.html"
+    },
+    {
+      "@type": "Product",
+      "position": 41,
+      "name": "Bumper Rush \u2014 Complete HTML5 Game",
+      "description": "Bumper-car arena score attack: ram two rival behaviours, hit score walls and boost strips, survive announced pulse phases, dash tactically.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/bumper-rush.html"
+    },
+    {
+      "@type": "Product",
+      "position": 42,
+      "name": "Coinfall Crisis \u2014 Complete HTML5 Game",
+      "description": "Coin-pusher physics attack: drop tokens by lane, read the pile, bank before the collapse; four token roles and a stability gauge.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/coinfall-crisis.html"
+    },
+    {
+      "@type": "Product",
+      "position": 43,
+      "name": "Dancefloor Panic \u2014 Complete HTML5 Game",
+      "description": "Rhythm and reaction score attack: four lanes, perfect/good/miss judgements, holds, lane flips, safe-vs-risk route choices at phrase breaks.",
+      "offers": {
+        "@type": "Offer",
+        "price": 12.9,
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b"
+      },
+      "url": "https://business2-lasse-tfa.vercel.app/dancefloor-panic.html"
+    }
+  ]
 }
