@@ -306,35 +306,35 @@
     "submissions": 26,
     "awarded": 0,
     "products": 46,
-    "cycles": 3149,
+    "cycles": 3150,
     "emails_sent": 117,
     "report": "/Users/lassetaft/business_v2/mission/daily_reports/2026-08-18.md"
   },
-  "generated_at": "2026-08-18T15:00:00.352Z",
+  "generated_at": "2026-08-18T15:30:00.907Z",
   "recent_activity": [
     {
       "tag": "quality",
-      "line": "[Tue Aug 18 17:00:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
+      "line": "[Tue Aug 18 17:30:00 CEST 2026] executing top task 0x825e69bbec84620a2dea42cad196e97fbd65f52284b909d877eaca3edb5e68b0"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:55:03.768Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T15:25:01.975Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:55:03.766Z   [0.08] bounty $0.5 subs=5 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T15:25:01.973Z   [0.08] bounty $0.5 subs=5 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:55:03.766Z ranked fresh tasks (quality-first):"
+      "line": "2026-08-18T15:25:01.973Z ranked fresh tasks (quality-first):"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:55:03.763Z QUALITY poll: 18 open"
+      "line": "2026-08-18T15:25:01.970Z QUALITY poll: 18 open"
     },
     {
       "tag": "quality",
-      "line": "2026-08-18T14:50:01.724Z quality queue written: 0x825e69bbec8462"
+      "line": "2026-08-18T15:20:03.034Z quality queue written: 0x825e69bbec8462"
     },
     {
       "tag": "taskmarket",
@@ -346,7 +346,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T14:55:03.765Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=5 # Join my ARC/v0 branch as one independent child (Selah-appr"
+      "line": "2026-08-18T15:25:02.182Z candidate: 0x825e69bbec8462 bounty reward=50000 subs=5 # Join my ARC/v0 branch as one independent child (Selah-appr"
     },
     {
       "tag": "taskmarket",
@@ -354,7 +354,7 @@
     },
     {
       "tag": "taskmarket",
-      "line": "2026-08-18T14:55:03.763Z poll: 18 open tasks"
+      "line": "2026-08-18T15:25:02.181Z poll: 18 open tasks"
     },
     {
       "tag": "taskmarket",
@@ -366,23 +366,23 @@
     },
     {
       "tag": "distribute",
+      "line": "[daemon 2026-08-18T15:22:09.479Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
+      "line": "[daemon 2026-08-18T15:07:09.399Z] prospects=34 fresh=0 sending=0"
+    },
+    {
+      "tag": "distribute",
+      "line": "sent 0/0"
+    },
+    {
+      "tag": "distribute",
       "line": "[daemon 2026-08-18T14:52:09.320Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T14:37:09.257Z] prospects=34 fresh=0 sending=0"
-    },
-    {
-      "tag": "distribute",
-      "line": "sent 0/0"
-    },
-    {
-      "tag": "distribute",
-      "line": "[daemon 2026-08-18T14:22:09.183Z] prospects=34 fresh=0 sending=0"
     }
   ],
   "domain": {
