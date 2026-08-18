@@ -1,11 +1,11 @@
 {
   "name": "Autonomy Labs Storefront",
-  "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 33 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
+  "description": "AI-agent-discoverable storefront: browse a machine-readable catalog of 43 products, buy digital downloads by card via Stripe Checkout, or commission a browser prototype. Free agent-readiness audit API included.",
   "endpoints": [
     {
       "path": "/products.json",
       "method": "GET",
-      "description": "Full product catalog (Schema.org ItemList): 33 products with names, prices in EUR, categories, and per-product Stripe Checkout payment links."
+      "description": "Full product catalog (Schema.org ItemList): 43 products with names, prices in EUR, categories, and per-product Stripe Checkout payment links."
     },
     {
       "path": "/llms.txt",
@@ -20,27 +20,47 @@
     {
       "path": "/api/audit",
       "method": "GET",
-      "query": { "url": "https://example.com" },
+      "query": {
+        "url": "https://example.com"
+      },
       "description": "Free AI-agent readiness audit for any website. Returns JSON: grade (A-D), score, per-surface checks across eight surfaces (robots.txt, sitemap.xml, llms.txt, llms-full.txt, agents.txt, .well-known/x402, .well-known/agents.json, .well-known/security.txt)."
     }
   ],
   "workflows": [
     {
       "id": "buy-product",
-      "description": "Buy a digital product or commission a service: read the catalog, pick a Stripe Checkout payment link, and pay by card. Downloads are delivered by webhook; made-to-order services follow their stated delivery windows.",
+      "description": "Buy a digital product (43-item catalog incl. 12 complete HTML5 games), or commission a service: read the catalog, pick a Stripe Checkout payment link, and pay by card. Downloads are delivered by webhook; made-to-order services follow their stated delivery windows.",
       "steps": [
-        { "name": "browse-catalog", "action": "GET /products.json" },
-        { "name": "pick-product", "action": "read the product's offers.url (buy.stripe.com payment link)" },
-        { "name": "checkout", "action": "open the payment link; customer pays by card via Stripe Checkout" },
-        { "name": "delivery", "action": "checkout.session.completed webhook emails digital downloads; made-to-order services follow the product delivery window" }
+        {
+          "name": "browse-catalog",
+          "action": "GET /products.json"
+        },
+        {
+          "name": "pick-product",
+          "action": "read the product's offers.url (buy.stripe.com payment link)"
+        },
+        {
+          "name": "checkout",
+          "action": "open the payment link; customer pays by card via Stripe Checkout"
+        },
+        {
+          "name": "delivery",
+          "action": "checkout.session.completed webhook emails digital downloads; made-to-order services follow the product delivery window"
+        }
       ]
     },
     {
       "id": "run-free-audit",
-      "description": "Grade any website's AI-agent discoverability for free, then optionally order the deep €19 audit report.",
+      "description": "Grade any website's AI-agent discoverability for free, then optionally order the deep \u20ac19 audit report.",
       "steps": [
-        { "name": "audit", "action": "GET /api/audit?url=<target-site>" },
-        { "name": "deep-audit-option", "action": "if a deeper evidence-backed report is wanted, buy the AI Website Audit Report (€19) and enter the URL at checkout" }
+        {
+          "name": "audit",
+          "action": "GET /api/audit?url=<target-site>"
+        },
+        {
+          "name": "deep-audit-option",
+          "action": "if a deeper evidence-backed report is wanted, buy the AI Website Audit Report (\u20ac19) and enter the URL at checkout"
+        }
       ]
     }
   ]
