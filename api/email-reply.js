@@ -1,9 +1,11 @@
-// Vercel serverless function: Resend inbound webhook → automatic reply to hello@autonomylabsweb.tech
-// Resend POSTs parsed inbound email here; we reply with a helpful auto-response.
+// Vercel serverless function: Resend email.received webhook → automatic reply to hello@autonomylabsweb.tech
+// Resend POSTs {type:'email.received', data:{from,to,subject,...}} here; we reply with a helpful auto-response.
+// Auth: shared secret passed as ?token= (Vercel does not expose rawBody, so Ed25519 signature can't be verified here).
 const https = require('https');
 
 const RESEND_KEY = process.env.RESEND_API_KEY || '';
 const FROM = 'Autonomy Labs <hello@autonomylabsweb.tech>';
+const WEBHOOK_TOKEN = 'Nzm4EiasrRN_eBcL17tUhWic_Zvb7lPu';
 
 function resend(to, subject, html) {
   return new Promise((resolve) => {
@@ -44,10 +46,18 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'method not allowed' });
   }
+  // Shared-secret auth: reject calls without the token.
+  if ((req.query && req.query.token) !== WEBHOOK_TOKEN) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+
   const body = req.body || {};
-  const from = body.from || body.From || '';
-  const subject = body.subject || body.Subject || '';
-  const to = body.to || body.To || '';
+  // Resend webhook envelope: { type, created_at, data: { from, to, subject, ... } }
+  // Legacy inbound-route shape: flat { from, to, subject, ... }
+  const data = body.data && typeof body.data === 'object' ? body.data : body;
+  const from = data.from || '';
+  const subject = data.subject || '';
+  const to = Array.isArray(data.to) ? data.to.join(', ') : (data.to || '');
 
   // Extract sender email from "Name <email>" or bare email
   const m = String(from).match(/<([^>]+)>/) || String(from).match(/([^\s]+@[^\s]+)/);
