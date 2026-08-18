@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>BUMPER RUSH — Autonomy Labs</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05060f;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  #scene{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair;}
+  #hud{position:fixed;top:0;left:0;right:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:5;color:#cfe8ff;text-shadow:0 0 8px rgba(0,180,255,.6);}
+  .hud-block{display:flex;flex-direction:column;gap:2px;}
+  .hud-label{font-size:10px;letter-spacing:2px;color:#7fb8e8;text-transform:uppercase;}
+  .hud-value{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;}
+  #hud .mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  #health-wrap{width:160px;height:10px;border:1px solid #ff3d81;border-radius:5px;overflow:hidden;background:rgba(0,0,0,.5);}
+  #health-fill{height:100%;width:100%;background:linear-gradient(90deg,#00ff88,#ff3d81);transition:width .2s;}
+  #dash-wrap{width:160px;height:8px;border:1px solid #ffb300;border-radius:4px;overflow:hidden;background:rgba(0,0,0,.5);margin-top:2px;}
+  #dash-fill{height:100%;width:100%;background:linear-gradient(90deg,#ffb300,#ff5e00);transition:width .2s;}
+  #announce{position:fixed;left:50%;top:110px;transform:translateX(-50%);background:rgba(10,16,40,.92);border:1px solid #00d4ff;border-radius:10px;padding:8px 20px;color:#00d4ff;font-weight:800;font-size:16px;letter-spacing:1px;z-index:5;display:none;pointer-events:none;box-shadow:0 0 16px rgba(0,212,255,.4);}
+  #combo{position:fixed;left:50%;top:64px;transform:translateX(-50%);font-size:24px;font-weight:900;color:#ffd23e;text-shadow:0 0 12px rgba(255,210,62,.8);display:none;z-index:5;pointer-events:none;}
+  #popups{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden;}
+  #popups .pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.9);white-space:nowrap;animation:popfloat .9s ease-out forwards;}
+  @keyframes popfloat{0%{opacity:0;scale:.6;}15%{opacity:1;scale:1.15;}30%{scale:1;}100%{opacity:0;scale:1.1;translate:0 -40px;}}
+  #overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(4,6,16,.82);z-index:10;color:#e8f4ff;text-align:center;}
+  #overlay h1{font-size:40px;margin:0 0 6px;letter-spacing:3px;background:linear-gradient(90deg,#00d4ff,#ff3d81,#ffb300);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;}
+  #overlay h2{font-size:18px;margin:0 0 18px;color:#9fd4ff;font-weight:400;}
+  #overlay .big{font-size:34px;font-weight:800;margin:6px 0;}
+  #overlay .sub{font-size:14px;color:#7fb8e8;margin:2px 0;}
+  #overlay .hint{margin-top:22px;font-size:13px;color:#5a7fa8;letter-spacing:1px;line-height:1.7;}
+  #overlay button{margin-top:14px;padding:12px 34px;font-size:16px;font-weight:700;letter-spacing:2px;color:#04101a;background:linear-gradient(90deg,#00d4ff,#ff3d81);border:none;border-radius:30px;cursor:pointer;pointer-events:auto;}
+  #overlay button:active{transform:scale(.96);}
+  #mute{position:fixed;top:10px;right:14px;z-index:6;background:rgba(0,0,0,.4);border:1px solid #2a4a6a;color:#9fd4ff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;pointer-events:auto;}
+  #touch{position:fixed;bottom:0;left:0;right:0;height:34%;display:none;z-index:4;}
+  #touch .zone{position:absolute;bottom:0;width:50%;height:100%;pointer-events:auto;}
+  #touch .zone.left{left:0;}
+  #touch .zone.right{right:0;}
+  #touch .zone::after{content:'';position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:64px;height:64px;border-radius:50%;border:2px solid rgba(0,212,255,.35);}
+  #touch .zone.right::after{border-color:rgba(255,61,129,.35);}
+  @media (pointer:coarse){ #touch{display:block;} }
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="hud">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score">0</span>
+  </div>
+  <div class="mid">
+    <div id="health-wrap"><div id="health-fill"></div></div>
+    <div id="dash-wrap"><div id="dash-fill"></div></div>
+  </div>
+  <div class="hud-block" style="align-items:flex-end;">
+    <span class="hud-label">High Score</span>
+    <span class="hud-value" id="high">0</span>
+  </div>
+</div>
+<div id="combo"></div>
+<div id="announce"></div>
+<div id="popups"></div>
+<button id="mute">SOUND ON</button>
+<div id="touch"><div class="zone left"></div><div class="zone right"></div></div>
+<div id="overlay">
+  <h1>BUMPER RUSH</h1>
+  <h2>Ram the rivals, hit the walls, survive the pulse</h2>
+  <div class="big" id="final-score">0</div>
+  <div class="sub" id="final-high">High score: 0</div>
+  <div class="sub" id="final-new">NEW HIGH SCORE!</div>
+  <div class="hint">WASD / ARROWS — steer &nbsp;·&nbsp; SPACE — dash (when charged) &nbsp;·&nbsp; R — restart</div>
+  <button id="start">START</button>
+</div>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   BUMPER RUSH — bumper-car vehicle arena score attack
+   Self-contained single file. No external assets, no build.
+   ============================================================ */
+
+const TEST = new URLSearchParams(location.search).has('test');
+
+// ---------- arena geometry ----------
+const AW = 620, AH = 620;                  // arena half-width/height
+const PLAYER_R = 36;
+const RIVAL_R = 32;
+const MAX_SPEED = 520;
+const DASH_SPEED = 1500;
+
+// ---------- state ----------
+let score = 0, high = 0, combo = 1, comboT = 0;
+let health = 100, dash = 100, dashT = 0;
+let state = 'title';                       // title | play | over
+let pulse = 'normal', pulseT = 0, pulseCd = 0, announced = false;
+let player = { x: 0, y: 0, vx: 0, vy: 0, ang: 0, boost: false };
+let rivals = [];
+let features = [];                         // score walls, boost strips, bumpers, slow zones
+let parts = [], popups = [];
+let shake = 0;
+let muted = false;
+try { muted = localStorage.getItem('br_mute') === '1'; } catch (e) {}
+try { high = parseInt(localStorage.getItem('br_high') || '0', 10) || 0; } catch (e) {}
+
+// ---------- renderer ----------
+const sceneEl = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+sceneEl.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05060f);
+const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 1, 4000);
+camera.position.set(0, 0, 1500);
+camera.lookAt(0, 0, 0);
+
+scene.add(new THREE.AmbientLight(0x334466, 1.4));
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(300, 600, 900);
+scene.add(key);
+const rim = new THREE.PointLight(0x00d4ff, 900, 2000);
+rim.position.set(0, 0, 500);
+scene.add(rim);
+
+// arena floor
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(AW * 2, AH * 2),
+  new THREE.MeshStandardMaterial({ color: 0x0e1738, roughness: 0.5, metalness: 0.4 })
+);
+scene.add(floor);
+// boundary walls
+function wall(w, h, x, y, color) {
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(w, h, 16),
+    new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.55 })
+  );
+  m.position.set(x, y, 0);
+  scene.add(m);
+  return m;
+}
+wall(AW * 2, 22, 0, AH, 0xff3d81);
+wall(AW * 2, 22, 0, -AH, 0xff3d81);
+wall(22, AH * 2, AW, 0, 0xff3d81);
+wall(22, AH * 2, -AW, 0, 0xff3d81);
+
+// score walls (central pillars)
+const scoreWallMeshes = [];
+function scoreWall(x, y, w, h) {
+  const m = new THREE.Mesh(
+    new THREE.BoxGeometry(w, h, 20),
+    new THREE.MeshStandardMaterial({ color: 0xffb300, emissive: 0xffb300, emissiveIntensity: 0.6 })
+  );
+  m.position.set(x, y, 0);
+  scene.add(m);
+  scoreWallMeshes.push(m);
+  return { x, y, w, h, cooldown: 0 };
+}
+const featuresList = [];
+featuresList.push({ type: 'wall', x: -300, y: 0, w: 90, h: 260, mesh: scoreWall(-300, 0, 90, 260) });
+featuresList.push({ type: 'wall', x: 300, y: 0, w: 90, h: 260, mesh: scoreWall(300, 0, 90, 260) });
+// boost strips (floor glow)
+const boostStrips = [];
+function boostStrip(x, y, w, h, rot) {
+  const m = new THREE.Mesh(
+    new THREE.PlaneGeometry(w, h),
+    new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.5, side: THREE.DoubleSide })
+  );
+  m.position.set(x, y, 1);
+  m.rotation.z = rot || 0;
+  scene.add(m);
+  boostStrips.push(m);
+  return { x, y, w, h, rot: rot || 0, cooldown: 0 };
+}
+const stripFeatures = [];
+stripFeatures.push(boostStrip(0, -380, 220, 40, 0));
+stripFeatures.push(boostStrip(0, 380, 220, 40, 0));
+stripFeatures.push(boostStrip(-380, 0, 40, 220, 0));
+stripFeatures.push(boostStrip(380, 0, 40, 220, 0));
+// slow zones (dark circles)
+const slowMeshes = [];
+function slowZone(x, y, r) {
+  const m = new THREE.Mesh(
+    new THREE.CircleGeometry(r, 24),
+    new THREE.MeshStandardMaterial({ color: 0x7b5cff, emissive: 0x7b5cff, emissiveIntensity: 0.25, transparent: true, opacity: 0.4, side: THREE.DoubleSide })
+  );
+  m.position.set(x, y, 1);
+  scene.add(m);
+  slowMeshes.push(m);
+  return { x, y, r };
+}
+const slowZones = [slowZone(-180, -220, 90), slowZone(180, 220, 90)];
+
+// player vehicle
+const playerMesh = new THREE.Group();
+const playerBody = new THREE.Mesh(
+  new THREE.BoxGeometry(56, 24, 70),
+  new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.5, roughness: 0.3, metalness: 0.6 })
+);
+playerMesh.add(playerBody);
+const playerCockpit = new THREE.Mesh(
+  new THREE.SphereGeometry(16, 12, 12),
+  new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x88ccff, emissiveIntensity: 0.4 })
+);
+playerCockpit.position.y = 14;
+playerMesh.add(playerCockpit);
+scene.add(playerMesh);
+
+// rival vehicles
+const rivalMeshes = [];
+function spawnRival(behaviour) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(50, 22, 62),
+    new THREE.MeshStandardMaterial({ color: behaviour === 'chaser' ? 0xff3d81 : 0xffb300, emissive: behaviour === 'chaser' ? 0xff3d81 : 0xffb300, emissiveIntensity: 0.5, roughness: 0.3, metalness: 0.6 })
+  );
+  g.add(body);
+  const cockpit = new THREE.Mesh(
+    new THREE.SphereGeometry(14, 12, 12),
+    new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffaa88, emissiveIntensity: 0.3 })
+  );
+  cockpit.position.y = 12;
+  g.add(cockpit);
+  scene.add(g);
+  const pos = {
+    x: (Math.random() - 0.5) * AW * 1.4,
+    y: (Math.random() - 0.5) * AH * 1.4,
+  };
+  g.position.set(pos.x, pos.y, 0);
+  const rival = {
+    x: pos.x, y: pos.y, vx: 0, vy: 0, behaviour, mesh: g,
+    state: 'roam', stateT: 0, ang: Math.random() * Math.PI * 2,
+    hitCd: 0, flash: 0,
+  };
+  rivals.push(rival);
+  return rival;
+}
+// two rival behaviours:
+//  - 'chaser': actively hunts the player, speeds up in pulse
+//  - 'roamer': patrols walls then suddenly charges (telegraphed)
+function initRivals() {
+  for (const r of rivals) scene.remove(r.mesh);
+  rivals = [];
+  spawnRival('chaser');
+  spawnRival('roamer');
+}
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const scoreEl = $('score'), highEl = $('high'), healthFill = $('health-fill'),
+  dashFill = $('dash-fill'), comboEl = $('combo'), overlay = $('overlay'),
+  finalScore = $('final-score'), finalHigh = $('final-high'), finalNew = $('final-new'),
+  startBtn = $('start'), muteBtn = $('mute'), announceEl = $('announce');
+function setMuteUI() { muteBtn.textContent = muted ? 'SOUND OFF' : 'SOUND ON'; }
+muteBtn.addEventListener('click', () => { muted = !muted; try { localStorage.setItem('br_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); });
+setMuteUI();
+
+// ---------- audio ----------
+let AC = null;
+function audio() {
+  if (muted) return null;
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+function tone(freq, dur, type, vol, slide) {
+  const ac = audio(); if (!ac) return;
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, ac.currentTime);
+  if (slide) o.frequency.exponentialRampToValueAtTime(slide, ac.currentTime + dur);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(ac.currentTime + dur + 0.02);
+}
+function noise(dur, vol) {
+  const ac = audio(); if (!ac) return;
+  const n = Math.floor(ac.sampleRate * dur);
+  const buf = ac.createBuffer(1, n, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const g = ac.createGain(); g.gain.value = vol;
+  src.connect(g); g.connect(ac.destination); src.start();
+}
+const sfx = {
+  hit: () => tone(660, 0.08, 'square', 0.16, 440),
+  wall: () => tone(440, 0.1, 'sine', 0.14, 300),
+  boost: () => tone(880, 0.15, 'sine', 0.15, 1320),
+  slow: () => tone(220, 0.15, 'sawtooth', 0.08, 160),
+  dash: () => noise(0.2, 0.25),
+  damage: () => tone(160, 0.2, 'sawtooth', 0.16, 90),
+  pulse: () => { tone(330, 0.2, 'sine', 0.18, 660); },
+  over: () => { tone(440, 0.2, 'sine', 0.15); setTimeout(() => tone(330, 0.25, 'sine', 0.15), 180); setTimeout(() => tone(220, 0.4, 'sine', 0.15), 360); },
+};
+
+// ---------- helpers ----------
+function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+function addPopup(x, y, text, color) {
+  popups.push({ x, y, text, color, t: 0, life: 0.9 });
+}
+function addParts(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, s = 100 + Math.random() * 260;
+    parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t: 0, life: 0.5, color });
+  }
+}
+function scoreAdd(base, x, y, label) {
+  const pts = Math.round(base * combo);
+  score += pts;
+  addPopup(x, y, '+' + pts, label || '#ffd23e');
+  if (score > high) { high = score; try { localStorage.setItem('br_high', String(high)); } catch (e) {} }
+  return pts;
+}
+function bumpCombo() {
+  const now = performance.now() / 1000;
+  if (now - comboT < 4) combo = Math.min(5, combo + 1);
+  else combo = 1;
+  comboT = now;
+  if (combo > 1) {
+    comboEl.style.display = 'block';
+    comboEl.textContent = 'COMBO x' + combo;
+  }
+}
+function addDash(v) { dash = clamp(dash + v, 0, 100); }
+function useDash() {
+  if (dash < 100 || state !== 'play') return;
+  dash = 0;
+  player.boost = true;
+  dashT = 0.5;
+  sfx.dash();
+  addPopup(player.x, player.y + 40, 'DASH!', '#ffb300');
+}
+
+// ---------- flow ----------
+function startGame() {
+  score = 0; combo = 1; health = 100; dash = 100;
+  pulse = 'normal'; pulseT = 0; pulseCd = 0;
+  player.x = 0; player.y = 0; player.vx = 0; player.vy = 0;
+  player.ang = 0; player.boost = false;
+  initRivals();
+  scoreEl.textContent = '0';
+  highEl.textContent = high;
+  healthFill.style.width = '100%';
+  dashFill.style.width = '100%';
+  overlay.style.display = 'none';
+  announceEl.style.display = 'none';
+  state = 'play';
+}
+startBtn.addEventListener('click', startGame);
+
+function announce(text) {
+  announceEl.textContent = text;
+  announceEl.style.display = 'block';
+  setTimeout(() => { announceEl.style.display = 'none'; }, 2200);
+}
+
+function gameOver() {
+  state = 'over';
+  sfx.over();
+  const isNew = score >= high && score > 0;
+  finalScore.textContent = score;
+  finalHigh.textContent = 'High score: ' + high;
+  finalNew.style.display = isNew ? 'block' : 'none';
+  overlay.style.display = 'flex';
+}
+
+// ---------- input ----------
+const keys = {};
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return;
+  const k = e.key;
+  if (k === ' ') {
+    if (state === 'title' || state === 'over') { startGame(); return; }
+    useDash();
+    e.preventDefault();
+  }
+  if (k === 'r' || k === 'R') { if (state === 'over' || state === 'title') startGame(); }
+  if (k === 'm' || k === 'M') { muted = !muted; try { localStorage.setItem('br_mute', muted ? '1' : '0'); } catch (e) {} setMuteUI(); }
+  keys[k] = true;
+});
+window.addEventListener('keyup', (e) => { keys[e.key] = false; });
+const tzL = document.querySelector('#touch .zone.left'), tzR = document.querySelector('#touch .zone.right');
+let touchSteer = 0;
+tzL.addEventListener('touchstart', (e) => { e.preventDefault(); touchSteer = -1; }, { passive: false });
+tzL.addEventListener('touchend', (e) => { e.preventDefault(); touchSteer = 0; }, { passive: false });
+tzR.addEventListener('touchstart', (e) => { e.preventDefault(); touchSteer = 1; }, { passive: false });
+tzR.addEventListener('touchend', (e) => { e.preventDefault(); touchSteer = 0; }, { passive: false });
+sceneEl.addEventListener('touchstart', (e) => {
+  if (state === 'title' || state === 'over') startGame();
+  else useDash();
+}, { passive: true });
+
+// ---------- physics ----------
+function circleCollide(a, b, rest) {
+  const dx = a.x - b.x, dy = a.y - b.y;
+  const d2 = dx * dx + dy * dy;
+  const minD = a.r + b.r;
+  if (d2 >= minD * minD) return false;
+  let nx, ny;
+  if (d2 === 0) { nx = 0; ny = 1; }
+  else { const d = Math.sqrt(d2); nx = dx / d; ny = dy / d; }
+  a.x = b.x + nx * minD;
+  a.y = b.y + ny * minD;
+  const rel = (a.vx - (b.vx || 0)) * nx + (a.vy - (b.vy || 0)) * ny;
+  if (rel < 0) {
+    a.vx -= (1 + rest) * rel * nx;
+    a.vy -= (1 + rest) * rel * ny;
+  }
+  return true;
+}
+function rectCollide(x, y, r, rect) {
+  const cx = clamp(x, rect.x - rect.w / 2, rect.x + rect.w / 2);
+  const cy = clamp(y, rect.y - rect.h / 2, rect.y + rect.h / 2);
+  const dx = x - cx, dy = y - cy;
+  const d2 = dx * dx + dy * dy;
+  if (d2 >= r * r) return false;
+  let nx, ny;
+  if (d2 === 0) { nx = 0; ny = 1; }
+  else { const d = Math.sqrt(d2); nx = dx / d; ny = dy / d; }
+  return { nx, ny, cx, cy };
+}
+
+function updateRivals(dt) {
+  for (const r of rivals) {
+    if (r.hitCd > 0) r.hitCd -= dt;
+    if (r.flash > 0) r.flash -= dt;
+    r.stateT -= dt;
+    // behaviour
+    if (r.behaviour === 'chaser') {
+      // hunt the player
+      const dx = player.x - r.x, dy = player.y - r.y;
+      const d = Math.hypot(dx, dy) || 1;
+      const speed = pulse === 'pulse' ? 380 : 250;
+      r.vx += (dx / d) * speed * 2.2 * dt;
+      r.vy += (dy / d) * speed * 2.2 * dt;
+    } else {
+      // roamer: patrol, then telegraph a charge
+      if (r.state === 'roam') {
+        if (r.stateT <= 0) {
+          r.state = 'telegraph';
+          r.stateT = 0.7;
+        }
+        // gentle drift
+        r.vx += Math.cos(r.ang) * 120 * dt;
+        r.vy += Math.sin(r.ang) * 120 * dt;
+        if (Math.random() < dt * 0.4) r.ang = Math.random() * Math.PI * 2;
+      } else if (r.state === 'telegraph') {
+        r.vx *= (1 - 4 * dt);
+        r.vy *= (1 - 4 * dt);
+        r.flash = 0.3;  // flashing = about to charge
+        if (r.stateT <= 0) {
+          r.state = 'charge';
+          r.stateT = 1.4;
+          const dx = player.x - r.x, dy = player.y - r.y;
+          const d = Math.hypot(dx, dy) || 1;
+          const speed = pulse === 'pulse' ? 620 : 480;
+          r.vx = (dx / d) * speed;
+          r.vy = (dy / d) * speed;
+        }
+      } else {
+        // charging: keep going, then return to roam
+        if (r.stateT <= 0) {
+          r.state = 'roam';
+          r.stateT = 1 + Math.random() * 1.5;
+        }
+      }
+    }
+    // speed cap
+    const sp = Math.hypot(r.vx, r.vy);
+    const cap = pulse === 'pulse' ? 650 : 420;
+    if (sp > cap) { r.vx *= cap / sp; r.vy *= cap / sp; }
+    r.x += r.vx * dt;
+    r.y += r.vy * dt;
+    // walls
+    if (r.x > AW - RIVAL_R) { r.x = AW - RIVAL_R; r.vx = -Math.abs(r.vx) * 0.5; }
+    if (r.x < -AW + RIVAL_R) { r.x = -AW + RIVAL_R; r.vx = Math.abs(r.vx) * 0.5; }
+    if (r.y > AH - RIVAL_R) { r.y = AH - RIVAL_R; r.vy = -Math.abs(r.vy) * 0.5; }
+    if (r.y < -AH + RIVAL_R) { r.y = -AH + RIVAL_R; r.vy = Math.abs(r.vy) * 0.5; }
+    // score walls deflect
+    for (const f of featuresList) {
+      if (f.type !== 'wall') continue;
+      const hit = rectCollide(r.x, r.y, RIVAL_R, f);
+      if (hit) {
+        r.x += hit.nx * (RIVAL_R - Math.hypot(r.x - hit.cx, r.y - hit.cy) + 1);
+        r.y += hit.ny * (RIVAL_R - Math.hypot(r.x - hit.cx, r.y - hit.cy) + 1);
+        const rel = r.vx * hit.nx + r.vy * hit.ny;
+        if (rel < 0) { r.vx -= 1.6 * rel * hit.nx; r.vy -= 1.6 * rel * hit.ny; }
+      }
+    }
+    r.mesh.position.set(r.x, r.y, 0);
+    r.mesh.rotation.z = Math.atan2(r.vy, r.vx);
+    r.mesh.children[0].material.emissiveIntensity = 0.4 + (r.flash > 0 ? r.flash * 2 : 0);
+  }
+}
+
+function physics(dt) {
+  if (state !== 'play') return;
+  // pulse phases
+  pulseCd -= dt;
+  if (pulse === 'normal' && pulseCd <= 0 && score > 0) {
+    pulse = 'pulse';
+    pulseT = 6;
+    announce('PULSE! HIGH RISK / HIGH SCORE');
+    sfx.pulse();
+  }
+  if (pulse === 'pulse') {
+    pulseT -= dt;
+    if (pulseT <= 0) {
+      pulse = 'normal';
+      pulseCd = 10;
+      announce('PULSE END');
+    }
+  }
+  // steering
+  let steerX = 0, steerY = 0;
+  if (keys['ArrowLeft'] || keys['a'] || keys['A']) steerX -= 1;
+  if (keys['ArrowRight'] || keys['d'] || keys['D']) steerX += 1;
+  if (keys['ArrowUp'] || keys['w'] || keys['W']) steerY += 1;
+  if (keys['ArrowDown'] || keys['s'] || keys['S']) steerY -= 1;
+  if (touchSteer !== 0) steerX = touchSteer;
+  const mag = Math.hypot(steerX, steerY) || 1;
+  const accel = player.boost ? 2600 : 900;
+  player.vx += (steerX / mag) * accel * dt;
+  player.vy += (steerY / mag) * accel * dt;
+  // dash boost: impulse along current heading + decay
+  if (player.boost) {
+    dashT -= dt;
+    const sp0 = Math.hypot(player.vx, player.vy);
+    if (sp0 > 60) {
+      player.vx += (player.vx / sp0) * 900 * dt;
+      player.vy += (player.vy / sp0) * 900 * dt;
+    } else {
+      // no heading yet: dash forward (up)
+      player.vy += 900 * dt;
+    }
+    if (dashT <= 0) player.boost = false;
+  }
+  // slow zones reduce speed
+  for (const z of slowZones) {
+    const dx = player.x - z.x, dy = player.y - z.y;
+    if (dx * dx + dy * dy < z.r * z.r) {
+      player.vx *= (1 - 1.6 * dt);
+      player.vy *= (1 - 1.6 * dt);
+      sfx.slow();
+    }
+  }
+  // speed cap
+  const sp = Math.hypot(player.vx, player.vy);
+  const cap = player.boost ? DASH_SPEED : MAX_SPEED;
+  if (sp > cap) { player.vx *= cap / sp; player.vy *= cap / sp; }
+  // friction
+  player.vx *= (1 - 0.6 * dt);
+  player.vy *= (1 - 0.6 * dt);
+  player.x += player.vx * dt;
+  player.y += player.vy * dt;
+  // arena walls
+  if (player.x > AW - PLAYER_R) { player.x = AW - PLAYER_R; player.vx = -Math.abs(player.vx) * 0.5; }
+  if (player.x < -AW + PLAYER_R) { player.x = -AW + PLAYER_R; player.vx = Math.abs(player.vx) * 0.5; }
+  if (player.y > AH - PLAYER_R) { player.y = AH - PLAYER_R; player.vy = -Math.abs(player.vy) * 0.5; }
+  if (player.y < -AH + PLAYER_R) { player.y = -AH + PLAYER_R; player.vy = Math.abs(player.vy) * 0.5; }
+  // score walls: productive collision = score + deflection
+  for (const f of featuresList) {
+    if (f.type !== 'wall') continue;
+    const hit = rectCollide(player.x, player.y, PLAYER_R, f);
+    if (hit) {
+      player.x += hit.nx * (PLAYER_R - Math.hypot(player.x - hit.cx, player.y - hit.cy) + 1);
+      player.y += hit.ny * (PLAYER_R - Math.hypot(player.x - hit.cx, player.y - hit.cy) + 1);
+      const rel = player.vx * hit.nx + player.vy * hit.ny;
+      if (rel < 0) {
+        player.vx -= 1.5 * rel * hit.nx;
+        player.vy -= 1.5 * rel * hit.ny;
+        if (f.cooldown <= 0) {
+          f.cooldown = 0.5;
+          bumpCombo();
+          const mult = pulse === 'pulse' ? 3 : 1;
+          scoreAdd(100 * mult, f.x, f.y, '#ffb300');
+          addParts(f.x, f.y, 0xffb300, 8);
+          sfx.wall();
+        }
+      }
+    }
+    if (f.cooldown > 0) f.cooldown -= dt;
+  }
+  // boost strips
+  for (const s of stripFeatures) {
+    const dx = player.x - s.x, dy = player.y - s.y;
+    if (Math.abs(dx) < s.w / 2 && Math.abs(dy) < s.h / 2) {
+      // boost along strip axis
+      const ax = Math.cos(s.rot || 0), ay = Math.sin(s.rot || 0);
+      const dot = player.vx * ax + player.vy * ay;
+      player.vx += ax * (520 - dot) * 0.1;
+      player.vy += ay * (520 - dot) * 0.1;
+      if (s.cooldown <= 0) {
+        s.cooldown = 0.8;
+        bumpCombo();
+        const mult = pulse === 'pulse' ? 2 : 1;
+        scoreAdd(75 * mult, s.x, s.y, '#00d4ff');
+        addParts(s.x, s.y, 0x00d4ff, 6);
+        sfx.boost();
+      }
+    }
+    if (s.cooldown > 0) s.cooldown -= dt;
+  }
+  // dash recharge from impacts
+  if (sp > 300) addDash(2 * dt * 60);
+  // rival collisions
+  for (const r of rivals) {
+    if (r.hitCd > 0) continue;
+    const dx = player.x - r.x, dy = player.y - r.y;
+    const d2 = dx * dx + dy * dy;
+    const minD = PLAYER_R + RIVAL_R;
+    if (d2 < minD * minD) {
+      const d = Math.sqrt(d2) || 1;
+      const nx = dx / d, ny = dy / d;
+      // productive collision: player closing fast on rival -> ram score
+      const rel = player.vx * nx + player.vy * ny - (r.vx * nx + r.vy * ny);
+      r.hitCd = 0.5;
+      if (rel < -120 || player.boost) {
+        bumpCombo();
+        const mult = pulse === 'pulse' ? 2 : 1;
+        scoreAdd(150 * mult, r.x, r.y + 30, '#ff3d81');
+        addParts(r.x, r.y, 0xff3d81, 10);
+        sfx.hit();
+        addDash(15);
+        // knock rival back
+        r.vx += nx * 300;
+        r.vy += ny * 300;
+      } else {
+        // unproductive bump: small damage
+        health = Math.max(0, health - 5);
+        addPopup(r.x, r.y + 30, 'BUMP', '#7fb8e8');
+        sfx.damage();
+        // push player away
+        player.vx += nx * 60;
+        player.vy += ny * 60;
+      }
+      // separate
+      player.x = r.x + nx * minD;
+      player.y = r.y + ny * minD;
+      if (health <= 0) { gameOver(); return; }
+    }
+  }
+  // combo decay
+  if (combo > 1 && performance.now() / 1000 - comboT > 4) {
+    combo = 1;
+    comboEl.style.display = 'none';
+  }
+  // particles
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i];
+    p.t += dt;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.t > p.life) { parts.splice(i, 1); i--; }
+  }
+  // popups
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    p.t += dt;
+    if (p.t > p.life) { popups.splice(pi, 1); pi--; }
+  }
+}
+
+// ---------- render ----------
+function render(dt, t) {
+  // player mesh
+  playerMesh.position.set(player.x, player.y, 0);
+  playerMesh.rotation.z = Math.atan2(player.vy, player.vx);
+  playerMesh.scale.set(player.boost ? 1.2 : 1, player.boost ? 1.2 : 1, 1);
+  playerBody.material.emissiveIntensity = player.boost ? 1.4 : 0.5;
+  // pulse arena glow
+  if (pulse === 'pulse') {
+    const p = 0.5 + Math.sin(t * 6) * 0.3;
+    rim.intensity = 1500 + Math.sin(t * 6) * 600;
+    for (const m of scoreWallMeshes) m.material.emissiveIntensity = 0.6 + p;
+    floor.material.color.setHex(0x1a0f2a);
+  } else {
+    rim.intensity = 900;
+    for (const m of scoreWallMeshes) m.material.emissiveIntensity = 0.6;
+    floor.material.color.setHex(0x0e1738);
+  }
+  // boost strips pulse
+  for (const s of boostStrips) {
+    s.material.emissiveIntensity = 0.3 + Math.sin(t * 4) * 0.3;
+  }
+  // popups (DOM)
+  const popWrap = $('popups');
+  const alive = new Set(popups.map(p => p._id));
+  for (const el of popWrap.querySelectorAll('.pop')) {
+    if (!alive.has(Number(el.dataset.id))) el.remove();
+  }
+  for (let pi = 0; pi < popups.length; pi++) {
+    const p = popups[pi];
+    if (!p._id) {
+      p._id = Math.random() * 1e9;
+      const el = document.createElement('div');
+      el.className = 'pop';
+      el.dataset.id = String(p._id);
+      el.textContent = p.text;
+      el.style.color = p.color || '#ffd23e';
+      el.style.left = (50 + p.x / 20) + '%';
+      el.style.top = (50 - p.y / 20) + '%';
+      popWrap.appendChild(el);
+    }
+  }
+  // camera shake
+  if (shake > 0) {
+    shake -= dt;
+    camera.position.x = (Math.random() - 0.5) * shake * 30;
+    camera.position.y = (Math.random() - 0.5) * shake * 30;
+  } else {
+    camera.position.x = 0; camera.position.y = 0;
+  }
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+  // HUD
+  scoreEl.textContent = score;
+  highEl.textContent = high;
+  healthFill.style.width = health + '%';
+  healthFill.style.background = health < 30 ? 'linear-gradient(90deg,#ff3d81,#ffb300)' : 'linear-gradient(90deg,#00ff88,#ff3d81)';
+  dashFill.style.width = dash + '%';
+}
+
+// ---------- main loop ----------
+let last = performance.now();
+let paused = false;
+function loop(now) {
+  const dt = Math.min(0.033, (now - last) / 1000);
+  last = now;
+  if (!paused) {
+    physics(dt);
+    updateRivals(dt);
+    render(dt, now / 1000);
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ---------- test hooks ----------
+if (TEST) {
+  window.__bumper = {
+    get state() { return state; },
+    get score() { return score; },
+    get high() { return high; },
+    get combo() { return combo; },
+    get health() { return health; },
+    get dash() { return dash; },
+    get pulse() { return pulse; },
+    get player() { return { x: player.x, y: player.y, vx: player.vx, vy: player.vy, boost: player.boost }; },
+    get rivals() { return rivals.map(r => ({ x: r.x, y: r.y, behaviour: r.behaviour, state: r.state })); },
+    start: startGame,
+    setPlayer: (x, y, vx, vy) => { player.x = x; player.y = y; player.vx = vx || 0; player.vy = vy || 0; },
+    setRival: (i, x, y, vx, vy) => { if (rivals[i]) { rivals[i].x = x; rivals[i].y = y; rivals[i].vx = vx || 0; rivals[i].vy = vy || 0; } },
+    setDash: (v) => { dash = clamp(v, 0, 100); },
+    dashNow: useDash,
+    step: (n) => { for (let i = 0; i < (n || 1); i++) { physics(1 / 60); updateRivals(1 / 60); } },
+    pause: () => { paused = true; },
+    resume: () => { paused = false; },
+  };
+}
+
+startGame();
+</script>
+</body>
+</html>
