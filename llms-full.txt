@@ -152,3 +152,43 @@ This is an AI-agent-discoverable product storefront. AI agents and humans can br
 - **AI Agent API Integration Kit** — €14.90 — https://buy.stripe.com/cNicN4dOqegC9Yv0tQ2Nq0X — landing: https://business2-lasse-tfa.vercel.app/api-integration-kit.html
 - **Agent Billing & Metering API (source + deploy guide)** — €49.00 — https://buy.stripe.com/00wdR8dOq0pM9YvfoK2Nq0Y — landing: https://business2-lasse-tfa.vercel.app/agent-billing-api.html
 - **Agent Memory-as-a-Service (source + deploy guide)** — €39.00 — https://buy.stripe.com/dRmcN47q2dcyfiP4K62Nq0Z — landing: https://business2-lasse-tfa.vercel.app/agent-memory-api.html
+- **Pinball Overdrive — Complete HTML5 Game** — €12.90 one-time. Two flippers, six scoring elements, combo chains, skill shots, and a player-triggered Overdrive that doubles scoring at real risk.
+   - Buy: https://buy.stripe.com/3cI8wO7q22xUc6D2BY2Nq12
+   - Demo: https://business2-lasse-tfa.vercel.app/pinball-overdrive/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/pinball-overdrive.html
+- **Skee Shock — Complete HTML5 Game** — €12.90 one-time. Six scoring rings plus a moving target, precision chain, and surge multiplier.
+   - Buy: https://buy.stripe.com/00w4gy6lY0pM3A7a4q2Nq13
+   - Demo: https://business2-lasse-tfa.vercel.app/skee-shock/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/skee-shock.html
+- **Crane Breaker — Complete HTML5 Game** — €12.90 one-time. Contact-based claw grabbing with four prize roles and a precision grip tool.
+   - Buy: https://buy.stripe.com/8x2fZg25I6OafiPdgC2Nq14
+   - Demo: https://business2-lasse-tfa.vercel.app/crane-breaker/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/crane-breaker.html
+- **Whack Protocol — Complete HTML5 Game** — €12.90 one-time. Changing protocol cards, protected targets, delayed rules, chain jackpots, focus tool.
+   - Buy: https://buy.stripe.com/7sYaEW8u6goKdaHfoK2Nq15
+   - Demo: https://business2-lasse-tfa.vercel.app/whack-protocol/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/whack-protocol.html
+- **Air Hockey Afterburner — Complete HTML5 Game** — €12.90 one-time. Rally charge from clean saves; spend on a burning Afterburner boost return.
+   - Buy: https://buy.stripe.com/eVqfZg25IegC9Yv4K62Nq16
+   - Demo: https://business2-lasse-tfa.vercel.app/air-hockey-afterburner/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/air-hockey-afterburner.html
+- **Neon Range — Complete HTML5 Game** — €12.90 one-time. Four target roles, heat system, and a limited Focus slow-time action.
+   - Buy: https://buy.stripe.com/6oUdR8bGidcy3A7gsO2Nq17
+   - Demo: https://business2-lasse-tfa.vercel.app/neon-range/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/neon-range.html
+- **Strike Vector — Complete HTML5 Game** — €12.90 one-time. Safe formation or narrow gold route; momentum bank; lane conditions.
+   - Buy: https://buy.stripe.com/fZu4gy11E0pM5Ifa4q2Nq18
+   - Demo: https://business2-lasse-tfa.vercel.app/strike-vector/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/strike-vector.html
+- **Bumper Rush — Complete HTML5 Game** — €12.90 one-time. Ram two rival behaviours, score walls, boost strips, announced pulse phases.
+   - Buy: https://buy.stripe.com/dRmaEWaCe0pM5If1xU2Nq19
+   - Demo: https://business2-lasse-tfa.vercel.app/bumper-rush/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/bumper-rush.html
+- **Coinfall Crisis — Complete HTML5 Game** — €12.90 one-time. Token roles, stability gauge, collapse countdown, earned nudge tool.
+   - Buy: https://buy.stripe.com/cNi3cu9ya7Se8Ur7Wi2Nq1a
+   - Demo: https://business2-lasse-tfa.vercel.app/coinfall-crisis/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/coinfall-crisis.html
+- **Dancefloor Panic — Complete HTML5 Game** — €12.90 one-time. Four lanes, holds, lane flips, safe-vs-risk route choices at phrase breaks.
+   - Buy: https://buy.stripe.com/eVq00i8u6goKeeLekG2Nq1b
+   - Demo: https://business2-lasse-tfa.vercel.app/dancefloor-panic/play.html
+   - Landing: https://business2-lasse-tfa.vercel.app/dancefloor-panic.html
